@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="profile_email">Email</string>
+    <string name="profile_logout">Logout</string>
+    <string name="profile_settings">Settings</string>
+    <string name="profile_policy">Rules &amp; Policy</string>
+    <string name="profile_send_email_via">Contact %s via</string>
+    <string name="profile_user">User</string>
+    <string name="view_profile">My profile</string>
+    <string name="view_badge">My badge</string>
+    <string name="settings_screen_title">Settings</string>
+    <string name="settings_auto_login_option_label">Enable auto login</string>
+    <string name="login_no_account">You don’t have an account yet ? </string>
+    <string name="login_sign_up_action">Sign up here</string>
+    <string name="edit_profile">Edit profile</string>
+    <string name="profile_data_error">Error loading profile data !</string>
+    <string name="profile_gallery">Gallery</string>
+    <string name="profile_keywords">Keywords</string>
+    <string name="profile_coffee_gear">Coffee gear</string>
+    <string name="profile_coffee_beans">Coffee beans</string>
+    <string name="profile_edit_hint">Click on the picture to want to edit</string>
+    <string name="profile_general">General</string>
+    <string name="profile_firstName">First name</string>
+    <string name="profile_lastName">Last name</string>
+    <string name="profile_status">Status</string>
+    <string name="profile_description">Profile description</string>
+    <string name="profile_cannot_edit">You cannot edit these fields !</string>
+    <string name="profile_address">Address</string>
+    <string name="profile_country">Country</string>
+    <string name="profile_city">City</string>
+    <string name="profile_pick_exact_location">Pick an exact location on map :</string>
+    <string name="profile_missing_profile_picture">Missing profile picture!</string>
+    <string name="profile_missing_cover_picture">Missing cover picture!</string>
+    <string name="profile_coffee_space">My coffee corner</string>
+    <string name="profile_sex_male">Male</string>
+    <string name="profile_sex_female">Female</string>
+
+
+
+      <!-- Content description -->
+    <string name="content_description_product_image_preview">Product image: %s</string>
+    <string name="content_description_product_action">Production click action: %s</string>
+
+
+
+</resources>

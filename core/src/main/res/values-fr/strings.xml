@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="see_all_button">Voir tout</string>
+    <string name="image_picker_error_message">Erreur lors de la sélection de l\'image</string>
+    <string name="enable_location_service">Activer le service de localisation</string>
+    <string name="random_error">Une erreur est survenue !</string>
+    <string name="permission_required">Permission requise !</string>
+
+
+        <string name="input_required_error_message">Ce champ est obligatoire.</string>
+
+        <string name="input_email_format_error_message">Veuillez entrer une adresse e-mail valide.</string>
+        <string name="input_phone_format_error_message">Veuillez entrer un numéro de téléphone valide.</string>
+        <string name="input_date_formats_error_message">Veuillez utiliser le format AAAA-MM-JJ.</string>
+
+        <string name="input_letters_only_error_message">Seules les lettres (a-z) sont autorisées dans ce champ.</string>
+        <string name="input_numbers_only_error_message">Seuls les nombres sont autorisés dans ce champ.</string>
+        <string name="input_digits_only_error_message">Seuls les nombres entiers (chiffres 0-9) sont autorisés.</string>
+
+        <string name="input_password_policy_error_message">Le mot de passe doit comporter au moins 8 caractères et inclure un chiffre et un symbole.</string>
+
+        <string name="text_area_min_characters_error_message">Doit contenir au moins 10 caractères.</string>
+        <string name="text_area_max_characters_error_message">Ne peut pas dépasser 255 caractères.</string>
+       <string name="input_link_format_error_message">Veuillez entrer un lien valide !</string>
+
+
+    <string name="input_password_mismatch_error_message">Les mots de passe ne correspondent pas.</string>
+        <string name="input_already_exists_error_message">Cette valeur existe déjà. Veuillez en essayer une autre.</string>
+        <string name="input_range_error_message">La valeur doit être comprise entre %1$d et %2$d.</string>
+        <string name="input_url_format_error_message">Veuillez entrer une adresse web (URL) valide.</string>
+
+    <string name="product_list_title">Liste des produits</string>
+    <string name="product_list_empty_list">Aucun produit disponible</string>
+
+    <!--  Accessibility   -->
+
+    <string name="content_description_product_image_preview">Image du produit : %s</string>
+    <string name="content_description_product_action">Action sur le produit : %s</string>
+    <string name="content_description_enable_location_service">Bouton Activer le service de localisation</string>
+</resources>

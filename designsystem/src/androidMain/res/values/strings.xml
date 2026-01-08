@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">OnlyBeans</string>
+    <string name="app_brand_text_primary" translatable="false">SESAME</string>
+    <string name="app_brand_text_secondary" translatable="false">Student Life</string>
+    <string name="version_placeholder">Version %s</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="ok">OK</string>
+    <string name="app_exit_popup_title">Do you really want to quit the app ?</string>
+    <string name="app_logout_popup_title">Do you really want to logout ?</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="email_address_label">Email address</string>
+    <string name="email_address_placeholder" translatable="false">user@xxx.xx</string>
+    <string name="password_label">Password</string>
+    <string name="password_placeholder">Your password…</string>
+    <string name="login">Login</string>
+    <string name="retry">Retry</string>
+    <string name="search">Search</string>
+    <string name="result_not_found">No result !</string>
+    <string name="error_network_title">Network error</string>
+    <string name="error_network_internal_server_details">Internal Server Error</string>
+    <string name="error_network_no_internet_details">Internet connection is unavailable !</string>
+    <string name="accepted">Accepted</string>
+    <string name="rejected">Rejected</string>
+    <string name="sex_male">Male</string>
+    <string name="sex_female">Female</string>
+    <string name="error_destination_not_found_title">Navigation error</string>
+    <string name="error_destination_not_found_detail">Path not found</string>
+    <string name="next_step">Next</string>
+    <string name="error_toast_unknown">An error has occurred</string>
+    <string name="error_toast_invalid_credentials">Invalid login!</string>
+    <string name="error_toast_unauthorized">Action unauthorized</string>
+    <string name="error_toast_locked">Account locked !</string>
+    <string name="description_placeholder">No description available _</string>
+    <string name="expand_to_read_more">Read more</string>
+    <string name="collapse_to_read_less">Read less</string>
+    <string name="next">Next</string>
+    <string name="save">Save changes</string>
+    <string name="phone_number_label">Phone</string>
+    <string name="phone_number_placeholder">XXX-XXX-XXX</string>
+    <string name="phone_number_country_placeholder">XXX</string>
+    <string name="links_label">Links</string>
+    <string name="links_placeholder" translatable="false">https://www.mywebsite.com</string>
+    <string name="carousel_placeholder">No images or videos in your gallery !</string>
+    <string name="add_images">Add images or Videos</string>
+    <string name="keywords">Keywords</string>
+    <string name="image_picker_no_more_items_allowed">You can\'t pick more elements !</string>
+
+
+
+     <!-- Content description-->
+    <string name="content_description_drop_down_item">Drop down item : %s</string>
+    <string name="content_description_back_button">Back button icon</string>
+    <string name="content_description_delete_button">Delete button icon</string>
+    <string name="content_description_link_button">Icon which redirects to link: %s</string>
+    <string name="content_description_remove_keyword_button">Icon to remove keyword: %s</string>
+    <string name="content_description_remove_cancel_keyword_button">Icon to cancel remove keyword action</string>
+
+
+
+    <!-- <string name="carousel_placeholder">¡Aún no hay imágenes ni vídeos en tu galería!</string> -->
+
+    <!-- <string name="add_images">Añadir imágenes/vídeos</string> -->
+</resources>

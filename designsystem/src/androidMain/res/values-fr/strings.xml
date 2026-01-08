@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">OnlyBeans</string>
+    <string name="version_placeholder">Version %s</string>
+    <string name="yes">Oui</string>
+    <string name="no">Non</string>
+    <string name="ok">OK</string>
+    <string name="app_exit_popup_title">Voulez vous vraiment quitter l\'application ?</string>
+    <string name="app_logout_popup_title">Voulez vous vraiment vous déconnecter ?</string>
+    <string name="confirm">Confirmer</string>
+    <string name="cancel">Annuler</string>
+    <string name="email_address_label">Addresse Email</string>
+    <string name="password_label">Mot de passe</string>
+    <string name="password_placeholder">Votre mot de passe</string>
+    <string name="login">Se connecter</string>
+    <string name="retry">Réessayer</string>
+    <string name="search">Rechercher</string>
+    <string name="result_not_found">Pas de résultat !</string>
+    <string name="error_network_title">Erreur réseau !</string>
+    <string name="error_network_internal_server_details">Erreur serveur interne</string>
+    <string name="error_network_no_internet_details">La connexion internet est indisponible</string>
+    <string name="accepted">Accepté</string>
+    <string name="rejected">Rejeté</string>
+    <string name="sex_male">Homme</string>
+    <string name="sex_female">Femme</string>
+    <string name="error_destination_not_found_title">Erreur de navigation</string>
+    <string name="error_destination_not_found_detail">Chemin introuvable !</string>
+    <string name="next_step">Suivant</string>
+    <string name="error_toast_unknown">Un erreur s\'est produit !</string>
+    <string name="error_toast_invalid_credentials">Login invalide !</string>
+    <string name="error_toast_unauthorized">Action non autorisée !</string>
+    <string name="error_toast_locked">Compte verouillé !</string>
+    <string name="description_placeholder">Description indisponible !</string>
+    <string name="expand_to_read_more">Lire plus</string>
+    <string name="collapse_to_read_less">Lire moins</string>
+    <string name="next">Suivant</string>
+    <string name="save">Sauvegarder</string>
+    <string name="phone_number_label">Téléphone</string>
+    <string name="phone_number_placeholder">XXX-XXX-XXX</string>
+    <string name="phone_number_country_placeholder">XXX</string>
+    <string name="links_label">Liens</string>
+    <string name="carousel_placeholder">Aucune image ou vidéo dans votre galerie pour le moment !</string>
+    <string name="add_images">Ajouter des images/vidéos</string>
+    <string name="keywords">Mots-clés</string>
+    <string name="image_picker_no_more_items_allowed">Vous ne pouvez pas sélectionner plus d\'éléments !</string>
+
+    <!-- Content description-->
+    <string name="content_description_drop_down_item">Élément de la liste déroulante : %s</string>
+    <string name="content_description_back_button">Icone button retour</string>
+    <string name="content_description_delete_button">Icone button supprimer</string>
+    <string name="content_description_link_button">Icone qui vous redirige vers le lien : %s</string>
+    <string name="content_description_remove_keyword_button">Icône pour supprimer le mot-clé : %s</string>
+    <string name="content_description_remove_cancel_keyword_button">Icône pour annuler l\'action de suppression du mot-clé</string>
+
+
+</resources>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="profile_email">Correo electrónico</string>
+    <string name="profile_logout">Cerrar sesión</string>
+    <string name="profile_settings">Ajustes</string>
+    <string name="profile_policy">Reglas y política</string>
+    <string name="profile_myprojects">Mis proyectos</string>
+    <string name="profile_my_subs">Mis suscripciones</string>
+    <string name="profile_my_grades">Mis notas</string>
+    <string name="profile_myclasses">Mis clases</string>
+    <string name="profile_send_email_via">Contactar con %s vía</string>
+    <string name="profile_user">Usuario</string>
+    <string name="profile_student">Estudiante</string>
+    <string name="profile_teacher">Profesor</string>
+    <string name="view_profile">Mi perfil</string>
+    <string name="view_badge">Mi insignia</string>
+    <string name="settings_screen_title">Ajustes</string>
+    <string name="settings_auto_login_option_label">Habilitar inicio de sesión automático</string>
+    <string name="login_no_account">¿Aún no tienes una cuenta?</string>
+    <string name="login_sign_up_action">Regístrate aquí</string>
+    <string name="edit_profile">Editar perfil</string>
+    <string name="profile_data_error">Error al cargar los datos del perfil !</string>
+    <string name="profile_gallery">Galería</string>
+    <string name="profile_keywords">Palabras clave</string>
+    <string name="profile_coffee_gear">Equipo de café</string>
+    <string name="profile_coffee_beans">Granos de café</string>
+    <string name="profile_edit_hint">Haz clic en la imagen que quieras editar</string>
+    <string name="profile_general">General</string>
+    <string name="profile_firstName">Nombre</string>
+    <string name="profile_lastName">Apellido</string>
+    <string name="profile_status">Estado</string>
+    <string name="profile_description">Descripción del perfil</string>
+    <string name="profile_cannot_edit">No puede editar estos campos.</string>
+    <string name="profile_address">Dirección</string>
+    <string name="profile_country">País</string>
+    <string name="profile_city">Ciudad</string>
+    <string name="profile_pick_exact_location">Elegir una ubicación exacta en el mapa :</string>
+    <string name="profile_missing_profile_picture">Falta la imagen de perfil!</string>
+    <string name="profile_missing_cover_picture">Falta la imagen de portada!</string>
+    <string name="profile_coffee_space">Mi rincon de café</string>
+    <string name="profile_sex_male">Masculino</string>
+    <string name="profile_sex_female">Femenino</string>
+
+    <!--  Accessibility   -->
+
+    <string name="content_description_product_image_preview">Imagen del producto: %s</string>
+    <string name="content_description_product_action">Acción al hacer clic en el producto: %s</string>
+
+</resources>

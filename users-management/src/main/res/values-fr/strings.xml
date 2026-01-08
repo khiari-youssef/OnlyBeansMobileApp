@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="profile_email">Email</string>
+    <string name="profile_logout">Se déconnecter</string>
+    <string name="profile_settings">Paramètres</string>
+    <string name="profile_policy">Politique de sécurité</string>
+    <string name="profile_send_email_via">Contactez %s via</string>
+    <string name="profile_user">Utilisateur</string>
+    <string name="view_profile">Mon profile</string>
+    <string name="view_badge">Mon badge</string>
+    <string name="settings_screen_title">Paramètres</string>
+    <string name="settings_auto_login_option_label">Activer la connexion automatique</string>
+    <string name="login_no_account">Pas encore un membre ? </string>
+    <string name="login_sign_up_action">Inscrivez-vous</string>
+    <string name="edit_profile">Modifier le profil</string>
+    <string name="profile_data_error">Erreur de chargement des données du profil !</string>
+    <string name="profile_gallery">Galerie</string>
+    <string name="profile_keywords">Mots-clés</string>
+    <string name="profile_coffee_gear">Équipement de café</string>
+    <string name="profile_coffee_beans">Grains de café</string>
+    <string name="profile_edit_hint">Cliquez sur l\'image à modifier</string>
+    <string name="profile_general">Géneral</string>
+    <string name="profile_firstName">Prénom</string>
+    <string name="profile_lastName">Nom</string>
+    <string name="profile_status">Statut</string>
+    <string name="profile_description">Description du profil</string>
+    <string name="profile_cannot_edit">Vous ne pouvez pas modifier ces champs !</string>
+    <string name="profile_address">Adresse</string>
+    <string name="profile_country">Pays</string>
+    <string name="profile_city">Ville</string>
+    <string name="profile_pick_exact_location">Choisir un emplacement précis sur la carte :</string>
+    <string name="profile_missing_profile_picture">Photo de profile manquante!</string>
+    <string name="profile_missing_cover_picture">Photo de couverture manquante!</string>
+    <string name="profile_coffee_space">Mon Coin café</string>
+    <string name="profile_sex_male">Homme</string>
+    <string name="profile_sex_female">Femme</string>
+
+
+    <!--  Accessibility   -->
+
+    <string name="content_description_product_image_preview">Image du produit : %s</string>
+    <string name="content_description_product_action">Action sur le produit : %s</string>
+
+</resources>
