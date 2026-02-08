@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.FloatingActionButton
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
@@ -224,17 +224,26 @@ fun ProfileScreen(
                                 ProductOverViewList(
                                     data = coffeeGearData,
                                     sectionTitle = stringResource(R.string.profile_coffee_gear),
+                                    placeholderText = stringResource(com.youapps.onlybeans.R.string.product_list_empty_list),
                                     maxRows = 2,
                                     onItemClick = onProductClicked,
                                     onSeeAllClick = onSeeAllCoffeeGearClicked
                                 )
 
                                 val coffeeBeansData = ProductListData(
-                                    items = screenState.profile.myCoffeeSpace?.coffeeBeans ?: emptyList()
+                                    items = (screenState.profile.myCoffeeSpace?.coffeeBeans ?: emptyList()).map {
+                                        OBProductListItem(
+                                            productID = it.id,
+                                            productName = it.label,
+                                            productImagePreview = it.productCover,
+                                            productDescription = it.productDescription
+                                        )
+                                    }
                                 )
                                 ProductOverViewList(
                                     data = coffeeBeansData,
                                     sectionTitle = stringResource(R.string.profile_coffee_beans),
+                                    placeholderText = stringResource(com.youapps.onlybeans.R.string.product_list_empty_list),
                                     maxRows = 4,
                                     onItemClick = onProductClicked,
                                     onSeeAllClick = onSeeAllCoffeeBeanClicked
@@ -256,7 +265,7 @@ fun ProfileScreen(
             contentAlignment = Alignment.Center
         ) {
             FloatingActionButton(
-                backgroundColor = MaterialTheme.colorScheme.primary,
+                containerColor = MaterialTheme.colorScheme.primary,
                 onClick = onLogOutClicked
             ) {
                 Icon(

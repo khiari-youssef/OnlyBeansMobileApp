@@ -33,6 +33,8 @@
 
     <string name="product_list_title">Lista de productos</string>
     <string name="product_list_empty_list">No hay productos disponibles</string>
+    <string name="product_create_new">Crear nuevo producto</string>
+    <string name="product_add_to_card">Añadir a la cesta</string>
 
 
 

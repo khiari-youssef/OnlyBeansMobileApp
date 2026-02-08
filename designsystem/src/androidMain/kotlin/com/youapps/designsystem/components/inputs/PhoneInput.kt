@@ -1,4 +1,4 @@
-package com.youapps.designsystem.components.textfields
+package com.youapps.designsystem.components.inputs
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.ScrollState

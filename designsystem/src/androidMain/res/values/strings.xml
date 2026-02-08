@@ -57,6 +57,12 @@
     <string name="content_description_link_button">Icon which redirects to link: %s</string>
     <string name="content_description_remove_keyword_button">Icon to remove keyword: %s</string>
     <string name="content_description_remove_cancel_keyword_button">Icon to cancel remove keyword action</string>
+    <string name="content_description_increase_counter_input">Icon to increase counter input</string>
+    <string name="content_description_decrease_counter_input">Icon to decrease counter input</string>
+    <string name="content_description_like_button">Icon to represent like button state</string>
+    <string name="content_description_share_button">Icon to share content</string>
+    <string name="content_description_shopping_bag_button">Icon to see shopping bag</string>
+"
 
 
 

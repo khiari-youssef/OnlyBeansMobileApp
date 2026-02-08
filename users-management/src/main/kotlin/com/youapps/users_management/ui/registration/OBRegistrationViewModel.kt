@@ -5,6 +5,7 @@ import android.net.Uri
 import android.webkit.MimeTypeMap
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.serialization.saved
 import androidx.lifecycle.viewModelScope
 import com.youapps.designsystem.components.lists.CarouselState
 import com.youapps.designsystem.components.lists.OBCarouselMediaType
@@ -15,6 +16,7 @@ import com.youapps.designsystem.components.menus.KeywordsData
 import com.youapps.onlybeans.R
 import com.youapps.onlybeans.data.repositories.AppMetaDataAPI
 import com.youapps.onlybeans.data.repositories.users.OBUsersRepositoryInterface
+import com.youapps.onlybeans.domain.entities.products.OBProductListItem
 import com.youapps.onlybeans.domain.entities.users.OBLocation
 import com.youapps.onlybeans.domain.exception.DomainErrorType
 import com.youapps.onlybeans.domain.services.InputRuleType
@@ -23,6 +25,7 @@ import com.youapps.onlybeans.domain.valueobjects.OBFile
 import com.youapps.onlybeans.domain.valueobjects.OBFileType
 import com.youapps.onlybeans.domain.valueobjects.UserSex
 import com.youapps.onlybeans.domain.valueobjects.decodeToUserSex
+import com.youapps.onlybeans.ui.product.ProductListData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -535,13 +538,20 @@ class OBRegistrationViewModel(
     }
 
 
-    suspend fun getMimeTypeForUri(uri : Uri) : String? = withContext(Dispatchers.Default){
-        val cR: ContentResolver = applicationContext.contentResolver
-        val mime = MimeTypeMap.getSingleton()
-         mime.getExtensionFromMimeType(cR.getType(uri))
+    fun getUserCoffeeGearProducts() : Flow<ProductListData?> = savedStateHandle.getStateFlow(PROFILE_COFFEE_GEAR,null)
+
+    fun getUserCoffeeBeansProducts() : Flow<ProductListData?> = savedStateHandle.getStateFlow(PROFILE_COFFEE_BEANS,null)
+
+    fun addUserCoffeeGearProduct(product: OBProductListItem){
+        viewModelScope.launch {
+            val currentList = savedStateHandle.get<String?>(PROFILE_COFFEE_GEAR)?.split("||")
+            savedStateHandle[PROFILE_COFFEE_GEAR] = currentList
+        }
     }
 
+    fun addUserCoffeeBeansProduct(product: OBProductListItem){
 
+    }
 
 
 
@@ -571,6 +581,10 @@ class OBRegistrationViewModel(
         private const val USER_SEX_KEY = "user_sex_link"
 
         private const val PROFILE_KEYWORDS = "profile_keywords"
+
+        private const val PROFILE_COFFEE_GEAR = "profile_coffee_gear"
+
+        private const val PROFILE_COFFEE_BEANS = "profile_coffee_beans"
     }
 
 

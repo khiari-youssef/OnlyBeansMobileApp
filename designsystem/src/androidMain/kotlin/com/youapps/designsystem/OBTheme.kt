@@ -26,23 +26,27 @@ fun OBTheme(
             secondary = BrickRed,
             tertiary = PumpkinOrangeShaded,
             surface = Alabaster,
+            surfaceVariant = Color(0xFFE8E8E8),
             primaryContainer = TonedDark,
             surfaceContainerHigh = Color.Black,
             background = Dark,
             onBackground = Color(0xFFB6B6B6),
             error = ErrorColor,
-            onSurfaceVariant = ShadedWhite
+            onSurfaceVariant = ShadedWhite,
+            outline = Color(0xFFB9B9B9)
         )
     } else {
         lightColorScheme(
             primary = RoseEbony,
             secondary = BrickRed,
             tertiary = PumpkinOrangeShaded,
+            surfaceVariant = Color(0xFFFFFFFF),
             surfaceContainerHigh = Color.White,
             surface = Alabaster,
             primaryContainer = Isabelline,
             error = ErrorColor,
-            onSurfaceVariant = TonedDark
+            onSurfaceVariant = TonedDark,
+            outline = Color(0xFFB9B9B9)
         )
     }
     val typography = Typography(
@@ -66,5 +70,6 @@ fun OBTheme(
         shapes = shapes,
         content = content
     )
+
 
 }

@@ -34,9 +34,9 @@ import com.youapps.designsystem.components.images.OBCircleImageXXL
 import com.youapps.designsystem.components.images.OBCoverPhoto
 import com.youapps.designsystem.components.menus.DropDownMenuItemData
 import com.youapps.designsystem.components.text.OBTextArea
-import com.youapps.designsystem.components.textfields.LinkInputField
-import com.youapps.designsystem.components.textfields.OBAutoCompleteTextField
-import com.youapps.designsystem.components.textfields.OBPhoneInput
+import com.youapps.designsystem.components.inputs.LinkInputField
+import com.youapps.designsystem.components.inputs.OBAutoCompleteTextField
+import com.youapps.designsystem.components.inputs.OBPhoneInput
 import com.youapps.onlybeans.domain.services.InputRuleType
 import com.youapps.onlybeans.domain.valueobjects.UserSex
 import com.youapps.onlybeans.ui.EnableLocationChip

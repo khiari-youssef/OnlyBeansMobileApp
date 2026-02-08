@@ -32,6 +32,8 @@
 
     <string name="product_list_title">Liste des produits</string>
     <string name="product_list_empty_list">Aucun produit disponible</string>
+    <string name="product_create_new">Créer un nouveau produit</string>
+    <string name="product_add_to_card">Ajouter au panier</string>
 
     <!--  Accessibility   -->
 

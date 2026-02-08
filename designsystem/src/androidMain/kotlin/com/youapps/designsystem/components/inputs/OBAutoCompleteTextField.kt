@@ -1,4 +1,4 @@
-package com.youapps.designsystem.components.textfields
+package com.youapps.designsystem.components.inputs
 
 import OBTextField
 import androidx.compose.foundation.layout.fillMaxWidth

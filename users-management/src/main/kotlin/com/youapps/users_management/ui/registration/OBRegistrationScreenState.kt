@@ -14,6 +14,7 @@ import com.youapps.onlybeans.domain.entities.users.OBUserProfile
 import com.youapps.onlybeans.domain.exception.DomainErrorType
 import com.youapps.onlybeans.domain.services.InputRuleType
 import com.youapps.onlybeans.domain.valueobjects.UserSex
+import com.youapps.onlybeans.ui.product.ProductListData
 
 
 sealed interface InputRuleCheckState{
@@ -68,7 +69,9 @@ data class OBRegistrationStateHolder(
     val countryCodesDropDownMenuData: State<DropDownMenuData?>,
     val selectedCountryCode: State<DropDownMenuItemData?>,
     val link : State<InputRuleCheckState>,
-    val keywords: State<KeywordsData?>
+    val keywords: State<KeywordsData?>,
+    val coffeeGear : State<ProductListData?>,
+    val coffeeBeans : State<ProductListData?>,
 ){
 
     @Composable
@@ -103,7 +106,9 @@ data class OBRegistrationStateHolder(
              countryCodesDropDownMenuData : State<DropDownMenuData?>,
              selectedCountryCode: State<DropDownMenuItemData?>,
              link : State<InputRuleCheckState>,
-             keywords: State<KeywordsData?>
+             keywords: State<KeywordsData?>,
+              coffeeGear : State<ProductListData?>,
+              coffeeBeans : State<ProductListData?>,
         ) : OBRegistrationStateHolder = remember(
             profilePicture,
             coverPicture,
@@ -122,10 +127,32 @@ data class OBRegistrationStateHolder(
             countryCodesDropDownMenuData,
             selectedCountryCode,
             link,
-            keywords
+            keywords,
+            coffeeGear,
+            coffeeBeans
         ) {
             OBRegistrationStateHolder(
-                profilePicture,coverPicture,profileDescription,profileStatus,firstName,lastName,userSex,email,country,city,location,phone,countriesListData,citiesListData,coffeeSpaceCarouselState,countryCodesDropDownMenuData,selectedCountryCode,link,keywords
+                profilePicture,
+                coverPicture,
+                profileDescription,
+                profileStatus,
+                firstName,
+                lastName,
+                userSex,
+                email,
+                country,
+                city,
+                location,
+                phone,
+                countriesListData,
+                citiesListData,
+                coffeeSpaceCarouselState,
+                countryCodesDropDownMenuData,
+                selectedCountryCode,
+                link,
+                keywords,
+               coffeeGear,
+               coffeeBeans
             )
         }
 

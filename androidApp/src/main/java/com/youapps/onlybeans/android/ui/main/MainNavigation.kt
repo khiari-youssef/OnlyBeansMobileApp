@@ -201,7 +201,9 @@ fun MainActivity.MainNavigation(
                     countryCodesDropDownMenuData = viewModel.countryCodesDropDownMenuDataStateFlow.collectAsStateWithLifecycle(initialValue = null),
                     selectedCountryCode = viewModel.getSelectedPhonePrefix().collectAsStateWithLifecycle(initialValue = null),
                     link = viewModel.getProfileLink().collectAsStateWithLifecycle(initialValue = InputRuleCheckState.Initial),
-                    keywords = viewModel.getProfileKeywordsList().collectAsStateWithLifecycle(initialValue = null)
+                    keywords = viewModel.getProfileKeywordsList().collectAsStateWithLifecycle(initialValue = null),
+                    coffeeBeans =viewModel.getUserCoffeeBeansProducts().collectAsStateWithLifecycle(initialValue = null) ,
+                    coffeeGear = viewModel.getUserCoffeeGearProducts().collectAsStateWithLifecycle(initialValue = null)
                 )
                 val currentContext = LocalContext.current
 

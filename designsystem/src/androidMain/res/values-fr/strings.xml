@@ -51,6 +51,10 @@
     <string name="content_description_link_button">Icone qui vous redirige vers le lien : %s</string>
     <string name="content_description_remove_keyword_button">Icône pour supprimer le mot-clé : %s</string>
     <string name="content_description_remove_cancel_keyword_button">Icône pour annuler l\'action de suppression du mot-clé</string>
-
+    <string name="content_description_increase_counter_input">Icône pour augmenter le compteur</string>
+    <string name="content_description_decrease_counter_input">Icône pour diminuer le compteur</string>
+    <string name="content_description_like_button">Icône pour représenter l\'état du bouton "J\'aime"</string>
+    <string name="content_description_share_button">Icône pour partager un contenu</string>
+    <string name="content_description_shopping_bag_button">Icône pour voir le panier</string>
 
 </resources>

@@ -1,15 +1,22 @@
 package com.youapps.onlybeans.data.dataSources
 
 import com.youapps.onlybeans.data.dto.OBAddressDTO
+import com.youapps.onlybeans.data.dto.OBCoffeeBeansPricingDTO
+import com.youapps.onlybeans.data.dto.OBCoffeeBeansProductDetailsDTO
+import com.youapps.onlybeans.data.dto.OBCoffeeRegionDTO
+import com.youapps.onlybeans.data.dto.OBCoffeeRoasterDTO
 import com.youapps.onlybeans.data.dto.OBCoffeeSpaceDTO
 import com.youapps.onlybeans.data.dto.OBFileDTO
+import com.youapps.onlybeans.data.dto.OBFlavorNotesDTO
 import com.youapps.onlybeans.data.dto.OBHomeCoffeeBarDTO
 import com.youapps.onlybeans.data.dto.OBHomeCoffeeBarID
+import com.youapps.onlybeans.data.dto.OBLocationDTO
 import com.youapps.onlybeans.data.dto.OBLoginResponseWrapper
 import com.youapps.onlybeans.data.dto.OBProductListItemDTO
 import com.youapps.onlybeans.data.dto.OBUserProfileDTO
 import com.youapps.onlybeans.data.exceptions.CustomHttpException
 import com.youapps.onlybeans.data.exceptions.HttpErrorType
+import com.youapps.onlybeans.domain.entities.products.OBRoastLevel
 import io.ktor.client.HttpClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.IO
@@ -81,11 +88,51 @@ internal class UsersRemoteDAO(
                 },
                 coffeeBeans = List(4){ id->
                     OBProductListItemDTO(
-                        productID = "productID$id",
+                        productID = "",
                         productName = "productName$id",
                         productDescription = "productName$id".repeat(6),
-                        productImagePreview = "https://m.media-amazon.com/images/I/71wr1tWBudL._AC_UF894,1000_QL80_.jpg"
+                        productImagePreview = ""
                     )
+                   /*
+                    OBCoffeeBeansProductDetailsDTO(
+                        id = "ob-product-beans-123e4567-e89b-12d3-a456-426614174000",
+                        label = "Café Quindio Milk Chocolate (Grano)",
+                        productCovers = listOf(
+                            "https://www.cafequindio.com.co/cdn/shop/files/cafe_cosecha_especial_chocolate_Frente.webp?v=1767389464&width=800"
+                        ),
+                        productDescription = "In the heart of Colombia's Coffee Region, in the picturesque area of \u200B\u200BCórdoba, Quindío, an exceptional coffee is cultivated that reflects the richness of its soil and the dedication of its growers. This coffee comes from beautiful farms where a small area is carefully selected and subjected to a special treatment that brings out its best qualities.",
+                        species = "Arabica",
+                        variety = "Castillo",
+                        origins = listOf(OBCoffeeRegionDTO(
+                            country = "Colombia",
+                            flag = "ET",
+                            region = "Córdoba, Quindío",
+                            farm = "Various smallholders"
+                        )),
+                        processingMethod = "Washed",
+                        flavorNotes = listOf(
+                            OBFlavorNotesDTO("Lemon", "https://example.com/lemon.png"),
+                            OBFlavorNotesDTO("Jasmine", "https://example.com/jasmine.png"),
+                            OBFlavorNotesDTO("Black Tea", "https://example.com/tea.png")
+                        ),
+                        roastLevel = OBRoastLevel.MEDIUM.name,
+                        roaster = OBCoffeeRoasterDTO(
+                            id = "roaster-$id",
+                            name = "Café Quindio"
+                        ),
+                        roastDate = "2025-12-29",
+                        pricing = OBCoffeeBeansPricingDTO(
+                            pricePerWeight = mapOf(
+                                250f to 55,
+                                500f to 100,
+                                1000f to 200
+                            ),
+                            currency = "USD",
+                            weightUnit = "g"
+                        ),
+                        endConsumptionDate = "2026-12-31"
+                    )
+                    */
                 }
             )
         )

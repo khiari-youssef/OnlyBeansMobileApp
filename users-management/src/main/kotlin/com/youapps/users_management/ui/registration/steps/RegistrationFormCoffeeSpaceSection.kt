@@ -22,6 +22,7 @@ import com.youapps.designsystem.components.lists.OBCarouselMediaType
 import com.youapps.designsystem.components.media.OBVideoPlayer
 import com.youapps.designsystem.components.menus.OBKeywordsListInput
 import com.youapps.designsystem.components.text.PlaceholderText
+import com.youapps.onlybeans.ui.product.ProductListBuilder
 import com.youapps.users_management.R
 import com.youapps.designsystem.R as ds
 import com.youapps.users_management.ui.registration.OBRegistrationStateHolder
@@ -69,6 +70,31 @@ fun RegistrationFormCoffeeSpaceSection(
             onKeywordAdded = onKeywordAdded,
             onKeyWordDeleted = onKeyWordDeleted
         )
+        ProductListBuilder(
+            modifier = Modifier,
+            sectionTitle = stringResource(R.string.profile_coffee_gear),
+            data = screenState.coffeeGear.value,
+            placeholderText = stringResource(com.youapps.onlybeans.R.string.product_list_empty_list),
+            onItemClick = {
+
+            },
+            onCreateNewItemClicked = {
+
+            }
+        )
+        ProductListBuilder(
+            modifier = Modifier,
+            sectionTitle = stringResource(R.string.profile_coffee_beans),
+            data = screenState.coffeeBeans.value,
+            placeholderText = stringResource(com.youapps.onlybeans.R.string.product_list_empty_list),
+            onItemClick = {
+
+            },
+            onCreateNewItemClicked = {
+
+            }
+        )
+
 
     }
 

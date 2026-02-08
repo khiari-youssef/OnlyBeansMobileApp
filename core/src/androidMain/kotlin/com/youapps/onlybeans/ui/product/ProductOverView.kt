@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -36,6 +37,7 @@ import coil.request.CachePolicy
 import coil.request.ImageRequest
 import com.youapps.designsystem.R
 import com.youapps.designsystem.components.loading.shimmerEffect
+import com.youapps.designsystem.components.text.PlaceholderText
 import com.youapps.onlybeans.domain.entities.products.OBProductListItem
 
 @Immutable
@@ -46,13 +48,14 @@ data class ProductListData(
 @Composable
 fun ProductOverViewList(
     modifier: Modifier = Modifier,
-    data: ProductListData,
+    data: ProductListData?,
     sectionTitle : String,
+    placeholderText : String?=null,
     maxRows : Int = 4,
     onItemClick : (OBProductListItem)->Unit,
-    onSeeAllClick : ()->Unit
+    onSeeAllClick : (()->Unit)?=null
 ){
-    data.items.takeIf { it.isNotEmpty() }?.take(maxRows)?.let { listData->
+
         Column (
             modifier = modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -65,6 +68,7 @@ fun ProductOverViewList(
                 style = MaterialTheme.typography.titleLarge,
                 textAlign = TextAlign.Start
             )
+            data?.items?.takeIf { it.isNotEmpty() }?.take(maxRows)?.let { listData->
                 List(listData.size){ index->
                     val item : OBProductListItem = listData[index]
                         ProductOverViewItem(
@@ -79,11 +83,12 @@ fun ProductOverViewList(
                             }
                         )
                 }
+            onSeeAllClick?.run {
                 if (data.items.size > maxRows) {
                     Row(
-                      modifier = Modifier.fillMaxWidth(),
-                      verticalAlignment = Alignment.CenterVertically,
-                      horizontalArrangement = Arrangement.End
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.End
                     ) {
                         OBButton(
                             backgroundColor = Color(0xFF3A3A3A),
@@ -93,8 +98,53 @@ fun ProductOverViewList(
 
                     }
                 }
-        }
+            }
+        } ?: run {
+                placeholderText?.run {
+                    PlaceholderText(
+                        modifier = Modifier.fillMaxWidth(),
+                        text = placeholderText,
+                        align = TextAlign.Center
+                    )
+                }
+            }
+
     }
+
+}
+
+
+@Composable
+fun ProductListBuilder(
+    modifier: Modifier = Modifier,
+    data: ProductListData?,
+    sectionTitle : String,
+    placeholderText: String?,
+    onItemClick : (OBProductListItem)->Unit,
+    onCreateNewItemClicked : ()->Unit
+) {
+    Column (
+        modifier = modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.Top)
+    ){
+        ProductOverViewList(
+            modifier = Modifier,
+            data = data,
+            sectionTitle = sectionTitle,
+            maxRows = 2,
+            placeholderText = placeholderText,
+            onItemClick = onItemClick
+        )
+        OBButton(
+            modifier = Modifier.fillMaxWidth(0.8f),
+            backgroundColor = Color(0xFF3A3A3A),
+            text = stringResource(com.youapps.onlybeans.R.string.product_create_new),
+            onClick = onCreateNewItemClicked
+        )
+
+    }
+
 }
 
 
