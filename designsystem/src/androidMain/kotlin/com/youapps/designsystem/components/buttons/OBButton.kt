@@ -252,7 +252,7 @@ fun OBButton(
                    Row(
                        modifier = Modifier.wrapContentSize(),
                        verticalAlignment = Alignment.CenterVertically,
-                       horizontalArrangement = Arrangement.spacedBy(2.dp,Alignment.CenterHorizontally)
+                       horizontalArrangement = Arrangement.spacedBy(8.dp)
                    ) {
                         Icon(
                             imageVector = ImageVector.vectorResource(id = icon) ,

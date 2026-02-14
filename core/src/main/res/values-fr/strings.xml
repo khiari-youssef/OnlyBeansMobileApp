@@ -16,7 +16,7 @@
 
         <string name="input_letters_only_error_message">Seules les lettres (a-z) sont autorisées dans ce champ.</string>
         <string name="input_numbers_only_error_message">Seuls les nombres sont autorisés dans ce champ.</string>
-        <string name="input_digits_only_error_message">Seuls les nombres entiers (chiffres 0-9) sont autorisés.</string>
+        <string name="input_digits_only_error_message">Seuls les nombres entiers (chiffres 0–9) sont autorisés.</string>
 
         <string name="input_password_policy_error_message">Le mot de passe doit comporter au moins 8 caractères et inclure un chiffre et un symbole.</string>
 
@@ -34,6 +34,7 @@
     <string name="product_list_empty_list">Aucun produit disponible</string>
     <string name="product_create_new">Créer un nouveau produit</string>
     <string name="product_add_to_card">Ajouter au panier</string>
+    <string name="product_view_market_place">Voir sur le marché</string>
 
     <!--  Accessibility   -->
 

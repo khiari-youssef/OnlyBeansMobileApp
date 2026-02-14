@@ -18,11 +18,7 @@ data class OBCoffeeRegion(
     val description : String?=null
 )
 
-data class OBCoffeeBeansPricing(
-    val pricePerWeight : Map<Float,Int>,
-    val currency : String,
-    val weightUnit : String
-)
+
 
 enum class OBRoastLevel{
     LIGHT,MEDIUM,DARK
@@ -40,11 +36,12 @@ data class OBFlavorProfileData(
 
 
 
-data class OBCoffeeBeansProductDetails(
-    val id : String,
-    val label : String,
-    val productCovers : List<String>,
-    val productDescription : String,
+ class OBCoffeeBeansProductDetails(
+     id : String,
+     name : String,
+     displayMetadata : String,
+     productCovers : List<String>,
+     productDescription : String,
     val species : String,
     val variety : String,
     val origins : List<OBCoffeeRegion>?=null,
@@ -55,9 +52,15 @@ data class OBCoffeeBeansProductDetails(
     val roastLevel : OBRoastLevel,
     val roaster : OBCoffeeRoaster,
     val roastDate : String,
-    val pricing : OBCoffeeBeansPricing,
     val endConsumptionDate : String,
-    val rating : OBProductRating?=null,
+     rating : OBProductRating?=null,
+) : OBProduct(
+    id = id,
+    name = name,
+    productCovers = productCovers,
+    productDescription = productDescription,
+    rating = rating,
+    displayMetadata = displayMetadata
 ){
     fun isSingleOrigin() : Boolean = origins?.size == 1
-}
+ }

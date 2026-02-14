@@ -1,12 +1,13 @@
 package com.youapps.onlybeans.data.dto
 
 
-import com.youapps.onlybeans.domain.entities.products.OBCoffeeBeansPricing
 import com.youapps.onlybeans.domain.entities.products.OBCoffeeBeansProductDetails
 import com.youapps.onlybeans.domain.entities.products.OBCoffeeRegion
 import com.youapps.onlybeans.domain.entities.products.OBCoffeeRoaster
 import com.youapps.onlybeans.domain.entities.products.OBFlavorNotes
 import com.youapps.onlybeans.domain.entities.products.OBFlavorProfileData
+import com.youapps.onlybeans.domain.entities.products.OBPrice
+import com.youapps.onlybeans.domain.entities.products.OBProductPricing
 import com.youapps.onlybeans.domain.entities.products.OBProductRating
 import com.youapps.onlybeans.domain.entities.products.OBRoastLevel
 import kotlinx.serialization.Serializable
@@ -44,13 +45,28 @@ data class OBCoffeeRegionDTO(
 }
 
 @Serializable
+data class OBPriceDTO(
+    val price : Float,
+    val discount : Float
+){
+    fun toDomain() : OBPrice = OBPrice(
+        price = this.price,
+        discount = this.discount
+    )
+}
+
+@Serializable
 data class OBCoffeeBeansPricingDTO(
-    val pricePerWeight : Map<Float,Int>,
+    val pricePerWeight : Map<Int,OBPriceDTO>,
     val currency : String,
     val weightUnit : String
 ){
-    fun toDomain() : OBCoffeeBeansPricing = OBCoffeeBeansPricing(
-        pricePerWeight = this.pricePerWeight,
+    fun toDomain() : OBProductPricing.OBProductMultipleWeightBasedPricing = OBProductPricing.OBProductMultipleWeightBasedPricing(
+        pricePerWeight = this.pricePerWeight.map { (weight,price) ->
+            weight to OBPrice(
+                price = price.price,
+                discount = price.discount
+            ) }.toMap(),
         currency = this.currency,
         weightUnit = this.weightUnit
     )
@@ -81,7 +97,8 @@ data class OBFlavorProfileDataDTO(
 @Serializable
 data class OBCoffeeBeansProductDetailsDTO(
     val id : String,
-    val label : String,
+    val name : String,
+    val displayMetadata : String,
     val productCovers : List<String>,
     val productDescription : String,
     val species : String,
@@ -101,7 +118,8 @@ data class OBCoffeeBeansProductDetailsDTO(
 ) {
     fun toDomain() : OBCoffeeBeansProductDetails =OBCoffeeBeansProductDetails(
        id = this.id,
-       label = this.label,
+       name = this.name,
+        displayMetadata = displayMetadata,
       productCovers = this.productCovers,
       productDescription = this.productDescription,
       species = this.species,
@@ -114,7 +132,6 @@ data class OBCoffeeBeansProductDetailsDTO(
       roastDate = this.roastDate,
       roastLevel = OBRoastLevel.valueOf(this.roastLevel),
       roaster = this.roaster.toDomain(),
-      pricing = this.pricing.toDomain(),
       endConsumptionDate = this.endConsumptionDate,
       rating = if (this.averageRating != null && this.reviewsNumber != null) OBProductRating(
           averageRating = this.averageRating,

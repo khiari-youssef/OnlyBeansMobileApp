@@ -37,6 +37,7 @@
     <string name="product_list_empty_list">No products available</string>
     <string name="product_create_new">Create new product</string>
     <string name="product_add_to_card">Add to card</string>
+    <string name="product_view_market_place">View on marketplace</string>
 
     <!--  Accessibility   -->
 

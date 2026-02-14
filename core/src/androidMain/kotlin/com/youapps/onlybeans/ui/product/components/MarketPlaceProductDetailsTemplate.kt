@@ -1,9 +1,9 @@
-package com.youapps.onlybeans.ui.product.coffeeBeans
+package com.youapps.onlybeans.ui.product.components
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -20,6 +20,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -27,34 +28,36 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.util.packInts
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import com.youapps.designsystem.OBTheme
-import com.youapps.designsystem.components.bars.OBTopBar
-import com.youapps.designsystem.components.images.OBCoverPhoto
-import com.youapps.onlybeans.domain.entities.products.OBCoffeeBeansPricing
+import com.youapps.designsystem.components.dialogs.ImageViewerDialog
+import com.youapps.onlybeans.ui.product.OBProductTopBar
 import com.youapps.onlybeans.domain.entities.products.OBCoffeeBeansProductDetails
 import com.youapps.onlybeans.domain.entities.products.OBCoffeeRegion
 import com.youapps.onlybeans.domain.entities.products.OBCoffeeRoaster
 import com.youapps.onlybeans.domain.entities.products.OBFlavorNotes
 import com.youapps.onlybeans.domain.entities.products.OBFlavorProfileData
+import com.youapps.onlybeans.domain.entities.products.OBMarketPlaceProduct
+import com.youapps.onlybeans.domain.entities.products.OBPrice
+import com.youapps.onlybeans.domain.entities.products.OBProductPricing
 import com.youapps.onlybeans.domain.entities.products.OBProductRating
 import com.youapps.onlybeans.domain.entities.products.OBRoastLevel
 import com.youapps.onlybeans.domain.entities.users.OBLocation
 import com.youapps.onlybeans.ui.product.ProductBottomAppBar
+import com.youapps.onlybeans.ui.product.obCoffeeBeansMockProduct
 
 @Preview()
 @Composable
-fun CoffeeBeansProductPreview(){
+fun MarketPlaceProductDetailsTemplatePreview(){
     val    obCoffeeBeansProduct: OBCoffeeBeansProductDetails = OBCoffeeBeansProductDetails(
         id = "product-coffee-0x5gae1dhfsd1hs1hf1",
-        label = "Ethiopian Yirgacheffe",
+        name = "Ethiopian Yirgacheffe",
         productCovers = listOf(
 
         ),
@@ -79,15 +82,6 @@ fun CoffeeBeansProductPreview(){
             locations = listOf(OBLocation(23.154757,65.2254789))
         ) ,
         roastDate = "04-02-2026",
-        pricing = OBCoffeeBeansPricing(
-            pricePerWeight = mapOf(
-                18.5f to 250,
-                35f to 500,
-                65f to 1000
-            ),
-            currency = "USD",
-            weightUnit = "g"
-        ) ,
         endConsumptionDate = "04-05-2026",
         flavorProfileData = OBFlavorProfileData(
             description = "Complex & Floral",
@@ -117,11 +111,26 @@ fun CoffeeBeansProductPreview(){
         rating = OBProductRating(
             reviewsNumber = 124,
             averageRating = 4.8f
-        )
+        ),
+        displayMetadata = "100% Arabica • Single Origin • Medium Roast"
     )
     OBTheme{
-        CoffeeBeansProduct(
-            obCoffeeBeansProduct = obCoffeeBeansProduct,
+        MarketPlaceProductDetailsTemplate(
+            oBMarketPlaceProduct = OBMarketPlaceProduct(
+               marketPlaceID = "marketplace-id-0aegd2sh15srh1",
+                product = obCoffeeBeansMockProduct,
+                pricing = OBProductPricing.OBProductMultipleWeightBasedPricing(
+                    pricePerWeight = mapOf(
+                        250 to OBPrice(price = 18.5f,0.2f),
+                        500 to OBPrice(price = 35f),
+                        1000 to OBPrice(price = 65f)
+                    ),
+                    currency = "USD",
+                    weightUnit = "g"
+                ) ,
+                isAddedToFavoriteList = false,
+                inStockItems = 5,
+            ),
             onBackClick = {
 
             },
@@ -133,6 +142,9 @@ fun CoffeeBeansProductPreview(){
             },
             onAddToCartClicked = {
 
+            },
+            content = {
+
             }
         )
     }
@@ -140,19 +152,20 @@ fun CoffeeBeansProductPreview(){
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun CoffeeBeansProduct(
+fun MarketPlaceProductDetailsTemplate(
     modifier: Modifier = Modifier,
-    obCoffeeBeansProduct: OBCoffeeBeansProductDetails,
+    oBMarketPlaceProduct: OBMarketPlaceProduct,
     onBackClick: () -> Unit,
     onShareClick: () -> Unit,
     onAddToCartClicked : (Int)-> Unit,
-    onLikeClicked : (isLiked : Boolean)-> Unit
+    onLikeClicked : (isLiked : Boolean)-> Unit,
+    content : @Composable ColumnScope.()-> Unit
 ) {
     val topAppBarScrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
     Scaffold(
         modifier = modifier.nestedScroll(topAppBarScrollBehavior.nestedScrollConnection),
      topBar = {
-         OBTopBar(
+         OBProductTopBar(
              modifier = Modifier
                  .fillMaxWidth(),
              scrollBehavior = topAppBarScrollBehavior,
@@ -193,6 +206,16 @@ fun CoffeeBeansProduct(
         }
     ) { _ ->
         val scrollState = rememberScrollState()
+        val imageViewerContent : MutableState<String?> = remember {
+            mutableStateOf(null)
+        }
+        ImageViewerDialog(
+            imageUrl = imageViewerContent.value ?: "" ,
+            isVisible = imageViewerContent.value != null,
+            onDismissRequest = {
+                imageViewerContent.value = null
+            }
+        )
         Column(
             modifier = Modifier
                 .verticalScroll(scrollState)
@@ -204,11 +227,15 @@ fun CoffeeBeansProduct(
                 bottomStart = 16.dp,
                 bottomEnd = 16.dp
             )
-            OBCoverPhoto(
+            OBProductCoversCarousel(
                 modifier = Modifier
                     .fillMaxWidth()
                     .clip(carouselCorners),
-                url = "https://plus.unsplash.com/premium_photo-1724820188081-17b09ee3f2b7?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+               covers = oBMarketPlaceProduct.product.productCovers,
+                onPhotoClicked = {
+                    imageViewerContent.value = it
+                },
+                preferredItemWidth = 300.dp
             )
             Card(
                 modifier = Modifier
@@ -225,12 +252,80 @@ fun CoffeeBeansProduct(
                     containerColor = MaterialTheme.colorScheme.surface
                 )
             ) {
-                Spacer(
-                    Modifier.height(1000.dp)
-                )
+                Column(
+                    modifier = Modifier
+                        .padding(
+                            top = 24.dp
+                        )
+                        .padding(
+                            horizontal = 12.dp
+                        )
+                        .fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(16.dp)
+                ) {
+                    ConstraintLayout(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .wrapContentHeight()
+                    ) {
+                        val (left,right) = createRefs()
+
+                        OBProductHeader(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .constrainAs(left){
+                                    start.linkTo(parent.start)
+                                    top.linkTo(parent.top)
+                                    bottom.linkTo(parent.bottom)
+                                    end.linkTo(right.start,8.dp)
+                                    width = Dimension.fillToConstraints
+                                },
+                            title = oBMarketPlaceProduct.product.name,
+                            subTitle = oBMarketPlaceProduct.product.run {
+                                this.displayMetadata
+                            }
+                        )
+                       Column(
+                           modifier = Modifier
+                               .wrapContentHeight()
+                               .constrainAs(right){
+                                   top.linkTo(parent.top)
+                                   bottom.linkTo(parent.bottom)
+                                   end.linkTo(parent.end)
+                               },
+                           horizontalAlignment = Alignment.CenterHorizontally,
+                           verticalArrangement = Arrangement.spacedBy(4.dp)
+                       ) {
+                           oBMarketPlaceProduct.pricing.run {
+                               OBProductPriceSection(
+                                   modifier = Modifier,
+                                   onOBPrice = when(this){
+                                       is OBProductPricing.OBProductMultipleWeightBasedPricing -> this.pricePerWeight.values.first()
+                                       is OBProductPricing.OBProductMultipleBundleBasedPricing -> this.pricePerBundle.values.first()
+                                       is OBProductPricing.OBProductSinglePricing -> this.price
+                                   },
+                                   currency = this.currency
+                               )
+                           }
+                           oBMarketPlaceProduct.product.rating?.run {
+                               OBProductRatingTag(
+                                   modifier = Modifier,
+                                   rating = averageRating,
+                                   reviewCount = reviewsNumber
+                               )
+                           }
+                       }
+
+                    }
+                    content()
+                }
             }
 
         }
     }
+
+
+
 
 }

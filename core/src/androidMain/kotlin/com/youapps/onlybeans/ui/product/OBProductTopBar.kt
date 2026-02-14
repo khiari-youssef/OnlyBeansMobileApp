@@ -1,9 +1,11 @@
-package com.youapps.designsystem.components.bars
+package com.youapps.onlybeans.ui.product
 
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.Badge
+import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
@@ -17,7 +19,6 @@ import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
@@ -28,7 +29,7 @@ import com.youapps.designsystem.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun OBTopBar(
+fun OBProductTopBar(
     modifier: Modifier = Modifier,
     title: String?=null,
     scrollBehavior: TopAppBarScrollBehavior?=null,
@@ -36,9 +37,10 @@ fun OBTopBar(
         containerColor = Color.Transparent,
         scrolledContainerColor = MaterialTheme.colorScheme.primary
     ),
+    itemsAddedToCard : Int = 0,
     onBackClick: () -> Unit,
     onShareClick: () -> Unit,
-    onShoppingBagClicked : ()-> Unit
+    onShoppingBagClicked : (()-> Unit)?=null
 ) {
     CenterAlignedTopAppBar(
         modifier = modifier,
@@ -85,21 +87,48 @@ fun OBTopBar(
                     contentDescription = stringResource(R.string.content_description_share_button)
                 )
             }
-            FloatingActionButton(
-                onClick = onShoppingBagClicked,
-                modifier = Modifier
-                    .padding(end = 8.dp)
-                    .size(40.dp),
-                shape = CircleShape,
-                containerColor = MaterialTheme.colorScheme.surface,
-                contentColor = MaterialTheme.colorScheme.onSurface,
-                elevation = FloatingActionButtonDefaults.elevation(4.dp)
-            ) {
-                Icon(
-                    ImageVector.vectorResource(R.drawable.ic_shopping_bag),
-                    contentDescription = stringResource(R.string.content_description_shopping_bag_button)
-                )
+
+            onShoppingBagClicked?.run {
+                FloatingActionButton(
+                    onClick = onShoppingBagClicked,
+                    modifier = Modifier
+                        .padding(end = 8.dp)
+                        .size(40.dp),
+                    shape = CircleShape,
+                    containerColor = MaterialTheme.colorScheme.surface,
+                    contentColor = MaterialTheme.colorScheme.onSurface,
+                    elevation = FloatingActionButtonDefaults.elevation(4.dp)
+                ) {
+                    if (itemsAddedToCard > 0) {
+                        BadgedBox(
+                            badge = {
+                                Badge(
+                                    contentColor = Color(0xFFD51E1E),
+                                    content = {
+                                        Text(
+                                            modifier = Modifier
+                                                .wrapContentSize(),
+                                            text = "1",
+                                            color = Color.White
+                                        )
+                                    }
+                                )
+                            }
+                        ){
+                            Icon(
+                                ImageVector.vectorResource(R.drawable.ic_shopping_bag),
+                                contentDescription = stringResource(R.string.content_description_shopping_bag_button)
+                            )
+                        }
+                    } else {
+                        Icon(
+                            ImageVector.vectorResource(R.drawable.ic_shopping_bag),
+                            contentDescription = stringResource(R.string.content_description_shopping_bag_button)
+                        )
+                    }
+                }
             }
+
         }
     )
 }
