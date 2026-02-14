@@ -1,5 +1,5 @@
 plugins {
-    id("sesame.android.application")
+    id("onlybeans.android.application")
     alias(libs.plugins.compose.compiler)
 }
 

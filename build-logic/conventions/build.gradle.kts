@@ -13,16 +13,12 @@ dependencies{
 gradlePlugin{
    plugins {
        register("androidApplication") {
-           id = "sesame.android.application"
+           id = "onlybeans.android.application"
            implementationClass = "AndroidApplicationConventionPlugin"
        }
        register("androidFeature") {
-           id = "sesame.android.feature"
+           id = "onlybeans.android.feature"
            implementationClass = "AndroidFeatureConventionPlugin"
-       }
-       register("androidTest"){
-           id = "sesame.android.test"
-           implementationClass = "AndroidTestConventionPlugin"
        }
    }
 }
