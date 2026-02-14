@@ -1,4 +1,4 @@
-package com.youapps.onlybeans.ui.product.components
+package com.youapps.onlybeans.marketplace.ui.components
 
 
 import androidx.compose.foundation.background
@@ -14,7 +14,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.youapps.onlybeans.R
@@ -41,7 +40,7 @@ fun OBProductRatingTag(
     ) {
         // The Star Icon
         Icon(
-            imageVector = ImageVector.vectorResource(com.youapps.designsystem.R.drawable.ic_rating_star),
+            imageVector = ImageVector.vectorResource(com.youapps.onlybeans.designsystem.R.drawable.ic_rating_star),
             contentDescription = "Rating",
             tint = starColor,
             modifier = Modifier.size(16.dp),

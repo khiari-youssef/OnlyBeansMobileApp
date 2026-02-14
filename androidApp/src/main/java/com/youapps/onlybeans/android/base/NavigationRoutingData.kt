@@ -15,6 +15,19 @@ data object NavigationRoutingData {
 
     const val REGISTRATION_SCREEN = "registration_screen"
 
+
+
+
+    data object MarketPlace{
+
+        val ROOT = Home.toString()
+
+        const val MARKET_PLACE_MAIN_SCREEN = "marketplace_main_screen"
+
+    }
+
+
+
     data object Home{
           val ROOT = toString()
         const val NETWORK = "network_screen"

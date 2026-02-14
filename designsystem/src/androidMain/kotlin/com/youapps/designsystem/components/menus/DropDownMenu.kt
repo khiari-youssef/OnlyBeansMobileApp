@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.CachePolicy
 import coil.request.ImageRequest
-import com.youapps.designsystem.R
+import com.youapps.onlybeans.designsystem.R
 
 sealed interface ImageMediaType{
     data class Resource(val resId : Int,val size : DpSize?=null) : ImageMediaType

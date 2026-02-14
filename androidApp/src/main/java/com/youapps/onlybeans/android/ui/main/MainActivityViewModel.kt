@@ -2,7 +2,7 @@ package com.youapps.onlybeans.android.ui.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.youapps.designsystem.R
+import com.youapps.onlybeans.designsystem.R
 import com.youapps.designsystem.components.bars.OBBottomNavigationBarItem
 import com.youapps.onlybeans.contracts.UseCaseContract
 import com.youapps.onlybeans.data.repositories.users.OBUsersRepositoryInterface

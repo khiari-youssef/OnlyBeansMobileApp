@@ -47,8 +47,8 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import com.youapps.designsystem.components.popups.SesameToastDefaults
 import com.youapps.designsystem.components.popups.SesameToastPopup
 import com.youapps.onlybeans.domain.exception.DomainErrorType
-import com.youapps.users_management.R
-import com.youapps.designsystem.R as DSR
+import com.youapps.onlybeans.users_management.R
+import com.youapps.onlybeans.designsystem.R as DSR
 
 typealias ToastState = Pair<Int,String>
 

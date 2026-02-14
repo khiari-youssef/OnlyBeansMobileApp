@@ -2,6 +2,7 @@ plugins {
     id("onlybeans.android.application")
     id("kotlin-parcelize")
     alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.google.playservices)
 }
 
 
@@ -16,6 +17,7 @@ dependencies {
     api(projects.core)
     implementation(projects.designsystem)
     implementation(projects.usersManagement)
+    implementation(projects.marketplace)
     implementation(libs.bundles.composelibs)
     implementation(libs.kotlinx.datetime)
     implementation(libs.kotlin.coroutines)
@@ -25,4 +27,5 @@ dependencies {
     implementation(libs.koin.android)
     implementation(libs.jetpack.viewmodel.core)
     implementation(platform(libs.firebase.bom))
+    implementation(libs.firebase.analytics)
 }

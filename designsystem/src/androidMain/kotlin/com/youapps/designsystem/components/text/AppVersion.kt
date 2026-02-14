@@ -9,7 +9,7 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import com.youapps.designsystem.OBFontFamilies
-import com.youapps.designsystem.R
+import com.youapps.onlybeans.designsystem.R
 
 @Composable
 fun AppVersion(

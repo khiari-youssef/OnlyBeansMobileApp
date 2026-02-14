@@ -1,6 +1,6 @@
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.youapps.designsystem.R
+import com.youapps.onlybeans.designsystem.R
 
 
 @Composable

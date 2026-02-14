@@ -23,8 +23,8 @@ import com.youapps.designsystem.components.media.OBVideoPlayer
 import com.youapps.designsystem.components.menus.OBKeywordsListInput
 import com.youapps.designsystem.components.text.PlaceholderText
 import com.youapps.onlybeans.ui.product.ProductListBuilder
-import com.youapps.users_management.R
-import com.youapps.designsystem.R as ds
+import com.youapps.onlybeans.users_management.R
+import com.youapps.onlybeans.designsystem.R as ds
 import com.youapps.users_management.ui.registration.OBRegistrationStateHolder
 
 

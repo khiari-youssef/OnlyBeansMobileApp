@@ -40,10 +40,10 @@ import com.youapps.designsystem.components.inputs.OBPhoneInput
 import com.youapps.onlybeans.domain.services.InputRuleType
 import com.youapps.onlybeans.domain.valueobjects.UserSex
 import com.youapps.onlybeans.ui.EnableLocationChip
-import com.youapps.users_management.R
+import com.youapps.onlybeans.users_management.R
 import com.youapps.users_management.ui.registration.InputRuleCheckState
 import com.youapps.users_management.ui.registration.OBRegistrationStateHolder
-import com.youapps.designsystem.R as ds
+import com.youapps.onlybeans.designsystem.R as ds
 
 
 @OptIn(ExperimentalLayoutApi::class, ExperimentalMaterialApi::class)

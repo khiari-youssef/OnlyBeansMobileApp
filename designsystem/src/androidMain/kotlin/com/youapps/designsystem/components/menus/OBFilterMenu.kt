@@ -63,7 +63,7 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.youapps.designsystem.DisabledOnSurfaceColorLightMode
 import com.youapps.designsystem.OBFontFamilies
-import com.youapps.designsystem.R
+import com.youapps.onlybeans.designsystem.R
 import com.youapps.designsystem.components.text.PlaceholderText
 
 @Immutable

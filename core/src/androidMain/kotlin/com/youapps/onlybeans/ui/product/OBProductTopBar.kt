@@ -24,7 +24,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.youapps.designsystem.R
+import com.youapps.onlybeans.designsystem.R
 
 
 @OptIn(ExperimentalMaterial3Api::class)

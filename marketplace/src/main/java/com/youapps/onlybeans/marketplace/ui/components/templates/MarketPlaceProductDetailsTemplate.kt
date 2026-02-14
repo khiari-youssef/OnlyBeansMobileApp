@@ -1,12 +1,9 @@
-package com.youapps.onlybeans.ui.product.components
+package com.youapps.onlybeans.marketplace.ui.components.templates
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -50,6 +47,10 @@ import com.youapps.onlybeans.domain.entities.products.OBProductRating
 import com.youapps.onlybeans.domain.entities.products.OBRoastLevel
 import com.youapps.onlybeans.domain.entities.users.OBLocation
 import com.youapps.onlybeans.ui.product.ProductBottomAppBar
+import com.youapps.onlybeans.ui.product.components.OBProductCoversCarousel
+import com.youapps.onlybeans.ui.product.components.OBProductHeader
+import com.youapps.onlybeans.marketplace.ui.components.OBProductPriceSection
+import com.youapps.onlybeans.marketplace.ui.components.OBProductRatingTag
 import com.youapps.onlybeans.ui.product.obCoffeeBeansMockProduct
 
 @Preview()
@@ -231,7 +232,7 @@ fun MarketPlaceProductDetailsTemplate(
                 modifier = Modifier
                     .fillMaxWidth()
                     .clip(carouselCorners),
-               covers = oBMarketPlaceProduct.product.productCovers,
+                covers = oBMarketPlaceProduct.product.productCovers,
                 onPhotoClicked = {
                     imageViewerContent.value = it
                 },
@@ -274,11 +275,11 @@ fun MarketPlaceProductDetailsTemplate(
                         OBProductHeader(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .constrainAs(left){
+                                .constrainAs(left) {
                                     start.linkTo(parent.start)
                                     top.linkTo(parent.top)
                                     bottom.linkTo(parent.bottom)
-                                    end.linkTo(right.start,8.dp)
+                                    end.linkTo(right.start, 8.dp)
                                     width = Dimension.fillToConstraints
                                 },
                             title = oBMarketPlaceProduct.product.name,
@@ -300,7 +301,7 @@ fun MarketPlaceProductDetailsTemplate(
                            oBMarketPlaceProduct.pricing.run {
                                OBProductPriceSection(
                                    modifier = Modifier,
-                                   onOBPrice = when(this){
+                                   onOBPrice = when (this) {
                                        is OBProductPricing.OBProductMultipleWeightBasedPricing -> this.pricePerWeight.values.first()
                                        is OBProductPricing.OBProductMultipleBundleBasedPricing -> this.pricePerBundle.values.first()
                                        is OBProductPricing.OBProductSinglePricing -> this.price

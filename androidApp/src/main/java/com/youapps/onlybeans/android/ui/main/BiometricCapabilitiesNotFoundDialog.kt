@@ -11,7 +11,7 @@ fun BiometricCapabilitiesNotFoundDialog(
       title = stringResource(id = R.string.error_unsupported_biometric_features_title),
       subtitle = stringResource(id = R.string.error_unsupported_biometric_features_message),
       isShown = isShown,
-      buttonText = stringResource(id = com.youapps.designsystem.R.string.ok),
+      buttonText = stringResource(id = com.youapps.onlybeans.designsystem.R.string.ok),
       onDismissRequest = onClosed,
       onButtonClicked = onClosed
    )

@@ -45,7 +45,7 @@ import coil.compose.AsyncImage
 import coil.request.CachePolicy
 import coil.request.ImageRequest
 import com.youapps.designsystem.OBFontFamilies
-import com.youapps.designsystem.R
+import com.youapps.onlybeans.designsystem.R
 import com.youapps.designsystem.TonedDark
 import com.youapps.designsystem.components.menus.DropDownMenuData
 import com.youapps.designsystem.components.menus.DropDownMenuItemData

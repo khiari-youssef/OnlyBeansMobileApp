@@ -37,7 +37,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.youapps.designsystem.LinkColor
 import com.youapps.designsystem.OBFontFamilies
-import com.youapps.designsystem.R
+import com.youapps.onlybeans.designsystem.R
 import com.youapps.designsystem.TonedDark
 import com.youapps.designsystem.components.text.PlaceholderText
 import com.youapps.designsystem.onBackgroundShadedDarkMode

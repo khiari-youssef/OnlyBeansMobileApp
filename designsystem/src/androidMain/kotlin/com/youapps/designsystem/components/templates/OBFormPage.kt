@@ -30,7 +30,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.youapps.designsystem.R as ds
+import com.youapps.onlybeans.designsystem.R as ds
 
 @Composable
 fun  OBFormPage(

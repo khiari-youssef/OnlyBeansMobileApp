@@ -32,12 +32,12 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.youapps.designsystem.R
+import com.youapps.onlybeans.designsystem.R
 import com.youapps.designsystem.components.images.OBCoverPhoto
 import com.youapps.designsystem.components.loading.shimmerEffect
 import com.youapps.designsystem.components.media.OBVideoPlayer
 import com.youapps.designsystem.components.text.PlaceholderText
-import com.youapps.designsystem.R as ds
+import com.youapps.onlybeans.designsystem.R as ds
 
 enum class OBCarouselMediaType{
     Image,Video

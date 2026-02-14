@@ -3,7 +3,7 @@ package com.youapps.designsystem.components.popups
 import DualButtonPopup
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
-import com.youapps.designsystem.R
+import com.youapps.onlybeans.designsystem.R
 
 @Composable
 fun LogoutPopup(

@@ -2,7 +2,7 @@ import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import com.youapps.designsystem.R
+import com.youapps.onlybeans.designsystem.R
 
 @Composable
 fun OBEmailTextField(

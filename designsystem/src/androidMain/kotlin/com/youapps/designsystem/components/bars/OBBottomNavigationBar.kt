@@ -20,7 +20,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.vectorResource
 import androidx.core.graphics.toColor
-import com.youapps.designsystem.R
+import com.youapps.onlybeans.designsystem.R
 
 
 data class OBBottomNavigationBarItem(

@@ -31,7 +31,7 @@ import androidx.compose.ui.unit.dp
 import com.youapps.onlybeans.R
 import com.youapps.onlybeans.platform.OBLocationService
 import org.koin.compose.koinInject
-import com.youapps.designsystem.R as ds
+import com.youapps.onlybeans.designsystem.R as ds
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable

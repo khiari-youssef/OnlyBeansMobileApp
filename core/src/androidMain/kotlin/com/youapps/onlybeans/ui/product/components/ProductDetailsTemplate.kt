@@ -5,9 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
@@ -38,10 +36,8 @@ import androidx.constraintlayout.compose.Dimension
 import com.youapps.designsystem.OBTheme
 import com.youapps.designsystem.components.dialogs.ImageViewerDialog
 import com.youapps.onlybeans.ui.product.OBProductTopBar
-import com.youapps.designsystem.components.images.OBCoverPhoto
 import com.youapps.onlybeans.R
 import com.youapps.onlybeans.domain.entities.products.OBProduct
-import com.youapps.onlybeans.domain.entities.products.OBProductPricing
 import com.youapps.onlybeans.ui.product.obCoffeeBeansMockProduct
 
 @Preview()
@@ -109,7 +105,7 @@ fun ProductDetailsTemplate(
                         modifier = Modifier,
                         text = stringResource(R.string.product_view_market_place),
                         size = OBButtonSize.Large,
-                        icon = com.youapps.designsystem.R.drawable.ic_marketplace,
+                        icon = com.youapps.onlybeans.designsystem.R.drawable.ic_marketplace,
                         onClick = {
 
                         }
@@ -178,40 +174,14 @@ fun ProductDetailsTemplate(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.Top)
                 ) {
-                    ConstraintLayout(
+                    OBProductHeader(
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .wrapContentHeight()
-                    ) {
-                        val (left,right) = createRefs()
-
-                        OBProductHeader(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .constrainAs(left){
-                                    start.linkTo(parent.start)
-                                    top.linkTo(parent.top)
-                                    bottom.linkTo(parent.bottom)
-                                    end.linkTo(right.start,8.dp)
-                                    width = Dimension.fillToConstraints
-                                },
-                            title = obProduct.name,
-                            subTitle = obProduct.run {
-                                this.displayMetadata
-                            }
-                        )
-                        obProduct.rating?.run {
-                            OBProductRatingTag(
-                                modifier = Modifier.constrainAs(right){
-                                    top.linkTo(parent.top)
-                                    end.linkTo(parent.end)
-                                },
-                                rating = averageRating,
-                                reviewCount = reviewsNumber
-                            )
+                            .fillMaxWidth(),
+                        title = obProduct.name,
+                        subTitle = obProduct.run {
+                            this.displayMetadata
                         }
-
-                    }
+                    )
                     content()
                 }
             }

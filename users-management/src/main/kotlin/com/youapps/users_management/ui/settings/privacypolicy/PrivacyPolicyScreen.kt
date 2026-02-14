@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.youapps.designsystem.components.DetailsScreenTemplate
-import com.youapps.users_management.R
+import com.youapps.onlybeans.users_management.R
 
 @Composable
 fun PrivacyPolicyScreen(

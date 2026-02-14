@@ -4,7 +4,7 @@ plugins {
 }
 
 android.run {
-    namespace = "com.youapps.users_management"
+    namespace = "com.youapps.onlybeans.users_management"
     defaultConfig.setConsumerProguardFiles(
        listOf("consumer-rules.pro")
     )

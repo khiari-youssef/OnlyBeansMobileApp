@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
-import com.youapps.designsystem.R
+import com.youapps.onlybeans.designsystem.R
 import com.youapps.designsystem.components.images.OBCircleImageXL
 import com.youapps.designsystem.components.images.OBCoverPhoto
 import com.youapps.designsystem.components.loading.shimmerEffect

@@ -52,6 +52,8 @@ import com.youapps.users_management.ui.settings.privacypolicy.PrivacyPolicyScree
 import org.koin.androidx.compose.koinViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import androidx.core.net.toUri
+import androidx.navigation.navigation
+import com.youapps.onlybeans.marketplace.ui.screens.home_marketplace.HomeMarketPlace
 import com.youapps.onlybeans.ui.product.ProductsListScreen
 import com.youapps.onlybeans.ui.product.ProductsListScreenState
 
@@ -280,7 +282,7 @@ fun MainActivity.MainNavigation(
                         if (allowedImagesToAdd > 0){
                             galleryPicturePicker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly, maxItems = allowedImagesToAdd), options = ActivityOptionsCompat.makeBasic())
                         } else {
-                            Toast.makeText(currentContext,currentContext.getString(com.youapps.designsystem.R.string.image_picker_no_more_items_allowed),Toast.LENGTH_LONG).show()
+                            Toast.makeText(currentContext,currentContext.getString(com.youapps.onlybeans.designsystem.R.string.image_picker_no_more_items_allowed),Toast.LENGTH_LONG).show()
                         }
                     },
                     onExit = {
@@ -338,6 +340,18 @@ fun MainActivity.MainNavigation(
 
                     }
                 )
+            }
+            navigation(
+                route = NavigationRoutingData.MarketPlace.ROOT,
+                startDestination = NavigationRoutingData.MarketPlace.MARKET_PLACE_MAIN_SCREEN
+            ){
+                composable(
+                    route = NavigationRoutingData.MarketPlace.MARKET_PLACE_MAIN_SCREEN
+                ) {
+                    HomeMarketPlace(
+                        modifier = Modifier
+                    )
+                }
             }
             composable(
                 route = NavigationRoutingData.REGISTRATION_SCREEN

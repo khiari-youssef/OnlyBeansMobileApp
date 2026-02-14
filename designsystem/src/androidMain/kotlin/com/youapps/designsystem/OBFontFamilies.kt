@@ -2,6 +2,7 @@ package com.youapps.designsystem
 
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
+import com.youapps.onlybeans.designsystem.R
 
 data object OBFontFamilies {
     val LogoFontRegular = FontFamily(Font(R.font.brand_font))

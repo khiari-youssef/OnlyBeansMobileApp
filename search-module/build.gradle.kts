@@ -4,7 +4,7 @@ plugins {
 }
 
 android.run {
-    namespace = "com.youapps.search_module"
+    namespace = "com.youapps.onlybeans.search_module"
     defaultConfig.setConsumerProguardFiles(
         listOf("consumer-rules.pro")
     )

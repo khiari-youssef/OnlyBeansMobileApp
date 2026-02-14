@@ -33,7 +33,7 @@ fun BiometricCapabilitiesCheckUIHandler(
               title = stringResource(id = R.string.error_biometric_temporararely_unavailable_title),
               subtitle = stringResource(id = R.string.error_biometric_temporararely_unavailable_message),
               isShown = true ,
-              buttonText = stringResource(id = com.youapps.designsystem.R.string.retry) ,
+              buttonText = stringResource(id = com.youapps.onlybeans.designsystem.R.string.retry) ,
               onButtonClicked = onOpenSettings,
               onDismissRequest = onQuitApp
           )
@@ -46,7 +46,7 @@ fun BiometricCapabilitiesCheckUIHandler(
               title = stringResource(id = R.string.error_biometric_undefined_title),
               subtitle = stringResource(id = R.string.error_biometric_undefined_message),
               isShown = true ,
-              buttonText = stringResource(id = com.youapps.designsystem.R.string.retry) ,
+              buttonText = stringResource(id = com.youapps.onlybeans.designsystem.R.string.retry) ,
               onButtonClicked = onOpenSettings,
               onDismissRequest = onQuitApp
           )

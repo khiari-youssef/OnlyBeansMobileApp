@@ -9,6 +9,7 @@ import com.youapps.onlybeans.di.UsersRepositoryTag
 import com.youapps.onlybeans.di.androidSecurityModule
 import com.youapps.onlybeans.di.domainModule
 import com.youapps.onlybeans.di.repositoriesModule
+import com.youapps.onlybeans.marketplace.ui.state.MarketPlaceViewModel
 import com.youapps.onlybeans.ui.product.ProductsViewModel
 import com.youapps.users_management.ui.login.LoginViewModel
 import com.youapps.users_management.ui.profile.MyProfileViewModel
@@ -47,5 +48,8 @@ val viewModelsModule = module {
     }
     viewModel {
         ProductsViewModel(get(UsersRepositoryTag))
+    }
+    viewModel {
+        MarketPlaceViewModel()
     }
 }

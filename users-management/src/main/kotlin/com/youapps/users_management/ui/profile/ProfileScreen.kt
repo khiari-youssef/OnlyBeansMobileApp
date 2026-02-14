@@ -35,11 +35,11 @@ import com.youapps.onlybeans.domain.entities.products.OBProductListItem
 import com.youapps.onlybeans.domain.valueobjects.OBFileType
 import com.youapps.onlybeans.ui.product.ProductOverViewList
 import com.youapps.onlybeans.ui.product.ProductListData
-import com.youapps.users_management.R
+import com.youapps.onlybeans.users_management.R
 import com.youapps.users_management.ui.profile.ProfileScreenState
 import com.youapps.users_management.ui.profile.UserProfilePreview
 import com.youapps.users_management.ui.profile.UserProfilePreviewLoader
-import com.youapps.designsystem.R as ds
+import com.youapps.onlybeans.designsystem.R as ds
 
 
 @Composable
@@ -233,9 +233,9 @@ fun ProfileScreen(
                                 val coffeeBeansData = ProductListData(
                                     items = (screenState.profile.myCoffeeSpace?.coffeeBeans ?: emptyList()).map {
                                         OBProductListItem(
-                                            productID = it.id,
-                                            productName = it.label,
-                                            productImagePreview = it.productCover,
+                                            productID = it.productID,
+                                            productName = it.productName,
+                                            productImagePreview = it.productImagePreview,
                                             productDescription = it.productDescription
                                         )
                                     }
