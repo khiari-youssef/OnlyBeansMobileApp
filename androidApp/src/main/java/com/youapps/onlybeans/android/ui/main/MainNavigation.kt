@@ -54,6 +54,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import androidx.core.net.toUri
 import androidx.navigation.navigation
 import com.youapps.onlybeans.marketplace.ui.screens.home_marketplace.HomeMarketPlace
+import com.youapps.onlybeans.marketplace.ui.state.MarketPlaceStateHolder
 import com.youapps.onlybeans.ui.product.ProductsListScreen
 import com.youapps.onlybeans.ui.product.ProductsListScreenState
 
@@ -340,18 +341,6 @@ fun MainActivity.MainNavigation(
 
                     }
                 )
-            }
-            navigation(
-                route = NavigationRoutingData.MarketPlace.ROOT,
-                startDestination = NavigationRoutingData.MarketPlace.MARKET_PLACE_MAIN_SCREEN
-            ){
-                composable(
-                    route = NavigationRoutingData.MarketPlace.MARKET_PLACE_MAIN_SCREEN
-                ) {
-                    HomeMarketPlace(
-                        modifier = Modifier
-                    )
-                }
             }
             composable(
                 route = NavigationRoutingData.REGISTRATION_SCREEN

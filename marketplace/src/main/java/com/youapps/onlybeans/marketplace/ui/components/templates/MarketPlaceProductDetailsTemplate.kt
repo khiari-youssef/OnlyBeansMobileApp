@@ -34,7 +34,6 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.youapps.designsystem.OBTheme
 import com.youapps.designsystem.components.dialogs.ImageViewerDialog
-import com.youapps.onlybeans.ui.product.OBProductTopBar
 import com.youapps.onlybeans.domain.entities.products.OBCoffeeBeansProductDetails
 import com.youapps.onlybeans.domain.entities.products.OBCoffeeRegion
 import com.youapps.onlybeans.domain.entities.products.OBCoffeeRoaster
@@ -166,7 +165,7 @@ fun MarketPlaceProductDetailsTemplate(
     Scaffold(
         modifier = modifier.nestedScroll(topAppBarScrollBehavior.nestedScrollConnection),
      topBar = {
-         OBProductTopBar(
+         MarketPlaceDetailsTopBar(
              modifier = Modifier
                  .fillMaxWidth(),
              scrollBehavior = topAppBarScrollBehavior,

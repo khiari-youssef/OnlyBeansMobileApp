@@ -1,13 +1,12 @@
 package com.youapps.designsystem.components
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
@@ -29,34 +28,16 @@ Row(
     verticalAlignment = Alignment.CenterVertically,
     horizontalArrangement = Arrangement.spacedBy(8.dp,Alignment.CenterHorizontally)
 ) {
-    Column(
-        modifier = Modifier
-            .wrapContentSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(1.dp, Alignment.CenterVertically)
-    ) {
-        Text(
-            modifier = Modifier.wrapContentSize(),
-            text = stringResource(id = R.string.app_brand_text_primary),
-            style = TextStyle(
-                fontSize = 32.sp,
-                fontFamily = OBFontFamilies.LogoFontRegular,
-                fontWeight = FontWeight.W700,
-                fontStyle = FontStyle.Normal,
-                color = Color(0xFF284C8E),
-            )
+    Text(
+        modifier = Modifier.wrapContentSize(),
+        text = stringResource(id = R.string.app_name),
+        style = TextStyle(
+            fontSize = 24.sp,
+            fontFamily = OBFontFamilies.BrandFontRegular,
+            fontWeight = FontWeight.W700,
+            fontStyle = FontStyle.Normal,
+            color = MaterialTheme.colorScheme.primary,
         )
-        Text(
-            modifier = Modifier.wrapContentSize(),
-            text = stringResource(id = R.string.app_brand_text_secondary),
-            style = TextStyle(
-                fontSize = 20.sp,
-                fontFamily = OBFontFamilies.LogoFontRegular,
-                fontWeight = FontWeight.W400,
-                fontStyle = FontStyle.Normal,
-                color = Color(0xFF62BCC5),
-            )
-        )
-    }
+    )
 }
 }

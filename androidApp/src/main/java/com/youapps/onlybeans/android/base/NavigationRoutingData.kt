@@ -18,14 +18,6 @@ data object NavigationRoutingData {
 
 
 
-    data object MarketPlace{
-
-        val ROOT = Home.toString()
-
-        const val MARKET_PLACE_MAIN_SCREEN = "marketplace_main_screen"
-
-    }
-
 
 
     data object Home{
@@ -33,7 +25,7 @@ data object NavigationRoutingData {
         const val NETWORK = "network_screen"
         const val PROFILE = "profile_screen"
         const val NOTIFICATIONS = "notifications_screen"
-        const val MARKETPLACE = "news_screen"
+        const val MARKETPLACE = "marketplace_screen"
 
         fun mapRouteToIndex(route : String) : Int = when (route){
             NETWORK  -> 0

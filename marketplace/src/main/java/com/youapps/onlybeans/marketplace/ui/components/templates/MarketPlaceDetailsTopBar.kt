@@ -1,11 +1,8 @@
-package com.youapps.onlybeans.ui.product
+package com.youapps.onlybeans.marketplace.ui.components.templates
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Badge
-import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
@@ -25,11 +22,12 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.youapps.onlybeans.designsystem.R
+import com.youapps.onlybeans.marketplace.ui.components.ShoppingCardIcon
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun OBProductTopBar(
+fun MarketPlaceDetailsTopBar(
     modifier: Modifier = Modifier,
     title: String?=null,
     scrollBehavior: TopAppBarScrollBehavior?=null,
@@ -37,8 +35,10 @@ fun OBProductTopBar(
         containerColor = Color.Transparent,
         scrolledContainerColor = MaterialTheme.colorScheme.primary
     ),
+    itemsAddedToCard : Int = 0,
     onBackClick: () -> Unit,
-    onShareClick: () -> Unit
+    onShareClick: () -> Unit,
+    onShoppingBagClicked : (()-> Unit)?=null
 ) {
     CenterAlignedTopAppBar(
         modifier = modifier,
@@ -84,6 +84,23 @@ fun OBProductTopBar(
                     ImageVector.vectorResource(R.drawable.ic_share),
                     contentDescription = stringResource(R.string.content_description_share_button)
                 )
+            }
+
+            onShoppingBagClicked?.run {
+                FloatingActionButton(
+                    onClick = onShoppingBagClicked,
+                    modifier = Modifier
+                        .padding(end = 8.dp)
+                        .size(40.dp),
+                    shape = CircleShape,
+                    containerColor = MaterialTheme.colorScheme.surface,
+                    contentColor = MaterialTheme.colorScheme.onSurface,
+                    elevation = FloatingActionButtonDefaults.elevation(4.dp)
+                ) {
+                    ShoppingCardIcon(
+                        itemsAddedToCard = itemsAddedToCard
+                    )
+                }
             }
 
         }

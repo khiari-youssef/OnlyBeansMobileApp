@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">OnlyBeans</string>
-    <string name="app_brand_text_primary" translatable="false">SESAME</string>
-    <string name="app_brand_text_secondary" translatable="false">Student Life</string>
     <string name="version_placeholder">Version %s</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
@@ -47,6 +45,7 @@
     <string name="add_images">Add images or Videos</string>
     <string name="keywords">Keywords</string>
     <string name="image_picker_no_more_items_allowed">You can\'t pick more elements !</string>
+    <string name="section_see_all">See all</string>
 
 
 
@@ -62,6 +61,8 @@
     <string name="content_description_like_button">Icon to represent like button state</string>
     <string name="content_description_share_button">Icon to share content</string>
     <string name="content_description_shopping_bag_button">Icon to see shopping bag</string>
+    <string name="content_description_search_icon">Search bar icon</string>
+    <string name="content_description_search_clear_icon">Clear Search icon</string>
 "
 
 

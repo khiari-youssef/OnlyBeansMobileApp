@@ -35,6 +35,7 @@ import androidx.navigation.NavOptions
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navigation
 import com.youapps.designsystem.components.NavigationBarScreenTemplate
 import com.youapps.designsystem.components.bars.OBBottomNavigationBar
 import com.youapps.designsystem.components.bars.OBBottomNavigationBarDefaults
@@ -43,6 +44,12 @@ import com.youapps.onlybeans.android.base.NavigationRoutingData
 import com.youapps.onlybeans.android.ui.notifications.NotificationScreenStateHolder
 import com.youapps.onlybeans.android.ui.notifications.NotificationsScreen
 import com.youapps.onlybeans.android.ui.notifications.NotificationsViewModel
+import com.youapps.onlybeans.marketplace.domain.entities.MarketPlaceNewsCard
+import com.youapps.onlybeans.marketplace.ui.screens.home_marketplace.HomeMarketPlace
+import com.youapps.onlybeans.marketplace.ui.state.MarketPlaceFilterCategoryList
+import com.youapps.onlybeans.marketplace.ui.state.MarketPlaceNewsCardList
+import com.youapps.onlybeans.marketplace.ui.state.MarketPlaceStateHolder
+import com.youapps.onlybeans.marketplace.ui.state.MarketPlaceViewModel
 import com.youapps.users_management.ui.profile.MyProfileViewModel
 import com.youapps.users_management.ui.profile.ProfileScreenState
 import kotlinx.coroutines.launch
@@ -138,7 +145,24 @@ fun HomeScreen(
                 composable(
                     route = NavigationRoutingData.Home.MARKETPLACE
                 ) {
+                    val viewModel = koinViewModel<MarketPlaceViewModel>()
 
+                    val screenState = MarketPlaceStateHolder.rememberMarketPlaceState(
+                        searchQuery = viewModel.currentSearchQuery.collectAsStateWithLifecycle(initialValue = null),
+                        newsCardsList = viewModel.marketPlaceNewsCardList,
+                        filterCategoryList  = viewModel.marketPlaceFilterCategoryList,
+                        selectedFilterIndex = viewModel.selectedFilterIndex.collectAsStateWithLifecycle(0)
+                    )
+                    HomeMarketPlace(
+                        modifier = Modifier
+                            .fillMaxSize(),
+                        state = screenState,
+                        onSearchQueryChanged = viewModel::setSearchQuery,
+                        onNewsCardClicked = {
+
+                        },
+                        onCategorySelectedIndexChanged = viewModel::setSelectedFilterIndex
+                    )
                 }
                 composable(NavigationRoutingData.Home.NOTIFICATIONS) {
                     val viewModel = koinViewModel<NotificationsViewModel>()

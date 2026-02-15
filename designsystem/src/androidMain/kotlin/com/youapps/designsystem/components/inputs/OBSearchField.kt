@@ -1,7 +1,10 @@
 package com.youapps.designsystem.components.inputs
 
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -16,6 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.youapps.onlybeans.designsystem.R
 import com.youapps.designsystem.components.text.PlaceholderText
@@ -35,14 +39,16 @@ fun OBSearchField(
         state = searchBarState,
         colors = SearchBarDefaults.colors(
             inputFieldColors = TextFieldDefaults.colors(
-                focusedTextColor = Color.Black,
-                unfocusedTextColor = Color.Black
+                focusedTextColor = Color(0xFF292524),
+                unfocusedTextColor = Color(0xFF292524)
             )
         ),
+        tonalElevation = 1.dp,
+        shadowElevation = 1.dp,
         shape = MaterialTheme.shapes.medium,
         inputField = {
             TextField(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier.fillMaxWidth(),
                 value = query,
                 onValueChange = onSearchQueryChanged,
                 placeholder = {
@@ -54,15 +60,26 @@ fun OBSearchField(
                 leadingIcon = {
                     Icon(
                         imageVector = ImageVector.vectorResource(R.drawable.ic_search),
-                        contentDescription = "",
-                        tint = MaterialTheme.colorScheme.secondary
+                        contentDescription = stringResource(R.string.content_description_search_icon),
+                    )
+                },
+                trailingIcon = {
+                    Icon(
+                        modifier = Modifier
+                            .padding(8.dp)
+                            .clickable{
+                                onSearchQueryChanged("")
+                            },
+                        imageVector = ImageVector.vectorResource(R.drawable.ic_clear),
+                        contentDescription = stringResource(R.string.content_description_search_clear_icon),
                     )
                 },
                 singleLine = true,
                 colors = TextFieldDefaults.colors(
-                    focusedContainerColor = Color.Transparent,
-                    unfocusedContainerColor = Color.Transparent,
-                    disabledContainerColor = Color.Transparent,
+                    focusedLeadingIconColor = Color(0xFFB45309),
+                    unfocusedLeadingIconColor = Color(0xFF78716c),
+                    focusedContainerColor = Color(0xFFf5f5f4),
+                    unfocusedContainerColor = Color(0xFFf5f5f4),
                     focusedIndicatorColor = Color.Transparent, // Removes the bottom line
                     unfocusedIndicatorColor = Color.Transparent,
                 )

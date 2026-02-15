@@ -43,6 +43,7 @@
     <string name="add_images">Ajouter des images/vidéos</string>
     <string name="keywords">Mots-clés</string>
     <string name="image_picker_no_more_items_allowed">Vous ne pouvez pas sélectionner plus d\'éléments !</string>
+    <string name="section_see_all">Voir tout</string>
 
     <!-- Content description-->
     <string name="content_description_drop_down_item">Élément de la liste déroulante : %s</string>
@@ -56,5 +57,7 @@
     <string name="content_description_like_button">Icône pour représenter l\'état du bouton "J\'aime"</string>
     <string name="content_description_share_button">Icône pour partager un contenu</string>
     <string name="content_description_shopping_bag_button">Icône pour voir le panier</string>
+    <string name="content_description_search_icon">Icone de recherche</string>
+    <string name="content_description_search_clear_icon">Icone pour effacer la recherche</string>
 
 </resources>

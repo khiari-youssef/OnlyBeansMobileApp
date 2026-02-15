@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">OnlyBeans</string>
-    <string name="app_brand_text_primary" translatable="false">SESAME</string>
-    <string name="app_brand_text_secondary" translatable="false">Student Life</string>
     <string name="version_placeholder">Versión %s</string>
 
     <string name="yes">Sí</string>
@@ -57,6 +55,7 @@
     <string name="add_images">Añadir imágenes/vídeos</string>
     <string name="keywords">Palabras clave</string>
     <string name="image_picker_no_more_items_allowed">¡No puedes seleccionar más elementos!</string>
+    <string name="section_see_all">Ver todo</string>
 
 
     <string name="content_description_drop_down_item">Elemento de lista desplegable: %s</string>
@@ -70,5 +69,7 @@
     <string name="content_description_like_button">Icono para representar el estado del botón Me gusta</string>
     <string name="content_description_share_button">Icono para compartir contenido</string>
     <string name="content_description_shopping_bag_button">Icono para ver la bolsa de compras</string>
+    <string name="content_description_search_icon">Buscar icono</string>
+    <string name="content_description_search_clear_icon">Borrar Search icono</string>
 
 </resources>

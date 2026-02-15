@@ -1,3 +1,9 @@
 <resources>
+   <string name="marketplace_label">Marketplace</string>
    <string name="marketplace_search_input_placeholder">Search beans, equipment …</string>
+    <string name="categories_label">Categories</string>
+    <string name="marketplace_popular_products_label">Popular products</string>"
+
+
+
 </resources>

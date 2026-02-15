@@ -17,6 +17,7 @@ import coil.request.CachePolicy
 import coil.request.ImageRequest
 import coil.size.Size
 import com.youapps.designsystem.components.loading.shimmerEffect
+import com.youapps.onlybeans.designsystem.R
 
 
 @Composable
@@ -49,6 +50,7 @@ fun OBCoverPhoto(
                 } ?: Size.ORIGINAL
             }
             .data(url)
+            .placeholder(R.drawable.placeholder_cover)
             .diskCachePolicy(CachePolicy.ENABLED)
             .crossfade(true)
             .build(),
