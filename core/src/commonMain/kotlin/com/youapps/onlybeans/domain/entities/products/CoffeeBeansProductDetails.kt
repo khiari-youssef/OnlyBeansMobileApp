@@ -52,14 +52,12 @@ data class OBFlavorProfileData(
     val roastLevel : OBRoastLevel,
     val roaster : OBCoffeeRoaster,
     val roastDate : String,
-    val endConsumptionDate : String,
-     rating : OBProductRating?=null,
+    val endConsumptionDate : String
 ) : OBProduct(
     id = id,
     name = name,
     productCovers = productCovers,
     productDescription = productDescription,
-    rating = rating,
     displayMetadata = displayMetadata
 ){
     fun isSingleOrigin() : Boolean = origins?.size == 1

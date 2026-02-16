@@ -39,8 +39,7 @@ abstract class OBProduct(
     val name : String,
     val displayMetadata : String,
     val productCovers : List<String>,
-    val productDescription : String,
-    val rating : OBProductRating?=null
+    val productDescription : String
 )
 
 data class OBMarketPlaceProduct(
@@ -48,7 +47,9 @@ data class OBMarketPlaceProduct(
     val product : OBProduct,
     val pricing : OBProductPricing,
     val inStockItems: Int,
-    val isAddedToFavoriteList : Boolean
+    val isAddedToFavoriteList : Boolean = false,
+    val isAddedToCard : Boolean = false,
+    val rating : OBProductRating?=null
 )
 
 

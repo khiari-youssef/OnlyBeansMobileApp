@@ -35,14 +35,22 @@ import androidx.compose.ui.unit.dp
 import com.youapps.designsystem.OBTheme
 import com.youapps.designsystem.components.PageSection
 import com.youapps.designsystem.components.inputs.OBSearchField
+import com.youapps.onlybeans.domain.entities.products.OBMarketPlaceProduct
+import com.youapps.onlybeans.domain.entities.products.OBPrice
+import com.youapps.onlybeans.domain.entities.products.OBProductPricing
+import com.youapps.onlybeans.domain.entities.products.OBProductRating
 import com.youapps.onlybeans.marketplace.R
 import com.youapps.onlybeans.marketplace.domain.entities.MarketPlaceNewsCard
 import com.youapps.onlybeans.marketplace.ui.components.MarketPlaceCarousel
 import com.youapps.onlybeans.marketplace.ui.components.MarketplaceProductsCategoryFilter
 import com.youapps.onlybeans.marketplace.ui.components.MarketplaceTopBar
+import com.youapps.onlybeans.marketplace.ui.components.lists.MarketPlaceProductGridList
+import com.youapps.onlybeans.marketplace.ui.components.lists.MarketPlaceProductGridListData
 import com.youapps.onlybeans.marketplace.ui.state.MarketPlaceFilterCategoryList
 import com.youapps.onlybeans.marketplace.ui.state.MarketPlaceNewsCardList
+import com.youapps.onlybeans.marketplace.ui.state.MarketPlaceProductGridListState
 import com.youapps.onlybeans.marketplace.ui.state.MarketPlaceStateHolder
+import com.youapps.onlybeans.ui.product.obCoffeeBeansMockProduct
 
 @Preview
 @Composable
@@ -62,6 +70,36 @@ fun HomeMarketPlacePreview() {
                 ),
                 selectedFilterIndex = remember {
                     mutableIntStateOf(-1)
+                },
+                productsListState = remember {
+                    mutableStateOf(
+                        MarketPlaceProductGridListState.Success(
+                            data = MarketPlaceProductGridListData(
+                                items = List(10){
+                                    OBMarketPlaceProduct(
+                                        marketPlaceID = "marketplace-id-0aegd2sh15srh1",
+                                        product = obCoffeeBeansMockProduct,
+                                        pricing = OBProductPricing.OBProductMultipleWeightBasedPricing(
+                                            pricePerWeight = mapOf(
+                                                250 to OBPrice(price = 18.5f,0.2f),
+                                                500 to OBPrice(price = 35f),
+                                                1000 to OBPrice(price = 65f)
+                                            ),
+                                            currency = "USD",
+                                            weightUnit = "g"
+                                        ) ,
+                                        isAddedToFavoriteList = it % 2 == 0,
+                                        isAddedToCard =  it % 2 != 0,
+                                        inStockItems = 5,
+                                        rating = OBProductRating(
+                                            reviewsNumber = 124,
+                                            averageRating = 4.8f
+                                        )
+                                    )
+                                }
+                            )
+                        )
+                    )
                 }
             ),
 
@@ -157,11 +195,22 @@ fun HomeMarketPlace(
                     )
                 }
             ) {
-                Spacer(
-                    modifier = Modifier
-                        .height(1000.dp)
-                        .fillMaxWidth()
-                )
+                when(val productsListState = state.productsListState.value){
+                    is MarketPlaceProductGridListState.Loading -> {
+
+                    }
+                    is MarketPlaceProductGridListState.Success -> {
+                        MarketPlaceProductGridList(
+                            modifier = Modifier
+                                .height(400.dp)
+                                .fillMaxWidth(),
+                            data = productsListState.data
+                        )
+                    }
+                    is MarketPlaceProductGridListState.Error -> {
+
+                    }
+                }
             }
 
         }

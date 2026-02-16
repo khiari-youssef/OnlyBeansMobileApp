@@ -108,10 +108,6 @@ fun MarketPlaceProductDetailsTemplatePreview(){
             )
         ),
         roastLevel = OBRoastLevel.MEDIUM,
-        rating = OBProductRating(
-            reviewsNumber = 124,
-            averageRating = 4.8f
-        ),
         displayMetadata = "100% Arabica • Single Origin • Medium Roast"
     )
     OBTheme{
@@ -130,6 +126,10 @@ fun MarketPlaceProductDetailsTemplatePreview(){
                 ) ,
                 isAddedToFavoriteList = false,
                 inStockItems = 5,
+                rating = OBProductRating(
+                    averageRating = 4.8f,
+                    reviewsNumber = 124
+                )
             ),
             onBackClick = {
 
@@ -308,11 +308,12 @@ fun MarketPlaceProductDetailsTemplate(
                                    currency = this.currency
                                )
                            }
-                           oBMarketPlaceProduct.product.rating?.run {
+                           oBMarketPlaceProduct.rating?.run {
                                OBProductRatingTag(
                                    modifier = Modifier,
                                    rating = averageRating,
-                                   reviewCount = reviewsNumber
+                                   reviewCount = reviewsNumber,
+                                   backgroundColor = Color(0xFFFFFBE6)
                                )
                            }
                        }

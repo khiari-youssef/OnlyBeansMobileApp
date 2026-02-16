@@ -71,5 +71,7 @@
     <string name="content_description_shopping_bag_button">Icono para ver la bolsa de compras</string>
     <string name="content_description_search_icon">Buscar icono</string>
     <string name="content_description_search_clear_icon">Borrar Search icono</string>
+    <string name="content_description_product_item_add_to_card_button">Anadir al carrito de compras</string>
+    <string name="content_description_rating_star_icon">Estrella de calificación</string>
 
 </resources>

@@ -63,6 +63,8 @@
     <string name="content_description_shopping_bag_button">Icon to see shopping bag</string>
     <string name="content_description_search_icon">Search bar icon</string>
     <string name="content_description_search_clear_icon">Clear Search icon</string>
+    <string name="content_description_product_item_add_to_card_button">Add to card button</string>
+    <string name="content_description_rating_star_icon">Rating star icon</string>
 "
 
 

@@ -48,6 +48,7 @@ import com.youapps.onlybeans.marketplace.domain.entities.MarketPlaceNewsCard
 import com.youapps.onlybeans.marketplace.ui.screens.home_marketplace.HomeMarketPlace
 import com.youapps.onlybeans.marketplace.ui.state.MarketPlaceFilterCategoryList
 import com.youapps.onlybeans.marketplace.ui.state.MarketPlaceNewsCardList
+import com.youapps.onlybeans.marketplace.ui.state.MarketPlaceProductGridListState
 import com.youapps.onlybeans.marketplace.ui.state.MarketPlaceStateHolder
 import com.youapps.onlybeans.marketplace.ui.state.MarketPlaceViewModel
 import com.youapps.users_management.ui.profile.MyProfileViewModel
@@ -151,7 +152,8 @@ fun HomeScreen(
                         searchQuery = viewModel.currentSearchQuery.collectAsStateWithLifecycle(initialValue = null),
                         newsCardsList = viewModel.marketPlaceNewsCardList,
                         filterCategoryList  = viewModel.marketPlaceFilterCategoryList,
-                        selectedFilterIndex = viewModel.selectedFilterIndex.collectAsStateWithLifecycle(0)
+                        selectedFilterIndex = viewModel.selectedFilterIndex.collectAsStateWithLifecycle(0),
+                        productsList = viewModel.marketPlaceProductGridListState.collectAsStateWithLifecycle(initialValue = MarketPlaceProductGridListState.Loading)
                     )
                     HomeMarketPlace(
                         modifier = Modifier

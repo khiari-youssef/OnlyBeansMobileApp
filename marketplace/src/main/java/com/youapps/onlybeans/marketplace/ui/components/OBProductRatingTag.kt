@@ -12,6 +12,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -24,12 +25,12 @@ import com.youapps.onlybeans.R
 fun OBProductRatingTag(
     modifier: Modifier = Modifier,
     rating: Float,
-    reviewCount: Int
+    reviewCount: Int,
+    backgroundColor : Color = Color.Transparent,
+     starColor : Color= Color(0xFFFFA000), // Deep Orange/Amber
+     textColor : Color = Color(0xFF8B4513)
 ) {
-    // Defining the specific colors from your image
-    val starColor = Color(0xFFFFA000) // Deep Orange/Amber
-    val textColor = Color(0xFF8B4513) // Brownish-orange text
-    val backgroundColor = Color(0xFFFFFBE6) // Light cream background
+
 
     Row(
         modifier = modifier
@@ -41,7 +42,7 @@ fun OBProductRatingTag(
         // The Star Icon
         Icon(
             imageVector = ImageVector.vectorResource(com.youapps.onlybeans.designsystem.R.drawable.ic_rating_star),
-            contentDescription = "Rating",
+            contentDescription = stringResource(com.youapps.onlybeans.designsystem.R.string.content_description_rating_star_icon),
             tint = starColor,
             modifier = Modifier.size(16.dp),
         )

@@ -132,10 +132,6 @@ data class OBCoffeeBeansProductDetailsDTO(
       roastDate = this.roastDate,
       roastLevel = OBRoastLevel.valueOf(this.roastLevel),
       roaster = this.roaster.toDomain(),
-      endConsumptionDate = this.endConsumptionDate,
-      rating = if (this.averageRating != null && this.reviewsNumber != null) OBProductRating(
-          averageRating = this.averageRating,
-          reviewsNumber = this.reviewsNumber
-      ) else null
+      endConsumptionDate = this.endConsumptionDate
     )
 }

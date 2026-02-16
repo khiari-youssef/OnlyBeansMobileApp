@@ -59,5 +59,7 @@
     <string name="content_description_shopping_bag_button">Icône pour voir le panier</string>
     <string name="content_description_search_icon">Icone de recherche</string>
     <string name="content_description_search_clear_icon">Icone pour effacer la recherche</string>
+    <string name="content_description_product_item_add_to_card_button">Ajouter au panier</string>
+    <string name="content_description_rating_star_icon">Etoile de notation</string>
 
 </resources>
