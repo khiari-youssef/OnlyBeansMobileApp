@@ -46,11 +46,7 @@ fun OBBottomNavigationBar(
     onItemSelected : (index : Int)->Unit
 ) {
     val allowedItems = properties.items.take(5)
-    val unSelectedBottomNavigationColor =  LocalContext.current.getColor(
-        R.color.screenBackgroundColor
-    ).toColor().let {
-        Color(it.red(),it.green(),it.blue(),it.alpha())
-    }
+    val unSelectedBottomNavigationColor = MaterialTheme.colorScheme.surfaceVariant
 
     val selectedNavigationBarItemColor = if (isSystemInDarkTheme()) Color(0xFF150d0d)  else Color(0xFFCFC1C1)
     NavigationBar(

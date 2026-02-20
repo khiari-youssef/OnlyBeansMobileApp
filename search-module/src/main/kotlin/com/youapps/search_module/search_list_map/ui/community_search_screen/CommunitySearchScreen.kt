@@ -22,6 +22,7 @@ import com.youapps.onlybeans.search_module.R
 import com.youapps.search_module.search_list_map.ui.community_search_screen.list_view.CommunityListView
 import com.youapps.search_module.search_list_map.ui.community_search_screen.map_view.CommunityMapView
 import com.youapps.search_module.search_list_map.ui.community_search_state.CommunitySearchStateHolder
+import com.youapps.search_module.search_list_map.ui.community_search_state.SearchByRegionBounds
 import com.youapps.search_module.search_list_map.ui.components.OBSearchFilterDialog
 
 
@@ -30,7 +31,8 @@ fun CommunitySearchScreen(
     modifier: Modifier = Modifier,
     screenState : CommunitySearchStateHolder,
     onSearchQueryChanged : (String)-> Unit,
-    onSearchFilterChanged : (selectedFilterIndex : Int,radiusValue : Float)-> Unit
+    onSearchFilterChanged : (selectedFilterIndex : Int,radiusValue : Float)-> Unit,
+    searchVisibleArea : (SearchByRegionBounds)-> Unit
 ) {
     var searchViewType by remember {
        mutableStateOf(SearchViewType.Map)
@@ -58,7 +60,8 @@ fun CommunitySearchScreen(
         when(searchViewType){
             SearchViewType.Map -> CommunityMapView(
                 modifier = Modifier.fillMaxSize(),
-                screenState = screenState
+                screenState = screenState,
+                searchVisibleArea = searchVisibleArea
             )
             SearchViewType.List -> CommunityListView(
                 modifier = Modifier.fillMaxSize(),
@@ -92,16 +95,6 @@ fun CommunitySearchScreen(
                     isFilterDialogVisible = true
                 }
             )}
-           /*
-            screenState.searchFilters.value?.data?.run {
-                OBFilterMenu(
-                    modifier = Modifier,
-                    filters = this,
-                    selectedFilterIndex = screenState.selectedFilterIndex.value ,
-                    onFilterSelected = onSelectedFilterIndex
-                )
-            }
-            */
         }
 
     }

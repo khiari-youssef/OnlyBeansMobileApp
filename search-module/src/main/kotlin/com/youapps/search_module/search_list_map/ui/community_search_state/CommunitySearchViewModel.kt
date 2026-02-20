@@ -3,13 +3,10 @@ package com.youapps.search_module.search_list_map.ui.community_search_state
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.time.delay
 
 class CommunitySearchViewModel : ViewModel() {
 
@@ -29,6 +26,9 @@ class CommunitySearchViewModel : ViewModel() {
 
  private val _currentRadiusValue: MutableStateFlow<Float> = MutableStateFlow(1f)
  val currentRadiusValue: StateFlow<Float> = _currentRadiusValue
+
+ private val _currentSearchByAreaState: MutableStateFlow<SearchByAreaState> = MutableStateFlow(SearchByAreaState.Idle)
+ val currentSearchByAreaState: StateFlow<SearchByAreaState> = _currentSearchByAreaState
 
 
 
@@ -63,7 +63,16 @@ class CommunitySearchViewModel : ViewModel() {
     }
 
 
-    fun runSearchForData(){
+    fun searchVisibleArea(bounds : SearchByRegionBounds){
+        _currentSearchByAreaState.update {
+            SearchByAreaState.Loading
+        }
+        viewModelScope.launch {
+            delay(1000)
+            _currentSearchByAreaState.update {
+                SearchByAreaState.Success
+            }
+        }
 
     }
 

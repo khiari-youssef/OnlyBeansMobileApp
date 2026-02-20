@@ -145,6 +145,9 @@ fun HomeScreen(
                                     onSearchFilterChanged = { selectedFilterIndex,radiusValue ->
                                         viewModel.setRadiusValue(radiusValue)
                                         viewModel.setSelectedFilterIndex(selectedFilterIndex)
+                                    },
+                                    searchVisibleArea = { bounds ->
+                                        viewModel.searchVisibleArea(bounds)
                                     }
                                 )
                             }
