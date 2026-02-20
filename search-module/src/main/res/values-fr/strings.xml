@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="search_bar_placeholder">Rechercher des personnes, communautés et évenements</string>
+
+    <!-- Content description-->
+    <string name="content_description_map_view">Vue de la carte pour rechercher et visualiser les éléments de la communauté sur la carte</string>
 </resources>

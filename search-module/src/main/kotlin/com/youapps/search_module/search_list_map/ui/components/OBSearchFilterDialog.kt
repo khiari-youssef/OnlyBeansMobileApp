@@ -1,6 +1,5 @@
 package com.youapps.search_module.search_list_map.ui.components
 
-import OBButton
 import OBButtonContainedSecondary
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -9,13 +8,16 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.Surface
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -28,7 +30,6 @@ import androidx.compose.ui.window.Dialog
 import com.youapps.designsystem.components.inputs.OBRadiusSlider
 import com.youapps.designsystem.components.menus.OBFilterMenu
 import com.youapps.designsystem.components.text.PlaceholderText
-import com.youapps.onlybeans.search_module.R
 import com.youapps.onlybeans.designsystem.R as ds
 import com.youapps.search_module.search_list_map.ui.community_search_state.SearchFilterList
 
@@ -59,7 +60,7 @@ fun OBSearchFilterDialog(
                     var selectedFilterIndex by remember(selectedFilterIndex) {
                         mutableIntStateOf(selectedFilterIndex)
                     }
-                    var selectedRadiusValue by remember {
+                    var selectedRadiusValue : Float by remember {
                         mutableFloatStateOf(currentRadiusValue)
                     }
                     Column(
@@ -93,18 +94,39 @@ fun OBSearchFilterDialog(
                                 fontSize = 12.sp
                             )
                         }
-                        Text(
-                            text = stringResource(ds.string.radius_label),
-                            textAlign = TextAlign.Start,
-                            style = MaterialTheme.typography.titleMedium
-                        )
-                        OBRadiusSlider(
-                            currentValue = selectedRadiusValue,
-                            range = 1f..100f,
-                            onValueChange = {
-                                selectedRadiusValue = it
-                            }
-                        )
+                        var isSearchByRadiusEnabled by remember {
+                            mutableStateOf(false)
+                        }
+                         Row(
+                             modifier = Modifier,
+                             verticalAlignment = Alignment.CenterVertically,
+                             horizontalArrangement = Arrangement.Start
+                         ) {
+
+                             Checkbox(
+                                 checked = isSearchByRadiusEnabled,
+                                 onCheckedChange = { isEnabled->
+                                     isSearchByRadiusEnabled = isEnabled
+                                     if(isEnabled.not()){
+                                         selectedRadiusValue = -1f
+                                     }
+                                 }
+                             )
+                             Text(
+                                 text = stringResource(ds.string.enable_search_by_radius),
+                                 textAlign = TextAlign.Start,
+                                 style = MaterialTheme.typography.titleMedium
+                             )
+                         }
+                        if (isSearchByRadiusEnabled) {
+                            OBRadiusSlider(
+                                currentValue = selectedRadiusValue,
+                                range = 1f..100f,
+                                onValueChange = {
+                                    selectedRadiusValue = it
+                                }
+                            )
+                        }
                         Row(
                             modifier = Modifier.fillMaxWidth(),
                             verticalAlignment = Alignment.CenterVertically,

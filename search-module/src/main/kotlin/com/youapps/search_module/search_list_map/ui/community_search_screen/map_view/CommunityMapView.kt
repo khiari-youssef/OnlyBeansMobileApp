@@ -10,6 +10,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
@@ -20,6 +21,7 @@ import com.google.maps.android.compose.rememberCameraPositionState
 import com.google.maps.android.compose.rememberMarkerState
 import com.google.maps.android.compose.rememberUpdatedMarkerState
 import com.youapps.onlybeans.domain.entities.users.OBLocation
+import com.youapps.onlybeans.search_module.R
 import com.youapps.search_module.search_list_map.ui.community_search_state.CommunitySearchStateHolder
 import com.youapps.search_module.search_list_map.ui.community_search_state.SearchByAreaState
 import com.youapps.search_module.search_list_map.ui.community_search_state.SearchByRegionBounds
@@ -43,7 +45,7 @@ fun CommunityMapView(
         GoogleMap(
             modifier = Modifier.fillMaxSize(),
             cameraPositionState = cameraPositionState,
-            contentDescription = "Community Map",
+            contentDescription = stringResource(R.string.content_description_map_view),
             onMapLoaded = {
 
             },

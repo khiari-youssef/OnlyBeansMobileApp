@@ -57,7 +57,7 @@
     <string name="image_picker_no_more_items_allowed">¡No puedes seleccionar más elementos!</string>
     <string name="section_see_all">Ver todo</string>
     <string name="apply_button">Aplicar</string>
-    <string name="radius_label">Radio</string>
+    <string name="enable_search_by_radius">Permitir búsqueda por radio</string>
     <string name="filters_not_available">Filtros no disponibles</string>
     <string name="categories_label">Categorías</string>
 
@@ -78,5 +78,6 @@
     <string name="content_description_search_clear_icon">Borrar Search icono</string>
     <string name="content_description_product_item_add_to_card_button">Anadir al carrito de compras</string>
     <string name="content_description_rating_star_icon">Estrella de calificación</string>
+
 
 </resources>

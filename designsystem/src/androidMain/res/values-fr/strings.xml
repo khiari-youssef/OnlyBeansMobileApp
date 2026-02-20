@@ -45,7 +45,7 @@
     <string name="image_picker_no_more_items_allowed">Vous ne pouvez pas sélectionner plus d\'éléments !</string>
     <string name="section_see_all">Voir tout</string>
     <string name="apply_button">Appliquer</string>
-    <string name="radius_label">Rayon</string>
+    <string name="enable_search_by_radius">Permettre la recherche par rayon</string>
     <string name="filters_not_available">Filtres non disponibles</string>
     <string name="categories_label">Catégories</string>
 
