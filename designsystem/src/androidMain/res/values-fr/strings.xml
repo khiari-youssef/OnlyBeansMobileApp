@@ -44,6 +44,10 @@
     <string name="keywords">Mots-clés</string>
     <string name="image_picker_no_more_items_allowed">Vous ne pouvez pas sélectionner plus d\'éléments !</string>
     <string name="section_see_all">Voir tout</string>
+    <string name="apply_button">Appliquer</string>
+    <string name="radius_label">Rayon</string>
+    <string name="filters_not_available">Filtres non disponibles</string>
+    <string name="categories_label">Catégories</string>
 
     <!-- Content description-->
     <string name="content_description_drop_down_item">Élément de la liste déroulante : %s</string>
@@ -55,6 +59,7 @@
     <string name="content_description_increase_counter_input">Icône pour augmenter le compteur</string>
     <string name="content_description_decrease_counter_input">Icône pour diminuer le compteur</string>
     <string name="content_description_like_button">Icône pour représenter l\'état du bouton "J\'aime"</string>
+    <string name="content_description_filter_button">Icone pour ouvrir les options de filtre</string>
     <string name="content_description_share_button">Icône pour partager un contenu</string>
     <string name="content_description_shopping_bag_button">Icône pour voir le panier</string>
     <string name="content_description_search_icon">Icone de recherche</string>

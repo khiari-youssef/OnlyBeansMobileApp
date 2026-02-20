@@ -1,6 +1,5 @@
 <resources>
     <string name="marketplace_search_input_placeholder">Rechercher des grains, des équipements…</string>
     <string name="marketplace_label">Marché</string>
-    <string name="categories_label">Catégories</string>
     <string name="marketplace_popular_products_label">Produits populaires</string>
 </resources>

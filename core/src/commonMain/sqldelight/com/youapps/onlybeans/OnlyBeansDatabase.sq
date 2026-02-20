@@ -37,16 +37,20 @@ CREATE TABLE OBCountriesDB(
 countryCode TEXT PRIMARY KEY,
 phonePrefix TEXT UNIQUE NOT NULL,
 countryName TEXT UNIQUE NOT NULL,
-countryFlag TEXT NOT NULL
+countryFlag TEXT NOT NULL,
+latLngBounds TEXT
 );
 
 
 
 insertCountries:
-INSERT OR REPLACE INTO OBCountriesDB VALUES (?,?,?,?);
+INSERT OR REPLACE INTO OBCountriesDB VALUES (?,?,?,?,?);
 
 getCountries:
 SELECT * FROM OBCountriesDB ORDER BY countryCode  LIMIT :limitparam OFFSET :offsetparam;
+
+getLatLngBoundsForCountry:
+SELECT latLngBounds FROM OBCountriesDB WHERE  countryCode = :isoCode LIMIT 1;
 
 getCountriesByCode:
 SELECT * FROM OBCountriesDB WHERE countryCode = :countryCode LIMIT 1;

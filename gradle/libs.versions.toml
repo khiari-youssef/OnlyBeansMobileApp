@@ -22,8 +22,13 @@ compose-navigation="2.9.5"
 compose-lottie="6.6.10"
 kotlinxDatetime = "0.7.1"
 androidx-activityCompose = "1.11.0"
+mapsCompose = "8.1.0"
+mapsComposeUtils = "8.1.0"
+mapsComposeWidgets = "8.1.0"
+playServicesMaps = "20.0.0"
 playServicesMlkitBarcodeScanning = "18.3.1"
 playServicesMlkitDocumentScanner = "16.0.0"
+secretsGradlePlugin = "2.0.1"
 securityAppAuthenticator = "1.0.0"
 securityCrypto = "1.1.0"
 securityIdentityCredential = "1.0.0-alpha03"
@@ -107,8 +112,13 @@ koin-android ={module = "io.insert-koin:koin-android",version.ref = "koin"}
 koin-compose={module="io.insert-koin:koin-androidx-compose",version.ref="koin"}
 koin-test ={module = "io.insert-koin:koin-test",version.ref = "koin"}
 koin-test-android={module="io.insert-koin:koin-android-test",version.ref="koin"}
+maps-compose = { module = "com.google.maps.android:maps-compose", version.ref = "mapsCompose" }
+maps-compose-utils = { module = "com.google.maps.android:maps-compose-utils", version.ref = "mapsComposeUtils" }
+maps-compose-widgets = { module = "com.google.maps.android:maps-compose-widgets", version.ref = "mapsComposeWidgets" }
+play-services-maps = { module = "com.google.android.gms:play-services-maps", version.ref = "playServicesMaps" }
 play-services-mlkit-barcode-scanning = { module = "com.google.android.gms:play-services-mlkit-barcode-scanning", version.ref = "playServicesMlkitBarcodeScanning" }
 play-services-mlkit-document-scanner = { module = "com.google.android.gms:play-services-mlkit-document-scanner", version.ref = "playServicesMlkitDocumentScanner" }
+secrets-gradle-plugin = { module = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin", version.ref = "secretsGradlePlugin" }
 sqldelight-runtime ={module = "app.cash.sqldelight:runtime",version.ref = "sqldelight"}
 sqldelight-driver-android ={module="app.cash.sqldelight:android-driver",version.ref="sqldelight"}
 sqldelight-driver-native ={module = "app.cash.sqldelight:native-driver",version.ref = "sqldelight"}

@@ -97,6 +97,7 @@ data class OBFlavorProfileDataDTO(
 @Serializable
 data class OBCoffeeBeansProductDetailsDTO(
     val id : String,
+    val categoryID : String,
     val name : String,
     val displayMetadata : String,
     val productCovers : List<String>,
@@ -132,6 +133,7 @@ data class OBCoffeeBeansProductDetailsDTO(
       roastDate = this.roastDate,
       roastLevel = OBRoastLevel.valueOf(this.roastLevel),
       roaster = this.roaster.toDomain(),
-      endConsumptionDate = this.endConsumptionDate
+      endConsumptionDate = this.endConsumptionDate,
+        categoryID = this.categoryID
     )
 }

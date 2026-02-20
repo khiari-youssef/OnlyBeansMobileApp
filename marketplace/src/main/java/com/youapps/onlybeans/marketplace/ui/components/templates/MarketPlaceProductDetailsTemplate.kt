@@ -57,6 +57,7 @@ import com.youapps.onlybeans.ui.product.obCoffeeBeansMockProduct
 fun MarketPlaceProductDetailsTemplatePreview(){
     val    obCoffeeBeansProduct: OBCoffeeBeansProductDetails = OBCoffeeBeansProductDetails(
         id = "product-coffee-0x5gae1dhfsd1hs1hf1",
+        categoryID = "coffee_beans",
         name = "Ethiopian Yirgacheffe",
         productCovers = listOf(
 

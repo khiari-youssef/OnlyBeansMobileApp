@@ -59,6 +59,7 @@ fun OBSearchField(
                 },
                 leadingIcon = {
                     Icon(
+                        tint = MaterialTheme.colorScheme.onSurface,
                         imageVector = ImageVector.vectorResource(R.drawable.ic_search),
                         contentDescription = stringResource(R.string.content_description_search_icon),
                     )
@@ -71,6 +72,7 @@ fun OBSearchField(
                                 onSearchQueryChanged("")
                             },
                         imageVector = ImageVector.vectorResource(R.drawable.ic_clear),
+                        tint = MaterialTheme.colorScheme.onSurface,
                         contentDescription = stringResource(R.string.content_description_search_clear_icon),
                     )
                 },

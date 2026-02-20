@@ -52,6 +52,8 @@ import com.youapps.users_management.ui.settings.privacypolicy.PrivacyPolicyScree
 import org.koin.androidx.compose.koinViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import androidx.core.net.toUri
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
 import androidx.navigation.navigation
 import com.youapps.onlybeans.marketplace.ui.screens.home_marketplace.HomeMarketPlace
 import com.youapps.onlybeans.marketplace.ui.state.MarketPlaceStateHolder
@@ -208,7 +210,7 @@ fun MainActivity.MainNavigation(
                     coffeeBeans =viewModel.getUserCoffeeBeansProducts().collectAsStateWithLifecycle(initialValue = null) ,
                     coffeeGear = viewModel.getUserCoffeeGearProducts().collectAsStateWithLifecycle(initialValue = null)
                 )
-                val currentContext = LocalContext.current
+
 
                 val coverPicturePicker  = rememberLauncherForActivityResult(
                     ActivityResultContracts.PickVisualMedia()
@@ -216,7 +218,7 @@ fun MainActivity.MainNavigation(
                     if (uri != null) {
                         viewModel.updateCoverPicture(uri = uri.toString())
                     } else {
-                        Toast.makeText(currentContext,currentContext.getString(R.string.image_picker_error_message) , Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@MainNavigation,getString(R.string.image_picker_error_message) , Toast.LENGTH_SHORT).show()
                     }
                 }
                 val profilerPicturePicker  = rememberLauncherForActivityResult(
@@ -225,7 +227,7 @@ fun MainActivity.MainNavigation(
                     if (uri != null) {
                         viewModel.updateProfilePicture(uri = uri.toString())
                     } else {
-                        Toast.makeText(currentContext,currentContext.getString(R.string.image_picker_error_message) , Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@MainNavigation,getString(R.string.image_picker_error_message) , Toast.LENGTH_SHORT).show()
                     }
                 }
 
@@ -237,7 +239,7 @@ fun MainActivity.MainNavigation(
                                 coffeeSpaceImages = this
                             )
                     } ?: run {
-                        Toast.makeText(currentContext,currentContext.getString(R.string.image_picker_error_message) , Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@MainNavigation,getString(R.string.image_picker_error_message) , Toast.LENGTH_SHORT).show()
                     }
                 }
 
@@ -283,7 +285,7 @@ fun MainActivity.MainNavigation(
                         if (allowedImagesToAdd > 0){
                             galleryPicturePicker.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly, maxItems = allowedImagesToAdd), options = ActivityOptionsCompat.makeBasic())
                         } else {
-                            Toast.makeText(currentContext,currentContext.getString(com.youapps.onlybeans.designsystem.R.string.image_picker_no_more_items_allowed),Toast.LENGTH_LONG).show()
+                            Toast.makeText(this@MainNavigation,getString(com.youapps.onlybeans.designsystem.R.string.image_picker_no_more_items_allowed),Toast.LENGTH_LONG).show()
                         }
                     },
                     onExit = {
@@ -325,7 +327,16 @@ fun MainActivity.MainNavigation(
 
             }
             composable(
-                route = NavigationRoutingData.VIEW_SCREEN_PRODUCT_LIST
+                route = "${NavigationRoutingData.VIEW_SCREEN_PRODUCT_LIST}/{categoryID}/{userID}",
+                arguments = listOf(
+                    navArgument("categoryID") {
+                        type = NavType.StringType
+                        nullable = true  },
+                    navArgument("userId") {
+                        type = NavType.StringType
+                        nullable = true
+                    }
+                )
             ){
                 ProductsListScreen(
                     modifier = Modifier

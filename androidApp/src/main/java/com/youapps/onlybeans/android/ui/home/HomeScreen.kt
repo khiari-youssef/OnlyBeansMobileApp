@@ -35,7 +35,6 @@ import androidx.navigation.NavOptions
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.navigation
 import com.youapps.designsystem.components.NavigationBarScreenTemplate
 import com.youapps.designsystem.components.bars.OBBottomNavigationBar
 import com.youapps.designsystem.components.bars.OBBottomNavigationBarDefaults
@@ -44,13 +43,13 @@ import com.youapps.onlybeans.android.base.NavigationRoutingData
 import com.youapps.onlybeans.android.ui.notifications.NotificationScreenStateHolder
 import com.youapps.onlybeans.android.ui.notifications.NotificationsScreen
 import com.youapps.onlybeans.android.ui.notifications.NotificationsViewModel
-import com.youapps.onlybeans.marketplace.domain.entities.MarketPlaceNewsCard
 import com.youapps.onlybeans.marketplace.ui.screens.home_marketplace.HomeMarketPlace
-import com.youapps.onlybeans.marketplace.ui.state.MarketPlaceFilterCategoryList
-import com.youapps.onlybeans.marketplace.ui.state.MarketPlaceNewsCardList
 import com.youapps.onlybeans.marketplace.ui.state.MarketPlaceProductGridListState
 import com.youapps.onlybeans.marketplace.ui.state.MarketPlaceStateHolder
 import com.youapps.onlybeans.marketplace.ui.state.MarketPlaceViewModel
+import com.youapps.search_module.search_list_map.ui.community_search_screen.CommunitySearchScreen
+import com.youapps.search_module.search_list_map.ui.community_search_state.CommunitySearchStateHolder
+import com.youapps.search_module.search_list_map.ui.community_search_state.CommunitySearchViewModel
 import com.youapps.users_management.ui.profile.MyProfileViewModel
 import com.youapps.users_management.ui.profile.ProfileScreenState
 import kotlinx.coroutines.launch
@@ -129,8 +128,7 @@ fun HomeScreen(
             ) {
                 composable(NavigationRoutingData.Home.NETWORK) {
                     NavigationBarScreenTemplate(
-                        modifier = Modifier
-                            .padding(paddingValues),
+                        modifier = Modifier,
                         onExitNavigation = remember {
                             {
                                 onHomeExit(NavigationRoutingData.EXIT_APP_ROUTE)
@@ -138,7 +136,17 @@ fun HomeScreen(
                         },
                         content = remember {
                             { modifier ->
-
+                                val viewModel = koinViewModel<CommunitySearchViewModel>()
+                                val communitySearchState = CommunitySearchStateHolder.bindViewModelState(viewModel)
+                                CommunitySearchScreen(
+                                    modifier = modifier,
+                                    screenState = communitySearchState,
+                                    onSearchQueryChanged = viewModel::updateSearchQuery,
+                                    onSearchFilterChanged = { selectedFilterIndex,radiusValue ->
+                                        viewModel.setRadiusValue(radiusValue)
+                                        viewModel.setSelectedFilterIndex(selectedFilterIndex)
+                                    }
+                                )
                             }
                         }
                     )
@@ -155,16 +163,39 @@ fun HomeScreen(
                         selectedFilterIndex = viewModel.selectedFilterIndex.collectAsStateWithLifecycle(0),
                         productsList = viewModel.marketPlaceProductGridListState.collectAsStateWithLifecycle(initialValue = MarketPlaceProductGridListState.Loading)
                     )
-                    HomeMarketPlace(
+                    NavigationBarScreenTemplate(
                         modifier = Modifier
-                            .fillMaxSize(),
-                        state = screenState,
-                        onSearchQueryChanged = viewModel::setSearchQuery,
-                        onNewsCardClicked = {
-
+                            .padding(paddingValues),
+                        onExitNavigation = remember {
+                            {
+                                onHomeExit(NavigationRoutingData.EXIT_APP_ROUTE)
+                            }
                         },
-                        onCategorySelectedIndexChanged = viewModel::setSelectedFilterIndex
+                        content = remember {
+                            { modifier ->
+                                HomeMarketPlace(
+                                    modifier = Modifier
+                                        .fillMaxSize(),
+                                    state = screenState,
+                                    onSearchQueryChanged = viewModel::setSearchQuery,
+                                    onNewsCardClicked = {
+
+                                    },
+                                    onCategorySelectedIndexChanged = viewModel::setSelectedFilterIndex,
+                                    onLikeClicked = { product, isLiked ->
+                                        viewModel.updateProductFavoriteStatus(product.product.id,isLiked)
+                                    },
+                                    onAddToCardClicked = { product, isLiked ->
+                                        viewModel.updateCardStatus(product.product.id,isLiked)
+                                    },
+                                    onSeeAllProductsClicked = {
+                                        onHomeExit(NavigationRoutingData.VIEW_SCREEN_PRODUCT_LIST)
+                                    }
+                                )
+                            }
+                        }
                     )
+
                 }
                 composable(NavigationRoutingData.Home.NOTIFICATIONS) {
                     val viewModel = koinViewModel<NotificationsViewModel>()

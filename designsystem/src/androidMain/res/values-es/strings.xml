@@ -56,6 +56,10 @@
     <string name="keywords">Palabras clave</string>
     <string name="image_picker_no_more_items_allowed">¡No puedes seleccionar más elementos!</string>
     <string name="section_see_all">Ver todo</string>
+    <string name="apply_button">Aplicar</string>
+    <string name="radius_label">Radio</string>
+    <string name="filters_not_available">Filtros no disponibles</string>
+    <string name="categories_label">Categorías</string>
 
 
     <string name="content_description_drop_down_item">Elemento de lista desplegable: %s</string>
@@ -67,6 +71,7 @@
     <string name="content_description_increase_counter_input">Icono para aumentar la entrada del contador</string>
     <string name="content_description_decrease_counter_input">Icono para disminuir la entrada del contador</string>
     <string name="content_description_like_button">Icono para representar el estado del botón Me gusta</string>
+    <string name="content_description_filter_button">Icono para abrir las opciones de filtro</string>
     <string name="content_description_share_button">Icono para compartir contenido</string>
     <string name="content_description_shopping_bag_button">Icono para ver la bolsa de compras</string>
     <string name="content_description_search_icon">Buscar icono</string>

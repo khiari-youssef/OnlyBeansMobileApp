@@ -42,6 +42,7 @@ data class OBFlavorProfileData(
      displayMetadata : String,
      productCovers : List<String>,
      productDescription : String,
+     categoryID : String,
     val species : String,
     val variety : String,
     val origins : List<OBCoffeeRegion>?=null,
@@ -58,7 +59,8 @@ data class OBFlavorProfileData(
     name = name,
     productCovers = productCovers,
     productDescription = productDescription,
-    displayMetadata = displayMetadata
+    displayMetadata = displayMetadata,
+    categoryID = categoryID
 ){
     fun isSingleOrigin() : Boolean = origins?.size == 1
  }

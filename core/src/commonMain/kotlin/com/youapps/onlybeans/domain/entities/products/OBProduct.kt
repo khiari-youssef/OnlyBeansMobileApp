@@ -36,6 +36,7 @@ sealed class OBProductPricing(
 
 abstract class OBProduct(
     val id : String,
+    val categoryID : String,
     val name : String,
     val displayMetadata : String,
     val productCovers : List<String>,

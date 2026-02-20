@@ -3,6 +3,8 @@ plugins {
     id("kotlin-parcelize")
     alias(libs.plugins.compose.compiler)
     alias(libs.plugins.google.playservices)
+    id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+
 }
 
 
@@ -18,6 +20,7 @@ dependencies {
     implementation(projects.designsystem)
     implementation(projects.usersManagement)
     implementation(projects.marketplace)
+    implementation(projects.searchModule)
     implementation(libs.bundles.composelibs)
     implementation(libs.kotlinx.datetime)
     implementation(libs.kotlin.coroutines)
