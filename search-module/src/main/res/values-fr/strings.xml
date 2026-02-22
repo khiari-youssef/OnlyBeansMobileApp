@@ -7,5 +7,6 @@
     <string name="content_description_map_view">Vue de la carte pour rechercher et visualiser les éléments de la communauté sur la carte</string>
     <string name="content_description_map_recenter_icon">Icone pour recenter l\'utilisateur sur la carte</string>
     <string name="content_description_map_enable_location_icon">Icone pour activer les services de localisation</string>
+    <string name="location_update_notice">Assurez-vous que votre emplacement est à jour pour des résultats de recherche précis</string>
 
 </resources>

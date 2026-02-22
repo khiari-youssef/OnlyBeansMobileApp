@@ -29,6 +29,7 @@ import androidx.compose.ui.window.Dialog
 import com.youapps.designsystem.components.inputs.OBRadiusSlider
 import com.youapps.designsystem.components.menus.OBFilterMenu
 import com.youapps.designsystem.components.text.PlaceholderText
+import com.youapps.onlybeans.search_module.R
 import com.youapps.search_module.search_list_map.ui.community_search_state.SearchFilterList
 import com.youapps.onlybeans.designsystem.R as ds
 
@@ -121,7 +122,12 @@ fun OBSearchFilterDialog(
                                     selectedRadiusValue = it
                                 }
                             )
+                            PlaceholderText(
+                                text = stringResource(R.string.location_update_notice),
+                                align = TextAlign.Center
+                            )
                         }
+
                         Row(
                             modifier = Modifier.fillMaxWidth(),
                             verticalAlignment = Alignment.CenterVertically,

@@ -7,4 +7,5 @@
     <string name="content_description_map_view">Vista de mapa para buscar y visualizar artículos de la comunidad en el mapa</string>
     <string name="content_description_map_recenter_icon">Icono para recenter el usuario en el mapa</string>
     <string name="content_description_map_enable_location_icon">Icono para habilitar servicios de ubicación</string>
+    <string name="location_update_notice">Asegúrate de que tu ubicación esté actualizada para obtener resultados de búsqueda precisos</string>
 </resources>

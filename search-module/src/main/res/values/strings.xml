@@ -8,6 +8,7 @@
     <string name="content_description_map_view">Map View to search and visualize community items on the map</string>
     <string name="content_description_map_recenter_icon">Icon to recenter user on the map</string>
     <string name="content_description_map_enable_location_icon">Icon to enable location services</string>
+    <string name="location_update_notice">Make sure your location is up to date for accurate search result</string>
 
 
 </resources>
