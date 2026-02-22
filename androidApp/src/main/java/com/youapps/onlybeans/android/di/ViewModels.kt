@@ -3,7 +3,6 @@ package com.youapps.onlybeans.android.di
 import com.youapps.onlybeans.android.ui.main.MainActivityViewModel
 import com.youapps.onlybeans.android.ui.notifications.NotificationsViewModel
 import com.youapps.onlybeans.di.AppMetaDataAPITag
-import com.youapps.onlybeans.di.OBLocationServicePlayServicesImplTag
 import com.youapps.onlybeans.di.OBUserLoginUseCaseTag
 import com.youapps.onlybeans.di.OBUserLogoutUseCaseTag
 import com.youapps.onlybeans.di.UsersRepositoryTag
@@ -27,9 +26,11 @@ val viewModelsModule = module {
         NotificationsViewModel()
     }
     viewModel {
-        MyProfileViewModel(get(UsersRepositoryTag),get(
-            OBUserLogoutUseCaseTag
-        ))
+        MyProfileViewModel(
+            get(UsersRepositoryTag), get(
+                OBUserLogoutUseCaseTag
+            )
+        )
     }
     viewModel {
         LoginViewModel(get(OBUserLoginUseCaseTag))
@@ -45,7 +46,7 @@ val viewModelsModule = module {
         )
     }
     viewModel {
-        OBRegistrationViewModel(get(),get(),get(UsersRepositoryTag),get(AppMetaDataAPITag))
+        OBRegistrationViewModel(get(), get(), get(UsersRepositoryTag), get(AppMetaDataAPITag))
     }
     viewModel {
         ProductsViewModel(get(UsersRepositoryTag))

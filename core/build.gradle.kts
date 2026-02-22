@@ -12,7 +12,7 @@ kotlin {
 
         }
     }
-    
+
     listOf(
         iosX64(),
         iosArm64(),
@@ -85,7 +85,7 @@ android {
     }
 
     buildTypes {
-        getByName("debug"){
+        getByName("debug") {
             isMinifyEnabled = false
         }
         getByName("release") {

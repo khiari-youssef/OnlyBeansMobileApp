@@ -16,7 +16,6 @@ import org.koin.dsl.module
 internal val dataStorePathTag = named("datastorepath")
 
 
-
 internal val dataSourcesModule = module {
     single<DataStore<Preferences>> {
         PreferenceDataStoreFactory.createWithPath(
@@ -35,7 +34,7 @@ internal val dataSourcesModule = module {
     includes(datastoreModule)
     includes(databaseModule)
     factory<UsersLocalDAO> {
-        UsersLocalDAO(get(),get())
+        UsersLocalDAO(get(), get())
     }
     factory {
         UsersRemoteDAO(get(RestClientImplTag))

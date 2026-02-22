@@ -17,7 +17,6 @@ import androidx.compose.material3.rememberTooltipState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -25,7 +24,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.google.android.gms.maps.CameraUpdateFactory
 import com.youapps.onlybeans.search_module.R
 import kotlinx.coroutines.launch
 
@@ -33,8 +31,8 @@ import kotlinx.coroutines.launch
 @Composable
 fun OBMapRecenterButton(
     modifier: Modifier = Modifier,
-    enabled : Boolean = true,
-    onClick : ()-> Unit
+    enabled: Boolean = true,
+    onClick: () -> Unit
 ) {
     val tooltipState = rememberTooltipState()
     val toolTipScope = rememberCoroutineScope()
@@ -62,19 +60,21 @@ fun OBMapRecenterButton(
                     shadowElevation = 1.dp
                 ) {
                     Text(
-                        if(enabled)
+                        if (enabled)
                             stringResource(com.youapps.onlybeans.designsystem.R.string.location_enabled)
                         else stringResource(com.youapps.onlybeans.designsystem.R.string.location_disabled),
                         textAlign = TextAlign.Center,
                         style = MaterialTheme.typography.labelSmall,
-                        color =  MaterialTheme.colorScheme.onSurface
+                        color = MaterialTheme.colorScheme.onSurface
                     )
                 }
             },
             state = tooltipState
-        ){
+        ) {
             FloatingActionButton(
-                containerColor = if (enabled) MaterialTheme.colorScheme.surface else Color(0xFF808080),
+                containerColor = if (enabled) MaterialTheme.colorScheme.surface else Color(
+                    0xFF808080
+                ),
                 shape = CircleShape,
                 modifier = Modifier
                     .wrapContentSize(),
@@ -91,7 +91,7 @@ fun OBMapRecenterButton(
                 Icon(
                     imageVector = ImageVector.vectorResource(com.youapps.onlybeans.designsystem.R.drawable.ic_crosshair),
                     contentDescription = stringResource(R.string.content_description_map_recenter_icon),
-                    tint = if(enabled) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error
+                    tint = if (enabled) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.error
                 )
             }
         }

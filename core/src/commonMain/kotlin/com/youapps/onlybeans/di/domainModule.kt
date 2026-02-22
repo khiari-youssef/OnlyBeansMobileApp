@@ -14,22 +14,19 @@ val OBUserLoginUseCaseTag = named("OBUserLoginUseCase")
 val OBUserLogoutUseCaseTag = named("OBUserLogoutUseCase")
 
 
-
-
-
 val domainModule = module {
-   includes(repositoriesModule)
+    includes(repositoriesModule)
 
-   factory<UseCaseContract< OBAuthInterface,OBUserProfile>>(OBUserLoginUseCaseTag) {
-       OBUserLoginUseCase(
-           get(UsersRepositoryTag)
-       )
-   }
+    factory<UseCaseContract<OBAuthInterface, OBUserProfile>>(OBUserLoginUseCaseTag) {
+        OBUserLoginUseCase(
+            get(UsersRepositoryTag)
+        )
+    }
 
-   factory<UseCaseContractReadOnly<Boolean>>(OBUserLogoutUseCaseTag) {
-       OBUserLogoutUseCase(
-           get(UsersRepositoryTag)
-       )
-   }
+    factory<UseCaseContractReadOnly<Boolean>>(OBUserLogoutUseCaseTag) {
+        OBUserLogoutUseCase(
+            get(UsersRepositoryTag)
+        )
+    }
 
 }

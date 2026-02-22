@@ -50,7 +50,7 @@ import com.youapps.onlybeans.domain.exception.DomainErrorType
 import com.youapps.onlybeans.users_management.R
 import com.youapps.onlybeans.designsystem.R as DSR
 
-typealias ToastState = Pair<Int,String>
+typealias ToastState = Pair<Int, String>
 
 @Composable
 fun LoginScreen(
@@ -58,257 +58,263 @@ fun LoginScreen(
     loginUIStateHolder: LoginUIStateHolder,
     onEmailChanged: (email: String) -> Unit,
     onPasswordChanged: (password: String) -> Unit,
-    onSetIdleState : ()->Unit,
-    onLoginClicked : ()->Unit,
-    onSignUpClicked : ()->Unit
+    onSetIdleState: () -> Unit,
+    onLoginClicked: () -> Unit,
+    onSignUpClicked: () -> Unit
 
 ) {
 
-   val isLargeScreen  = LocalConfiguration.current.run {
-       (orientation == Configuration.ORIENTATION_LANDSCAPE) or (this.screenWidthDp >= 600)
-   }
-    val toastState : MutableState<ToastState?> = remember {
+    val isLargeScreen = LocalConfiguration.current.run {
+        (orientation == Configuration.ORIENTATION_LANDSCAPE) or (this.screenWidthDp >= 600)
+    }
+    val toastState: MutableState<ToastState?> = remember {
         mutableStateOf(null)
     }
     val localContext = LocalContext.current
     LaunchedEffect(
-        key1 =loginUIStateHolder.loginRequestResult.value,
-        block ={
-        val state = loginUIStateHolder.loginRequestResult.value
-        if (state is LoginState.Error) {
-            toastState.value =  (DSR.drawable.ic_alert to when(state.errorType){
-                DomainErrorType.AccountLocked -> {
-                    localContext.getString(DSR.string.error_toast_locked)
-                }
-                DomainErrorType.Unauthorized ->{
-                    localContext.getString(DSR.string.error_toast_unauthorized)
-                }
-                DomainErrorType.InvalidCredentials ->{
-                    localContext.getString(DSR.string.error_toast_invalid_credentials)
-                }
-                else -> localContext.getString(DSR.string.error_toast_unknown)
-            })
-            onSetIdleState()
-        }
+        key1 = loginUIStateHolder.loginRequestResult.value,
+        block = {
+            val state = loginUIStateHolder.loginRequestResult.value
+            if (state is LoginState.Error) {
+                toastState.value = (DSR.drawable.ic_alert to when (state.errorType) {
+                    DomainErrorType.AccountLocked -> {
+                        localContext.getString(DSR.string.error_toast_locked)
+                    }
 
-    } )
+                    DomainErrorType.Unauthorized -> {
+                        localContext.getString(DSR.string.error_toast_unauthorized)
+                    }
 
-ConstraintLayout(
-    modifier = modifier.padding(
-        horizontal = if (isLargeScreen) 12.dp else 20.dp
-    ),
-    constraintSet = if (isLargeScreen) LoginScreenConfigurationLandscape else LoginScreenConfigurationPortrait
-) {
+                    DomainErrorType.InvalidCredentials -> {
+                        localContext.getString(DSR.string.error_toast_invalid_credentials)
+                    }
 
-    LoginScreenTop(
-        modifier = Modifier
-            .layoutId("LoginScreenTop")
-    )
-    AppTitleLogo(
-        modifier = Modifier
-            .layoutId("AppTitleLogo")
-    )
-    LoginForm(
-        modifier = Modifier
-            .layoutId("loginForm"),
-        email = loginUIStateHolder.loginEmail.value,
-        password = loginUIStateHolder.loginPassword.value,
-        onEmailChanged = onEmailChanged,
-        onPasswordChanged = onPasswordChanged
-    )
-    Text(
-        modifier = Modifier.fillMaxWidth().layoutId("signUpAction"),
-        style = MaterialTheme.typography.bodyLarge,
-        color = MaterialTheme.colorScheme.onBackground,
-        textAlign = TextAlign.Center,
-        text = buildAnnotatedString {
-            val context = LocalContext.current
-            val text1 = stringResource(R.string.login_no_account)
-            val text2 = stringResource(R.string.login_sign_up_action)
-            val primaryColor : Color =  MaterialTheme.colorScheme.primary
-            append(text1)
-            appendLine()
-            withLink(
-                link = LinkAnnotation.Clickable(
-                    tag = "SignUpActionText",
-                    styles = TextLinkStyles(SpanStyle(color = primaryColor)),
-                    linkInteractionListener = { it->
-                        onSignUpClicked()
-                    },
-                )
-            ){
-                append(text2)
+                    else -> localContext.getString(DSR.string.error_toast_unknown)
+                })
+                onSetIdleState()
             }
 
-        }
-    )
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .wrapContentHeight()
-            .layoutId("loginButton"),
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(8.dp,Alignment.CenterHorizontally)
+        })
+
+    ConstraintLayout(
+        modifier = modifier.padding(
+            horizontal = if (isLargeScreen) 12.dp else 20.dp
+        ),
+        constraintSet = if (isLargeScreen) LoginScreenConfigurationLandscape else LoginScreenConfigurationPortrait
     ) {
-       OBButtonContainedPrimary(
-           modifier = Modifier
-               .semantics {
-                   contentDescription = "LoginButton"
-               }
-               .wrapContentHeight()
-               .fillMaxWidth(0.9f),
-           text = stringResource(id = DSR.string.login),
-           isEnabled = true,
-           isLoading = loginUIStateHolder.loginRequestResult.value is LoginState.Loading,
-           onClick = onLoginClicked
-       )
-    }
-    Column(
-        modifier = Modifier
-            .wrapContentHeight()
-            .layoutId("loginFooter"),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.spacedBy(32.dp, Alignment.CenterVertically)
-    ) {
-        LoginScreenBottom(
+
+        LoginScreenTop(
             modifier = Modifier
-                .layoutId("LoginScreenBottom")
+                .layoutId("LoginScreenTop")
+        )
+        AppTitleLogo(
+            modifier = Modifier
+                .layoutId("AppTitleLogo")
+        )
+        LoginForm(
+            modifier = Modifier
+                .layoutId("loginForm"),
+            email = loginUIStateHolder.loginEmail.value,
+            password = loginUIStateHolder.loginPassword.value,
+            onEmailChanged = onEmailChanged,
+            onPasswordChanged = onPasswordChanged
+        )
+        Text(
+            modifier = Modifier
+                .fillMaxWidth()
+                .layoutId("signUpAction"),
+            style = MaterialTheme.typography.bodyLarge,
+            color = MaterialTheme.colorScheme.onBackground,
+            textAlign = TextAlign.Center,
+            text = buildAnnotatedString {
+                val context = LocalContext.current
+                val text1 = stringResource(R.string.login_no_account)
+                val text2 = stringResource(R.string.login_sign_up_action)
+                val primaryColor: Color = MaterialTheme.colorScheme.primary
+                append(text1)
+                appendLine()
+                withLink(
+                    link = LinkAnnotation.Clickable(
+                        tag = "SignUpActionText",
+                        styles = TextLinkStyles(SpanStyle(color = primaryColor)),
+                        linkInteractionListener = { it ->
+                            onSignUpClicked()
+                        },
+                    )
+                ) {
+                    append(text2)
+                }
+
+            }
         )
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .wrapContentHeight(),
+                .wrapContentHeight()
+                .layoutId("loginButton"),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(8.dp,Alignment.Start)
+            horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally)
         ) {
-            AppVersion(version = "1.0.0")
-        }
-    }
-    SesameToastPopup(
-        modifier = Modifier
-            .padding(
-                horizontal = 16.dp
+            OBButtonContainedPrimary(
+                modifier = Modifier
+                    .semantics {
+                        contentDescription = "LoginButton"
+                    }
+                    .wrapContentHeight()
+                    .fillMaxWidth(0.9f),
+                text = stringResource(id = DSR.string.login),
+                isEnabled = true,
+                isLoading = loginUIStateHolder.loginRequestResult.value is LoginState.Loading,
+                onClick = onLoginClicked
             )
-            .fillMaxWidth()
-            .layoutId("toast"),
-        isShown = toastState.value != null,
-        message = toastState.value?.second ?: "",
-        iconResID = toastState.value?.first ?: DSR.drawable.ic_alert,
-        sesameToastDefaults = SesameToastDefaults.getAlertToastStyle(),
-        onDismissRequest = {
-            toastState.value = null
         }
-    )
-}
+        Column(
+            modifier = Modifier
+                .wrapContentHeight()
+                .layoutId("loginFooter"),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(32.dp, Alignment.CenterVertically)
+        ) {
+            LoginScreenBottom(
+                modifier = Modifier
+                    .layoutId("LoginScreenBottom")
+            )
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.Start)
+            ) {
+                AppVersion(version = "1.0.0")
+            }
+        }
+        SesameToastPopup(
+            modifier = Modifier
+                .padding(
+                    horizontal = 16.dp
+                )
+                .fillMaxWidth()
+                .layoutId("toast"),
+            isShown = toastState.value != null,
+            message = toastState.value?.second ?: "",
+            iconResID = toastState.value?.first ?: DSR.drawable.ic_alert,
+            sesameToastDefaults = SesameToastDefaults.getAlertToastStyle(),
+            onDismissRequest = {
+                toastState.value = null
+            }
+        )
+    }
 
 }
 
 @Composable
-fun LoginScreenTop(modifier : Modifier) {
-  Row(
-      modifier = modifier.fillMaxWidth(),
-      horizontalArrangement = Arrangement.SpaceBetween,
-      verticalAlignment = Alignment.CenterVertically
-  ) {
-      Image(
-          modifier = Modifier
-              .rotate(30f)
-              .size(72.dp),
-          imageVector = ImageVector.vectorResource(id = DSR.drawable.ic_coffee_dripper),
-          contentDescription = ""
-      )
-      Image(
-          modifier = Modifier
-              .size(72.dp),
-          imageVector = ImageVector.vectorResource(id = DSR.drawable.ic_espresso_machine),
-          contentDescription = ""
-      )
-      Image(
-          modifier = Modifier
-              .rotate(-30f)
-              .size(72.dp),
-          imageVector = ImageVector.vectorResource(id = DSR.drawable.ic_coffee_cup),
-          contentDescription = ""
-      )
-  }
+fun LoginScreenTop(modifier: Modifier) {
+    Row(
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Image(
+            modifier = Modifier
+                .rotate(30f)
+                .size(72.dp),
+            imageVector = ImageVector.vectorResource(id = DSR.drawable.ic_coffee_dripper),
+            contentDescription = ""
+        )
+        Image(
+            modifier = Modifier
+                .size(72.dp),
+            imageVector = ImageVector.vectorResource(id = DSR.drawable.ic_espresso_machine),
+            contentDescription = ""
+        )
+        Image(
+            modifier = Modifier
+                .rotate(-30f)
+                .size(72.dp),
+            imageVector = ImageVector.vectorResource(id = DSR.drawable.ic_coffee_cup),
+            contentDescription = ""
+        )
+    }
 }
+
 @Composable
-fun LoginScreenBottom(modifier : Modifier) {
-  Row(
-      modifier = modifier.fillMaxWidth(),
-      horizontalArrangement = Arrangement.SpaceBetween,
-      verticalAlignment = Alignment.CenterVertically
-  ) {
-      Image(
-          modifier = Modifier
-              .rotate(30f)
-              .size(72.dp),
-          imageVector = ImageVector.vectorResource(id = DSR.drawable.ic_coffee_press),
-          contentDescription = ""
-      )
-      Image(
-          modifier = Modifier
-              .size(72.dp),
-          imageVector = ImageVector.vectorResource(id = DSR.drawable.ic_coffee_brunch),
-          contentDescription = ""
-      )
-      Image(
-          modifier = Modifier
-              .rotate(-30f)
-              .size(72.dp),
-          imageVector = ImageVector.vectorResource(id = DSR.drawable.ic_coffee_grinder),
-          contentDescription = ""
-      )
-  }
+fun LoginScreenBottom(modifier: Modifier) {
+    Row(
+        modifier = modifier.fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceBetween,
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        Image(
+            modifier = Modifier
+                .rotate(30f)
+                .size(72.dp),
+            imageVector = ImageVector.vectorResource(id = DSR.drawable.ic_coffee_press),
+            contentDescription = ""
+        )
+        Image(
+            modifier = Modifier
+                .size(72.dp),
+            imageVector = ImageVector.vectorResource(id = DSR.drawable.ic_coffee_brunch),
+            contentDescription = ""
+        )
+        Image(
+            modifier = Modifier
+                .rotate(-30f)
+                .size(72.dp),
+            imageVector = ImageVector.vectorResource(id = DSR.drawable.ic_coffee_grinder),
+            contentDescription = ""
+        )
+    }
 }
 
 
 @Composable
 fun LoginForm(
     modifier: Modifier,
-    email : String = "",
-    password : String = "",
-    onEmailChanged : (email : String) -> Unit ={},
-    onPasswordChanged : (password : String)->Unit={}
+    email: String = "",
+    password: String = "",
+    onEmailChanged: (email: String) -> Unit = {},
+    onPasswordChanged: (password: String) -> Unit = {}
 ) {
- Column(
-     modifier = modifier
-         .fillMaxWidth()
-         .wrapContentHeight(),
-     horizontalAlignment = Alignment.CenterHorizontally,
-     verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically)
- ) {
-     OBEmailTextField(
-         modifier = Modifier
-             .focusGroup()
-             .fillMaxWidth()
-             .wrapContentHeight()
-             .semantics {
-                 contentDescription = "LoginEmailTextField"
-             },
-         text = email,
-         isEnabled = true,
-         rightIconRes = DSR.drawable.ic_clear,
-         keyboardActions = KeyboardActions.Default,
-         onRightIconResClicked ={
-             onEmailChanged("")
-         },
-         onEmailChanged = onEmailChanged
-     )
-     SesamePasswordTextField(
-         modifier = Modifier
-             .focusGroup()
-             .fillMaxWidth()
-             .wrapContentHeight()
-             .semantics {
-                 contentDescription = "LoginPasswordTextField"
-             },
-         password = password,
-         label = stringResource(id = DSR.string.password_label) ,
-         placeholder =stringResource(id = DSR.string.password_placeholder),
-         keyboardActions = KeyboardActions.Default,
-         isEnabled = true,
-         onPasswordChanged = onPasswordChanged
-     )
- }
+    Column(
+        modifier = modifier
+            .fillMaxWidth()
+            .wrapContentHeight(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically)
+    ) {
+        OBEmailTextField(
+            modifier = Modifier
+                .focusGroup()
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .semantics {
+                    contentDescription = "LoginEmailTextField"
+                },
+            text = email,
+            isEnabled = true,
+            rightIconRes = DSR.drawable.ic_clear,
+            keyboardActions = KeyboardActions.Default,
+            onRightIconResClicked = {
+                onEmailChanged("")
+            },
+            onEmailChanged = onEmailChanged
+        )
+        SesamePasswordTextField(
+            modifier = Modifier
+                .focusGroup()
+                .fillMaxWidth()
+                .wrapContentHeight()
+                .semantics {
+                    contentDescription = "LoginPasswordTextField"
+                },
+            password = password,
+            label = stringResource(id = DSR.string.password_label),
+            placeholder = stringResource(id = DSR.string.password_placeholder),
+            keyboardActions = KeyboardActions.Default,
+            isEnabled = true,
+            onPasswordChanged = onPasswordChanged
+        )
+    }
 }

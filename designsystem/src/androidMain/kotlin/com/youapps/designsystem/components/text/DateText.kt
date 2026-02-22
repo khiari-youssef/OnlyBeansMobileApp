@@ -21,48 +21,50 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.youapps.designsystem.OBFontFamilies
-import com.youapps.onlybeans.designsystem.R
 import com.youapps.designsystem.onBackgroundShadedDarkMode
 import com.youapps.designsystem.onBackgroundShadedLightMode
+import com.youapps.onlybeans.designsystem.R
 
 
 @Composable
 fun DateText(
     modifier: Modifier = Modifier,
-    label : String,
-    value : String,
-    valuePlaceholderResID : Int
+    label: String,
+    value: String,
+    valuePlaceholderResID: Int
 ) {
- Row(
-     modifier = modifier,
-     verticalAlignment = Alignment.CenterVertically,
-     horizontalArrangement = Arrangement.spacedBy(
-         8.dp,
-         Alignment.Start
-     )
- ) {
-     val valuePlaceHolderResource = stringResource(valuePlaceholderResID)
-    Icon(
-        modifier = Modifier
-            .requiredSize(24.dp),
-        imageVector = ImageVector.vectorResource(R.drawable.ic_calendar_outlined),
-        contentDescription = ""
-    )
-     Text(
-         text = buildAnnotatedString {
-          append("$label : ")
-             withStyle(SpanStyle(
-                 color = MaterialTheme.colorScheme.onBackground
-             )) {
-                 append(value.ifBlank { valuePlaceHolderResource })
-             }
-         },
-         style = TextStyle(
-             fontSize = 14.sp,
-             fontFamily = OBFontFamilies.MainMediumFontFamily,
-             fontWeight = FontWeight(500),
-             color = if (isSystemInDarkTheme()) onBackgroundShadedDarkMode else onBackgroundShadedLightMode,
-         )
-     )
- }
+    Row(
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(
+            8.dp,
+            Alignment.Start
+        )
+    ) {
+        val valuePlaceHolderResource = stringResource(valuePlaceholderResID)
+        Icon(
+            modifier = Modifier
+                .requiredSize(24.dp),
+            imageVector = ImageVector.vectorResource(R.drawable.ic_calendar_outlined),
+            contentDescription = ""
+        )
+        Text(
+            text = buildAnnotatedString {
+                append("$label : ")
+                withStyle(
+                    SpanStyle(
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+                ) {
+                    append(value.ifBlank { valuePlaceHolderResource })
+                }
+            },
+            style = TextStyle(
+                fontSize = 14.sp,
+                fontFamily = OBFontFamilies.MainMediumFontFamily,
+                fontWeight = FontWeight(500),
+                color = if (isSystemInDarkTheme()) onBackgroundShadedDarkMode else onBackgroundShadedLightMode,
+            )
+        )
+    }
 }

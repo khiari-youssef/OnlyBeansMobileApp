@@ -4,12 +4,12 @@ import androidx.compose.ui.graphics.Color
 
 internal val RoseEbony = Color(0xFF674141)
 internal val Licorice = Color(0xFF1f1313)
- internal val BrickRed = Color(0xFFAA4A44)
+internal val BrickRed = Color(0xFFAA4A44)
 internal val PumpkinOrangeShaded = Color(0xFFFF7518)
 internal val Alabaster = Color(0xFFFBFBFB)
 
 internal val Isabelline = Color(0xFFF0ECEC)
- val ErrorColor = Color(0xFFA21E1E)
+val ErrorColor = Color(0xFFA21E1E)
 val SuccessColor = Color(0xFF1A8652)
 val onBackgroundShadedLightMode = Color(0xFF8D8B8B)
 val onBackgroundShadedDarkMode = Color(0xFFB8B8B8)

@@ -16,7 +16,7 @@ import com.youapps.onlybeans.designsystem.R
 
 @Composable
 fun ShoppingCardIcon(
-    itemsAddedToCard : Int
+    itemsAddedToCard: Int
 ) {
     if (itemsAddedToCard > 0) {
         BadgedBox(
@@ -34,7 +34,7 @@ fun ShoppingCardIcon(
                     }
                 )
             }
-        ){
+        ) {
             Icon(
                 ImageVector.vectorResource(R.drawable.ic_shopping_bag),
                 contentDescription = stringResource(R.string.content_description_shopping_bag_button)

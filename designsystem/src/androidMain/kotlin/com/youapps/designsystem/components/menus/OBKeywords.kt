@@ -45,23 +45,21 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.youapps.designsystem.DisabledOnSurfaceColorLightMode
 import com.youapps.designsystem.OBFontFamilies
-import com.youapps.onlybeans.designsystem.R
 import com.youapps.designsystem.components.text.PlaceholderText
-
-
+import com.youapps.onlybeans.designsystem.R
 
 
 @Stable
 data class KeywordsData(
-    val keywords : List<String>
+    val keywords: List<String>
 )
 
 @Composable
 fun OBKeywordsList(
     modifier: Modifier = Modifier,
-    data : KeywordsData?,
-    onKeyWordClicked: ((String)-> Unit)?=null,
-    onKeyWordDeleted: ((String)-> Unit)?=null
+    data: KeywordsData?,
+    onKeyWordClicked: ((String) -> Unit)? = null,
+    onKeyWordDeleted: ((String) -> Unit)? = null
 ) {
     if (data?.keywords?.isNotEmpty() == true) {
         FlowRow(
@@ -81,9 +79,9 @@ fun OBKeywordsList(
                 Box(
                     modifier = Modifier
                         .combinedClickable(
-                            enabled = onKeyWordClicked != null && onKeyWordDeleted != null ,
+                            enabled = onKeyWordClicked != null && onKeyWordDeleted != null,
                             onClick = {
-                                if(isDeleteOptionEnabled) {
+                                if (isDeleteOptionEnabled) {
                                     isDeleteOptionEnabled = false
                                 } else {
                                     onKeyWordClicked?.invoke(item)
@@ -106,7 +104,10 @@ fun OBKeywordsList(
                             )
                             .wrapContentSize(),
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(4.dp,Alignment.CenterHorizontally),
+                        horizontalArrangement = Arrangement.spacedBy(
+                            4.dp,
+                            Alignment.CenterHorizontally
+                        ),
                     ) {
                         Text(
                             modifier = Modifier.wrapContentSize(),
@@ -121,17 +122,21 @@ fun OBKeywordsList(
                         )
                         AnimatedContent(
                             targetState = isDeleteOptionEnabled,
-                        ) { isEnabled->
-                            if (isEnabled){
-                                Row(modifier = Modifier.wrapContentSize(),
+                        ) { isEnabled ->
+                            if (isEnabled) {
+                                Row(
+                                    modifier = Modifier.wrapContentSize(),
                                     verticalAlignment = Alignment.CenterVertically,
-                                    horizontalArrangement = Arrangement.spacedBy(4.dp,Alignment.CenterHorizontally)
+                                    horizontalArrangement = Arrangement.spacedBy(
+                                        4.dp,
+                                        Alignment.CenterHorizontally
+                                    )
                                 ) {
                                     IconButton(
                                         modifier = Modifier
                                             .size(24.dp)
                                             .background(
-                                                color =  MaterialTheme.colorScheme.error,
+                                                color = MaterialTheme.colorScheme.error,
                                                 shape = CircleShape
                                             )
                                             .clip(CircleShape)
@@ -143,7 +148,10 @@ fun OBKeywordsList(
                                         Icon(
                                             modifier = Modifier.size(24.dp),
                                             imageVector = ImageVector.vectorResource(R.drawable.ic_remove),
-                                            contentDescription = stringResource(R.string.content_description_remove_keyword_button,item),
+                                            contentDescription = stringResource(
+                                                R.string.content_description_remove_keyword_button,
+                                                item
+                                            ),
                                             tint = Color.White
                                         )
                                     }
@@ -151,13 +159,13 @@ fun OBKeywordsList(
                                         modifier = Modifier
                                             .size(24.dp)
                                             .background(
-                                                color =  Color.White,
+                                                color = Color.White,
                                                 shape = CircleShape
                                             )
                                             .clip(CircleShape)
                                             .padding(2.dp),
                                         onClick = {
-                                              isDeleteOptionEnabled = false
+                                            isDeleteOptionEnabled = false
                                         }
                                     ) {
                                         Icon(
@@ -184,18 +192,18 @@ fun OBKeywordsList(
 @Composable
 fun OBKeywordsListInput(
     modifier: Modifier = Modifier,
-    label : String,
+    label: String,
     keywords: KeywordsData?,
-    maxKeywords : Int = 10,
-    onKeywordAdded: (String)-> Unit,
-    onKeyWordDeleted: (String)-> Unit
+    maxKeywords: Int = 10,
+    onKeywordAdded: (String) -> Unit,
+    onKeyWordDeleted: (String) -> Unit
 ) {
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.Start,
-        verticalArrangement = Arrangement.spacedBy(8.dp,Alignment.CenterVertically)
+        verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterVertically)
     ) {
-        val currentInputText =remember {
+        val currentInputText = remember {
             mutableStateOf("")
         }
         val isEnabled = (keywords?.keywords?.size ?: 0) < maxKeywords
@@ -204,9 +212,9 @@ fun OBKeywordsListInput(
                 .wrapContentHeight()
                 .fillMaxWidth()
         ) {
-            val (inputLabel,inputField,addButton) = createRefs()
+            val (inputLabel, inputField, addButton) = createRefs()
             Text(
-                modifier = Modifier.constrainAs(inputLabel){
+                modifier = Modifier.constrainAs(inputLabel) {
                     top.linkTo(parent.top)
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
@@ -219,10 +227,10 @@ fun OBKeywordsListInput(
             )
             OutlinedTextField(
                 modifier = Modifier
-                    .constrainAs(inputField){
+                    .constrainAs(inputField) {
                         start.linkTo(parent.start)
                         end.linkTo(addButton.start)
-                        top.linkTo(inputLabel.bottom,4.dp)
+                        top.linkTo(inputLabel.bottom, 4.dp)
                         bottom.linkTo(parent.bottom)
                         width = Dimension.fillToConstraints
                         height = Dimension.wrapContent
@@ -237,28 +245,28 @@ fun OBKeywordsListInput(
                     lineHeight = 24.sp
                 ),
                 value = currentInputText.value,
-                keyboardActions= KeyboardActions(),
+                keyboardActions = KeyboardActions(),
                 placeholder = {
                     PlaceholderText(
                         text = label,
                         fontSize = 14.sp
                     )
                 },
-                onValueChange =  {
+                onValueChange = {
                     currentInputText.value = it
                 }
             )
             Box(
-                modifier = Modifier.constrainAs(addButton){
-                    start.linkTo(inputField.end,8.dp)
+                modifier = Modifier.constrainAs(addButton) {
+                    start.linkTo(inputField.end, 8.dp)
                     end.linkTo(parent.end)
                     top.linkTo(inputField.top)
                     bottom.linkTo(inputField.bottom)
                 },
-               contentAlignment = Alignment.Center
-            ){
+                contentAlignment = Alignment.Center
+            ) {
                 IconButton(
-                    enabled =isEnabled ,
+                    enabled = isEnabled,
                     modifier = Modifier
                         .size(32.dp)
                         .background(
@@ -268,7 +276,7 @@ fun OBKeywordsListInput(
                         .clip(CircleShape)
                         .padding(2.dp),
                     onClick = {
-                        if(currentInputText.value.isBlank().not()){
+                        if (currentInputText.value.isBlank().not()) {
                             onKeywordAdded(currentInputText.value)
                         }
                     }

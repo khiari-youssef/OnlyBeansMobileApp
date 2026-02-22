@@ -31,24 +31,25 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 
-enum class CustomSheetExpandState{
-    EXPANDED,HALF_EXPANDED,HIDDEN
+enum class CustomSheetExpandState {
+    EXPANDED, HALF_EXPANDED, HIDDEN
 }
 
 data class CustomBottomSheetState(
-   private val expandState: MutableState<CustomSheetExpandState>
+    private val expandState: MutableState<CustomSheetExpandState>
 ) {
 
-    companion object{
+    companion object {
         @Composable
         fun rememberCustomBottomSheetState(
             expandState: MutableState<CustomSheetExpandState> = remember {
                 mutableStateOf(CustomSheetExpandState.HIDDEN)
             }
-        ) : CustomBottomSheetState = remember(expandState) {
+        ): CustomBottomSheetState = remember(expandState) {
             CustomBottomSheetState(expandState)
         }
     }
+
     fun expand() {
         expandState.value = CustomSheetExpandState.EXPANDED
     }
@@ -61,53 +62,52 @@ data class CustomBottomSheetState(
         expandState.value = CustomSheetExpandState.EXPANDED
     }
 
-    val currentState : State<CustomSheetExpandState> = expandState
+    val currentState: State<CustomSheetExpandState> = expandState
 }
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun CustomModalBottomSheetDialog(
-    sheetState : CustomBottomSheetState = CustomBottomSheetState.rememberCustomBottomSheetState(),
-    sheetShape : Shape = RoundedCornerShape(topEnd = 12.dp, topStart = 12.dp),
-    sheetBackgroundColor : Color = Color.White,
-    sheetElevation : Dp = 0.dp,
-    parentContent : @Composable ()->Unit,
-    sheetContent :  @Composable ()->Unit
+    sheetState: CustomBottomSheetState = CustomBottomSheetState.rememberCustomBottomSheetState(),
+    sheetShape: Shape = RoundedCornerShape(topEnd = 12.dp, topStart = 12.dp),
+    sheetBackgroundColor: Color = Color.White,
+    sheetElevation: Dp = 0.dp,
+    parentContent: @Composable () -> Unit,
+    sheetContent: @Composable () -> Unit
 ) {
     val swipeableState = rememberSwipeableState(initialValue = 0)
     val screenHeight = LocalConfiguration.current.screenHeightDp.toFloat()
     val anchors = mapOf(0f to 0, screenHeight to 1) // Maps anchor points (in px) to states
- Box(modifier = Modifier.fillMaxSize()){
-     parentContent()
-     Box(
-         modifier = Modifier
-             .swipeable(
-                 state = swipeableState,
-                 anchors = anchors,
-                 orientation = Orientation.Vertical,
-                 thresholds = { from, to ->
-                     FractionalThreshold(0.4f)
-                 }
-             )
-             .background(
-                 color = sheetBackgroundColor,
-                 shape = sheetShape
-             )
-             .shadow(sheetElevation)
-             .align(Alignment.BottomCenter)
-     ){
+    Box(modifier = Modifier.fillMaxSize()) {
         parentContent()
-     }
- }
+        Box(
+            modifier = Modifier
+                .swipeable(
+                    state = swipeableState,
+                    anchors = anchors,
+                    orientation = Orientation.Vertical,
+                    thresholds = { from, to ->
+                        FractionalThreshold(0.4f)
+                    }
+                )
+                .background(
+                    color = sheetBackgroundColor,
+                    shape = sheetShape
+                )
+                .shadow(sheetElevation)
+                .align(Alignment.BottomCenter)
+        ) {
+            parentContent()
+        }
+    }
 }
-
 
 
 @Preview
 @Composable
 fun Test() {
     val sheetState = CustomBottomSheetState.rememberCustomBottomSheetState(
-        expandState =  remember {
+        expandState = remember {
             mutableStateOf(CustomSheetExpandState.HIDDEN)
         }
     )
@@ -115,22 +115,22 @@ fun Test() {
     CustomModalBottomSheetDialog(
         sheetState = sheetState,
         parentContent = {
-          Column(
-              modifier = Modifier
-                  .padding(
-                      top = 16.dp
-                  )
-                  .fillMaxSize(),
-              horizontalAlignment = Alignment.CenterHorizontally,
-              verticalArrangement = Arrangement.Center
-          ) {
-             Button(
-                 onClick = {
-                     sheetState.halfExpand()
-                 }) {
-                 Text(text = "Expand")
-             }
-          }
+            Column(
+                modifier = Modifier
+                    .padding(
+                        top = 16.dp
+                    )
+                    .fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Button(
+                    onClick = {
+                        sheetState.halfExpand()
+                    }) {
+                    Text(text = "Expand")
+                }
+            }
         },
         sheetContent = {
             Column(
@@ -142,11 +142,11 @@ fun Test() {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center
             ) {
-               LazyColumn(content = {
-                   items(20) {
-                       Text(text = "text$it")
-                   }
-               })
+                LazyColumn(content = {
+                    items(20) {
+                        Text(text = "text$it")
+                    }
+                })
             }
         }
     )

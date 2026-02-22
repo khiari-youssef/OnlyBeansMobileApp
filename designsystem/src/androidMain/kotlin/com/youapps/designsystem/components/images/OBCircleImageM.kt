@@ -6,9 +6,9 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun OBCircleImageM(
     modifier: Modifier = Modifier,
-    uri : Any,
-    placeholderRes : Int,
-    errorRes : Int
+    uri: Any,
+    placeholderRes: Int,
+    errorRes: Int
 ) {
     OBCircleImage(
         modifier = modifier,

@@ -8,18 +8,18 @@ import com.youapps.onlybeans.OnlyBeansDatabase
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
-actual val databaseModule : Module = module {
+actual val databaseModule: Module = module {
     single<SqlDriver> {
         AndroidSqliteDriver(OnlyBeansDatabase.Schema.synchronous(), get(), DATABASE_FILE_NAME)
     }
-    single<ColumnAdapter<Long,ULong >> {
-        object :ColumnAdapter<Long, ULong>{
+    single<ColumnAdapter<Long, ULong>> {
+        object : ColumnAdapter<Long, ULong> {
             override fun decode(databaseValue: ULong): Long = databaseValue.toLong()
 
             override fun encode(value: Long): ULong = value.toULong()
         }
     }
-    single<OnlyBeansDatabase>{
+    single<OnlyBeansDatabase> {
         OnlyBeansDatabase(
             get<SqlDriver>()
         )

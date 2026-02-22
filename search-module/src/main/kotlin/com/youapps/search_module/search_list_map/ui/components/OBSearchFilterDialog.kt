@@ -9,11 +9,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Checkbox
-import androidx.compose.material3.Surface
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
@@ -30,25 +29,21 @@ import androidx.compose.ui.window.Dialog
 import com.youapps.designsystem.components.inputs.OBRadiusSlider
 import com.youapps.designsystem.components.menus.OBFilterMenu
 import com.youapps.designsystem.components.text.PlaceholderText
-import com.youapps.onlybeans.designsystem.R as ds
 import com.youapps.search_module.search_list_map.ui.community_search_state.SearchFilterList
-
-
-
-
+import com.youapps.onlybeans.designsystem.R as ds
 
 
 @Composable
 fun OBSearchFilterDialog(
     modifier: Modifier = Modifier,
-    isVisible : Boolean,
-    categoryFilters : SearchFilterList?,
-    selectedFilterIndex : Int,
-    currentRadiusValue : Float,
-    onDismiss : ()-> Unit,
-    onApply : (onSelectedFilterIndex : Int,radiusValue : Float)-> Unit
+    isVisible: Boolean,
+    categoryFilters: SearchFilterList?,
+    selectedFilterIndex: Int,
+    currentRadiusValue: Float,
+    onDismiss: () -> Unit,
+    onApply: (onSelectedFilterIndex: Int, radiusValue: Float) -> Unit
 ) {
-    if (isVisible){
+    if (isVisible) {
         Dialog(
             onDismissRequest = onDismiss,
             content = {
@@ -56,11 +51,11 @@ fun OBSearchFilterDialog(
                     modifier = modifier,
                     color = MaterialTheme.colorScheme.surfaceVariant,
                     shape = RoundedCornerShape(16.dp)
-                ){
+                ) {
                     var selectedFilterIndex by remember(selectedFilterIndex) {
                         mutableIntStateOf(selectedFilterIndex)
                     }
-                    var selectedRadiusValue : Float by remember {
+                    var selectedRadiusValue: Float by remember {
                         mutableFloatStateOf(currentRadiusValue)
                     }
                     Column(
@@ -73,7 +68,7 @@ fun OBSearchFilterDialog(
                             .wrapContentHeight(),
                         horizontalAlignment = Alignment.Start,
                         verticalArrangement = Arrangement.spacedBy(8.dp)
-                    ){
+                    ) {
                         Text(
                             text = stringResource(ds.string.categories_label),
                             textAlign = TextAlign.Start,
@@ -97,27 +92,27 @@ fun OBSearchFilterDialog(
                         var isSearchByRadiusEnabled by remember {
                             mutableStateOf(false)
                         }
-                         Row(
-                             modifier = Modifier,
-                             verticalAlignment = Alignment.CenterVertically,
-                             horizontalArrangement = Arrangement.Start
-                         ) {
+                        Row(
+                            modifier = Modifier,
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.Start
+                        ) {
 
-                             Checkbox(
-                                 checked = isSearchByRadiusEnabled,
-                                 onCheckedChange = { isEnabled->
-                                     isSearchByRadiusEnabled = isEnabled
-                                     if(isEnabled.not()){
-                                         selectedRadiusValue = -1f
-                                     }
-                                 }
-                             )
-                             Text(
-                                 text = stringResource(ds.string.enable_search_by_radius),
-                                 textAlign = TextAlign.Start,
-                                 style = MaterialTheme.typography.titleMedium
-                             )
-                         }
+                            Checkbox(
+                                checked = isSearchByRadiusEnabled,
+                                onCheckedChange = { isEnabled ->
+                                    isSearchByRadiusEnabled = isEnabled
+                                    if (isEnabled.not()) {
+                                        selectedRadiusValue = -1f
+                                    }
+                                }
+                            )
+                            Text(
+                                text = stringResource(ds.string.enable_search_by_radius),
+                                textAlign = TextAlign.Start,
+                                style = MaterialTheme.typography.titleMedium
+                            )
+                        }
                         if (isSearchByRadiusEnabled) {
                             OBRadiusSlider(
                                 currentValue = selectedRadiusValue,
@@ -135,7 +130,7 @@ fun OBSearchFilterDialog(
                             OBButtonContainedSecondary(
                                 text = stringResource(ds.string.apply_button),
                                 onClick = {
-                                    onApply(selectedFilterIndex,currentRadiusValue)
+                                    onApply(selectedFilterIndex, currentRadiusValue)
                                     onDismiss()
                                 }
                             )

@@ -6,17 +6,17 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.remember
 
 class NotificationScreenStateHolder(
-    val notificationsListState : State<NotificationsListState>,
-    val currentPage : MutableIntState
-){
+    val notificationsListState: State<NotificationsListState>,
+    val currentPage: MutableIntState
+) {
 
-    companion object{
+    companion object {
 
         @Composable
         fun rememberNotificationScreenState(
-            notificationsListState : State<NotificationsListState>,
-            currentPage : MutableIntState
-        ) : NotificationScreenStateHolder = remember(notificationsListState, currentPage) {
+            notificationsListState: State<NotificationsListState>,
+            currentPage: MutableIntState
+        ): NotificationScreenStateHolder = remember(notificationsListState, currentPage) {
             NotificationScreenStateHolder(
                 notificationsListState, currentPage
             )

@@ -30,70 +30,70 @@ import com.youapps.onlybeans.designsystem.R
 
 @Composable
 fun NavigationBarScreenTemplate(
-    modifier : Modifier = Modifier,
-    onExitNavigation : ()->Unit,
-    content :@Composable (modifier : Modifier)->Unit
+    modifier: Modifier = Modifier,
+    onExitNavigation: () -> Unit,
+    content: @Composable (modifier: Modifier) -> Unit
 ) {
-   content(modifier)
+    content(modifier)
     BackHandler(onBack = onExitNavigation)
 }
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun DetailsScreenTemplate(
-    modifier : Modifier = Modifier,
-    title : String,
-    onBackPressed : ()->Unit,
-    content :@Composable ()->Unit
+    modifier: Modifier = Modifier,
+    title: String,
+    onBackPressed: () -> Unit,
+    content: @Composable () -> Unit
 ) {
-        BackHandler(onBack = onBackPressed )
+    BackHandler(onBack = onBackPressed)
     Column(
         modifier = modifier
             .background(color = MaterialTheme.colorScheme.surfaceVariant)
             .imePadding()
             .systemBarsPadding()
-    ){
-       ConstraintLayout(
-           modifier = Modifier
-               .fillMaxWidth()
-       ) {
-           val (icon,text) = createRefs()
-           val iconModifier =
-               Modifier
-                   .clickable(onClick = onBackPressed)
-           Icon(
-               modifier = iconModifier
-                   .constrainAs(icon) {
-                       start.linkTo(parent.start, 12.dp)
-                       top.linkTo(parent.top, 12.dp)
-                       bottom.linkTo(parent.bottom, 12.dp)
-                   }
-                   .size(24.dp),
-               imageVector = ImageVector.vectorResource(id = R.drawable.ic_back),
-               contentDescription = "",
-               tint = MaterialTheme.colorScheme.primary
-           )
-           Text(
-               modifier = Modifier
-                   .basicMarquee()
-                   .constrainAs(text) {
-                       start.linkTo(parent.start, 48.dp)
-                       top.linkTo(parent.top, 12.dp)
-                       bottom.linkTo(parent.bottom, 12.dp)
-                       end.linkTo(parent.end, 48.dp)
-                   },
-               text = title,
-               style = TextStyle(
-                       fontSize = 18.sp,
-                       fontFamily = FontFamily(Font(R.font.roboto_medium)),
-                       fontWeight = FontWeight(500),
-                       color = MaterialTheme.colorScheme.secondary,
-                       textAlign = TextAlign.Center,
-                   )
+    ) {
+        ConstraintLayout(
+            modifier = Modifier
+                .fillMaxWidth()
+        ) {
+            val (icon, text) = createRefs()
+            val iconModifier =
+                Modifier
+                    .clickable(onClick = onBackPressed)
+            Icon(
+                modifier = iconModifier
+                    .constrainAs(icon) {
+                        start.linkTo(parent.start, 12.dp)
+                        top.linkTo(parent.top, 12.dp)
+                        bottom.linkTo(parent.bottom, 12.dp)
+                    }
+                    .size(24.dp),
+                imageVector = ImageVector.vectorResource(id = R.drawable.ic_back),
+                contentDescription = "",
+                tint = MaterialTheme.colorScheme.primary
+            )
+            Text(
+                modifier = Modifier
+                    .basicMarquee()
+                    .constrainAs(text) {
+                        start.linkTo(parent.start, 48.dp)
+                        top.linkTo(parent.top, 12.dp)
+                        bottom.linkTo(parent.bottom, 12.dp)
+                        end.linkTo(parent.end, 48.dp)
+                    },
+                text = title,
+                style = TextStyle(
+                    fontSize = 18.sp,
+                    fontFamily = FontFamily(Font(R.font.roboto_medium)),
+                    fontWeight = FontWeight(500),
+                    color = MaterialTheme.colorScheme.secondary,
+                    textAlign = TextAlign.Center,
+                )
 
-           )
-       }
-       content()
+            )
+        }
+        content()
     }
 }
 

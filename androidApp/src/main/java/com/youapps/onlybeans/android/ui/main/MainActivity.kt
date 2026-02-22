@@ -6,9 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Lifecycle
@@ -34,7 +32,7 @@ class MainActivity : ComponentActivity() {
 
     private lateinit var _viewModel: MainActivityViewModel
 
-    private val appMetaDataAPI : AppMetaDataAPI by inject<AppMetaDataAPI>(AppMetaDataAPITag)
+    private val appMetaDataAPI: AppMetaDataAPI by inject<AppMetaDataAPI>(AppMetaDataAPITag)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,8 +66,10 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background,
                 ) {
                     OBLocationServiceStateLocale(
-                        obLocationService = koinInject<OBLocationService>(OBLocationServicePlayServicesImplTag)
-                    ){
+                        obLocationService = koinInject<OBLocationService>(
+                            OBLocationServicePlayServicesImplTag
+                        )
+                    ) {
                         MainNavigation(
                             modifier = Modifier.fillMaxSize(),
                             rootNavController = uiState.rootNavController,

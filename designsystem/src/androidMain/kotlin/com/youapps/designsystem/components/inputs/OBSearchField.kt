@@ -2,11 +2,10 @@ package com.youapps.designsystem.components.inputs
 
 
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Icon
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.SearchBarDefaults
@@ -21,8 +20,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.youapps.onlybeans.designsystem.R
 import com.youapps.designsystem.components.text.PlaceholderText
+import com.youapps.onlybeans.designsystem.R
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -30,12 +29,12 @@ import com.youapps.designsystem.components.text.PlaceholderText
 fun OBSearchField(
     modifier: Modifier = Modifier,
     placeholderRes: Int,
-    query : String = "",
-    onSearchQueryChanged : (query : String)->Unit
+    query: String = "",
+    onSearchQueryChanged: (query: String) -> Unit
 ) {
     val searchBarState = rememberSearchBarState()
     SearchBar(
-        modifier =modifier,
+        modifier = modifier,
         state = searchBarState,
         colors = SearchBarDefaults.colors(
             inputFieldColors = TextFieldDefaults.colors(
@@ -68,7 +67,7 @@ fun OBSearchField(
                     Icon(
                         modifier = Modifier
                             .padding(8.dp)
-                            .clickable{
+                            .clickable {
                                 onSearchQueryChanged("")
                             },
                         imageVector = ImageVector.vectorResource(R.drawable.ic_clear),

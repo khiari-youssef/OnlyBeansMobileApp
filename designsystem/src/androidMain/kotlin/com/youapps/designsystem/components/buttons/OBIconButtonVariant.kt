@@ -22,9 +22,9 @@ import com.youapps.designsystem.OBFontFamilies
 @Composable
 fun OBIconButtonVariant(
     modifier: Modifier,
-    text : String,
-    iconResID : Int,
-    onClick : ()->Unit
+    text: String,
+    iconResID: Int,
+    onClick: () -> Unit
 ) {
     Button(
         modifier = modifier,
@@ -36,7 +36,7 @@ fun OBIconButtonVariant(
         onClick = onClick
     ) {
         Icon(
-            imageVector = ImageVector.vectorResource(iconResID) ,
+            imageVector = ImageVector.vectorResource(iconResID),
             contentDescription = "",
             tint = Color.Unspecified
         )

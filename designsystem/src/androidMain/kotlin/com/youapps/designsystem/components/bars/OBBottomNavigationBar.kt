@@ -17,42 +17,41 @@ import androidx.compose.runtime.Stable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.vectorResource
-import androidx.core.graphics.toColor
-import com.youapps.onlybeans.designsystem.R
 
 
 data class OBBottomNavigationBarItem(
- val selectedStateIcon  : Int,
- val unSelectedStateIcon  : Int,
- val badgeContent : Int  = 0
+    val selectedStateIcon: Int,
+    val unSelectedStateIcon: Int,
+    val badgeContent: Int = 0
 )
+
 @JvmInline
 @Stable
 value class OBBottomNavigationBarDefaults(
-   val items : List<OBBottomNavigationBarItem>
-){
-    companion object{
-        val DEFAULT : OBBottomNavigationBarDefaults = OBBottomNavigationBarDefaults(emptyList())
+    val items: List<OBBottomNavigationBarItem>
+) {
+    companion object {
+        val DEFAULT: OBBottomNavigationBarDefaults = OBBottomNavigationBarDefaults(emptyList())
     }
 }
 
 @Composable
 fun OBBottomNavigationBar(
-    selectedItemIndex : Int,
+    selectedItemIndex: Int,
     modifier: Modifier = Modifier,
-    properties : OBBottomNavigationBarDefaults,
-    onItemSelected : (index : Int)->Unit
+    properties: OBBottomNavigationBarDefaults,
+    onItemSelected: (index: Int) -> Unit
 ) {
     val allowedItems = properties.items.take(5)
     val unSelectedBottomNavigationColor = MaterialTheme.colorScheme.surfaceVariant
 
-    val selectedNavigationBarItemColor = if (isSystemInDarkTheme()) Color(0xFF150d0d)  else Color(0xFFCFC1C1)
+    val selectedNavigationBarItemColor =
+        if (isSystemInDarkTheme()) Color(0xFF150d0d) else Color(0xFFCFC1C1)
     NavigationBar(
         modifier = modifier,
         contentColor = unSelectedBottomNavigationColor
-    )  {
+    ) {
 
         allowedItems.forEachIndexed { index, item ->
             val state = animateIntAsState(
@@ -60,14 +59,14 @@ fun OBBottomNavigationBar(
             )
             NavigationBarItem(
                 colors = NavigationBarItemDefaults.colors(
-                    indicatorColor =  if (selectedItemIndex == index)
+                    indicatorColor = if (selectedItemIndex == index)
                         selectedNavigationBarItemColor
                     else unSelectedBottomNavigationColor
                 ),
                 modifier = Modifier
                     .background(
                         if (selectedItemIndex == index)
-                           selectedNavigationBarItemColor
+                            selectedNavigationBarItemColor
                         else unSelectedBottomNavigationColor
                     ),
                 icon = {

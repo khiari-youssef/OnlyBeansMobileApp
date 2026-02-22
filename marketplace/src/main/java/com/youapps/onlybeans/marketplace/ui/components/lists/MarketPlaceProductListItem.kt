@@ -1,12 +1,9 @@
 package com.youapps.onlybeans.marketplace.ui.components.lists
 
-import android.widget.Space
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -17,7 +14,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CardElevation
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
@@ -32,7 +28,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
@@ -44,9 +39,7 @@ import coil.compose.AsyncImage
 import coil.compose.AsyncImagePainter
 import com.youapps.designsystem.OBFontFamilies
 import com.youapps.designsystem.OBTheme
-import com.youapps.designsystem.components.buttons.OBLikeButton
 import com.youapps.designsystem.components.buttons.OBLikeCardButton
-import com.youapps.designsystem.components.images.OBCoverPhoto
 import com.youapps.designsystem.components.loading.shimmerEffect
 import com.youapps.onlybeans.designsystem.R
 import com.youapps.onlybeans.domain.entities.products.OBMarketPlaceProduct
@@ -54,14 +47,13 @@ import com.youapps.onlybeans.domain.entities.products.OBPrice
 import com.youapps.onlybeans.domain.entities.products.OBProductPricing
 import com.youapps.onlybeans.domain.entities.products.OBProductRating
 import com.youapps.onlybeans.marketplace.ui.components.OBProductRatingTag
-import com.youapps.onlybeans.marketplace.ui.components.ShoppingCardIcon
 import com.youapps.onlybeans.ui.product.obCoffeeBeansMockProduct
 
 
 @Preview(widthDp = 300)
 @Composable
 fun MarketPlaceProductListItemPreview() {
-    OBTheme{
+    OBTheme {
         val isLiked = remember {
             mutableStateOf(false)
         }
@@ -70,20 +62,21 @@ fun MarketPlaceProductListItemPreview() {
         }
 
         MarketPlaceProductListItem(
-            modifier = Modifier.width(300.dp)
+            modifier = Modifier
+                .width(300.dp)
                 .wrapContentHeight(),
             obProduct = OBMarketPlaceProduct(
                 marketPlaceID = "marketplace-id-0aegd2sh15srh1",
                 product = obCoffeeBeansMockProduct,
                 pricing = OBProductPricing.OBProductMultipleWeightBasedPricing(
                     pricePerWeight = mapOf(
-                        250 to OBPrice(price = 18.5f,0.2f),
+                        250 to OBPrice(price = 18.5f, 0.2f),
                         500 to OBPrice(price = 35f),
                         1000 to OBPrice(price = 65f)
                     ),
                     currency = "USD",
                     weightUnit = "g"
-                ) ,
+                ),
                 isAddedToFavoriteList = isLiked.value,
                 isAddedToCard = isAddedToCard.value,
                 inStockItems = 5,
@@ -93,7 +86,7 @@ fun MarketPlaceProductListItemPreview() {
                 )
             ),
             onLikeClicked = {
-                isLiked.value  = it
+                isLiked.value = it
             },
             onAddToCardClicked = {
                 isAddedToCard.value = it
@@ -107,29 +100,29 @@ fun MarketPlaceProductListItemPreview() {
 fun MarketPlaceProductListItem(
     modifier: Modifier = Modifier,
     obProduct: OBMarketPlaceProduct,
-    onAddToCardClicked : (isAdded : Boolean)-> Unit,
-    onLikeClicked : (isLiked : Boolean)-> Unit
+    onAddToCardClicked: (isAdded: Boolean) -> Unit,
+    onLikeClicked: (isLiked: Boolean) -> Unit
 ) {
     Card(
         modifier = modifier
             .clip(RoundedCornerShape(16.dp)),
-      shape = RoundedCornerShape(16.dp),
+        shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(
             containerColor = Color.White
         ),
-      elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
-    )  {
+        elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
+    ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Top
-        )  {
+        ) {
             val isLoading = remember {
                 mutableStateOf(true)
             }
-            Box{
+            Box {
                 AsyncImage(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -137,7 +130,7 @@ fun MarketPlaceProductListItem(
                         .shimmerEffect(isLoading.value),
                     contentScale = ContentScale.Crop,
                     model = obProduct.product.productCovers.firstOrNull(),
-                    onState = {state->
+                    onState = { state ->
                         isLoading.value = state is AsyncImagePainter.State.Loading
                     },
                     contentDescription = "contentDescription"
@@ -156,14 +149,14 @@ fun MarketPlaceProductListItem(
             Column(
                 modifier = Modifier
                     .padding(
-                      vertical = 8.dp,
+                        vertical = 8.dp,
                         horizontal = 8.dp
                     )
                     .fillMaxWidth()
                     .wrapContentHeight(),
                 horizontalAlignment = Alignment.Start,
                 verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.Top)
-            ){
+            ) {
                 obProduct.rating?.run {
                     OBProductRatingTag(
                         rating = averageRating,
@@ -192,20 +185,20 @@ fun MarketPlaceProductListItem(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
-                   Text(
-                       text =  when (val pricing = obProduct.pricing) {
-                           is OBProductPricing.OBProductMultipleWeightBasedPricing -> pricing.pricePerWeight.values.first()
-                           is OBProductPricing.OBProductMultipleBundleBasedPricing -> pricing.pricePerBundle.values.first()
-                           is OBProductPricing.OBProductSinglePricing -> pricing.price
-                       }.let { (price, _) -> "$price ${obProduct.pricing.currency}"  },
-                       textAlign = TextAlign.Start,
-                       maxLines = 1,
-                       style = TextStyle(
-                           color = MaterialTheme.colorScheme.onSurface,
-                           fontSize = 18.sp,
-                           fontFamily = OBFontFamilies.MainBoldFontFamily
-                       )
-                   )
+                    Text(
+                        text = when (val pricing = obProduct.pricing) {
+                            is OBProductPricing.OBProductMultipleWeightBasedPricing -> pricing.pricePerWeight.values.first()
+                            is OBProductPricing.OBProductMultipleBundleBasedPricing -> pricing.pricePerBundle.values.first()
+                            is OBProductPricing.OBProductSinglePricing -> pricing.price
+                        }.let { (price, _) -> "$price ${obProduct.pricing.currency}" },
+                        textAlign = TextAlign.Start,
+                        maxLines = 1,
+                        style = TextStyle(
+                            color = MaterialTheme.colorScheme.onSurface,
+                            fontSize = 18.sp,
+                            fontFamily = OBFontFamilies.MainBoldFontFamily
+                        )
+                    )
                     FloatingActionButton(
                         onClick = {
                             onAddToCardClicked(obProduct.isAddedToCard.not())
@@ -214,7 +207,7 @@ fun MarketPlaceProductListItem(
                             .padding(end = 8.dp)
                             .size(40.dp),
                         shape = CircleShape,
-                        containerColor =  if(obProduct.isAddedToCard) Color(0xFF92400e) else Color.Black,
+                        containerColor = if (obProduct.isAddedToCard) Color(0xFF92400e) else Color.Black,
                         elevation = FloatingActionButtonDefaults.elevation(4.dp)
                     ) {
                         Icon(

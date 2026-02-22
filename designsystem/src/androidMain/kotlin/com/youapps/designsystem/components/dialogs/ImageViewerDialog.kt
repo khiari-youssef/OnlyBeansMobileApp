@@ -10,9 +10,9 @@ import com.youapps.designsystem.components.images.OBCoverPhoto
 
 @Composable
 fun ImageViewerDialog(
-    imageUrl : String,
-    isVisible : Boolean,
-    onDismissRequest: ()-> Unit
+    imageUrl: String,
+    isVisible: Boolean,
+    onDismissRequest: () -> Unit
 ) {
     if (isVisible) {
         Dialog(
@@ -21,7 +21,7 @@ fun ImageViewerDialog(
                 dismissOnClickOutside = true
             ),
             onDismissRequest = onDismissRequest
-        ){
+        ) {
             OBCoverPhoto(
                 modifier = Modifier.wrapContentSize(),
                 url = imageUrl

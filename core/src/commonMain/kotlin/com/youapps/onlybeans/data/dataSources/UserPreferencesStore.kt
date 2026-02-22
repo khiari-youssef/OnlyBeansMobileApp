@@ -33,8 +33,7 @@ class UserPreferencesStore(
         }.flowOn(Dispatchers.IO)
 
 
-
-    suspend fun setUserToken(email : String,token: String) = withContext(Dispatchers.IO) {
+    suspend fun setUserToken(email: String, token: String) = withContext(Dispatchers.IO) {
         preferences.edit { mutablePrefs ->
             mutablePrefs[OB_USER_EMAIL] = email
             mutablePrefs[OB_USER_TOKEN] = token

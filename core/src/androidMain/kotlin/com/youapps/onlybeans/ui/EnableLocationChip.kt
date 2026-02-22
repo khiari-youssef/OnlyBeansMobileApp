@@ -2,7 +2,6 @@ package com.youapps.onlybeans.ui
 
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.provider.Settings
@@ -31,16 +30,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.youapps.onlybeans.R
 import com.youapps.onlybeans.di.OBLocationServicePlayServicesImplTag
 import com.youapps.onlybeans.platform.OBLocationService
-import com.youapps.onlybeans.platform.OBLocationServicePlayServicesImpl
 import kotlinx.coroutines.launch
-import org.koin.compose.KoinApplication
 import org.koin.compose.koinInject
-import org.koin.dsl.module
 import com.youapps.onlybeans.designsystem.R as ds
 
 
@@ -50,27 +45,29 @@ fun EnableLocationChip(
     modifier: Modifier = Modifier,
     onLocationEnabled: () -> Unit
 ) {
-    val locationService: OBLocationService = koinInject<OBLocationService>(OBLocationServicePlayServicesImplTag)
+    val locationService: OBLocationService =
+        koinInject<OBLocationService>(OBLocationServicePlayServicesImplTag)
     val localContext = LocalContext.current
     val locationPermissions = arrayOf(
         ACCESS_COARSE_LOCATION,
     )
     val localCoroutineScope = rememberCoroutineScope()
-    val locationSettingsLauncher: ActivityResultLauncher<Intent> = rememberLauncherForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) { (resultCode, _) ->
-        localCoroutineScope.launch {
-            if (resultCode == Activity.RESULT_CANCELED && locationService.isLocationEnabled()) {
-                onLocationEnabled()
-            } else {
-                Toast.makeText(
-                    localContext,
-                    localContext.getString(R.string.random_error),
-                    Toast.LENGTH_SHORT
-                ).show()
+    val locationSettingsLauncher: ActivityResultLauncher<Intent> =
+        rememberLauncherForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { (resultCode, _) ->
+            localCoroutineScope.launch {
+                if (resultCode == Activity.RESULT_CANCELED && locationService.isLocationEnabled()) {
+                    onLocationEnabled()
+                } else {
+                    Toast.makeText(
+                        localContext,
+                        localContext.getString(R.string.random_error),
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         }
-    }
 
     val enabledPermissions: List<Boolean> = locationPermissions.map { permission ->
         localContext.checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED

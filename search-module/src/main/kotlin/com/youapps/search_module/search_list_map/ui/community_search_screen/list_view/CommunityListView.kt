@@ -8,7 +8,7 @@ import com.youapps.search_module.search_list_map.ui.community_search_state.Commu
 @Composable
 fun CommunityListView(
     modifier: Modifier = Modifier,
-    screenState : CommunitySearchStateHolder
+    screenState: CommunitySearchStateHolder
 ) {
 
 }

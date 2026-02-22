@@ -28,14 +28,14 @@ import com.youapps.designsystem.onBackgroundShadedLightMode
 
 @Composable
 fun InfoPopup(
-    title : String,
-    subtitle : String?=null,
-    isShown : Boolean,
-    buttonText : String,
-    onButtonClicked : ()->Unit,
-    onDismissRequest : ()->Unit
+    title: String,
+    subtitle: String? = null,
+    isShown: Boolean,
+    buttonText: String,
+    onButtonClicked: () -> Unit,
+    onDismissRequest: () -> Unit
 ) {
-    if (isShown){
+    if (isShown) {
         Dialog(
             onDismissRequest = onDismissRequest
         ) {

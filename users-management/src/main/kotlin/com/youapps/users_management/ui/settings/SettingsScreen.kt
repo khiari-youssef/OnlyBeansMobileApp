@@ -14,29 +14,29 @@ import com.youapps.users_management.ui.settings.AppSettingsStateHolder
 @Composable
 fun SettingsScreen(
     modifier: Modifier = Modifier,
-    uiState : AppSettingsStateHolder,
-    onItemSelectedStateChanged : (isSelected : Boolean)->Unit,
-    onBackPressed : ()->Unit
+    uiState: AppSettingsStateHolder,
+    onItemSelectedStateChanged: (isSelected: Boolean) -> Unit,
+    onBackPressed: () -> Unit
 ) {
- DetailsScreenTemplate(
-     modifier =modifier,
-     title = stringResource(id = R.string.settings_screen_title),
-     onBackPressed = onBackPressed
- ) {
-   Column(
-       horizontalAlignment = Alignment.Start,
-       verticalArrangement = Arrangement
-           .spacedBy(12.dp,Alignment.CenterVertically)
-   ) {
-       OBCheckableSettingsOption(
-           modifier = Modifier
-               .fillMaxWidth()
-               .wrapContentHeight(),
-           isEnabled = true,
-           isSelected = uiState.isAutoLoginEnabled.value,
-           label = stringResource(id = R.string.settings_auto_login_option_label),
-           onItemSelectedStateChanged = onItemSelectedStateChanged
-       )
-   }
- }
+    DetailsScreenTemplate(
+        modifier = modifier,
+        title = stringResource(id = R.string.settings_screen_title),
+        onBackPressed = onBackPressed
+    ) {
+        Column(
+            horizontalAlignment = Alignment.Start,
+            verticalArrangement = Arrangement
+                .spacedBy(12.dp, Alignment.CenterVertically)
+        ) {
+            OBCheckableSettingsOption(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight(),
+                isEnabled = true,
+                isSelected = uiState.isAutoLoginEnabled.value,
+                label = stringResource(id = R.string.settings_auto_login_option_label),
+                onItemSelectedStateChanged = onItemSelectedStateChanged
+            )
+        }
+    }
 }

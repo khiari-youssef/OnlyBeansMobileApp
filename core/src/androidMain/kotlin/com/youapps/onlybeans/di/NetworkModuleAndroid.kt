@@ -11,7 +11,7 @@ import kotlinx.serialization.json.Json
 import org.koin.core.module.Module
 import org.koin.dsl.module
 
-actual val networkModule : Module = module {
+actual val networkModule: Module = module {
     factory(RestClientImplTag) {
         HttpClient(OkHttp) {
             defaultRequest {
@@ -19,7 +19,7 @@ actual val networkModule : Module = module {
                 port = DEFAULT_PORT
             }
             install(Logging)
-            install(HttpTimeout){
+            install(HttpTimeout) {
                 requestTimeoutMillis = 10000
             }
             install(ContentNegotiation) {

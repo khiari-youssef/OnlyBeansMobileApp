@@ -1,17 +1,10 @@
 package com.youapps.search_module.search_list_map.ui.community_search_state
 
-import android.location.Location
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.android.gms.maps.LocationSource
-import com.google.android.gms.maps.model.LatLng
 import com.youapps.onlybeans.contracts.UseCaseContract
 import com.youapps.onlybeans.data.repositories.AppMetaDataAPI
-import com.youapps.onlybeans.domain.entities.users.OBLocation
-import com.youapps.onlybeans.domain.exception.DomainErrorType
-import com.youapps.onlybeans.platform.LocationSettingsType
 import com.youapps.onlybeans.platform.OBLocationService
-import com.youapps.search_module.search_list_map.data.SearchCommunityRepository
 import com.youapps.search_module.search_list_map.domain.entities.MapSearchDataPoint
 import com.youapps.search_module.search_list_map.domain.entities.OBMapSearchQuery
 import com.youapps.search_module.search_list_map.ui.community_search_screen.map_view.DataClusterItem
@@ -23,9 +16,9 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class CommunitySearchViewModel(
-    private val locationService : OBLocationService,
-    private val appMetaDataAPI : AppMetaDataAPI,
-    private val useCase: UseCaseContract<OBMapSearchQuery,List<MapSearchDataPoint>>
+    private val locationService: OBLocationService,
+    private val appMetaDataAPI: AppMetaDataAPI,
+    private val useCase: UseCaseContract<OBMapSearchQuery, List<MapSearchDataPoint>>
 ) : ViewModel() {
 
 
@@ -33,23 +26,23 @@ class CommunitySearchViewModel(
         fetchSearchFilter()
     }
 
- private val _currentSearchQuery: MutableStateFlow<String?> = MutableStateFlow(null)
-   val currentSearchQuery: StateFlow<String?> = _currentSearchQuery
+    private val _currentSearchQuery: MutableStateFlow<String?> = MutableStateFlow(null)
+    val currentSearchQuery: StateFlow<String?> = _currentSearchQuery
 
- private val _searchFilterList: MutableStateFlow<SearchFilterList?> = MutableStateFlow(null)
- val searchFilterList: StateFlow<SearchFilterList?> = _searchFilterList
+    private val _searchFilterList: MutableStateFlow<SearchFilterList?> = MutableStateFlow(null)
+    val searchFilterList: StateFlow<SearchFilterList?> = _searchFilterList
 
- private val _selectedFilterIndex: MutableStateFlow<Int> = MutableStateFlow(0)
- val selectedFilterIndex: StateFlow<Int> = _selectedFilterIndex
+    private val _selectedFilterIndex: MutableStateFlow<Int> = MutableStateFlow(0)
+    val selectedFilterIndex: StateFlow<Int> = _selectedFilterIndex
 
- private val _currentRadiusValue: MutableStateFlow<Float> = MutableStateFlow(1f)
- val currentRadiusValue: StateFlow<Float> = _currentRadiusValue
+    private val _currentRadiusValue: MutableStateFlow<Float> = MutableStateFlow(1f)
+    val currentRadiusValue: StateFlow<Float> = _currentRadiusValue
 
- private val _currentSearchByAreaState: MutableStateFlow<SearchByAreaState> = MutableStateFlow(SearchByAreaState.Idle)
- val currentSearchByAreaState: StateFlow<SearchByAreaState> = _currentSearchByAreaState
+    private val _currentSearchByAreaState: MutableStateFlow<SearchByAreaState> =
+        MutableStateFlow(SearchByAreaState.Idle)
+    val currentSearchByAreaState: StateFlow<SearchByAreaState> = _currentSearchByAreaState
 
-  val currentLocationSource : ManualLocationSource = ManualLocationSource()
-
+    val currentLocationSource: ManualLocationSource = ManualLocationSource()
 
 
     /*
@@ -78,17 +71,17 @@ class CommunitySearchViewModel(
      */
 
 
-  fun updateSearchQuery(searchQuery: String) {
-      _currentSearchQuery.value = searchQuery
-  }
+    fun updateSearchQuery(searchQuery: String) {
+        _currentSearchQuery.value = searchQuery
+    }
 
-    fun setSelectedFilterIndex(index : Int){
+    fun setSelectedFilterIndex(index: Int) {
         _selectedFilterIndex.update {
             index
         }
     }
 
-    fun setRadiusValue(radiusValue : Float){
+    fun setRadiusValue(radiusValue: Float) {
         _currentRadiusValue.update {
             radiusValue
         }
@@ -100,7 +93,7 @@ class CommunitySearchViewModel(
             _searchFilterList.update {
                 SearchFilterList(
                     data = listOf(
-                        "All","Baristas","CoffeeShops","CoffeeRoasters","CoffeeFarms"
+                        "All", "Baristas", "CoffeeShops", "CoffeeRoasters", "CoffeeFarms"
                     )
                 )
             }
@@ -108,11 +101,11 @@ class CommunitySearchViewModel(
     }
 
 
-    fun searchVisibleArea(bounds : SearchByRegionBounds){
+    fun searchVisibleArea(bounds: SearchByRegionBounds) {
         _currentSearchByAreaState.update {
             SearchByAreaState.Loading
         }
-        val query : OBMapSearchQuery = OBMapSearchQuery(
+        val query: OBMapSearchQuery = OBMapSearchQuery(
             searchQuery = currentSearchQuery.value ?: "",
             mapBounds = bounds,
             radius = currentRadiusValue.value,
@@ -120,26 +113,26 @@ class CommunitySearchViewModel(
         )
         viewModelScope.launch {
             delay(1000)
-           try {
-               val result = useCase.execute(query)
-               _currentSearchByAreaState.update {
-                   SearchByAreaState.Success(
-                       data = SearchByAreaResult(
-                           data = result.map {
-                               DataClusterItem(
-                                   data = it,
-                                   itemSnippet = it.title
-                               )
-                           }
-                       )
-                   )
-               }
-           } catch (th : Throwable){
-               th.printStackTrace()
-               _currentSearchByAreaState.update {
-                   SearchByAreaState.Error()
-               }
-           }
+            try {
+                val result = useCase.execute(query)
+                _currentSearchByAreaState.update {
+                    SearchByAreaState.Success(
+                        data = SearchByAreaResult(
+                            data = result.map {
+                                DataClusterItem(
+                                    data = it,
+                                    itemSnippet = it.title
+                                )
+                            }
+                        )
+                    )
+                }
+            } catch (th: Throwable) {
+                th.printStackTrace()
+                _currentSearchByAreaState.update {
+                    SearchByAreaState.Error()
+                }
+            }
         }
 
     }

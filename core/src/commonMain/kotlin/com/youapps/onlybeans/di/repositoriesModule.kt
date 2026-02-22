@@ -6,7 +6,7 @@ import org.koin.core.module.Module
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
- val UsersRepositoryTag = named("OBUsersRepository")
+val UsersRepositoryTag = named("OBUsersRepository")
 val repositoriesModule = module {
     includes(dataSourcesModule)
     factory<OBUsersRepositoryInterface>(UsersRepositoryTag) {
@@ -15,4 +15,4 @@ val repositoriesModule = module {
     includes(sharedRepositories)
 }
 
-expect val sharedRepositories : Module
+expect val sharedRepositories: Module

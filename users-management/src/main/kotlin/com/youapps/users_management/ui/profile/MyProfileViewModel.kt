@@ -15,45 +15,45 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class MyProfileViewModel(
-    private val usersRepository : OBUsersRepositoryInterface,
+    private val usersRepository: OBUsersRepositoryInterface,
     private val obUserLogoutUseCase: UseCaseContractReadOnly<Boolean>
 ) : ViewModel() {
 
     private val _profileState = MutableStateFlow<ProfileScreenState>(ProfileScreenState.Loading())
-     val profileState : StateFlow<ProfileScreenState> = _profileState
+    val profileState: StateFlow<ProfileScreenState> = _profileState
 
     init {
         getMyProfile()
     }
 
-  fun getMyProfile(withRefresh : Boolean = false) {
-      viewModelScope.launch {
-          _profileState.update { it->
-              ProfileScreenState.Loading(withRefresh)
-          }
-          if (withRefresh) {
-              val profile = usersRepository.getCurrentUserData(withRefresh = true)
-              _profileState.update { it->
-                  profile?.run {
-                      ProfileScreenState.Loaded(profile)
-                  } ?: run {
-                      ProfileScreenState.Error(error = DomainErrorType.NotFound)
-                  }
-              }
-          } else {
-              val profile = usersRepository.getCurrentUserData()
-               profile?.run {
-                      _profileState.update { it->
-                          ProfileScreenState.Loaded(profile)
-                      }
-                  } ?: run {
-                      getMyProfile(withRefresh = true)
-                  }
-          }
-      }
-  }
+    fun getMyProfile(withRefresh: Boolean = false) {
+        viewModelScope.launch {
+            _profileState.update { it ->
+                ProfileScreenState.Loading(withRefresh)
+            }
+            if (withRefresh) {
+                val profile = usersRepository.getCurrentUserData(withRefresh = true)
+                _profileState.update { it ->
+                    profile?.run {
+                        ProfileScreenState.Loaded(profile)
+                    } ?: run {
+                        ProfileScreenState.Error(error = DomainErrorType.NotFound)
+                    }
+                }
+            } else {
+                val profile = usersRepository.getCurrentUserData()
+                profile?.run {
+                    _profileState.update { it ->
+                        ProfileScreenState.Loaded(profile)
+                    }
+                } ?: run {
+                    getMyProfile(withRefresh = true)
+                }
+            }
+        }
+    }
 
-    fun logOutCurrentUser() : Flow<Boolean> = flow {
+    fun logOutCurrentUser(): Flow<Boolean> = flow {
         emit(obUserLogoutUseCase.execute())
     }.flowOn(Dispatchers.Main)
 

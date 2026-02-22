@@ -20,12 +20,12 @@ import com.youapps.designsystem.OBFontFamilies
 @Composable
 fun LoadingScreen(
     modifier: Modifier = Modifier,
-    loadingText : String?=null
+    loadingText: String? = null
 ) {
     Box(
         modifier = modifier,
         contentAlignment = Alignment.Center
-    ){
+    ) {
 
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -44,7 +44,7 @@ fun LoadingScreen(
                     modifier = Modifier
                         .animateContentSize()
                         .fillMaxWidth(),
-                    text =loadingText,
+                    text = loadingText,
                     style = TextStyle(
                         color = MaterialTheme.colorScheme.primary,
                         fontFamily = OBFontFamilies.MainMediumFontFamily,

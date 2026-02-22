@@ -6,8 +6,8 @@ import com.youapps.onlybeans.designsystem.R
 @Preview
 @Composable
 fun NoInternetErrorModal(
-    details : String = stringResource(id = R.string.error_network_no_internet_details),
-    onRetryAction : ()->Unit={}
+    details: String = stringResource(id = R.string.error_network_no_internet_details),
+    onRetryAction: () -> Unit = {}
 ) {
     ErrorModal(
         title = stringResource(id = R.string.error_network_title),

@@ -13,20 +13,20 @@ import com.youapps.onlybeans.designsystem.R
 
 @Composable
 fun AppVersion(
-    version : String
+    version: String
 ) {
-  Text(
-      style = TextStyle(
-         color =  MaterialTheme.colorScheme.primary,
-          fontSize = 12.sp,
-          fontFamily = OBFontFamilies.MainMediumFontFamily,
-          fontStyle = FontStyle.Normal,
-          letterSpacing = 1.sp
-      ),
-      modifier = Modifier
-          .wrapContentSize(),
-      maxLines = 1,
-      text = stringResource(id = R.string.version_placeholder,version),
-      textAlign = TextAlign.Start
-  )
+    Text(
+        style = TextStyle(
+            color = MaterialTheme.colorScheme.primary,
+            fontSize = 12.sp,
+            fontFamily = OBFontFamilies.MainMediumFontFamily,
+            fontStyle = FontStyle.Normal,
+            letterSpacing = 1.sp
+        ),
+        modifier = Modifier
+            .wrapContentSize(),
+        maxLines = 1,
+        text = stringResource(id = R.string.version_placeholder, version),
+        textAlign = TextAlign.Start
+    )
 }

@@ -45,7 +45,6 @@ import coil.compose.AsyncImage
 import coil.request.CachePolicy
 import coil.request.ImageRequest
 import com.youapps.designsystem.OBFontFamilies
-import com.youapps.onlybeans.designsystem.R
 import com.youapps.designsystem.TonedDark
 import com.youapps.designsystem.components.menus.DropDownMenuData
 import com.youapps.designsystem.components.menus.DropDownMenuItemData
@@ -54,6 +53,7 @@ import com.youapps.designsystem.components.menus.OBDropDownMenu
 import com.youapps.designsystem.components.text.PlaceholderText
 import com.youapps.designsystem.onBackgroundShadedDarkMode
 import com.youapps.designsystem.onBackgroundShadedLightMode
+import com.youapps.onlybeans.designsystem.R
 
 
 @Composable
@@ -64,10 +64,10 @@ fun OBPhoneInput(
     countryCodesDropDownMenuData: DropDownMenuData,
     isRequired: Boolean = false,
     isEnabled: Boolean = true,
-    errorMessage : String?=null,
+    errorMessage: String? = null,
     dropDownScrollState: ScrollState = rememberScrollState(),
-    onDropDownDismissed: ()-> Unit,
-    onPhoneNumberChanged: (number : String) -> Unit,
+    onDropDownDismissed: () -> Unit,
+    onPhoneNumberChanged: (number: String) -> Unit,
     onCountryCodeChanged: (DropDownMenuItemData) -> Unit,
 ) {
     val isExpanded = remember {
@@ -98,7 +98,7 @@ fun OBPhoneInput(
             modifier = modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.Start)
-        ){
+        ) {
             Box(
                 modifier = Modifier.weight(0.3f),
                 contentAlignment = Alignment.Center
@@ -107,12 +107,13 @@ fun OBPhoneInput(
                     modifier = Modifier
                         .height(
                             height = 56.dp
-                        ).fillMaxWidth(),
+                        )
+                        .fillMaxWidth(),
                     colors = AssistChipDefaults.assistChipColors(
                         containerColor = if (isSystemInDarkTheme()) TonedDark else Color.White,
                         labelColor = MaterialTheme.colorScheme.onSurface
                     ),
-                    shape = MaterialTheme.shapes.small ,
+                    shape = MaterialTheme.shapes.small,
                     label = {
                         Text(
                             text = selectedCountryCode.value?.label ?: "",
@@ -130,26 +131,39 @@ fun OBPhoneInput(
                     },
                     leadingIcon = {
                         selectedCountryCode.value?.icon?.run {
-                            val label : String = selectedCountryCode.value?.label ?: ""
-                            when (this){
-                                is ImageMediaType.Resource ->Icon(
-                                    modifier = Modifier.size(this.size ?: DpSize(
-                                        width = 25.dp,
-                                        height = 30.dp)),
+                            val label: String = selectedCountryCode.value?.label ?: ""
+                            when (this) {
+                                is ImageMediaType.Resource -> Icon(
+                                    modifier = Modifier.size(
+                                        this.size ?: DpSize(
+                                            width = 25.dp,
+                                            height = 30.dp
+                                        )
+                                    ),
                                     imageVector = ImageVector.vectorResource(this.resId),
-                                    contentDescription = stringResource(R.string.content_description_drop_down_item,label),
+                                    contentDescription = stringResource(
+                                        R.string.content_description_drop_down_item,
+                                        label
+                                    ),
                                     tint = MaterialTheme.colorScheme.onSurface
                                 )
-                                is ImageMediaType.Url ->  AsyncImage(
-                                    modifier = Modifier.size(this.size ?: DpSize(
-                                        width = 25.dp,
-                                        height = 30.dp)),
+
+                                is ImageMediaType.Url -> AsyncImage(
+                                    modifier = Modifier.size(
+                                        this.size ?: DpSize(
+                                            width = 25.dp,
+                                            height = 30.dp
+                                        )
+                                    ),
                                     model = ImageRequest.Builder(LocalContext.current)
                                         .data(this.url)
                                         .diskCachePolicy(CachePolicy.ENABLED)
                                         .memoryCachePolicy(CachePolicy.ENABLED)
-                                        .build() ,
-                                    contentDescription = stringResource(R.string.content_description_drop_down_item,label),
+                                        .build(),
+                                    contentDescription = stringResource(
+                                        R.string.content_description_drop_down_item,
+                                        label
+                                    ),
                                 )
                             }
                         }
@@ -166,7 +180,7 @@ fun OBPhoneInput(
                             onDropDownDismissed()
                         }
                     },
-                    onClick = { data->
+                    onClick = { data ->
                         onCountryCodeChanged(data)
                         isExpanded.value = false
                         onDropDownDismissed()
@@ -185,7 +199,7 @@ fun OBPhoneInput(
                     lineHeight = 24.sp
                 ),
                 value = phoneNumber,
-                keyboardActions= KeyboardActions.Default,
+                keyboardActions = KeyboardActions.Default,
                 keyboardOptions = KeyboardOptions(
                     keyboardType = KeyboardType.Phone
                 ),
@@ -202,16 +216,18 @@ fun OBPhoneInput(
                     focusedContainerColor = if (isSystemInDarkTheme()) TonedDark else Color.White,
                     unfocusedContainerColor = if (isSystemInDarkTheme()) TonedDark else Color.White,
                     errorContainerColor = if (isSystemInDarkTheme()) TonedDark else Color.White,
-                    cursorColor =   MaterialTheme.colorScheme.primary,
-                    focusedLabelColor =  MaterialTheme.colorScheme.primary,
+                    cursorColor = MaterialTheme.colorScheme.primary,
+                    focusedLabelColor = MaterialTheme.colorScheme.primary,
                     focusedTrailingIconColor = Color.Unspecified,
                     focusedBorderColor = MaterialTheme.colorScheme.primary,
                     unfocusedLabelColor = if (isSystemInDarkTheme()) onBackgroundShadedDarkMode else onBackgroundShadedLightMode,
-                    disabledContainerColor = if (isSystemInDarkTheme()) Color(0xFF333333) else Color(0xFFD9D9D9),
+                    disabledContainerColor = if (isSystemInDarkTheme()) Color(0xFF333333) else Color(
+                        0xFFD9D9D9
+                    ),
                     disabledTextColor = Color(0xFFB3B3B3),
                     unfocusedBorderColor = Color(0xFFD9D9D9),
-                    unfocusedTextColor =  MaterialTheme.colorScheme.onSurface,
-                    focusedTextColor =  MaterialTheme.colorScheme.onSurface
+                    unfocusedTextColor = MaterialTheme.colorScheme.onSurface,
+                    focusedTextColor = MaterialTheme.colorScheme.onSurface
                 ),
                 onValueChange = onPhoneNumberChanged
             )

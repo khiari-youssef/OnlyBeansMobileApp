@@ -1,11 +1,9 @@
 package com.youapps.users_management.ui.registration
-import android.content.ContentResolver
+
 import android.content.Context
 import android.net.Uri
-import android.webkit.MimeTypeMap
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.serialization.saved
 import androidx.lifecycle.viewModelScope
 import com.youapps.designsystem.components.lists.CarouselState
 import com.youapps.designsystem.components.lists.OBCarouselMediaType
@@ -30,7 +28,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.getAndUpdate
 import kotlinx.coroutines.flow.map
@@ -38,40 +35,45 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.Locale
-import kotlin.collections.filter
-import kotlin.collections.map
 
 
 class OBRegistrationViewModel(
-    private val applicationContext : Context,
+    private val applicationContext: Context,
     private val savedStateHandle: SavedStateHandle,
-    private val usersRepository : OBUsersRepositoryInterface,
-    private val appMetaDataAPI : AppMetaDataAPI
-)  : ViewModel() {
+    private val usersRepository: OBUsersRepositoryInterface,
+    private val appMetaDataAPI: AppMetaDataAPI
+) : ViewModel() {
 
-    private val _profileState = MutableStateFlow<OBRegistrationScreenState>(OBRegistrationScreenState.Loading)
+    private val _profileState =
+        MutableStateFlow<OBRegistrationScreenState>(OBRegistrationScreenState.Loading)
 
-    private val _countryCodesDropDownMenuDataStateFlow : MutableStateFlow<DropDownMenuData?> = MutableStateFlow(null)
-     val countryCodesDropDownMenuDataStateFlow : StateFlow<DropDownMenuData?> = _countryCodesDropDownMenuDataStateFlow
+    private val _countryCodesDropDownMenuDataStateFlow: MutableStateFlow<DropDownMenuData?> =
+        MutableStateFlow(null)
+    val countryCodesDropDownMenuDataStateFlow: StateFlow<DropDownMenuData?> =
+        _countryCodesDropDownMenuDataStateFlow
 
-    private val _COUNTRIES_PAGE_SIZE : Int = 10
+    private val _COUNTRIES_PAGE_SIZE: Int = 10
 
 
-    private val _countriesList : MutableStateFlow<DropDownMenuData> = MutableStateFlow<DropDownMenuData>(DropDownMenuData(
-        items = List(5){
-            DropDownMenuItemData(
-                label = "label$it"
-            )
-        }
-    ))
+    private val _countriesList: MutableStateFlow<DropDownMenuData> =
+        MutableStateFlow<DropDownMenuData>(
+            DropDownMenuData(
+            items = List(5) {
+                DropDownMenuItemData(
+                    label = "label$it"
+                )
+            }
+        ))
 
-    private val _citiesList : MutableStateFlow<DropDownMenuData> = MutableStateFlow<DropDownMenuData>(DropDownMenuData(
-        items = List(5){
-            DropDownMenuItemData(
-                label = "label$it"
-            )
-        }
-    ))
+    private val _citiesList: MutableStateFlow<DropDownMenuData> =
+        MutableStateFlow<DropDownMenuData>(
+            DropDownMenuData(
+            items = List(5) {
+                DropDownMenuItemData(
+                    label = "label$it"
+                )
+            }
+        ))
 
     val countryCodes: Map<String, String> =
         applicationContext.resources.getStringArray(R.array.country_codes_to_prefixes_and_names)
@@ -80,7 +82,6 @@ class OBRegistrationViewModel(
                     key to value
                 }
             }
-
 
 
     init {
@@ -97,7 +98,7 @@ class OBRegistrationViewModel(
                 _profileState.update {
                     OBRegistrationScreenState.Error(errorType = DomainErrorType.Undefined)
                 }
-            }.onSuccess { data->
+            }.onSuccess { data ->
                 updateProfilePicture(uri = data.profilePicture)
                 updateCoverPicture(uri = data.coverPicture)
                 updateProfileDescription(text = data.profileDescription)
@@ -124,114 +125,116 @@ class OBRegistrationViewModel(
         }
     }
 
-    fun updateProfilePicture(uri : String) {
-       viewModelScope.launch {
-           withContext(Dispatchers.IO){
-               savedStateHandle[PROFILE_PICTURE_KEY] = uri
-           }
-       }
+    fun updateProfilePicture(uri: String) {
+        viewModelScope.launch {
+            withContext(Dispatchers.IO) {
+                savedStateHandle[PROFILE_PICTURE_KEY] = uri
+            }
+        }
     }
 
 
-    fun updateCoverPicture(uri : String) {
+    fun updateCoverPicture(uri: String) {
         viewModelScope.launch {
-            withContext(Dispatchers.IO){
+            withContext(Dispatchers.IO) {
                 savedStateHandle[COVER_PICTURE_KEY] = uri
             }
         }
     }
 
-    fun updateProfileDescription(text : String) {
+    fun updateProfileDescription(text: String) {
         viewModelScope.launch {
-            withContext(Dispatchers.IO){
+            withContext(Dispatchers.IO) {
                 savedStateHandle[PROFILE_DESC_KEY] = text
             }
         }
     }
 
-    fun updateStatus(status : String) {
+    fun updateStatus(status: String) {
         viewModelScope.launch {
-            withContext(Dispatchers.IO){
+            withContext(Dispatchers.IO) {
                 savedStateHandle[PROFILE_STATUS_KEY] = status
             }
         }
     }
 
-    fun updateCountry(country : String) {
+    fun updateCountry(country: String) {
         viewModelScope.launch {
-            withContext(Dispatchers.IO){
+            withContext(Dispatchers.IO) {
                 savedStateHandle[PROFILE_COUNTRY_KEY] = country
             }
         }
     }
 
-    fun updateCity(city : String) {
+    fun updateCity(city: String) {
         viewModelScope.launch {
-            withContext(Dispatchers.IO){
+            withContext(Dispatchers.IO) {
                 savedStateHandle[PROFILE_CITY_KEY] = city
             }
         }
     }
 
-    fun updateLocation(location : OBLocation) {
+    fun updateLocation(location: OBLocation) {
         viewModelScope.launch {
-            withContext(Dispatchers.IO){
+            withContext(Dispatchers.IO) {
                 savedStateHandle[PROFILE_LOCATION_KEY] = location
             }
         }
     }
 
-    fun updatePhoneNumber(phone : String) {
+    fun updatePhoneNumber(phone: String) {
         viewModelScope.launch {
-            withContext(Dispatchers.IO){
+            withContext(Dispatchers.IO) {
                 savedStateHandle[PROFILE_PHONE_KEY] = phone
             }
         }
     }
 
-    fun setSelectedCountryPrefix(data : DropDownMenuItemData) {
+    fun setSelectedCountryPrefix(data: DropDownMenuItemData) {
         viewModelScope.launch {
-            withContext(Dispatchers.IO){
-                savedStateHandle[PROFILE_PHONE_COUNTRY_PREFIX_KEY] = "${data.label}|${data.icon.toString()}"
+            withContext(Dispatchers.IO) {
+                savedStateHandle[PROFILE_PHONE_COUNTRY_PREFIX_KEY] =
+                    "${data.label}|${data.icon.toString()}"
             }
         }
     }
 
 
-
-    fun updateCoffeeSpaceCarouselImages(coffeeSpaceImages  : List<OBFile>) {
+    fun updateCoffeeSpaceCarouselImages(coffeeSpaceImages: List<OBFile>) {
         viewModelScope.launch {
-            withContext(Dispatchers.IO){
+            withContext(Dispatchers.IO) {
                 savedStateHandle[COFFEE_SPACE_CAROUSEL_KEY] = coffeeSpaceImages.joinToString("||")
             }
         }
     }
 
-    fun addCoffeeSpaceCarouselLocalImages(coffeeSpaceImages  : List<Uri>) {
+    fun addCoffeeSpaceCarouselLocalImages(coffeeSpaceImages: List<Uri>) {
         viewModelScope.launch {
-            withContext(Dispatchers.IO){
-               val currentList = savedStateHandle.get<String?>(key = COFFEE_SPACE_CAROUSEL_KEY)?.let {data->
-                    val filteredData = data.split("||").filter { it.isNotBlank() }
-                       return@let filteredData.mapNotNull { data->
-                           OBFile.fromString(data)
+            withContext(Dispatchers.IO) {
+                val currentList =
+                    savedStateHandle.get<String?>(key = COFFEE_SPACE_CAROUSEL_KEY)?.let { data ->
+                        val filteredData = data.split("||").filter { it.isNotBlank() }
+                        return@let filteredData.mapNotNull { data ->
+                            OBFile.fromString(data)
                         }
-                }
-                savedStateHandle[COFFEE_SPACE_CAROUSEL_KEY] =  ((currentList ?: emptyList()) + coffeeSpaceImages).joinToString("||")
+                    }
+                savedStateHandle[COFFEE_SPACE_CAROUSEL_KEY] =
+                    ((currentList ?: emptyList()) + coffeeSpaceImages).joinToString("||")
             }
         }
     }
 
-    fun setProfileLink(link : String) {
+    fun setProfileLink(link: String) {
         viewModelScope.launch {
-            withContext(Dispatchers.IO){
+            withContext(Dispatchers.IO) {
                 savedStateHandle[PROFILE_LINK_KEY] = link
             }
         }
     }
 
-    fun onSexChecked(userSex: UserSex){
+    fun onSexChecked(userSex: UserSex) {
         viewModelScope.launch {
-            withContext(Dispatchers.IO){
+            withContext(Dispatchers.IO) {
                 savedStateHandle[USER_SEX_KEY] = userSex.toString()
             }
         }
@@ -239,28 +242,28 @@ class OBRegistrationViewModel(
 
     fun deleteCoffeeSpaceCarouselImage(uriFilter: String) {
         viewModelScope.launch {
-            withContext(Dispatchers.IO){
-              val currentList =
-                  savedStateHandle.getStateFlow<String?>(key = COFFEE_SPACE_CAROUSEL_KEY,null)
-                      .firstOrNull()?.split("||")?.mapNotNull {
-                          OBFile.fromString(it)
-                      }
+            withContext(Dispatchers.IO) {
+                val currentList =
+                    savedStateHandle.getStateFlow<String?>(key = COFFEE_SPACE_CAROUSEL_KEY, null)
+                        .firstOrNull()?.split("||")?.mapNotNull {
+                            OBFile.fromString(it)
+                        }
 
 
-             val newUpdate = currentList?.filter { file ->
-                 uriFilter != file.uri
-             }
-             newUpdate?.run {
-              savedStateHandle[COFFEE_SPACE_CAROUSEL_KEY] = newUpdate.joinToString("||")
-             }
+                val newUpdate = currentList?.filter { file ->
+                    uriFilter != file.uri
+                }
+                newUpdate?.run {
+                    savedStateHandle[COFFEE_SPACE_CAROUSEL_KEY] = newUpdate.joinToString("||")
+                }
             }
         }
     }
 
-    fun addNewProfileKeyword(keyword : String) {
+    fun addNewProfileKeyword(keyword: String) {
         viewModelScope.launch {
-            withContext(Dispatchers.IO){
-                val currentKeywordsList : Set<String> = buildSet {
+            withContext(Dispatchers.IO) {
+                val currentKeywordsList: Set<String> = buildSet {
                     savedStateHandle.get<String>(PROFILE_KEYWORDS)?.split("|")?.run {
                         addAll(this)
                     }
@@ -272,264 +275,281 @@ class OBRegistrationViewModel(
         }
     }
 
-    fun deleteProfileKeyword(keyword : String) {
+    fun deleteProfileKeyword(keyword: String) {
         viewModelScope.launch {
-            withContext(Dispatchers.IO){
-                val updatedKeywordsList = savedStateHandle.get<String>(PROFILE_KEYWORDS)?.split("|")?.filter {
-                    it != keyword
-                }
+            withContext(Dispatchers.IO) {
+                val updatedKeywordsList =
+                    savedStateHandle.get<String>(PROFILE_KEYWORDS)?.split("|")?.filter {
+                        it != keyword
+                    }
                 savedStateHandle[PROFILE_KEYWORDS] = updatedKeywordsList?.joinToString("|")
             }
         }
     }
 
 
-
-    fun getProfileKeywordsList() : Flow<KeywordsData?> = savedStateHandle.getStateFlow<String?>(PROFILE_KEYWORDS, initialValue = null).map {
-        it?.split("|")?.run {
-            KeywordsData(
-                keywords = this
-            )
-        }
-    }
-    fun getProfilePicture() :  Flow<String?> = savedStateHandle.getStateFlow(key = PROFILE_PICTURE_KEY,null)
-
-     fun getCoverPicture() : Flow<String?> =  savedStateHandle.getStateFlow(key = COVER_PICTURE_KEY,null)
-
-    fun getProfileStatus() : Flow<InputRuleCheckState> = savedStateHandle.getStateFlow<String?>(key = PROFILE_STATUS_KEY,null).map { data->
-        return@map  data?.run {
-            if (OBFormValidator.matchesRequiredRule(this).not()){
-                InputRuleCheckState.Invalid(
-                    input = data,
-                    brokenRule = InputRuleType.LETTERS_ONLY
+    fun getProfileKeywordsList(): Flow<KeywordsData?> =
+        savedStateHandle.getStateFlow<String?>(PROFILE_KEYWORDS, initialValue = null).map {
+            it?.split("|")?.run {
+                KeywordsData(
+                    keywords = this
                 )
             }
-            if (OBFormValidator.matchesOnlyLettersRule(this).not()){
-                InputRuleCheckState.Invalid(
-                    input = data,
-                    brokenRule = InputRuleType.LETTERS_ONLY
-                )
-            }
-            InputRuleCheckState.Valid(
-                input = data
-            )
-
-        } ?: InputRuleCheckState.Initial
-    }
-
-     fun getProfileDescription() : Flow<InputRuleCheckState> = savedStateHandle.getStateFlow<String?>(key = PROFILE_DESC_KEY,null).map { data->
-         return@map  data?.run {
-             if (OBFormValidator.matchesRequiredRule(this).not()){
-                 InputRuleCheckState.Invalid(
-                     input = data,
-                     brokenRule = InputRuleType.REQUIRED
-                 )
-             }
-             if (OBFormValidator.matchesMinCharsRule(this).not()){
-                 InputRuleCheckState.Invalid(
-                     input = data,
-                     brokenRule = InputRuleType.MIN_LENGTH
-                 )
-             }
-             if (OBFormValidator.matchesMaxCharsRule(this).not()){
-                 InputRuleCheckState.Invalid(
-                     input = data,
-                     brokenRule = InputRuleType.MAX_LENGTH
-                 )
-             }
-             InputRuleCheckState.Valid(
-                 input = data
-             )
-         } ?: InputRuleCheckState.Initial
-     }
-
-
-    fun getPhone() : Flow<InputRuleCheckState> = savedStateHandle.getStateFlow<String?>(key = PROFILE_PHONE_KEY,null).map { data->
-        return@map  data?.run {
-            if (OBFormValidator.matchesRequiredRule(this).not()){
-                return@run   InputRuleCheckState.Invalid(
-                    input = data,
-                    brokenRule = InputRuleType.REQUIRED
-                )
-            }
-            if (OBFormValidator.matchesOnlyDigitsRule(this).not()){
-                return@run    InputRuleCheckState.Invalid(
-                    input = data,
-                    brokenRule = InputRuleType.PHONE_FORMAT
-                )
-            }
-            return@run   InputRuleCheckState.Valid(input = data)
-
-        } ?: InputRuleCheckState.Initial
-    }
-
-    fun getSelectedPhonePrefix() : Flow<DropDownMenuItemData?>
-    = savedStateHandle.getStateFlow<String?>(key = PROFILE_PHONE_COUNTRY_PREFIX_KEY,null).map { value->
-        value?.run {
-            split("|").runCatching {
-                DropDownMenuItemData(
-                    label = this[0],
-                    icon = ImageMediaType.Url(url = this[1])
-                )
-            }.getOrNull()
-        } ?: run {
-            val localCacheDefault =  appMetaDataAPI.getCountryByCode(Locale.getDefault().country)?.run {
-                DropDownMenuItemData(
-                    label = phonePrefix,
-                    icon = ImageMediaType.Url(url = countryFlag)
-                )
-            }
-            localCacheDefault ?: Locale.getDefault().runCatching {
-                DropDownMenuItemData(
-                    label = countryCodes[country]!!,
-                    icon = ImageMediaType.Url(url = applicationContext.getString(R.string.countries_api_url,country))
-                )
-            }.getOrNull()
         }
 
-    }
+    fun getProfilePicture(): Flow<String?> =
+        savedStateHandle.getStateFlow(key = PROFILE_PICTURE_KEY, null)
 
+    fun getCoverPicture(): Flow<String?> =
+        savedStateHandle.getStateFlow(key = COVER_PICTURE_KEY, null)
 
-
-    fun getProfileLink() : Flow<InputRuleCheckState> = savedStateHandle.getStateFlow<String?>(key = PROFILE_LINK_KEY,null).map { data->
-        return@map  data?.run {
-            if(OBFormValidator.matchesRequiredRule(this).not()){
-                return@run  InputRuleCheckState.Invalid(
-                    input = data,
-                    brokenRule = InputRuleType.REQUIRED
+    fun getProfileStatus(): Flow<InputRuleCheckState> =
+        savedStateHandle.getStateFlow<String?>(key = PROFILE_STATUS_KEY, null).map { data ->
+            return@map data?.run {
+                if (OBFormValidator.matchesRequiredRule(this).not()) {
+                    InputRuleCheckState.Invalid(
+                        input = data,
+                        brokenRule = InputRuleType.LETTERS_ONLY
+                    )
+                }
+                if (OBFormValidator.matchesOnlyLettersRule(this).not()) {
+                    InputRuleCheckState.Invalid(
+                        input = data,
+                        brokenRule = InputRuleType.LETTERS_ONLY
+                    )
+                }
+                InputRuleCheckState.Valid(
+                    input = data
                 )
-            }
-            if (OBFormValidator.matchesLinkRule(this).not()){
-                return@run  InputRuleCheckState.Invalid(
-                    input = data,
-                    brokenRule = InputRuleType.LINK_FORMAT
+
+            } ?: InputRuleCheckState.Initial
+        }
+
+    fun getProfileDescription(): Flow<InputRuleCheckState> =
+        savedStateHandle.getStateFlow<String?>(key = PROFILE_DESC_KEY, null).map { data ->
+            return@map data?.run {
+                if (OBFormValidator.matchesRequiredRule(this).not()) {
+                    InputRuleCheckState.Invalid(
+                        input = data,
+                        brokenRule = InputRuleType.REQUIRED
+                    )
+                }
+                if (OBFormValidator.matchesMinCharsRule(this).not()) {
+                    InputRuleCheckState.Invalid(
+                        input = data,
+                        brokenRule = InputRuleType.MIN_LENGTH
+                    )
+                }
+                if (OBFormValidator.matchesMaxCharsRule(this).not()) {
+                    InputRuleCheckState.Invalid(
+                        input = data,
+                        brokenRule = InputRuleType.MAX_LENGTH
+                    )
+                }
+                InputRuleCheckState.Valid(
+                    input = data
                 )
+            } ?: InputRuleCheckState.Initial
+        }
+
+
+    fun getPhone(): Flow<InputRuleCheckState> =
+        savedStateHandle.getStateFlow<String?>(key = PROFILE_PHONE_KEY, null).map { data ->
+            return@map data?.run {
+                if (OBFormValidator.matchesRequiredRule(this).not()) {
+                    return@run InputRuleCheckState.Invalid(
+                        input = data,
+                        brokenRule = InputRuleType.REQUIRED
+                    )
+                }
+                if (OBFormValidator.matchesOnlyDigitsRule(this).not()) {
+                    return@run InputRuleCheckState.Invalid(
+                        input = data,
+                        brokenRule = InputRuleType.PHONE_FORMAT
+                    )
+                }
+                return@run InputRuleCheckState.Valid(input = data)
+
+            } ?: InputRuleCheckState.Initial
+        }
+
+    fun getSelectedPhonePrefix(): Flow<DropDownMenuItemData?> =
+        savedStateHandle.getStateFlow<String?>(key = PROFILE_PHONE_COUNTRY_PREFIX_KEY, null)
+            .map { value ->
+                value?.run {
+                    split("|").runCatching {
+                        DropDownMenuItemData(
+                            label = this[0],
+                            icon = ImageMediaType.Url(url = this[1])
+                        )
+                    }.getOrNull()
+                } ?: run {
+                    val localCacheDefault =
+                        appMetaDataAPI.getCountryByCode(Locale.getDefault().country)?.run {
+                            DropDownMenuItemData(
+                                label = phonePrefix,
+                                icon = ImageMediaType.Url(url = countryFlag)
+                            )
+                        }
+                    localCacheDefault ?: Locale.getDefault().runCatching {
+                        DropDownMenuItemData(
+                            label = countryCodes[country]!!,
+                            icon = ImageMediaType.Url(
+                                url = applicationContext.getString(
+                                    R.string.countries_api_url,
+                                    country
+                                )
+                            )
+                        )
+                    }.getOrNull()
+                }
+
             }
-            return@run  InputRuleCheckState.Valid(
-                input = data
-            )
-        } ?: InputRuleCheckState.Initial
-    }
 
 
-    fun getFistName() : Flow<String?> = _profileState.map {
+    fun getProfileLink(): Flow<InputRuleCheckState> =
+        savedStateHandle.getStateFlow<String?>(key = PROFILE_LINK_KEY, null).map { data ->
+            return@map data?.run {
+                if (OBFormValidator.matchesRequiredRule(this).not()) {
+                    return@run InputRuleCheckState.Invalid(
+                        input = data,
+                        brokenRule = InputRuleType.REQUIRED
+                    )
+                }
+                if (OBFormValidator.matchesLinkRule(this).not()) {
+                    return@run InputRuleCheckState.Invalid(
+                        input = data,
+                        brokenRule = InputRuleType.LINK_FORMAT
+                    )
+                }
+                return@run InputRuleCheckState.Valid(
+                    input = data
+                )
+            } ?: InputRuleCheckState.Initial
+        }
+
+
+    fun getFistName(): Flow<String?> = _profileState.map {
         if (it is OBRegistrationScreenState.Success) {
             it.userProfile.firstName
         } else null
     }
 
-    fun getLastName() : Flow<String?> = _profileState.map {
+    fun getLastName(): Flow<String?> = _profileState.map {
         if (it is OBRegistrationScreenState.Success) {
             it.userProfile.secondName
         } else null
     }
 
-    fun getUserSex() : Flow<UserSex?> = savedStateHandle.getStateFlow<String?>(key = USER_SEX_KEY,null).map { it?.decodeToUserSex() }
+    fun getUserSex(): Flow<UserSex?> =
+        savedStateHandle.getStateFlow<String?>(key = USER_SEX_KEY, null)
+            .map { it?.decodeToUserSex() }
 
-    fun getEmail() : Flow<String?> = _profileState.map {
+    fun getEmail(): Flow<String?> = _profileState.map {
         if (it is OBRegistrationScreenState.Success) {
             it.userProfile.email
         } else null
     }
 
 
+    fun getCountriesList(): Flow<DropDownMenuData> = _countriesList
+
+    fun getCitiesList(): Flow<DropDownMenuData> = _citiesList
 
 
-
-    fun getCountriesList() : Flow<DropDownMenuData> = _countriesList
-
-    fun getCitiesList() : Flow<DropDownMenuData> = _citiesList
-
-
-
-
-
-    fun getCountry() : Flow<InputRuleCheckState> = savedStateHandle.getStateFlow<String?>(key = PROFILE_COUNTRY_KEY,null).map { data->
-        return@map  data?.takeIf {
-            OBFormValidator.matchesRequiredRule(it)
-        }?.run {
-            if (OBFormValidator.matchesOnlyLettersRule(this)){
-                InputRuleCheckState.Valid(
-                    input = data
-                )
-            } else {
-                InputRuleCheckState.Invalid(
-                    input = data,
-                    brokenRule = InputRuleType.LETTERS_ONLY
-                )
-            }
-        } ?: InputRuleCheckState.Invalid(
-            input = data,
-            brokenRule = InputRuleType.REQUIRED
-        )
-    }
-
-    fun getCity() : Flow<InputRuleCheckState> = savedStateHandle.getStateFlow<String?>(key = PROFILE_CITY_KEY,null).map { data->
-        return@map  data?.takeIf {
-            OBFormValidator.matchesRequiredRule(it)
-        }?.run {
-            if (OBFormValidator.matchesOnlyLettersRule(this)){
-                InputRuleCheckState.Valid(
-                    input = data
-                )
-            } else {
-                InputRuleCheckState.Invalid(
-                    input = data,
-                    brokenRule = InputRuleType.LETTERS_ONLY
-                )
-            }
-        } ?: InputRuleCheckState.Invalid(
-            input = data,
-            brokenRule = InputRuleType.REQUIRED
-        )
-    }
-    fun getLocation() : Flow<OBLocation?> = savedStateHandle.getStateFlow<String?>(key = PROFILE_LOCATION_KEY,null).map { encodedLocation->
-        encodedLocation?.run {
-            OBLocation.fromString(encodedLocation)
+    fun getCountry(): Flow<InputRuleCheckState> =
+        savedStateHandle.getStateFlow<String?>(key = PROFILE_COUNTRY_KEY, null).map { data ->
+            return@map data?.takeIf {
+                OBFormValidator.matchesRequiredRule(it)
+            }?.run {
+                if (OBFormValidator.matchesOnlyLettersRule(this)) {
+                    InputRuleCheckState.Valid(
+                        input = data
+                    )
+                } else {
+                    InputRuleCheckState.Invalid(
+                        input = data,
+                        brokenRule = InputRuleType.LETTERS_ONLY
+                    )
+                }
+            } ?: InputRuleCheckState.Invalid(
+                input = data,
+                brokenRule = InputRuleType.REQUIRED
+            )
         }
-      }
 
-    fun getCoffeeSpaceCarouselImages() : Flow<CarouselState.Loaded> = savedStateHandle.getStateFlow<String?>(key = COFFEE_SPACE_CAROUSEL_KEY,null)
-        .map { data ->
-            val filteredData = data?.split("||")?.filter { it.isNotBlank() } ?: listOf()
-            buildList {
-                filteredData.forEach { data->
-                    val obFile = OBFile.fromString(data)
-                    val mediaType = when (obFile?.toOBFileType()) {
-                        OBFileType.Image -> OBCarouselMediaType.Image
-                        OBFileType.Video -> OBCarouselMediaType.Video
-                        else -> null
-                    }
-                    if (mediaType != null && obFile != null) {
-                        add(mediaType to obFile.uri)
-                    }
+    fun getCity(): Flow<InputRuleCheckState> =
+        savedStateHandle.getStateFlow<String?>(key = PROFILE_CITY_KEY, null).map { data ->
+            return@map data?.takeIf {
+                OBFormValidator.matchesRequiredRule(it)
+            }?.run {
+                if (OBFormValidator.matchesOnlyLettersRule(this)) {
+                    InputRuleCheckState.Valid(
+                        input = data
+                    )
+                } else {
+                    InputRuleCheckState.Invalid(
+                        input = data,
+                        brokenRule = InputRuleType.LETTERS_ONLY
+                    )
+                }
+            } ?: InputRuleCheckState.Invalid(
+                input = data,
+                brokenRule = InputRuleType.REQUIRED
+            )
+        }
+
+    fun getLocation(): Flow<OBLocation?> =
+        savedStateHandle.getStateFlow<String?>(key = PROFILE_LOCATION_KEY, null)
+            .map { encodedLocation ->
+                encodedLocation?.run {
+                    OBLocation.fromString(encodedLocation)
                 }
             }
-        }.map { data ->
-               CarouselState.Loaded(data)
-         }
+
+    fun getCoffeeSpaceCarouselImages(): Flow<CarouselState.Loaded> =
+        savedStateHandle.getStateFlow<String?>(key = COFFEE_SPACE_CAROUSEL_KEY, null)
+            .map { data ->
+                val filteredData = data?.split("||")?.filter { it.isNotBlank() } ?: listOf()
+                buildList {
+                    filteredData.forEach { data ->
+                        val obFile = OBFile.fromString(data)
+                        val mediaType = when (obFile?.toOBFileType()) {
+                            OBFileType.Image -> OBCarouselMediaType.Image
+                            OBFileType.Video -> OBCarouselMediaType.Video
+                            else -> null
+                        }
+                        if (mediaType != null && obFile != null) {
+                            add(mediaType to obFile.uri)
+                        }
+                    }
+                }
+            }.map { data ->
+                CarouselState.Loaded(data)
+            }
 
     fun loadCountriesMenuNextPage(
-        offset : Int = 0,
-        withRefresh : Boolean = false
+        offset: Int = 0,
+        withRefresh: Boolean = false
     ) {
         viewModelScope.launch {
             appMetaDataAPI.getCountriesList(
                 limit = _COUNTRIES_PAGE_SIZE,
                 offset = offset
             ).firstOrNull()?.let { countries ->
-                _countryCodesDropDownMenuDataStateFlow.getAndUpdate { currentData->
-                    val newItems = countries.map { (countryCode, phonePrefix, countryName, countryFlag) ->
-                        DropDownMenuItemData(
-                            label = phonePrefix,
-                            icon = ImageMediaType.Url(
-                                url = countryFlag
+                _countryCodesDropDownMenuDataStateFlow.getAndUpdate { currentData ->
+                    val newItems =
+                        countries.map { (countryCode, phonePrefix, countryName, countryFlag) ->
+                            DropDownMenuItemData(
+                                label = phonePrefix,
+                                icon = ImageMediaType.Url(
+                                    url = countryFlag
+                                )
                             )
-                        )
-                    }
-                     DropDownMenuData(
+                        }
+                    DropDownMenuData(
                         items = currentData?.run {
-                            if (withRefresh) newItems else  items + newItems
+                            if (withRefresh) newItems else items + newItems
                         } ?: newItems
                     )
                 }
@@ -538,27 +558,25 @@ class OBRegistrationViewModel(
     }
 
 
-    fun getUserCoffeeGearProducts() : Flow<ProductListData?> = savedStateHandle.getStateFlow(PROFILE_COFFEE_GEAR,null)
+    fun getUserCoffeeGearProducts(): Flow<ProductListData?> =
+        savedStateHandle.getStateFlow(PROFILE_COFFEE_GEAR, null)
 
-    fun getUserCoffeeBeansProducts() : Flow<ProductListData?> = savedStateHandle.getStateFlow(PROFILE_COFFEE_BEANS,null)
+    fun getUserCoffeeBeansProducts(): Flow<ProductListData?> =
+        savedStateHandle.getStateFlow(PROFILE_COFFEE_BEANS, null)
 
-    fun addUserCoffeeGearProduct(product: OBProductListItem){
+    fun addUserCoffeeGearProduct(product: OBProductListItem) {
         viewModelScope.launch {
             val currentList = savedStateHandle.get<String?>(PROFILE_COFFEE_GEAR)?.split("||")
             savedStateHandle[PROFILE_COFFEE_GEAR] = currentList
         }
     }
 
-    fun addUserCoffeeBeansProduct(product: OBProductListItem){
+    fun addUserCoffeeBeansProduct(product: OBProductListItem) {
 
     }
 
 
-
-
-
-
-    companion object{
+    companion object {
         private const val PROFILE_PICTURE_KEY = "profile_picture"
         private const val COVER_PICTURE_KEY = "cover_picture"
         private const val PROFILE_DESC_KEY = "profile_desc"

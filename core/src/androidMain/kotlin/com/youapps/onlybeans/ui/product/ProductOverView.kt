@@ -5,7 +5,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -35,54 +34,60 @@ import coil.compose.AsyncImage
 import coil.compose.AsyncImagePainter
 import coil.request.CachePolicy
 import coil.request.ImageRequest
-import com.youapps.onlybeans.designsystem.R
 import com.youapps.designsystem.components.loading.shimmerEffect
 import com.youapps.designsystem.components.text.PlaceholderText
+import com.youapps.onlybeans.designsystem.R
 import com.youapps.onlybeans.domain.entities.products.OBProductListItem
 
 @Immutable
 data class ProductListData(
-    val items : List<OBProductListItem>
+    val items: List<OBProductListItem>
 )
 
 @Composable
 fun ProductOverViewList(
     modifier: Modifier = Modifier,
     data: ProductListData?,
-    sectionTitle : String,
-    placeholderText : String?=null,
-    maxRows : Int = 4,
-    onItemClick : (OBProductListItem)->Unit,
-    onSeeAllClick : (()->Unit)?=null
-){
+    sectionTitle: String,
+    placeholderText: String? = null,
+    maxRows: Int = 4,
+    onItemClick: (OBProductListItem) -> Unit,
+    onSeeAllClick: (() -> Unit)? = null
+) {
 
-        Column (
-            modifier = modifier.fillMaxWidth(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.Top)
-        ) {
-            Text(
-                modifier = Modifier.fillMaxWidth(),
-                text = sectionTitle,
-                color = MaterialTheme.colorScheme.onSurface,
-                style = MaterialTheme.typography.titleLarge,
-                textAlign = TextAlign.Start
-            )
-            data?.items?.takeIf { it.isNotEmpty() }?.take(maxRows)?.let { listData->
-                List(listData.size){ index->
-                    val item : OBProductListItem = listData[index]
-                        ProductOverViewItem(
-                            imagePreviewUrl = item.productImagePreview,
-                            imagePreviewContentDescription = stringResource(com.youapps.onlybeans.R.string.content_description_product_image_preview,item.productName),
-                            title = item.productName,
-                            description = item.productDescription,
-                            actionIcon = R.drawable.ic_arrow_right,
-                            actionIconContentDescription = stringResource(com.youapps.onlybeans.R.string.content_description_product_image_preview,item.productName),
-                            onActionClick = {
-                                onItemClick(item)
-                            }
-                        )
-                }
+    Column(
+        modifier = modifier.fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.Top)
+    ) {
+        Text(
+            modifier = Modifier.fillMaxWidth(),
+            text = sectionTitle,
+            color = MaterialTheme.colorScheme.onSurface,
+            style = MaterialTheme.typography.titleLarge,
+            textAlign = TextAlign.Start
+        )
+        data?.items?.takeIf { it.isNotEmpty() }?.take(maxRows)?.let { listData ->
+            List(listData.size) { index ->
+                val item: OBProductListItem = listData[index]
+                ProductOverViewItem(
+                    imagePreviewUrl = item.productImagePreview,
+                    imagePreviewContentDescription = stringResource(
+                        com.youapps.onlybeans.R.string.content_description_product_image_preview,
+                        item.productName
+                    ),
+                    title = item.productName,
+                    description = item.productDescription,
+                    actionIcon = R.drawable.ic_arrow_right,
+                    actionIconContentDescription = stringResource(
+                        com.youapps.onlybeans.R.string.content_description_product_image_preview,
+                        item.productName
+                    ),
+                    onActionClick = {
+                        onItemClick(item)
+                    }
+                )
+            }
             onSeeAllClick?.run {
                 if (data.items.size > maxRows) {
                     Row(
@@ -100,14 +105,14 @@ fun ProductOverViewList(
                 }
             }
         } ?: run {
-                placeholderText?.run {
-                    PlaceholderText(
-                        modifier = Modifier.fillMaxWidth(),
-                        text = placeholderText,
-                        align = TextAlign.Center
-                    )
-                }
+            placeholderText?.run {
+                PlaceholderText(
+                    modifier = Modifier.fillMaxWidth(),
+                    text = placeholderText,
+                    align = TextAlign.Center
+                )
             }
+        }
 
     }
 
@@ -118,16 +123,16 @@ fun ProductOverViewList(
 fun ProductListBuilder(
     modifier: Modifier = Modifier,
     data: ProductListData?,
-    sectionTitle : String,
+    sectionTitle: String,
     placeholderText: String?,
-    onItemClick : (OBProductListItem)->Unit,
-    onCreateNewItemClicked : ()->Unit
+    onItemClick: (OBProductListItem) -> Unit,
+    onCreateNewItemClicked: () -> Unit
 ) {
-    Column (
+    Column(
         modifier = modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.Top)
-    ){
+    ) {
         ProductOverViewList(
             modifier = Modifier,
             data = data,
@@ -148,18 +153,16 @@ fun ProductListBuilder(
 }
 
 
-
-
 @Composable
 fun ProductOverViewItem(
     modifier: Modifier = Modifier,
-    imagePreviewUrl : String,
-    imagePreviewContentDescription : String,
-    title : String,
-    description : String,
-    actionIcon : Int?=null,
-    actionIconContentDescription : String,
-    onActionClick: (()-> Unit)?=null
+    imagePreviewUrl: String,
+    imagePreviewContentDescription: String,
+    title: String,
+    description: String,
+    actionIcon: Int? = null,
+    actionIconContentDescription: String,
+    onActionClick: (() -> Unit)? = null
 ) {
     Card(
         modifier = modifier,
@@ -167,7 +170,7 @@ fun ProductOverViewItem(
         colors = CardDefaults.cardColors(
             containerColor = MaterialTheme.colorScheme.surfaceContainerHigh
         )
-    )  {
+    ) {
         Row(
             modifier = Modifier
                 .padding(
@@ -178,7 +181,7 @@ fun ProductOverViewItem(
                 .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.Start)
-        ){
+        ) {
             val isImageLoading = remember {
                 mutableStateOf(true)
             }
@@ -193,7 +196,7 @@ fun ProductOverViewItem(
                     .diskCachePolicy(CachePolicy.ENABLED)
                     .crossfade(true)
                     .build(),
-                onState = {state->
+                onState = { state ->
                     isImageLoading.value = state is AsyncImagePainter.State.Loading
                 },
                 contentDescription = imagePreviewContentDescription
@@ -226,7 +229,7 @@ fun ProductOverViewItem(
                     modifier = Modifier
                         .weight(0.1f)
                         .padding(8.dp)
-                        .apply{
+                        .apply {
                             onActionClick?.run {
                                 then(Modifier.clickable(onClick = onActionClick))
                             } ?: this

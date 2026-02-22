@@ -13,14 +13,15 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class LoginViewModel(
-    private val oBUserLoginUseCase: UseCaseContract<OBAuthInterface,OBUserProfile>
+    private val oBUserLoginUseCase: UseCaseContract<OBAuthInterface, OBUserProfile>
 ) : ViewModel() {
 
-    private val loginResultMutableState : MutableStateFlow<LoginState> = MutableStateFlow(LoginState.Idle)
-    val loginResultState : StateFlow<LoginState> = loginResultMutableState
+    private val loginResultMutableState: MutableStateFlow<LoginState> =
+        MutableStateFlow(LoginState.Idle)
+    val loginResultState: StateFlow<LoginState> = loginResultMutableState
 
-    fun loginWithEmailAndPassword(email : String,password : String){
-        if (email.isBlank() or password.isBlank()){
+    fun loginWithEmailAndPassword(email: String, password: String) {
+        if (email.isBlank() or password.isBlank()) {
             loginResultMutableState.value = LoginState.Error(
                 errorType = DomainErrorType.InvalidCredentials
             )
@@ -34,14 +35,14 @@ class LoginViewModel(
                             password = password.trim()
                         )
                     )
-                }.onFailure { th->
+                }.onFailure { th ->
                     th.printStackTrace()
                     loginResultMutableState.update {
                         LoginState.Error(
                             errorType = if (th is DomainException) th.errorType else DomainErrorType.Undefined
                         )
                     }
-                }.onSuccess { obUser->
+                }.onSuccess { obUser ->
                     loginResultMutableState.update {
                         LoginState.Success(obUser)
                     }

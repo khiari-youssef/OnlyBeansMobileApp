@@ -1,4 +1,5 @@
 package com.youapps.users_management.ui.registration
+
 import InfoPopup
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.padding
@@ -28,26 +29,26 @@ import com.youapps.onlybeans.designsystem.R as ds
 @Composable
 fun OBRegistrationScreen(
     modifier: Modifier = Modifier,
-    screenUpdateState : OBRegistrationStateHolder,
-    onSexChecked: (checkedItemIndex: Int)-> Unit,
-    onProfilePictureClicked: ()-> Unit,
-    onCoverPictureClicked: ()-> Unit,
-    onStatusChanged: (status : String)-> Unit,
-    onProfileDescriptionChanged: (profile : String)-> Unit,
-    onCountrySelected : (String)-> Unit,
-    onCitySelected : (String)-> Unit,
-    onGalleryItemAdd: ()-> Unit,
-    onGalleryItemClicked : ((OBCarouselMediaType, String)-> Unit)?=null,
-    onGalleryItemDeleted: (String)-> Unit,
+    screenUpdateState: OBRegistrationStateHolder,
+    onSexChecked: (checkedItemIndex: Int) -> Unit,
+    onProfilePictureClicked: () -> Unit,
+    onCoverPictureClicked: () -> Unit,
+    onStatusChanged: (status: String) -> Unit,
+    onProfileDescriptionChanged: (profile: String) -> Unit,
+    onCountrySelected: (String) -> Unit,
+    onCitySelected: (String) -> Unit,
+    onGalleryItemAdd: () -> Unit,
+    onGalleryItemClicked: ((OBCarouselMediaType, String) -> Unit)? = null,
+    onGalleryItemDeleted: (String) -> Unit,
     onPhoneNumberChanged: (String) -> Unit,
     onCountryCodeChanged: (DropDownMenuItemData) -> Unit,
-    onRequestDropDownRefresh: ()-> Unit,
-    onDropDownDismissed: ()-> Unit,
+    onRequestDropDownRefresh: () -> Unit,
+    onDropDownDismissed: () -> Unit,
     onLinkChanged: (link: String) -> Unit,
-    onValidLinkClicked : (link: String) -> Unit,
-    onKeywordAdded: (String)-> Unit,
-    onKeyWordDeleted: (String)-> Unit,
-    onExit : ()-> Unit
+    onValidLinkClicked: (link: String) -> Unit,
+    onKeywordAdded: (String) -> Unit,
+    onKeyWordDeleted: (String) -> Unit,
+    onExit: () -> Unit
 ) {
     val pagerState = rememberPagerState(pageCount = {
         3
@@ -55,7 +56,7 @@ fun OBRegistrationScreen(
 
     val pagerCoroutineScope = rememberCoroutineScope()
 
-    val infoPopupContent : MutableState<String?> = remember {
+    val infoPopupContent: MutableState<String?> = remember {
         mutableStateOf(null)
     }
 
@@ -71,20 +72,20 @@ fun OBRegistrationScreen(
         }
     )
     val missingProfilePicture = stringResource(R.string.profile_missing_profile_picture)
-    val missingCoverPicture =stringResource(R.string.profile_missing_cover_picture)
+    val missingCoverPicture = stringResource(R.string.profile_missing_cover_picture)
 
 
     HorizontalPager(
         modifier = modifier,
         state = pagerState,
         userScrollEnabled = false,
-        pageContent = {step->
+        pageContent = { step ->
             OBFormPage(
                 modifier = Modifier,
                 title = if (step == 1) stringResource(R.string.profile_coffee_space) else null,
                 canSubmitChanges = screenUpdateState.isFormReadyToSubmitState().value,
-                content = { padding->
-                    when(step) {
+                content = { padding ->
+                    when (step) {
                         0 -> {
                             val scrollState = rememberScrollState()
                             RegistrationFormGeneralSection(
@@ -106,6 +107,7 @@ fun OBRegistrationScreen(
                                 onValidLinkClicked = onValidLinkClicked
                             )
                         }
+
                         1 -> {
                             val scrollState = rememberScrollState()
                             RegistrationFormCoffeeSpaceSection(
@@ -123,7 +125,8 @@ fun OBRegistrationScreen(
                                 onKeyWordDeleted = onKeyWordDeleted
                             )
                         }
-                        2->{
+
+                        2 -> {
 
                         }
                     }
@@ -131,35 +134,33 @@ fun OBRegistrationScreen(
                 },
                 onNextStep =
                     {
-                        if (pagerState.canScrollForward){
+                        if (pagerState.canScrollForward) {
                             pagerCoroutineScope.launch {
-                                pagerState.scrollToPage(step+1)
+                                pagerState.scrollToPage(step + 1)
                             }
                         }
-                    }
-                ,
+                    },
                 onPreviousStep = {
-                    if (pagerState.canScrollBackward){
+                    if (pagerState.canScrollBackward) {
                         pagerCoroutineScope.launch {
-                            pagerState.scrollToPage(step-1)
+                            pagerState.scrollToPage(step - 1)
                         }
                     } else {
                         onExit()
                     }
                 },
                 onSubmit = {
-                 if(screenUpdateState.profilePicture.value.isNullOrBlank()) {
-                     infoPopupContent.value = missingProfilePicture
-                     return@OBFormPage
-                 }
+                    if (screenUpdateState.profilePicture.value.isNullOrBlank()) {
+                        infoPopupContent.value = missingProfilePicture
+                        return@OBFormPage
+                    }
                     if (screenUpdateState.coverPicture.value.isNullOrBlank()) {
-                     infoPopupContent.value = missingCoverPicture
-                     }
+                        infoPopupContent.value = missingCoverPicture
+                    }
                 }
             )
         }
     )
-
 
 
 }

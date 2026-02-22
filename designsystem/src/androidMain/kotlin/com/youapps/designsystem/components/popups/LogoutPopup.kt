@@ -7,16 +7,16 @@ import com.youapps.onlybeans.designsystem.R
 
 @Composable
 fun LogoutPopup(
-    isShown : Boolean,
-   onConfirmAppExit : ()->Unit,
-   onCancelled : ()->Unit
+    isShown: Boolean,
+    onConfirmAppExit: () -> Unit,
+    onCancelled: () -> Unit
 ) {
     DualButtonPopup(
-        isShown =isShown,
+        isShown = isShown,
         title = stringResource(id = R.string.app_logout_popup_title),
         onDismissRequest = onCancelled,
         onNegativeButtonClicked = onCancelled,
-        onPositiveButtonClicked =onConfirmAppExit,
+        onPositiveButtonClicked = onConfirmAppExit,
         positiveButtonText = stringResource(id = R.string.yes),
         negativeButtonText = stringResource(id = R.string.no)
     )

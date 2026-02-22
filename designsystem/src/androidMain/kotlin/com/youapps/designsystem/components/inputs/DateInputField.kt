@@ -6,20 +6,20 @@ import com.youapps.onlybeans.designsystem.R
 @Composable
 fun DateInputField(
     modifier: Modifier = Modifier,
-    date : String,
-    label : String,
-    errorMessage : String?=null,
-    isEnabled : Boolean = false,
-    onDateChanged : (date : String)->Unit
+    date: String,
+    label: String,
+    errorMessage: String? = null,
+    isEnabled: Boolean = false,
+    onDateChanged: (date: String) -> Unit
 ) {
     OBTextField(
         modifier = modifier,
-      text = date,
-      label = label,
-      placeholder = "" ,
-      isEnabled = isEnabled,
-      errorMessage = errorMessage ,
-      onTextChanged = onDateChanged,
-      rightIconRes = R.drawable.ic_calendar_outlined
-  )
+        text = date,
+        label = label,
+        placeholder = "",
+        isEnabled = isEnabled,
+        errorMessage = errorMessage,
+        onTextChanged = onDateChanged,
+        rightIconRes = R.drawable.ic_calendar_outlined
+    )
 }

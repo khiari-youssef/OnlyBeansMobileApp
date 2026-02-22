@@ -15,48 +15,48 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.compose.AsyncImagePainter
 import coil.request.ImageRequest
-import com.youapps.onlybeans.designsystem.R
 import com.youapps.designsystem.components.loading.shimmerEffect
+import com.youapps.onlybeans.designsystem.R
 
 
 @Composable
 fun OBCircleImage(
     modifier: Modifier = Modifier,
-    uri : Any,
-    placeholderRes : Int = R.drawable.profile_placeholder,
-    errorRes : Int = R.drawable.profile_placeholder,
-    size : Dp,
+    uri: Any,
+    placeholderRes: Int = R.drawable.profile_placeholder,
+    errorRes: Int = R.drawable.profile_placeholder,
+    size: Dp,
     borderStroke: BorderStroke = BorderStroke(width = 0.dp, color = Color.Unspecified),
-    background : Color = Color.Unspecified
+    background: Color = Color.Unspecified
 ) {
     val currentContext = LocalContext.current
     val isLoading = remember {
         mutableStateOf(true)
     }
- AsyncImage(
-     modifier = modifier
-         .border(
-             border = borderStroke,
-             shape = CircleShape
-         )
-         .background(
-             color = background,
-             shape = CircleShape
-         )
-         .clip(CircleShape)
-         .requiredSize(size)
-         .shimmerEffect(isLoading.value || uri.toString().isBlank()),
-     model = ImageRequest
-     .Builder(currentContext)
-      .size(size.value.toInt())
-     .data(uri)
-     .placeholder(placeholderRes)
-     .error(errorRes)
-     .build(),
-     onState = {state->
-       isLoading.value = state is AsyncImagePainter.State.Loading
-     },
-     contentDescription = ""
- )
+    AsyncImage(
+        modifier = modifier
+            .border(
+                border = borderStroke,
+                shape = CircleShape
+            )
+            .background(
+                color = background,
+                shape = CircleShape
+            )
+            .clip(CircleShape)
+            .requiredSize(size)
+            .shimmerEffect(isLoading.value || uri.toString().isBlank()),
+        model = ImageRequest
+            .Builder(currentContext)
+            .size(size.value.toInt())
+            .data(uri)
+            .placeholder(placeholderRes)
+            .error(errorRes)
+            .build(),
+        onState = { state ->
+            isLoading.value = state is AsyncImagePainter.State.Loading
+        },
+        contentDescription = ""
+    )
 }
 

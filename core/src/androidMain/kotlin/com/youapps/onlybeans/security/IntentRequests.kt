@@ -16,11 +16,13 @@ fun getRegistrationBiometricIdentityIntent(): Intent {
                 )
             }
         }
+
         Build.VERSION.SDK_INT >= Build.VERSION_CODES.P -> {
             // ACTION_FINGERPRINT_ENROLL is deprecated in API 29, but required for API 28 (P)
             @Suppress("DEPRECATION")
             Intent(Settings.ACTION_FINGERPRINT_ENROLL)
         }
+
         else -> {
             Intent(Settings.ACTION_SECURITY_SETTINGS)
         }

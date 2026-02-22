@@ -27,22 +27,23 @@ import androidx.compose.ui.unit.sp
 import com.youapps.designsystem.OBFontFamilies
 import java.util.Locale
 
-sealed interface OBParagraphMode{
+sealed interface OBParagraphMode {
     data class Expandable(
-        val expandActionText : String,
-        val collapseActionText : String,
-        val textStyle : SpanStyle
+        val expandActionText: String,
+        val collapseActionText: String,
+        val textStyle: SpanStyle
     ) : OBParagraphMode
+
     object None : OBParagraphMode
 }
 
 @Composable
-fun  OBParagraphText(
+fun OBParagraphText(
     modifier: Modifier = Modifier,
-    text : String,
-    placeholderRes : Int,
-    maxLines : Int = 3,
-    expandMode : OBParagraphMode = OBParagraphMode.None,
+    text: String,
+    placeholderRes: Int,
+    maxLines: Int = 3,
+    expandMode: OBParagraphMode = OBParagraphMode.None,
 ) {
 
 
@@ -63,7 +64,7 @@ fun  OBParagraphText(
             modifier = modifier,
             horizontalAlignment = Alignment.Start,
             verticalArrangement = Arrangement.spacedBy(2.dp, Alignment.Top)
-        ){
+        ) {
             Text(
                 text = buildAnnotatedString {
                     append(text.replaceFirstChar {

@@ -1,4 +1,3 @@
-
 import com.android.build.api.dsl.LibraryExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -18,7 +17,7 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                 packaging.resources.excludes += "/META-INF/{AL2.0,LGPL2.1}"
                 packaging.resources.excludes += "/META-INF/versions/9/previous-compilation-data.bin"
                 buildTypes {
-                    getByName("debug"){
+                    getByName("debug") {
                         isMinifyEnabled = false
                     }
                     getByName("release") {
@@ -27,7 +26,7 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                 }
             }
             dependencies {
-               // add("implementation", project(":domain"))
+                // add("implementation", project(":domain"))
                 add("testImplementation", kotlin("test"))
                 add("androidTestImplementation", kotlin("test"))
 //                add("implementation", libs.findLibrary("kotlinx.coroutines.android").get())

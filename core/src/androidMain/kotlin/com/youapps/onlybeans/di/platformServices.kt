@@ -8,7 +8,7 @@ import org.koin.dsl.module
 
 val OBLocationServicePlayServicesImplTag = named("OBLocationServicePlayServicesImpl")
 
-val  platformServicesModule = module {
+val platformServicesModule = module {
 
     single<OBLocationService>(OBLocationServicePlayServicesImplTag) {
         OBLocationServicePlayServicesImpl(get())

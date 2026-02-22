@@ -9,8 +9,6 @@ import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
@@ -25,7 +23,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.youapps.onlybeans.designsystem.R
 
@@ -33,11 +30,12 @@ import com.youapps.onlybeans.designsystem.R
 @Composable
 fun OBLikeButton(
     modifier: Modifier = Modifier,
-    isLiked : Boolean = false,
-    onClick : (Boolean)->Unit
+    isLiked: Boolean = false,
+    onClick: (Boolean) -> Unit
 ) {
 
-    val backgroundColor = if (isLiked) Color(0xFFFFE8F0) else MaterialTheme.colorScheme.surfaceContainerHigh
+    val backgroundColor =
+        if (isLiked) Color(0xFFFFE8F0) else MaterialTheme.colorScheme.surfaceContainerHigh
     val animatedBackgroundColor = animateColorAsState(targetValue = backgroundColor)
 
     val borderColor = if (isLiked) Color(0x80F585AB) else MaterialTheme.colorScheme.outline
@@ -64,7 +62,9 @@ fun OBLikeButton(
                 label = "IconTransition"
             ) { targetState ->
                 Icon(
-                    imageVector = if (targetState) ImageVector.vectorResource(R.drawable.ic_heart_filled) else  ImageVector.vectorResource(R.drawable.ic_heart_outlined),
+                    imageVector = if (targetState) ImageVector.vectorResource(R.drawable.ic_heart_filled) else ImageVector.vectorResource(
+                        R.drawable.ic_heart_outlined
+                    ),
                     contentDescription = stringResource(R.string.content_description_like_button),
                     tint = if (targetState) Color(0xFFE91E63) else MaterialTheme.colorScheme.outline
                 )
@@ -79,8 +79,8 @@ fun OBLikeButton(
 @Composable
 fun OBLikeCardButton(
     modifier: Modifier = Modifier,
-    isLiked : Boolean = false,
-    onClick : (Boolean)->Unit
+    isLiked: Boolean = false,
+    onClick: (Boolean) -> Unit
 ) {
 
     val backgroundColor = if (isLiked) Color(0xFFFFE8F0) else Color(0xFFDDE3E1)
@@ -92,7 +92,10 @@ fun OBLikeCardButton(
         modifier = modifier
             .wrapContentSize(),
         color = animatedBackgroundColor.value,
-        border = if (isLiked) null else BorderStroke(width = 1.dp, color = animatedBorderColor.value),
+        border = if (isLiked) null else BorderStroke(
+            width = 1.dp,
+            color = animatedBorderColor.value
+        ),
         shape = CircleShape
     ) {
         IconButton(
@@ -114,7 +117,9 @@ fun OBLikeCardButton(
                 Icon(
                     modifier = Modifier
                         .size(20.dp),
-                    imageVector = if (targetState) ImageVector.vectorResource(R.drawable.ic_heart_filled) else  ImageVector.vectorResource(R.drawable.ic_heart_outlined),
+                    imageVector = if (targetState) ImageVector.vectorResource(R.drawable.ic_heart_filled) else ImageVector.vectorResource(
+                        R.drawable.ic_heart_outlined
+                    ),
                     contentDescription = stringResource(R.string.content_description_like_button),
                     tint = if (targetState) Color(0xFFE91E63) else Color(0xFFA89F9A)
                 )

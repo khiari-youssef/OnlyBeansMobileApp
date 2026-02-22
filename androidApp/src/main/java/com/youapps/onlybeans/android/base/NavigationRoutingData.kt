@@ -16,34 +16,29 @@ data object NavigationRoutingData {
     const val REGISTRATION_SCREEN = "registration_screen"
 
 
-
-
-
-
-    data object Home{
-          val ROOT = toString()
+    data object Home {
+        val ROOT = toString()
         const val NETWORK = "network_screen"
         const val PROFILE = "profile_screen"
         const val NOTIFICATIONS = "notifications_screen"
         const val MARKETPLACE = "marketplace_screen"
 
-        fun mapRouteToIndex(route : String) : Int = when (route){
-            NETWORK  -> 0
+        fun mapRouteToIndex(route: String): Int = when (route) {
+            NETWORK -> 0
             PROFILE -> 3
             NOTIFICATIONS -> 2
             MARKETPLACE -> 1
-            else -> throw  IllegalStateException()
+            else -> throw IllegalStateException()
         }
 
-        fun mapIndexToRoute(index : Int) : String= when (index){
-            0-> NETWORK
+        fun mapIndexToRoute(index: Int): String = when (index) {
+            0 -> NETWORK
             1 -> MARKETPLACE
             2 -> NOTIFICATIONS
             3 -> PROFILE
-           else -> throw IndexOutOfBoundsException()
+            else -> throw IndexOutOfBoundsException()
         }
     }
-
 
 
 }

@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -22,12 +21,12 @@ import com.youapps.designsystem.OBFontFamilies
 @Composable
 fun PageSection(
     modifier: Modifier = Modifier,
-    sectionTitle : String?=null,
-    rightAction : (@Composable ()-> Unit)?=null,
-    content : @Composable ColumnScope.()-> Unit
+    sectionTitle: String? = null,
+    rightAction: (@Composable () -> Unit)? = null,
+    content: @Composable ColumnScope.() -> Unit
 ) {
 
-    Column (
+    Column(
         modifier = modifier
             .wrapContentHeight()
             .fillMaxWidth(),
@@ -69,5 +68,5 @@ fun PageSection(
 
         }
         content()
-        }
+    }
 }

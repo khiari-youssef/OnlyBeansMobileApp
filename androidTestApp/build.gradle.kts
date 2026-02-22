@@ -7,31 +7,38 @@ plugins {
 android {
     namespace = "tn.sesame.android.test"
     targetProjectPath = ":androidApp"
-    compileSdk = extensions.getByType<VersionCatalogsExtension>().named("libs").findVersion("compileSdk").get().toString().toInt()
-    defaultConfig.minSdk = extensions.getByType<VersionCatalogsExtension>().named("libs").findVersion("minSdk").get().toString().toInt()
+    compileSdk =
+        extensions.getByType<VersionCatalogsExtension>().named("libs").findVersion("compileSdk")
+            .get().toString().toInt()
+    defaultConfig.minSdk =
+        extensions.getByType<VersionCatalogsExtension>().named("libs").findVersion("minSdk").get()
+            .toString().toInt()
     defaultConfig.testApplicationId = "tn.sesame.spm.android.test"
-    defaultConfig.testInstrumentationRunner = "tn.sesame.spm.test.configuration.ApplicationTestRunner"
+    defaultConfig.testInstrumentationRunner =
+        "tn.sesame.spm.test.configuration.ApplicationTestRunner"
     defaultConfig.proguardFile("proguard-rules.pro")
 
-    testOptions{
+    testOptions {
         reportDir = "$projectDir/test-reports"
         resultsDir = "$projectDir/test-results"
     }
     buildTypes {
-       debug {
-         isDebuggable = true
-       }
+        debug {
+            isDebuggable = true
+        }
     }
     packaging {
         resources.excludes += "META-INF/*"
     }
 
-    buildFeatures{
+    buildFeatures {
         compose = true
         buildConfig = true
     }
-    composeOptions{
-        kotlinCompilerExtensionVersion = extensions.getByType<VersionCatalogsExtension>().named("libs").findVersion("compose-compiler").get().toString()
+    composeOptions {
+        kotlinCompilerExtensionVersion =
+            extensions.getByType<VersionCatalogsExtension>().named("libs")
+                .findVersion("compose-compiler").get().toString()
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -40,7 +47,7 @@ android {
 
 }
 
-dependencies{
+dependencies {
     implementation(projects.designsystem)
     implementation(projects.usersManagement)
     implementation(libs.kotlinx.datetime)

@@ -29,20 +29,20 @@ import com.youapps.onlybeans.marketplace.ui.components.ShoppingCardIcon
 @Composable
 fun MarketPlaceDetailsTopBar(
     modifier: Modifier = Modifier,
-    title: String?=null,
-    scrollBehavior: TopAppBarScrollBehavior?=null,
-    topAppBarColors : TopAppBarColors = TopAppBarDefaults.topAppBarColors(
+    title: String? = null,
+    scrollBehavior: TopAppBarScrollBehavior? = null,
+    topAppBarColors: TopAppBarColors = TopAppBarDefaults.topAppBarColors(
         containerColor = Color.Transparent,
         scrolledContainerColor = MaterialTheme.colorScheme.primary
     ),
-    itemsAddedToCard : Int = 0,
+    itemsAddedToCard: Int = 0,
     onBackClick: () -> Unit,
     onShareClick: () -> Unit,
-    onShoppingBagClicked : (()-> Unit)?=null
+    onShoppingBagClicked: (() -> Unit)? = null
 ) {
     CenterAlignedTopAppBar(
         modifier = modifier,
-        scrollBehavior =scrollBehavior ,
+        scrollBehavior = scrollBehavior,
         title = {
             title?.run {
                 Text(
@@ -65,7 +65,10 @@ fun MarketPlaceDetailsTopBar(
                 contentColor = MaterialTheme.colorScheme.onSurface,
                 elevation = FloatingActionButtonDefaults.elevation(4.dp)
             ) {
-                Icon(ImageVector.vectorResource(R.drawable.ic_back), contentDescription = stringResource(R.string.content_description_back_button))
+                Icon(
+                    ImageVector.vectorResource(R.drawable.ic_back),
+                    contentDescription = stringResource(R.string.content_description_back_button)
+                )
             }
         },
         actions = {

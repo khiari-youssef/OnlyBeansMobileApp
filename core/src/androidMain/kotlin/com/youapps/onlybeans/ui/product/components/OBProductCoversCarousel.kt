@@ -25,31 +25,31 @@ import com.youapps.onlybeans.designsystem.R
 @Composable
 fun OBProductCoversCarousel(
     modifier: Modifier = Modifier,
-    preferredItemWidth : Dp,
+    preferredItemWidth: Dp,
     covers: List<String>,
-    onPhotoClicked : (String)-> Unit
+    onPhotoClicked: (String) -> Unit
 ) {
-    if (covers.isNotEmpty()){
+    if (covers.isNotEmpty()) {
         val carouselState = rememberCarouselState {
             covers.size
         }
         Box(
             modifier = modifier,
-        ){
+        ) {
             HorizontalMultiBrowseCarousel(
                 state = carouselState,
                 modifier = Modifier,
                 preferredItemWidth = preferredItemWidth,
                 itemSpacing = 0.dp,
                 contentPadding = PaddingValues(0.dp),
-            ) { item->
+            ) { item ->
                 val photo = covers[item]
                 OBCoverPhoto(
                     modifier = Modifier
-                        .clickable{
+                        .clickable {
                             onPhotoClicked(photo)
                         },
-                    url =photo
+                    url = photo
                 )
             }
             CarouselDotIndicator(
@@ -60,7 +60,7 @@ fun OBProductCoversCarousel(
                         bottom = 12.dp
                     )
                     .align(Alignment.BottomCenter),
-                selectedColor = Color.White ,
+                selectedColor = Color.White,
                 unselectedColor = Color(0x80ffffff)
             )
         }

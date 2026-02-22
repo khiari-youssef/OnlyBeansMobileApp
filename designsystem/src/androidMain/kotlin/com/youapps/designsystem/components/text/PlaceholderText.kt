@@ -15,9 +15,9 @@ import com.youapps.designsystem.onBackgroundShadedLightMode
 @Composable
 fun PlaceholderText(
     modifier: Modifier = Modifier,
-    text : String,
-    fontSize : TextUnit = 14.sp,
-    align : TextAlign = TextAlign.Start
+    text: String,
+    fontSize: TextUnit = 14.sp,
+    align: TextAlign = TextAlign.Start
 ) {
     Text(
         modifier = modifier,

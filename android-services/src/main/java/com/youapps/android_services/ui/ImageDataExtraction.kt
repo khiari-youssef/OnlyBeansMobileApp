@@ -14,7 +14,7 @@ import com.google.mlkit.vision.label.custom.CustomImageLabelerOptions
 
 @Composable
 internal fun ImageDataExtraction(
-    modifier : Modifier
+    modifier: Modifier
 ) {
     val localModel = LocalModel.Builder()
         .setAssetFilePath("model.tflite")
@@ -24,7 +24,7 @@ internal fun ImageDataExtraction(
 
 
 private class YourImageAnalyzer(
-  private  val localModel : LocalModel
+    private val localModel: LocalModel
 ) : ImageAnalysis.Analyzer {
 
     val customImageLabelerOptions = CustomImageLabelerOptions.Builder(localModel)

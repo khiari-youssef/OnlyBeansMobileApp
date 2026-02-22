@@ -4,31 +4,31 @@ import com.youapps.onlybeans.android.R
 
 @Composable
 fun BiometricCapabilitiesNotFoundDialog(
-   isShown : Boolean = false,
-   onClosed : ()->Unit
+    isShown: Boolean = false,
+    onClosed: () -> Unit
 ) {
-   InfoPopup(
-      title = stringResource(id = R.string.error_unsupported_biometric_features_title),
-      subtitle = stringResource(id = R.string.error_unsupported_biometric_features_message),
-      isShown = isShown,
-      buttonText = stringResource(id = com.youapps.onlybeans.designsystem.R.string.ok),
-      onDismissRequest = onClosed,
-      onButtonClicked = onClosed
-   )
+    InfoPopup(
+        title = stringResource(id = R.string.error_unsupported_biometric_features_title),
+        subtitle = stringResource(id = R.string.error_unsupported_biometric_features_message),
+        isShown = isShown,
+        buttonText = stringResource(id = com.youapps.onlybeans.designsystem.R.string.ok),
+        onDismissRequest = onClosed,
+        onButtonClicked = onClosed
+    )
 }
 
 @Composable
 fun BiometricIdentityNotRegisteredDialog(
-   isShown : Boolean = false,
-   onOpenSettings : ()->Unit,
-   onClosed : ()->Unit
+    isShown: Boolean = false,
+    onOpenSettings: () -> Unit,
+    onClosed: () -> Unit
 ) {
-   InfoPopup(
-      title = stringResource(id = R.string.error_unregistered_biometric_identity_title),
-      subtitle = stringResource(id = R.string.error_unregistered_biometric_identity_message),
-      isShown = isShown,
-      buttonText = stringResource(id = R.string.button_open_system_settings),
-      onDismissRequest = onClosed,
-      onButtonClicked = onOpenSettings
-   )
+    InfoPopup(
+        title = stringResource(id = R.string.error_unregistered_biometric_identity_title),
+        subtitle = stringResource(id = R.string.error_unregistered_biometric_identity_message),
+        isShown = isShown,
+        buttonText = stringResource(id = R.string.button_open_system_settings),
+        onDismissRequest = onClosed,
+        onButtonClicked = onOpenSettings
+    )
 }

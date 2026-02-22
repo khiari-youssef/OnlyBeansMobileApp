@@ -15,26 +15,28 @@ import org.koin.compose.koinInject
 
 @Composable
 fun RequireBiometricAuth(
-    bioService : BiometricAuthService = koinInject(),
-    bioAuthTitle : String =  stringResource(id = R.string.biometric_auth_dialog_message),
-    bioAuthSubtitle : String = stringResource(id = R.string.biometric_auth_dialog_title),
-    onBiometricPassResult : (BiometricLauncherService.DeviceAuthenticationState)->Unit
+    bioService: BiometricAuthService = koinInject(),
+    bioAuthTitle: String = stringResource(id = R.string.biometric_auth_dialog_message),
+    bioAuthSubtitle: String = stringResource(id = R.string.biometric_auth_dialog_title),
+    onBiometricPassResult: (BiometricLauncherService.DeviceAuthenticationState) -> Unit
 ) {
-    val activityResultLauncher = rememberLauncherForActivityResult(contract = ActivityResultContracts.StartActivityForResult(), onResult ={
-        if (it.resultCode == FragmentActivity.RESULT_OK){
-            onBiometricPassResult(BiometricLauncherService.DeviceAuthenticationState.Idle)
-        }
-    } )
+    val activityResultLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult(),
+        onResult = {
+            if (it.resultCode == FragmentActivity.RESULT_OK) {
+                onBiometricPassResult(BiometricLauncherService.DeviceAuthenticationState.Idle)
+            }
+        })
     val localContext = LocalContext.current
     val hasBioCapabilities = bioService.checkBiometricCapabilitiesState()
-    if (hasBioCapabilities is SupportedDeviceAuthenticationMethods.Available){
-       val result = hasBioCapabilities.biometricLauncherService.launch(
-                activity = localContext as FragmentActivity,
-                title = bioAuthTitle,
-                subtitle = bioAuthSubtitle
-            ).collectAsStateWithLifecycle(
+    if (hasBioCapabilities is SupportedDeviceAuthenticationMethods.Available) {
+        val result = hasBioCapabilities.biometricLauncherService.launch(
+            activity = localContext as FragmentActivity,
+            title = bioAuthTitle,
+            subtitle = bioAuthSubtitle
+        ).collectAsStateWithLifecycle(
             initialValue = BiometricLauncherService.DeviceAuthenticationState.Idle,
-           )
+        )
         LaunchedEffect(key1 = result.value, block = {
             onBiometricPassResult(result.value)
         })

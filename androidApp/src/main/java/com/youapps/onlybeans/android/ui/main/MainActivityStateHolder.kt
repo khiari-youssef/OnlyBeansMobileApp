@@ -8,23 +8,23 @@ import com.youapps.designsystem.components.bars.OBBottomNavigationBarDefaults
 import com.youapps.onlybeans.security.SupportedDeviceAuthenticationMethods
 
 data class MainActivityStateHolder(
-    val biometricSupportState : State<SupportedDeviceAuthenticationMethods>,
-    val rootNavController : NavHostController,
-    val homeDestinations : State<OBBottomNavigationBarDefaults>
+    val biometricSupportState: State<SupportedDeviceAuthenticationMethods>,
+    val rootNavController: NavHostController,
+    val homeDestinations: State<OBBottomNavigationBarDefaults>
 ) {
 
 
-    companion object{
+    companion object {
         @Composable
         fun rememberMainActivityState(
-            biometricSupportState : State<SupportedDeviceAuthenticationMethods>,
-            rootNavController : NavHostController,
-            homeDestinations : State<OBBottomNavigationBarDefaults>
-        )  : MainActivityStateHolder = remember(
-            biometricSupportState,rootNavController,homeDestinations
-        ){
+            biometricSupportState: State<SupportedDeviceAuthenticationMethods>,
+            rootNavController: NavHostController,
+            homeDestinations: State<OBBottomNavigationBarDefaults>
+        ): MainActivityStateHolder = remember(
+            biometricSupportState, rootNavController, homeDestinations
+        ) {
             MainActivityStateHolder(
-                biometricSupportState,rootNavController,homeDestinations
+                biometricSupportState, rootNavController, homeDestinations
             )
         }
     }

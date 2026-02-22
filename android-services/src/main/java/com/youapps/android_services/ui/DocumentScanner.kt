@@ -21,9 +21,9 @@ import coil.compose.AsyncImage
 
 @Composable
 internal fun DocumentScanner(
-    modifier : Modifier,
-    selectedDocument : Documents,
-    onDocumentScan : ()->Unit
+    modifier: Modifier,
+    selectedDocument: Documents,
+    onDocumentScan: () -> Unit
 ) {
     Box(
         modifier = modifier,
@@ -35,7 +35,7 @@ internal fun DocumentScanner(
                 .wrapContentHeight(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(
-                24.dp,Alignment.CenterVertically
+                24.dp, Alignment.CenterVertically
             )
         ) {
             Button(
@@ -53,6 +53,7 @@ internal fun DocumentScanner(
                         textAlign = TextAlign.Center
                     )
                 )
+
                 1 -> {
                     AsyncImage(
                         modifier = Modifier
@@ -60,11 +61,12 @@ internal fun DocumentScanner(
                                 horizontal = 16.dp
                             )
                             .fillMaxWidth()
-                            .aspectRatio(16/9f),
+                            .aspectRatio(16 / 9f),
                         contentDescription = "Scanned document",
                         model = selectedDocument.data.first().uri
                     )
                 }
+
                 else -> {
                     LazyRow(
                         modifier = Modifier
@@ -75,11 +77,11 @@ internal fun DocumentScanner(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.Center
                     ) {
-                        items(selectedDocument.data) { document->
+                        items(selectedDocument.data) { document ->
                             AsyncImage(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .aspectRatio(16/9f),
+                                    .aspectRatio(16 / 9f),
                                 contentDescription = "Scanned document",
                                 model = document.uri
                             )

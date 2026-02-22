@@ -32,79 +32,79 @@ import com.youapps.designsystem.RoseEbony
 import com.youapps.designsystem.components.loading.OBCircularProgressBar
 
 
-
-
-enum class OBButtonSize{
-    Small,Medium,Large
+enum class OBButtonSize {
+    Small, Medium, Large
 }
 
 @Preview
 @Composable
 fun BtnsPreview(modifier: Modifier = Modifier) {
-   Row {
-       OBButtonContainedSecondary(
-           text = "ContainedSecondary",
-           size = OBButtonSize.Large
-       ) {
+    Row {
+        OBButtonContainedSecondary(
+            text = "ContainedSecondary",
+            size = OBButtonSize.Large
+        ) {
 
-       }
-       OBButtonContainedPrimary(
-           text = "ContainedPrimary",
-           size = OBButtonSize.Medium
-       ) {
+        }
+        OBButtonContainedPrimary(
+            text = "ContainedPrimary",
+            size = OBButtonSize.Medium
+        ) {
 
-       }
-       OBButtonContainedNeutral(
-           text = "ContainedNeutral",
-           size = OBButtonSize.Medium
-       ) {
+        }
+        OBButtonContainedNeutral(
+            text = "ContainedNeutral",
+            size = OBButtonSize.Medium
+        ) {
 
-       }
-   }
+        }
+    }
 }
-
 
 
 @Composable
 fun OBButtonContainedPrimary(
     modifier: Modifier = Modifier,
-    text : String,
-    size : OBButtonSize = OBButtonSize.Medium,
-    isEnabled : Boolean = true,
-    isLoading : Boolean = false,
-    icon: Int?=null,
-    onClick: ()->Unit
+    text: String,
+    size: OBButtonSize = OBButtonSize.Medium,
+    isEnabled: Boolean = true,
+    isLoading: Boolean = false,
+    icon: Int? = null,
+    onClick: () -> Unit
 ) {
     OBButton(
-        modifier= modifier,
+        modifier = modifier,
         text = text,
         isLoading = isLoading,
         isEnabled = isEnabled,
-        backgroundColor = RoseEbony ,
+        backgroundColor = RoseEbony,
         onClick = onClick,
         icon = icon,
-        fontSize = when(size){
-            OBButtonSize.Large ->  18.sp
-            OBButtonSize.Medium ->  16.sp
-            OBButtonSize.Small ->  14.sp
+        fontSize = when (size) {
+            OBButtonSize.Large -> 18.sp
+            OBButtonSize.Medium -> 16.sp
+            OBButtonSize.Small -> 14.sp
         },
-        paddingValues =  when(size){
+        paddingValues = when (size) {
             OBButtonSize.Large -> PaddingValues(
                 horizontal = 16.dp,
                 vertical = 12.dp
             )
+
             OBButtonSize.Medium -> PaddingValues(
                 horizontal = 16.dp,
-                vertical = 8.dp)
-            OBButtonSize.Small ->  PaddingValues(
+                vertical = 8.dp
+            )
+
+            OBButtonSize.Small -> PaddingValues(
                 horizontal = 12.dp,
                 vertical = 4.dp
             )
         },
-        heightRangeDP = when(size){
+        heightRangeDP = when (size) {
             OBButtonSize.Large -> 32..56
-            OBButtonSize.Medium ->  24..48
-            OBButtonSize.Small ->   20..40
+            OBButtonSize.Medium -> 24..48
+            OBButtonSize.Small -> 20..40
         }
 
     )
@@ -117,40 +117,43 @@ fun OBButtonContainedNeutral(
     size: OBButtonSize = OBButtonSize.Medium,
     isEnabled: Boolean = true,
     isLoading: Boolean = false,
-    icon: Int? =null,
+    icon: Int? = null,
     onClick: () -> Unit
 ) {
     OBButton(
-        modifier= modifier,
+        modifier = modifier,
         text = text,
         isLoading = isLoading,
         isEnabled = isEnabled,
-        backgroundColor = Color(0xFFb3b3b3) ,
+        backgroundColor = Color(0xFFb3b3b3),
         onClick = onClick,
         fontColor = Color.Black,
         icon = icon,
-        fontSize = when(size){
-            OBButtonSize.Large ->  18.sp
-            OBButtonSize.Medium ->  16.sp
-            OBButtonSize.Small ->  14.sp
+        fontSize = when (size) {
+            OBButtonSize.Large -> 18.sp
+            OBButtonSize.Medium -> 16.sp
+            OBButtonSize.Small -> 14.sp
         },
-        paddingValues =  when(size){
+        paddingValues = when (size) {
             OBButtonSize.Large -> PaddingValues(
                 horizontal = 16.dp,
                 vertical = 12.dp
             )
+
             OBButtonSize.Medium -> PaddingValues(
                 horizontal = 16.dp,
-                vertical = 8.dp)
-            OBButtonSize.Small ->  PaddingValues(
+                vertical = 8.dp
+            )
+
+            OBButtonSize.Small -> PaddingValues(
                 horizontal = 12.dp,
                 vertical = 4.dp
             )
         },
-        heightRangeDP = when(size){
+        heightRangeDP = when (size) {
             OBButtonSize.Large -> 32..56
-            OBButtonSize.Medium ->  24..48
-            OBButtonSize.Small ->   20..40
+            OBButtonSize.Medium -> 24..48
+            OBButtonSize.Small -> 20..40
         }
     )
 }
@@ -158,43 +161,46 @@ fun OBButtonContainedNeutral(
 @Composable
 fun OBButtonContainedSecondary(
     modifier: Modifier = Modifier,
-    text : String,
-    size : OBButtonSize = OBButtonSize.Medium,
-    isEnabled : Boolean = true,
-    isLoading : Boolean = false,
-    icon : Int?=null,
-    onClick: ()->Unit
+    text: String,
+    size: OBButtonSize = OBButtonSize.Medium,
+    isEnabled: Boolean = true,
+    isLoading: Boolean = false,
+    icon: Int? = null,
+    onClick: () -> Unit
 ) {
     OBButton(
-        modifier= modifier,
+        modifier = modifier,
         text = text,
         isLoading = isLoading,
         isEnabled = isEnabled,
         backgroundColor = BrickRed,
-        fontSize = when(size){
-            OBButtonSize.Large ->  18.sp
-            OBButtonSize.Medium ->  16.sp
-            OBButtonSize.Small ->  14.sp
+        fontSize = when (size) {
+            OBButtonSize.Large -> 18.sp
+            OBButtonSize.Medium -> 16.sp
+            OBButtonSize.Small -> 14.sp
         },
         icon = icon,
         onClick = onClick,
-        paddingValues =  when(size){
+        paddingValues = when (size) {
             OBButtonSize.Large -> PaddingValues(
                 horizontal = 16.dp,
                 vertical = 12.dp
             )
+
             OBButtonSize.Medium -> PaddingValues(
                 horizontal = 16.dp,
-                vertical = 8.dp)
-            OBButtonSize.Small ->  PaddingValues(
+                vertical = 8.dp
+            )
+
+            OBButtonSize.Small -> PaddingValues(
                 horizontal = 12.dp,
                 vertical = 4.dp
             )
         },
-        heightRangeDP =  when(size){
+        heightRangeDP = when (size) {
             OBButtonSize.Large -> 32..56
-            OBButtonSize.Medium ->  24..48
-            OBButtonSize.Small ->   20..40
+            OBButtonSize.Medium -> 24..48
+            OBButtonSize.Small -> 20..40
         }
     )
 }
@@ -203,83 +209,84 @@ fun OBButtonContainedSecondary(
 @Composable
 fun OBButton(
     modifier: Modifier = Modifier,
-    text : String,
-    icon : Int?=null,
-    iconDescription : String?=null,
-    backgroundColor : Color,
-    border : BorderStroke?=null,
-    isEnabled : Boolean = true,
-    isLoading : Boolean = false,
+    text: String,
+    icon: Int? = null,
+    iconDescription: String? = null,
+    backgroundColor: Color,
+    border: BorderStroke? = null,
+    isEnabled: Boolean = true,
+    isLoading: Boolean = false,
     paddingValues: PaddingValues = PaddingValues(
         horizontal = 16.dp,
-        vertical = 8.dp),
-    fontSize : TextUnit = 16.sp,
-    fontColor : Color = Color.White,
-    heightRangeDP : IntRange =  25..44,
-    onClick: ()->Unit
+        vertical = 8.dp
+    ),
+    fontSize: TextUnit = 16.sp,
+    fontColor: Color = Color.White,
+    heightRangeDP: IntRange = 25..44,
+    onClick: () -> Unit
 ) {
-   Button(
+    Button(
         modifier = modifier
-            .heightIn(heightRangeDP.first.dp,heightRangeDP.last.dp),
+            .heightIn(heightRangeDP.first.dp, heightRangeDP.last.dp),
         enabled = isEnabled or isLoading,
         shape = MaterialTheme.shapes.medium,
         colors = ButtonDefaults.buttonColors(
-          containerColor = backgroundColor,
+            containerColor = backgroundColor,
         ),
-       border =border,
+        border = border,
 
-       contentPadding = paddingValues,
+        contentPadding = paddingValues,
         onClick = onClick
     ) {
-       Crossfade(
-           modifier = Modifier.height(20.dp),
-           targetState = isLoading,
-           label = "ButtonLoading",
-           animationSpec = spring()
-       ) {
-           if (it){
-               OBCircularProgressBar(
-                   modifier = Modifier
-                       .semantics {
-                           contentDescription = "OBButtonLoadingCircularProgressBar"
-                       }
-                       .size(20.dp),
-                   strokeWidth = 2.dp,
-                   color = Color.White
-               )
-           } else {
-               icon?.run {
-                   Row(
-                       modifier = Modifier.wrapContentSize(),
-                       verticalAlignment = Alignment.CenterVertically,
-                       horizontalArrangement = Arrangement.spacedBy(8.dp)
-                   ) {
+        Crossfade(
+            modifier = Modifier.height(20.dp),
+            targetState = isLoading,
+            label = "ButtonLoading",
+            animationSpec = spring()
+        ) {
+            if (it) {
+                OBCircularProgressBar(
+                    modifier = Modifier
+                        .semantics {
+                            contentDescription = "OBButtonLoadingCircularProgressBar"
+                        }
+                        .size(20.dp),
+                    strokeWidth = 2.dp,
+                    color = Color.White
+                )
+            } else {
+                icon?.run {
+                    Row(
+                        modifier = Modifier.wrapContentSize(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
                         Icon(
-                            imageVector = ImageVector.vectorResource(id = icon) ,
+                            imageVector = ImageVector.vectorResource(id = icon),
                             contentDescription = iconDescription,
                             tint = fontColor,
                             modifier = Modifier.size(20.dp)
                         )
-                       Text(
-                           text = text,
-                           style = TextStyle(
-                               color = fontColor,
-                               fontFamily = OBFontFamilies.MainMediumFontFamily,
-                               fontSize = fontSize
-                           )
-                       )
-                   }
-               } ?:  Text(
-                   text = text,
-                   style = TextStyle(
-                       color = fontColor,
-                       fontFamily = OBFontFamilies.MainMediumFontFamily,
-                       fontSize = fontSize
-                   )
-               )
+                        Text(
+                            text = text,
+                            style = TextStyle(
+                                color = fontColor,
+                                fontFamily = OBFontFamilies.MainMediumFontFamily,
+                                fontSize = fontSize
+                            )
+                        )
+                    }
+                } ?: Text(
+                    text = text,
+                    style = TextStyle(
+                        color = fontColor,
+                        fontFamily = OBFontFamilies.MainMediumFontFamily,
+                        fontSize = fontSize
+                    )
+                )
 
-           }
-       }
+            }
+        }
 
 
     }

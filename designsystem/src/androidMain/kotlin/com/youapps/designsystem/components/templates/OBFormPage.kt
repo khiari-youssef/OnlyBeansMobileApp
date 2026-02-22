@@ -33,13 +33,13 @@ import androidx.compose.ui.unit.dp
 import com.youapps.onlybeans.designsystem.R as ds
 
 @Composable
-fun  OBFormPage(
+fun OBFormPage(
     modifier: Modifier = Modifier,
-    title : String?=null,
-    canSubmitChanges : Boolean = true,
-    onNextStep: (() -> Unit)?=null,
-    onPreviousStep: (()-> Unit)?=null,
-    onSubmit : (()-> Unit)?=null,
+    title: String? = null,
+    canSubmitChanges: Boolean = true,
+    onNextStep: (() -> Unit)? = null,
+    onPreviousStep: (() -> Unit)? = null,
+    onSubmit: (() -> Unit)? = null,
     content: @Composable (PaddingValues) -> Unit
 ) {
 
@@ -70,12 +70,14 @@ fun  OBFormPage(
                     onPreviousStep?.run {
                         Icon(
                             modifier = Modifier
-                                .background(color = MaterialTheme.colorScheme.primaryContainer , shape = CircleShape)
+                                .background(
+                                    color = MaterialTheme.colorScheme.primaryContainer,
+                                    shape = CircleShape
+                                )
                                 .clip(CircleShape)
                                 .padding(8.dp)
                                 .clickable(onClick = onPreviousStep)
-                                .weight(0.1f)
-                            ,
+                                .weight(0.1f),
                             imageVector = ImageVector.vectorResource(ds.drawable.ic_back),
                             tint = MaterialTheme.colorScheme.onBackground,
                             contentDescription = stringResource(ds.string.content_description_back_button)
@@ -122,7 +124,10 @@ fun  OBFormPage(
                         .align(Alignment.BottomCenter)
                         .fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(12.dp, Alignment.CenterHorizontally)
+                    horizontalArrangement = Arrangement.spacedBy(
+                        12.dp,
+                        Alignment.CenterHorizontally
+                    )
                 ) {
                     onSubmit?.run {
                         OBButtonContainedSecondary(

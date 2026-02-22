@@ -29,13 +29,13 @@ import com.youapps.designsystem.TonedDark
 @Composable
 fun OBTextArea(
     modifier: Modifier = Modifier,
-    label : String,
-    text : String?=null,
+    label: String,
+    text: String? = null,
     isEnabled: Boolean = true,
-    maxChars : Int = 255,
-    isRequired : Boolean = true,
-    errorMessage : String?=null,
-    onTextChanged : (String)->Unit
+    maxChars: Int = 255,
+    isRequired: Boolean = true,
+    errorMessage: String? = null,
+    onTextChanged: (String) -> Unit
 ) {
 
     Column(
@@ -46,12 +46,12 @@ fun OBTextArea(
         Text(
             modifier = modifier
                 .fillMaxWidth(),
-            text =   buildAnnotatedString {
+            text = buildAnnotatedString {
                 append("$label:")
                 if (isRequired) {
                     withStyle(
                         style = SpanStyle(color = MaterialTheme.colorScheme.error)
-                    ){
+                    ) {
                         append("*")
                     }
                 }
@@ -76,10 +76,12 @@ fun OBTextArea(
                 unfocusedContainerColor = if (isSystemInDarkTheme()) TonedDark else Color.White,
                 cursorColor = MaterialTheme.colorScheme.primary,
                 focusedTrailingIconColor = Color.Unspecified,
-                disabledContainerColor = if (isSystemInDarkTheme()) Color(0xFF333333) else Color(0xFFD9D9D9),
+                disabledContainerColor = if (isSystemInDarkTheme()) Color(0xFF333333) else Color(
+                    0xFFD9D9D9
+                ),
                 disabledTextColor = Color(0xFFB3B3B3),
-                unfocusedTextColor =  MaterialTheme.colorScheme.onSurface,
-                focusedTextColor =  MaterialTheme.colorScheme.onSurface
+                unfocusedTextColor = MaterialTheme.colorScheme.onSurface,
+                focusedTextColor = MaterialTheme.colorScheme.onSurface
             ),
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Text,
@@ -102,17 +104,16 @@ fun OBTextArea(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.End
         ) {
-           Text(
-               modifier = Modifier.fillMaxWidth(),
-               text = "${text?.length ?: 0}/$maxChars",
-               textAlign = TextAlign.End,
-               style = MaterialTheme.typography.labelSmall.copy(
-                   color = Color(0xFF757575)
-               )
-           )
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                text = "${text?.length ?: 0}/$maxChars",
+                textAlign = TextAlign.End,
+                style = MaterialTheme.typography.labelSmall.copy(
+                    color = Color(0xFF757575)
+                )
+            )
         }
     }
-
 
 
 }

@@ -36,11 +36,9 @@
     <string name="profile_sex_female">Female</string>
 
 
-
-      <!-- Content description -->
+    <!-- Content description -->
     <string name="content_description_product_image_preview">Product image: %s</string>
     <string name="content_description_product_action">Production click action: %s</string>
-
 
 
 </resources>

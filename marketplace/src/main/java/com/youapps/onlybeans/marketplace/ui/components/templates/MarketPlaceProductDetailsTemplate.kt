@@ -45,17 +45,17 @@ import com.youapps.onlybeans.domain.entities.products.OBProductPricing
 import com.youapps.onlybeans.domain.entities.products.OBProductRating
 import com.youapps.onlybeans.domain.entities.products.OBRoastLevel
 import com.youapps.onlybeans.domain.entities.users.OBLocation
+import com.youapps.onlybeans.marketplace.ui.components.OBProductPriceSection
+import com.youapps.onlybeans.marketplace.ui.components.OBProductRatingTag
 import com.youapps.onlybeans.ui.product.ProductBottomAppBar
 import com.youapps.onlybeans.ui.product.components.OBProductCoversCarousel
 import com.youapps.onlybeans.ui.product.components.OBProductHeader
-import com.youapps.onlybeans.marketplace.ui.components.OBProductPriceSection
-import com.youapps.onlybeans.marketplace.ui.components.OBProductRatingTag
 import com.youapps.onlybeans.ui.product.obCoffeeBeansMockProduct
 
 @Preview()
 @Composable
-fun MarketPlaceProductDetailsTemplatePreview(){
-    val    obCoffeeBeansProduct: OBCoffeeBeansProductDetails = OBCoffeeBeansProductDetails(
+fun MarketPlaceProductDetailsTemplatePreview() {
+    val obCoffeeBeansProduct: OBCoffeeBeansProductDetails = OBCoffeeBeansProductDetails(
         id = "product-coffee-0x5gae1dhfsd1hs1hf1",
         categoryID = "coffee_beans",
         name = "Ethiopian Yirgacheffe",
@@ -80,13 +80,13 @@ fun MarketPlaceProductDetailsTemplatePreview(){
             id = "coffee-roaster-0xatdhshzrhfsdj",
             name = "Bloom Coffee Co.",
             description = "Roasting small batches in Seattle, WA since 2015.",
-            locations = listOf(OBLocation(23.154757,65.2254789))
-        ) ,
+            locations = listOf(OBLocation(23.154757, 65.2254789))
+        ),
         roastDate = "04-02-2026",
         endConsumptionDate = "04-05-2026",
         flavorProfileData = OBFlavorProfileData(
             description = "Complex & Floral",
-            radarChartData =  mapOf(
+            radarChartData = mapOf(
                 "Acidity" to 80f,
                 "Aroma" to 90f,
                 "Sweetness" to 80f,
@@ -111,20 +111,20 @@ fun MarketPlaceProductDetailsTemplatePreview(){
         roastLevel = OBRoastLevel.MEDIUM,
         displayMetadata = "100% Arabica • Single Origin • Medium Roast"
     )
-    OBTheme{
+    OBTheme {
         MarketPlaceProductDetailsTemplate(
             oBMarketPlaceProduct = OBMarketPlaceProduct(
-               marketPlaceID = "marketplace-id-0aegd2sh15srh1",
+                marketPlaceID = "marketplace-id-0aegd2sh15srh1",
                 product = obCoffeeBeansMockProduct,
                 pricing = OBProductPricing.OBProductMultipleWeightBasedPricing(
                     pricePerWeight = mapOf(
-                        250 to OBPrice(price = 18.5f,0.2f),
+                        250 to OBPrice(price = 18.5f, 0.2f),
                         500 to OBPrice(price = 35f),
                         1000 to OBPrice(price = 65f)
                     ),
                     currency = "USD",
                     weightUnit = "g"
-                ) ,
+                ),
                 isAddedToFavoriteList = false,
                 inStockItems = 5,
                 rating = OBProductRating(
@@ -158,31 +158,31 @@ fun MarketPlaceProductDetailsTemplate(
     oBMarketPlaceProduct: OBMarketPlaceProduct,
     onBackClick: () -> Unit,
     onShareClick: () -> Unit,
-    onAddToCartClicked : (Int)-> Unit,
-    onLikeClicked : (isLiked : Boolean)-> Unit,
-    content : @Composable ColumnScope.()-> Unit
+    onAddToCartClicked: (Int) -> Unit,
+    onLikeClicked: (isLiked: Boolean) -> Unit,
+    content: @Composable ColumnScope.() -> Unit
 ) {
     val topAppBarScrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
     Scaffold(
         modifier = modifier.nestedScroll(topAppBarScrollBehavior.nestedScrollConnection),
-     topBar = {
-         MarketPlaceDetailsTopBar(
-             modifier = Modifier
-                 .fillMaxWidth(),
-             scrollBehavior = topAppBarScrollBehavior,
-             topAppBarColors = TopAppBarDefaults.topAppBarColors(
-                 containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(
-                     0.9f
-                 ),
-                 scrolledContainerColor = Color.Transparent
-             ),
-             onBackClick = onBackClick,
-             onShareClick = onShareClick,
-             onShoppingBagClicked = {
+        topBar = {
+            MarketPlaceDetailsTopBar(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                scrollBehavior = topAppBarScrollBehavior,
+                topAppBarColors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(
+                        0.9f
+                    ),
+                    scrolledContainerColor = Color.Transparent
+                ),
+                onBackClick = onBackClick,
+                onShareClick = onShareClick,
+                onShoppingBagClicked = {
 
-             }
-         )
-     },
+                }
+            )
+        },
         bottomBar = {
             var isLiked by remember {
                 mutableStateOf(false)
@@ -207,11 +207,11 @@ fun MarketPlaceProductDetailsTemplate(
         }
     ) { _ ->
         val scrollState = rememberScrollState()
-        val imageViewerContent : MutableState<String?> = remember {
+        val imageViewerContent: MutableState<String?> = remember {
             mutableStateOf(null)
         }
         ImageViewerDialog(
-            imageUrl = imageViewerContent.value ?: "" ,
+            imageUrl = imageViewerContent.value ?: "",
             isVisible = imageViewerContent.value != null,
             onDismissRequest = {
                 imageViewerContent.value = null
@@ -270,7 +270,7 @@ fun MarketPlaceProductDetailsTemplate(
                             .fillMaxWidth()
                             .wrapContentHeight()
                     ) {
-                        val (left,right) = createRefs()
+                        val (left, right) = createRefs()
 
                         OBProductHeader(
                             modifier = Modifier
@@ -287,37 +287,37 @@ fun MarketPlaceProductDetailsTemplate(
                                 this.displayMetadata
                             }
                         )
-                       Column(
-                           modifier = Modifier
-                               .wrapContentHeight()
-                               .constrainAs(right){
-                                   top.linkTo(parent.top)
-                                   bottom.linkTo(parent.bottom)
-                                   end.linkTo(parent.end)
-                               },
-                           horizontalAlignment = Alignment.CenterHorizontally,
-                           verticalArrangement = Arrangement.spacedBy(4.dp)
-                       ) {
-                           oBMarketPlaceProduct.pricing.run {
-                               OBProductPriceSection(
-                                   modifier = Modifier,
-                                   onOBPrice = when (this) {
-                                       is OBProductPricing.OBProductMultipleWeightBasedPricing -> this.pricePerWeight.values.first()
-                                       is OBProductPricing.OBProductMultipleBundleBasedPricing -> this.pricePerBundle.values.first()
-                                       is OBProductPricing.OBProductSinglePricing -> this.price
-                                   },
-                                   currency = this.currency
-                               )
-                           }
-                           oBMarketPlaceProduct.rating?.run {
-                               OBProductRatingTag(
-                                   modifier = Modifier,
-                                   rating = averageRating,
-                                   reviewCount = reviewsNumber,
-                                   backgroundColor = Color(0xFFFFFBE6)
-                               )
-                           }
-                       }
+                        Column(
+                            modifier = Modifier
+                                .wrapContentHeight()
+                                .constrainAs(right) {
+                                    top.linkTo(parent.top)
+                                    bottom.linkTo(parent.bottom)
+                                    end.linkTo(parent.end)
+                                },
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.spacedBy(4.dp)
+                        ) {
+                            oBMarketPlaceProduct.pricing.run {
+                                OBProductPriceSection(
+                                    modifier = Modifier,
+                                    onOBPrice = when (this) {
+                                        is OBProductPricing.OBProductMultipleWeightBasedPricing -> this.pricePerWeight.values.first()
+                                        is OBProductPricing.OBProductMultipleBundleBasedPricing -> this.pricePerBundle.values.first()
+                                        is OBProductPricing.OBProductSinglePricing -> this.price
+                                    },
+                                    currency = this.currency
+                                )
+                            }
+                            oBMarketPlaceProduct.rating?.run {
+                                OBProductRatingTag(
+                                    modifier = Modifier,
+                                    rating = averageRating,
+                                    reviewCount = reviewsNumber,
+                                    backgroundColor = Color(0xFFFFFBE6)
+                                )
+                            }
+                        }
 
                     }
                     content()
@@ -326,8 +326,6 @@ fun MarketPlaceProductDetailsTemplate(
 
         }
     }
-
-
 
 
 }

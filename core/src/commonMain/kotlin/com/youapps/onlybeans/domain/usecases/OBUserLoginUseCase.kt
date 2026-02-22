@@ -7,11 +7,12 @@ import com.youapps.onlybeans.domain.valueobjects.OBAuthInterface
 
 
 class OBUserLoginUseCase(
-    private val usersRepository : OBUsersRepositoryInterface
+    private val usersRepository: OBUsersRepositoryInterface
 ) : UseCaseContract<OBAuthInterface, OBUserProfile> {
 
 
-    override suspend fun execute(input: OBAuthInterface): OBUserProfile = usersRepository.authenticateUser(input)
+    override suspend fun execute(input: OBAuthInterface): OBUserProfile =
+        usersRepository.authenticateUser(input)
 
 }
 

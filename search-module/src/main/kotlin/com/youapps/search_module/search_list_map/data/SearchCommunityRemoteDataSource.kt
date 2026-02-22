@@ -7,13 +7,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 
-interface  SearchCommunityRemoteDataSource {
+interface SearchCommunityRemoteDataSource {
 
-    suspend fun fetchCommunityDataByCustomQuery(query: OBMapSearchQuery) : List<MapSearchDataPoint>
+    suspend fun fetchCommunityDataByCustomQuery(query: OBMapSearchQuery): List<MapSearchDataPoint>
 
 }
 
-class  SearchCommunityRemoteDataSourceImpl : SearchCommunityRemoteDataSource {
+class SearchCommunityRemoteDataSourceImpl : SearchCommunityRemoteDataSource {
 
     data class LatLng(val latitude: Double, val longitude: Double)
 
@@ -81,14 +81,14 @@ class  SearchCommunityRemoteDataSourceImpl : SearchCommunityRemoteDataSource {
     )
 
     override suspend fun fetchCommunityDataByCustomQuery(query: OBMapSearchQuery): List<MapSearchDataPoint> =
-        withContext(Dispatchers.IO){
-            tunisiaLocations.filter { latLng->
+        withContext(Dispatchers.IO) {
+            tunisiaLocations.filter { latLng ->
                 val isLatInRange = latLng.latitude >= query.mapBounds.southWest.latitude &&
                         latLng.latitude <= query.mapBounds.northEast.latitude
                 val isLngInRange = latLng.longitude >= query.mapBounds.southWest.longitude &&
                         latLng.longitude <= query.mapBounds.northEast.longitude
                 isLatInRange && isLngInRange
-            }.mapIndexed { index,latLng->
+            }.mapIndexed { index, latLng ->
                 MapSearchDataPoint(
                     location = OBLocation(
                         latitude = latLng.latitude,

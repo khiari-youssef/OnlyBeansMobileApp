@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <application android:name="com.youapps.spm.test.configuration.TestApplication"
+    <application
+        android:name="com.youapps.spm.test.configuration.TestApplication"
         android:icon="@mipmap/ic_launcher">
-        <activity android:name="com.youapps.spm.android.ui.main.MainActivity"
+        <activity
+            android:name="com.youapps.spm.android.ui.main.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -13,10 +15,8 @@
         <provider
             android:name="androidx.startup.InitializationProvider"
             android:authorities="${applicationId}.androidx-startup"
-            android:exported="false">
-        </provider>
+            android:exported="false"></provider>
     </application>
-
 
 
 </manifest>

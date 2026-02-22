@@ -24,37 +24,39 @@ import com.youapps.onlybeans.domain.exception.DomainErrorType
 sealed interface ProductsListScreenState {
 
     @Stable
-    data class Error(val errorType: DomainErrorType = DomainErrorType.Undefined) : ProductsListScreenState
-    data object Loading: ProductsListScreenState
+    data class Error(val errorType: DomainErrorType = DomainErrorType.Undefined) :
+        ProductsListScreenState
+
+    data object Loading : ProductsListScreenState
+
     @Stable
-    data class Loaded(val data: ProductListData): ProductsListScreenState
+    data class Loaded(val data: ProductListData) : ProductsListScreenState
 }
-
-
-
 
 
 @Composable
 fun ProductsListScreen(
     modifier: Modifier = Modifier,
-    title : String,
+    title: String,
     dataState: State<ProductsListScreenState>,
-    onItemClick : (OBProductListItem)->Unit,
-    onRefresh : ()->Unit,
+    onItemClick: (OBProductListItem) -> Unit,
+    onRefresh: () -> Unit,
 ) {
-    when(val state = dataState.value){
+    when (val state = dataState.value) {
         is ProductsListScreenState.Error -> {
             ErrorModal(
                 title = stringResource(id = com.youapps.onlybeans.R.string.random_error),
                 onRetryAction = onRefresh
             )
         }
+
         is ProductsListScreenState.Loading -> {
             LoadingScreen()
         }
+
         is ProductsListScreenState.Loaded -> {
-            state.data.items.takeIf { it.isNotEmpty() }?.let { listData->
-                Column (
+            state.data.items.takeIf { it.isNotEmpty() }?.let { listData ->
+                Column(
                     modifier = modifier.fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.Top)
@@ -72,8 +74,8 @@ fun ProductsListScreen(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.Top)
                     ) {
-                        items(listData.size){ index->
-                            val item : OBProductListItem = listData[index]
+                        items(listData.size) { index ->
+                            val item: OBProductListItem = listData[index]
                             ProductOverViewItem(
                                 imagePreviewUrl = item.productImagePreview,
                                 imagePreviewContentDescription = stringResource(

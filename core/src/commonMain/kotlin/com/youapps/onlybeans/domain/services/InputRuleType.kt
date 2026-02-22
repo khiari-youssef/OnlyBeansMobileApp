@@ -1,6 +1,6 @@
 package com.youapps.onlybeans.domain.services
 
-enum class InputRuleType{
+enum class InputRuleType {
     REQUIRED,
     EMAIL_FORMAT,
     PHONE_FORMAT,

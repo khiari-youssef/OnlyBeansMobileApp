@@ -6,6 +6,6 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 internal data class OBLoginResponseWrapper(
-  @SerialName("token")  val token : String,
-  @SerialName("data")  val data : OBUserProfileDTO
+    @SerialName("token") val token: String,
+    @SerialName("data") val data: OBUserProfileDTO
 )

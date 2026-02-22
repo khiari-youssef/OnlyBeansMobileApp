@@ -26,25 +26,25 @@ import androidx.compose.ui.unit.IntSize
  * @param isEnabled activates shimmer effect if true.
  * @param animDuration duration of the shimmer animation
  * @author Khiari Youssef
-  * it will not work if you override the methods below
+ * it will not work if you override the methods below
  * @see Modifier.background
  * @see Modifier.onGloballyPositioned
  * @see Modifier.drawWithContent
  */
 fun Modifier.shimmerEffect(
-    isEnabled : Boolean= true,
-    shape : Shape = RectangleShape,
-    animDuration : Int = 800
-) = composed{
-    return@composed if (isEnabled){
+    isEnabled: Boolean = true,
+    shape: Shape = RectangleShape,
+    animDuration: Int = 800
+) = composed {
+    return@composed if (isEnabled) {
         val layoutSizeState = remember {
             mutableStateOf(IntSize.Zero)
         }
         val transition = rememberInfiniteTransition()
 
         val transitionXOffsetState = transition.animateValue(
-            initialValue = -2*layoutSizeState.value.width,
-            targetValue = 2*layoutSizeState.value.width,
+            initialValue = -2 * layoutSizeState.value.width,
+            targetValue = 2 * layoutSizeState.value.width,
             animationSpec = infiniteRepeatable(
                 animation = tween(animDuration),
                 repeatMode = RepeatMode.Restart
@@ -53,7 +53,8 @@ fun Modifier.shimmerEffect(
         )
 
         val shimmerBackground = if (isSystemInDarkTheme()) Color(0xFFA5A5A5) else Color(0xFFC2C2C2)
-        val shimmerGradientColor = if (isSystemInDarkTheme()) Color(0xFFC2C2C2)  else Color(0xFFA5A5A5)
+        val shimmerGradientColor =
+            if (isSystemInDarkTheme()) Color(0xFFC2C2C2) else Color(0xFFA5A5A5)
         val shimmerBrush = Brush.linearGradient(
             colors = listOf(
                 shimmerBackground,
@@ -61,10 +62,13 @@ fun Modifier.shimmerEffect(
                 shimmerGradientColor,
                 shimmerBackground
             ),
-            start = Offset(transitionXOffsetState.value.toFloat(),0f),
-            end = Offset(transitionXOffsetState.value+layoutSizeState.value.width.toFloat(),layoutSizeState.value.height.toFloat())
+            start = Offset(transitionXOffsetState.value.toFloat(), 0f),
+            end = Offset(
+                transitionXOffsetState.value + layoutSizeState.value.width.toFloat(),
+                layoutSizeState.value.height.toFloat()
+            )
         )
-        background(shimmerBrush,shape = shape)
+        background(shimmerBrush, shape = shape)
             .onGloballyPositioned {
                 layoutSizeState.value = it.size
             }

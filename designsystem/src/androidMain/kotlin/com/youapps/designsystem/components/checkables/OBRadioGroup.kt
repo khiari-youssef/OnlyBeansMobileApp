@@ -17,31 +17,29 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.youapps.designsystem.DisabledOnSurfaceColorDarkMode
 import com.youapps.designsystem.DisabledOnSurfaceColorLightMode
-import com.youapps.designsystem.ShadedWhite
-import com.youapps.designsystem.TonedDark
 
 @Stable
 data class OBRadioGroupData(
-    val items : List<String>,
-    val checkedItemIndex : Int,
-    val disabledItemsIndexes : List<Int> = emptyList()
+    val items: List<String>,
+    val checkedItemIndex: Int,
+    val disabledItemsIndexes: List<Int> = emptyList()
 )
-
 
 
 @Composable
 fun OBRadioButton(
     modifier: Modifier = Modifier,
-    isChecked : Boolean,
-    isCheckable : Boolean = true,
-    label : String,
-    onClick : (Boolean)-> Unit
+    isChecked: Boolean,
+    isCheckable: Boolean = true,
+    label: String,
+    onClick: (Boolean) -> Unit
 ) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.Start)
     ) {
-        val disabledTextColor = if (isSystemInDarkTheme()) DisabledOnSurfaceColorDarkMode else DisabledOnSurfaceColorLightMode
+        val disabledTextColor =
+            if (isSystemInDarkTheme()) DisabledOnSurfaceColorDarkMode else DisabledOnSurfaceColorLightMode
         RadioButton(
             modifier = modifier,
             enabled = isCheckable,
@@ -59,18 +57,17 @@ fun OBRadioButton(
             text = label,
             textAlign = TextAlign.Start,
             style = MaterialTheme.typography.labelMedium,
-            color = if(isCheckable) MaterialTheme.colorScheme.onSurface else disabledTextColor
+            color = if (isCheckable) MaterialTheme.colorScheme.onSurface else disabledTextColor
         )
     }
 }
-
 
 
 @Composable
 fun OBRadioGroup(
     modifier: Modifier = Modifier,
     data: OBRadioGroupData,
-    onSexChecked: (checkedItemIndex : Int)-> Unit
+    onSexChecked: (checkedItemIndex: Int) -> Unit
 ) {
 
     data.items.takeIf {
@@ -82,15 +79,15 @@ fun OBRadioGroup(
             horizontalArrangement = Arrangement.SpaceAround,
             verticalArrangement = Arrangement.SpaceBetween,
             maxItemsInEachRow = 2
-        ){
-            data.items.forEachIndexed { index,item ->
+        ) {
+            data.items.forEachIndexed { index, item ->
                 OBRadioButton(
                     modifier = Modifier.wrapContentSize(),
                     label = item,
                     isChecked = index == data.checkedItemIndex,
                     isCheckable = data.disabledItemsIndexes.contains(index).not(),
-                    onClick = { isChecked->
-                        if (isChecked){
+                    onClick = { isChecked ->
+                        if (isChecked) {
                             onSexChecked(index)
                         }
                     }

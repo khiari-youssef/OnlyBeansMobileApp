@@ -27,24 +27,23 @@ import com.youapps.designsystem.OBFontFamilies
 
 @Stable
 data class MenuOption(
-    val id : String,
-    val iconRes : Int,
-    val label : String
+    val id: String,
+    val iconRes: Int,
+    val label: String
 )
 
 @Stable
 @JvmInline
 value class MenuOptions(
-    val options : List<MenuOption>
+    val options: List<MenuOption>
 )
-
 
 
 @Composable
 fun OptionsListMenu(
     modifier: Modifier = Modifier,
-    menuOptions : MenuOptions,
-    onOptionClicked : (optionIndex : Int)->Unit
+    menuOptions: MenuOptions,
+    onOptionClicked: (optionIndex: Int) -> Unit
 ) {
     val scrollState = rememberScrollState()
     Column(
@@ -55,8 +54,8 @@ fun OptionsListMenu(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        val itemColor =  MaterialTheme.colorScheme.secondary
-        menuOptions.options.forEachIndexed { index, option->
+        val itemColor = MaterialTheme.colorScheme.secondary
+        menuOptions.options.forEachIndexed { index, option ->
             Row(
                 modifier = Modifier
                     .padding(8.dp)
@@ -69,7 +68,7 @@ fun OptionsListMenu(
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Icon(
-                    imageVector = ImageVector.vectorResource(option.iconRes) ,
+                    imageVector = ImageVector.vectorResource(option.iconRes),
                     contentDescription = "",
                     tint = itemColor
                 )

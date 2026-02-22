@@ -6,26 +6,26 @@ import com.youapps.onlybeans.designsystem.R
 
 @Composable
 fun OBEmailTextField(
-    modifier : Modifier = Modifier,
+    modifier: Modifier = Modifier,
     text: String,
     isEnabled: Boolean = true,
-    errorMessage : String?=null,
-    rightIconRes : Int?=null,
+    errorMessage: String? = null,
+    rightIconRes: Int? = null,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
-    onRightIconResClicked : (()->Unit)?=null,
+    onRightIconResClicked: (() -> Unit)? = null,
     onEmailChanged: (text: String) -> Unit
 ) {
-   OBTextField(
-       modifier = modifier,
-       text = text,
-       label = stringResource(id = R.string.email_address_label) ,
-       placeholder = stringResource(id = R.string.email_address_placeholder)  ,
-       isEnabled = isEnabled,
-       keyboardActions= keyboardActions,
-       errorMessage = errorMessage,
-       rightIconRes =rightIconRes,
-       onRightIconResClicked = onRightIconResClicked,
-       onTextChanged =  onEmailChanged
-   )
+    OBTextField(
+        modifier = modifier,
+        text = text,
+        label = stringResource(id = R.string.email_address_label),
+        placeholder = stringResource(id = R.string.email_address_placeholder),
+        isEnabled = isEnabled,
+        keyboardActions = keyboardActions,
+        errorMessage = errorMessage,
+        rightIconRes = rightIconRes,
+        onRightIconResClicked = onRightIconResClicked,
+        onTextChanged = onEmailChanged
+    )
 
 }

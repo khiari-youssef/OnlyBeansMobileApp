@@ -28,13 +28,13 @@ import com.youapps.search_module.search_list_map.ui.components.OBSearchFilterDia
 @Composable
 fun CommunitySearchScreen(
     modifier: Modifier = Modifier,
-    screenState : CommunitySearchStateHolder,
-    onSearchQueryChanged : (String)-> Unit,
-    onSearchFilterChanged : (selectedFilterIndex : Int,radiusValue : Float)-> Unit,
-    searchVisibleArea : (SearchByRegionBounds)-> Unit
+    screenState: CommunitySearchStateHolder,
+    onSearchQueryChanged: (String) -> Unit,
+    onSearchFilterChanged: (selectedFilterIndex: Int, radiusValue: Float) -> Unit,
+    searchVisibleArea: (SearchByRegionBounds) -> Unit
 ) {
     var searchViewType by remember {
-       mutableStateOf(SearchViewType.Map)
+        mutableStateOf(SearchViewType.Map)
     }
 
     var isFilterDialogVisible by remember {
@@ -56,28 +56,31 @@ fun CommunitySearchScreen(
 
     Box(
         modifier = modifier
-    ){
+    ) {
 
-        when(searchViewType){
+        when (searchViewType) {
             SearchViewType.Map -> CommunityMapView(
                 modifier = Modifier.fillMaxSize(),
                 screenState = screenState,
                 onSearchVisibleArea = searchVisibleArea
             )
+
             SearchViewType.List -> CommunityListView(
                 modifier = Modifier.fillMaxSize(),
                 screenState = screenState
             )
         }
         Column(
-            modifier = Modifier.padding(
-                top = 12.dp,
-                start = 12.dp,
-                end = 12.dp
-            ).fillMaxWidth(),
+            modifier = Modifier
+                .padding(
+                    top = 12.dp,
+                    start = 12.dp,
+                    end = 12.dp
+                )
+                .fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(8.dp, Alignment.Top)
-        ){
+        ) {
             OBSearchField(
                 modifier = Modifier,
                 placeholderRes = R.string.search_bar_placeholder,
@@ -91,11 +94,12 @@ fun CommunitySearchScreen(
                 horizontalArrangement = Arrangement.End
             ) {
                 OBFilterButton(
-                modifier = Modifier,
-                onClick = {
-                    isFilterDialogVisible = true
-                }
-            )}
+                    modifier = Modifier,
+                    onClick = {
+                        isFilterDialogVisible = true
+                    }
+                )
+            }
         }
 
     }

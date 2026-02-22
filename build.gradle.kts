@@ -8,12 +8,12 @@ plugins {
 }
 
 
-buildscript{
+buildscript {
     repositories {
         google()
         mavenCentral()
     }
-    dependencies{
+    dependencies {
         classpath(libs.secrets.gradle.plugin)
     }
 }

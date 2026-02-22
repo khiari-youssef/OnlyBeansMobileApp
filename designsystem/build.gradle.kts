@@ -29,7 +29,7 @@ kotlin {
         commonTest.dependencies {
             implementation(libs.kotlin.test)
         }
-        androidMain.dependencies{
+        androidMain.dependencies {
             implementation(libs.bundles.composelibs)
             implementation(libs.androidx.media3.ui)
             implementation(libs.androidx.media3.exoplayer)
@@ -51,7 +51,7 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
-    dependencies{
+    dependencies {
         debugImplementation(libs.compose.ui.tooling)
     }
 }

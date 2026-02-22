@@ -25,204 +25,205 @@ import org.koin.test.inject
 
 class LoginScreenTest : KoinTest {
 
-private val instrumentationContext: Context by inject()
+    private val instrumentationContext: Context by inject()
 
-@get:Rule
-val composeLoginTestRule = createAndroidComposeRule<MainActivity>()
+    @get:Rule
+    val composeLoginTestRule = createAndroidComposeRule<MainActivity>()
 
-private val viewModelLoginMockState : MutableStateFlow<LoginState> = MutableStateFlow(LoginState.Idle)
+    private val viewModelLoginMockState: MutableStateFlow<LoginState> =
+        MutableStateFlow(LoginState.Idle)
 
-@Before
-fun init(){
-    viewModelLoginMockState.value = LoginState.Idle
-}
-
-@Test
-fun testLoginScreenWhenIdleThenLoginWithCredentials() {
-    composeLoginTestRule.activity.setContent {
-        val uiState = LoginUIStateHolder.rememberLoginUIState(
-            loginEmail = remember {
-                mutableStateOf("")
-            },
-            loginPassword = remember {
-                mutableStateOf("")
-            },
-            loginRequestResult = viewModelLoginMockState.collectAsStateWithLifecycle(
-                initialValue = LoginState.Idle
-            )
-        )
-        LoginScreen(
-            loginUIStateHolder = uiState,
-            onEmailChanged = {
-                uiState.loginEmail.value = it
-            }, onPasswordChanged ={
-                uiState.loginPassword.value = it
-            },
-            onLoginClicked = {
-                viewModelLoginMockState.value = LoginState.Loading
-            },
-            onSetIdleState = {
-                viewModelLoginMockState.value = LoginState.Idle
-            }
-        )
+    @Before
+    fun init() {
+        viewModelLoginMockState.value = LoginState.Idle
     }
-    composeLoginTestRule.run {
-        onNodeWithContentDescription("LoginEmailTextField")
-            .performTextInput("test@youapps.com.com")
-        onNodeWithContentDescription("LoginPasswordTextField")
-            .performTextInput("sesame1234")
-        onNodeWithContentDescription("SesameButtonLoadingCircularProgressBar")
-            .assertDoesNotExist()
-        onNodeWithContentDescription("LoginButton").performClick()
-        onNodeWithContentDescription("SesameButtonLoadingCircularProgressBar")
-            .assertExists()
-    }
-}
 
-
-@Test
-fun testLoginScreenWhenIdleThenLoginWithInvalidCredentials() {
-    composeLoginTestRule.activity.setContent {
-        val uiState = LoginUIStateHolder.rememberLoginUIState(
-            loginEmail = remember {
-                mutableStateOf("")
-            },
-            loginPassword = remember {
-                mutableStateOf("")
-            },
-            loginRequestResult = viewModelLoginMockState.collectAsStateWithLifecycle(
-                initialValue = LoginState.Idle
-            )
-        )
-        LoginScreen(
-            loginUIStateHolder = uiState,
-            onEmailChanged = {
-                uiState.loginEmail.value = it
-            }, onPasswordChanged ={
-                uiState.loginPassword.value = it
-            },
-            onLoginClicked = {
-                viewModelLoginMockState.value = LoginState.Error(
-                    errorType = DomainErrorType.InvalidCredentials
+    @Test
+    fun testLoginScreenWhenIdleThenLoginWithCredentials() {
+        composeLoginTestRule.activity.setContent {
+            val uiState = LoginUIStateHolder.rememberLoginUIState(
+                loginEmail = remember {
+                    mutableStateOf("")
+                },
+                loginPassword = remember {
+                    mutableStateOf("")
+                },
+                loginRequestResult = viewModelLoginMockState.collectAsStateWithLifecycle(
+                    initialValue = LoginState.Idle
                 )
-            },
-            onSetIdleState = {
-                viewModelLoginMockState.value = LoginState.Idle
-            }
-        )
-    }
-    composeLoginTestRule.run {
-        onNodeWithContentDescription("SesameButtonLoadingCircularProgressBar")
-            .assertDoesNotExist()
-        onNodeWithContentDescription("LoginButton").performClick()
-        val expectedToastMessage = instrumentationContext
-            .resources
-            .getString(R.string.error_toast_invalid_credentials)
-        onNodeWithContentDescription("ToastTextContent").run {
-            assertExists()
-           assertTextContains(expectedToastMessage)
+            )
+            LoginScreen(
+                loginUIStateHolder = uiState,
+                onEmailChanged = {
+                    uiState.loginEmail.value = it
+                }, onPasswordChanged = {
+                    uiState.loginPassword.value = it
+                },
+                onLoginClicked = {
+                    viewModelLoginMockState.value = LoginState.Loading
+                },
+                onSetIdleState = {
+                    viewModelLoginMockState.value = LoginState.Idle
+                }
+            )
+        }
+        composeLoginTestRule.run {
+            onNodeWithContentDescription("LoginEmailTextField")
+                .performTextInput("test@youapps.com.com")
+            onNodeWithContentDescription("LoginPasswordTextField")
+                .performTextInput("sesame1234")
+            onNodeWithContentDescription("SesameButtonLoadingCircularProgressBar")
+                .assertDoesNotExist()
+            onNodeWithContentDescription("LoginButton").performClick()
+            onNodeWithContentDescription("SesameButtonLoadingCircularProgressBar")
+                .assertExists()
         }
     }
-}
 
 
-@Test
-fun testLoginScreenWhenIdleThenLoginWithLockedAccount() {
-    composeLoginTestRule.activity.setContent {
-        val uiState = LoginUIStateHolder.rememberLoginUIState(
-            loginEmail = remember {
-                mutableStateOf("")
-            },
-            loginPassword = remember {
-                mutableStateOf("")
-            },
-            loginRequestResult = viewModelLoginMockState.collectAsStateWithLifecycle(
-                initialValue = LoginState.Idle
-            )
-        )
-        LoginScreen(
-            loginUIStateHolder = uiState,
-            onEmailChanged = {
-                uiState.loginEmail.value = it
-            }, onPasswordChanged ={
-                uiState.loginPassword.value = it
-            },
-            onSetIdleState = {
-                viewModelLoginMockState.value = LoginState.Idle
-            },
-            onLoginClicked = {
-                viewModelLoginMockState.value = LoginState.Error(
-                    errorType = DomainErrorType.AccountLocked
+    @Test
+    fun testLoginScreenWhenIdleThenLoginWithInvalidCredentials() {
+        composeLoginTestRule.activity.setContent {
+            val uiState = LoginUIStateHolder.rememberLoginUIState(
+                loginEmail = remember {
+                    mutableStateOf("")
+                },
+                loginPassword = remember {
+                    mutableStateOf("")
+                },
+                loginRequestResult = viewModelLoginMockState.collectAsStateWithLifecycle(
+                    initialValue = LoginState.Idle
                 )
+            )
+            LoginScreen(
+                loginUIStateHolder = uiState,
+                onEmailChanged = {
+                    uiState.loginEmail.value = it
+                }, onPasswordChanged = {
+                    uiState.loginPassword.value = it
+                },
+                onLoginClicked = {
+                    viewModelLoginMockState.value = LoginState.Error(
+                        errorType = DomainErrorType.InvalidCredentials
+                    )
+                },
+                onSetIdleState = {
+                    viewModelLoginMockState.value = LoginState.Idle
+                }
+            )
+        }
+        composeLoginTestRule.run {
+            onNodeWithContentDescription("SesameButtonLoadingCircularProgressBar")
+                .assertDoesNotExist()
+            onNodeWithContentDescription("LoginButton").performClick()
+            val expectedToastMessage = instrumentationContext
+                .resources
+                .getString(R.string.error_toast_invalid_credentials)
+            onNodeWithContentDescription("ToastTextContent").run {
+                assertExists()
+                assertTextContains(expectedToastMessage)
             }
-        )
-    }
-    composeLoginTestRule.run {
-        onNodeWithContentDescription("LoginEmailTextField")
-            .performTextInput("lockedaccount@youapps.com.com")
-        onNodeWithContentDescription("LoginPasswordTextField")
-            .performTextInput("sesame1234")
-        onNodeWithContentDescription("SesameButtonLoadingCircularProgressBar")
-            .assertDoesNotExist()
-        onNodeWithContentDescription("LoginButton").performClick()
-        val expectedToastMessage = instrumentationContext
-            .resources
-            .getString(R.string.error_toast_locked)
-        onNodeWithContentDescription("ToastTextContent").run {
-            assertExists()
-           assertTextContains(expectedToastMessage)
         }
     }
-}
-@Test
-fun testLoginScreenWhenIdleThenLoginANDUndefinedErrorOccurs() {
-    composeLoginTestRule.activity.setContent {
-        val uiState = LoginUIStateHolder.rememberLoginUIState(
-            loginEmail = remember {
-                mutableStateOf("")
-            },
-            loginPassword = remember {
-                mutableStateOf("")
-            },
-            loginRequestResult = viewModelLoginMockState.collectAsStateWithLifecycle(
-                initialValue = LoginState.Idle
-            )
-        )
-        LoginScreen(
-            loginUIStateHolder = uiState,
-            onEmailChanged = {
-                uiState.loginEmail.value = it
-            }, onPasswordChanged ={
-                uiState.loginPassword.value = it
-            },
-            onLoginClicked = {
-                viewModelLoginMockState.value = LoginState.Error(
-                    errorType = DomainErrorType.Undefined
+
+
+    @Test
+    fun testLoginScreenWhenIdleThenLoginWithLockedAccount() {
+        composeLoginTestRule.activity.setContent {
+            val uiState = LoginUIStateHolder.rememberLoginUIState(
+                loginEmail = remember {
+                    mutableStateOf("")
+                },
+                loginPassword = remember {
+                    mutableStateOf("")
+                },
+                loginRequestResult = viewModelLoginMockState.collectAsStateWithLifecycle(
+                    initialValue = LoginState.Idle
                 )
-            },
-            onSetIdleState = {
-                viewModelLoginMockState.value = LoginState.Idle
+            )
+            LoginScreen(
+                loginUIStateHolder = uiState,
+                onEmailChanged = {
+                    uiState.loginEmail.value = it
+                }, onPasswordChanged = {
+                    uiState.loginPassword.value = it
+                },
+                onSetIdleState = {
+                    viewModelLoginMockState.value = LoginState.Idle
+                },
+                onLoginClicked = {
+                    viewModelLoginMockState.value = LoginState.Error(
+                        errorType = DomainErrorType.AccountLocked
+                    )
+                }
+            )
+        }
+        composeLoginTestRule.run {
+            onNodeWithContentDescription("LoginEmailTextField")
+                .performTextInput("lockedaccount@youapps.com.com")
+            onNodeWithContentDescription("LoginPasswordTextField")
+                .performTextInput("sesame1234")
+            onNodeWithContentDescription("SesameButtonLoadingCircularProgressBar")
+                .assertDoesNotExist()
+            onNodeWithContentDescription("LoginButton").performClick()
+            val expectedToastMessage = instrumentationContext
+                .resources
+                .getString(R.string.error_toast_locked)
+            onNodeWithContentDescription("ToastTextContent").run {
+                assertExists()
+                assertTextContains(expectedToastMessage)
             }
-        )
-    }
-    composeLoginTestRule.run {
-        onNodeWithContentDescription("LoginEmailTextField")
-            .performTextInput("lockedaccount@youapps.com.com")
-        onNodeWithContentDescription("LoginPasswordTextField")
-            .performTextInput("sesame1234")
-        onNodeWithContentDescription("SesameButtonLoadingCircularProgressBar")
-            .assertDoesNotExist()
-        onNodeWithContentDescription("LoginButton").performClick()
-        val expectedToastMessage = instrumentationContext
-            .resources
-            .getString(R.string.error_toast_unknown)
-        onNodeWithContentDescription("ToastTextContent").run {
-            assertExists()
-           assertTextContains(expectedToastMessage)
         }
     }
-}
 
+    @Test
+    fun testLoginScreenWhenIdleThenLoginANDUndefinedErrorOccurs() {
+        composeLoginTestRule.activity.setContent {
+            val uiState = LoginUIStateHolder.rememberLoginUIState(
+                loginEmail = remember {
+                    mutableStateOf("")
+                },
+                loginPassword = remember {
+                    mutableStateOf("")
+                },
+                loginRequestResult = viewModelLoginMockState.collectAsStateWithLifecycle(
+                    initialValue = LoginState.Idle
+                )
+            )
+            LoginScreen(
+                loginUIStateHolder = uiState,
+                onEmailChanged = {
+                    uiState.loginEmail.value = it
+                }, onPasswordChanged = {
+                    uiState.loginPassword.value = it
+                },
+                onLoginClicked = {
+                    viewModelLoginMockState.value = LoginState.Error(
+                        errorType = DomainErrorType.Undefined
+                    )
+                },
+                onSetIdleState = {
+                    viewModelLoginMockState.value = LoginState.Idle
+                }
+            )
+        }
+        composeLoginTestRule.run {
+            onNodeWithContentDescription("LoginEmailTextField")
+                .performTextInput("lockedaccount@youapps.com.com")
+            onNodeWithContentDescription("LoginPasswordTextField")
+                .performTextInput("sesame1234")
+            onNodeWithContentDescription("SesameButtonLoadingCircularProgressBar")
+                .assertDoesNotExist()
+            onNodeWithContentDescription("LoginButton").performClick()
+            val expectedToastMessage = instrumentationContext
+                .resources
+                .getString(R.string.error_toast_unknown)
+            onNodeWithContentDescription("ToastTextContent").run {
+                assertExists()
+                assertTextContains(expectedToastMessage)
+            }
+        }
+    }
 
 
 }

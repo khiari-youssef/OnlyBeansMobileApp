@@ -4,8 +4,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -17,7 +15,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
@@ -34,7 +31,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.youapps.designsystem.OBTheme
 import com.youapps.designsystem.components.PageSection
-import com.youapps.designsystem.components.inputs.OBSearchField
 import com.youapps.designsystem.components.menus.OBFilterMenu
 import com.youapps.onlybeans.domain.entities.products.OBMarketPlaceProduct
 import com.youapps.onlybeans.domain.entities.products.OBPrice
@@ -66,7 +62,7 @@ fun HomeMarketPlacePreview() {
                 newsCardsList = MarketPlaceNewsCardList(
                     data = listOf()
                 ),
-                filterCategoryList  = MarketPlaceFilterCategoryList(
+                filterCategoryList = MarketPlaceFilterCategoryList(
                     data = listOf()
                 ),
                 selectedFilterIndex = remember {
@@ -76,21 +72,21 @@ fun HomeMarketPlacePreview() {
                     mutableStateOf(
                         MarketPlaceProductGridListState.Success(
                             data = MarketPlaceProductGridListData(
-                                items = List(10){
+                                items = List(10) {
                                     OBMarketPlaceProduct(
                                         marketPlaceID = "marketplace-id-0aegd2sh15srh1",
                                         product = obCoffeeBeansMockProduct,
                                         pricing = OBProductPricing.OBProductMultipleWeightBasedPricing(
                                             pricePerWeight = mapOf(
-                                                250 to OBPrice(price = 18.5f,0.2f),
+                                                250 to OBPrice(price = 18.5f, 0.2f),
                                                 500 to OBPrice(price = 35f),
                                                 1000 to OBPrice(price = 65f)
                                             ),
                                             currency = "USD",
                                             weightUnit = "g"
-                                        ) ,
+                                        ),
                                         isAddedToFavoriteList = it % 2 == 0,
-                                        isAddedToCard =  it % 2 != 0,
+                                        isAddedToCard = it % 2 != 0,
                                         inStockItems = 5,
                                         rating = OBProductRating(
                                             reviewsNumber = 124,
@@ -130,13 +126,13 @@ fun HomeMarketPlacePreview() {
 @Composable
 fun HomeMarketPlace(
     modifier: Modifier = Modifier,
-    state : MarketPlaceStateHolder,
-    onSearchQueryChanged : (String)-> Unit,
-    onCategorySelectedIndexChanged: (Int)-> Unit,
-    onNewsCardClicked: (MarketPlaceNewsCard)-> Unit,
-    onAddToCardClicked : (product : OBMarketPlaceProduct,isAdded : Boolean)-> Unit,
-    onLikeClicked : (product : OBMarketPlaceProduct,isLiked : Boolean)-> Unit,
-    onSeeAllProductsClicked :()-> Unit
+    state: MarketPlaceStateHolder,
+    onSearchQueryChanged: (String) -> Unit,
+    onCategorySelectedIndexChanged: (Int) -> Unit,
+    onNewsCardClicked: (MarketPlaceNewsCard) -> Unit,
+    onAddToCardClicked: (product: OBMarketPlaceProduct, isAdded: Boolean) -> Unit,
+    onLikeClicked: (product: OBMarketPlaceProduct, isLiked: Boolean) -> Unit,
+    onSeeAllProductsClicked: () -> Unit
 ) {
     val bodyScrollState = rememberScrollState()
     val topAppBarScrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
@@ -173,7 +169,7 @@ fun HomeMarketPlace(
                 ),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(12.dp, Alignment.Top)
-        ){
+        ) {
             MarketPlaceCarousel(
                 modifier = Modifier
                     .height(206.dp)
@@ -206,7 +202,7 @@ fun HomeMarketPlace(
                     )
                 }
             ) {
-                when(val productsListState = state.productsListState.value){
+                when (val productsListState = state.productsListState.value) {
                     is MarketPlaceProductGridListState.Loading -> {
                         MarketPlaceProductGridListLoader(
                             modifier = Modifier
@@ -214,6 +210,7 @@ fun HomeMarketPlace(
                                 .fillMaxWidth(),
                         )
                     }
+
                     is MarketPlaceProductGridListState.Success -> {
                         MarketPlaceProductGridList(
                             modifier = Modifier
@@ -224,6 +221,7 @@ fun HomeMarketPlace(
                             onLikeClicked = onLikeClicked
                         )
                     }
+
                     is MarketPlaceProductGridListState.Error -> {
 
                     }

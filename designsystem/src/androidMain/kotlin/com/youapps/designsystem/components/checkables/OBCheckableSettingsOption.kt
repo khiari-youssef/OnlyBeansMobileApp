@@ -16,24 +16,23 @@ import androidx.constraintlayout.compose.Dimension
 import com.youapps.designsystem.OBFontFamilies
 
 
-
 @Composable
 fun OBCheckableSettingsOption(
     modifier: Modifier = Modifier,
-    label : String,
-    isSelected : Boolean,
-    isEnabled : Boolean = true,
-    onItemSelectedStateChanged : (isSelected : Boolean)->Unit
+    label: String,
+    isSelected: Boolean,
+    isEnabled: Boolean = true,
+    onItemSelectedStateChanged: (isSelected: Boolean) -> Unit
 ) {
     ConstraintLayout(
         modifier = modifier
             .alpha(if (isEnabled) 1f else 0.4f)
             .padding(8.dp)
     ) {
-        val (nameRef,checkboxRef) = createRefs()
+        val (nameRef, checkboxRef) = createRefs()
         Text(
             modifier = Modifier.constrainAs(nameRef) {
-                start.linkTo(parent.start,8.dp)
+                start.linkTo(parent.start, 8.dp)
                 top.linkTo(parent.top)
                 bottom.linkTo(parent.bottom)
                 end.linkTo(checkboxRef.start, 16.dp)

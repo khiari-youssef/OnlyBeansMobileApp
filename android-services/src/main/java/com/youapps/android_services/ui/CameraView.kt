@@ -26,7 +26,7 @@ import kotlin.coroutines.suspendCoroutine
 @Composable
 fun CameraView(
     modifier: Modifier = Modifier,
-    onQrCodeCaptured: (data : String)->Unit
+    onQrCodeCaptured: (data: String) -> Unit
 ) {
     val context = LocalContext.current
 
@@ -43,24 +43,24 @@ fun CameraView(
     val lensFacing = CameraSelector.LENS_FACING_BACK
     val lifecycleOwner = LocalLifecycleOwner.current
     val preview = Preview.Builder()
-        .setTargetResolution(Size(150,150))
+        .setTargetResolution(Size(150, 150))
         .build()
     val previewView = remember {
         PreviewView(context)
     }
     val imageAnalysis = ImageAnalysis.Builder()
-        .setTargetResolution(Size(150,150))
+        .setTargetResolution(Size(150, 150))
         .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
         .build()
-    val isQrCode : MutableState<Boolean> = remember {
+    val isQrCode: MutableState<Boolean> = remember {
         mutableStateOf(false)
     }
-    val boundingBox : MutableState<android.graphics.Rect?> = remember {
+    val boundingBox: MutableState<android.graphics.Rect?> = remember {
         mutableStateOf(null)
     }
     val cameraxSelector = CameraSelector.Builder().requireLensFacing(lensFacing).build()
 
-    val qrCodAnalyser =  QRCodeImageAnalyzer(
+    val qrCodAnalyser = QRCodeImageAnalyzer(
         onBarCodeScanError = {
             isQrCode.value = false
         },
@@ -78,15 +78,15 @@ fun CameraView(
             boundingBox.value = it
         }
     )
-    imageAnalysis.setAnalyzer(ContextCompat.getMainExecutor(context),qrCodAnalyser)
+    imageAnalysis.setAnalyzer(ContextCompat.getMainExecutor(context), qrCodAnalyser)
     LaunchedEffect(lensFacing) {
         val cameraProvider = context.getCameraProvider()
         cameraProvider.unbindAll()
-        cameraProvider.bindToLifecycle(lifecycleOwner, cameraxSelector, imageAnalysis,preview)
+        cameraProvider.bindToLifecycle(lifecycleOwner, cameraxSelector, imageAnalysis, preview)
         preview.setSurfaceProvider(previewView.surfaceProvider)
     }
-        AndroidView(
-            modifier = modifier,
-            factory = { previewView }
-        )
+    AndroidView(
+        modifier = modifier,
+        factory = { previewView }
+    )
 }

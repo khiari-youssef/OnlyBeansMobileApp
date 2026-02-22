@@ -27,9 +27,11 @@ class LocationProviderChangedReceiver(
 
     override fun onReceive(context: Context, intent: Intent) {
         if (intent.action == LocationManager.PROVIDERS_CHANGED_ACTION) {
-            val locationManager = context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+            val locationManager =
+                context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
             val isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
-            val isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+            val isNetworkEnabled =
+                locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
             onLocationStatusChanged(isGpsEnabled || isNetworkEnabled)
         }
     }
@@ -39,13 +41,13 @@ class LocationProviderChangedReceiver(
 @Composable
 fun OBLocationServiceStateLocale(
     obLocationService: OBLocationService,
-    content: @Composable ()-> Unit
+    content: @Composable () -> Unit
 ) {
     val context = LocalContext.current
     val isLocationDefaultEnabled = produceState(initialValue = false) {
         value = obLocationService.isLocationEnabled()
     }
-    var isLocationEnabled : Boolean by remember {
+    var isLocationEnabled: Boolean by remember {
         mutableStateOf(isLocationDefaultEnabled.value)
     }
 

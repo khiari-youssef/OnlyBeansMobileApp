@@ -75,11 +75,10 @@ fun HomeScreen(
     }
 
 
-
     val initialRoute = remember {
-       derivedStateOf {
-           NavigationRoutingData.Home.mapIndexToRoute(selectedHomeDestinationIndex.intValue)
-       }
+        derivedStateOf {
+            NavigationRoutingData.Home.mapIndexToRoute(selectedHomeDestinationIndex.intValue)
+        }
     }
 
     val navOpts = remember {
@@ -137,12 +136,13 @@ fun HomeScreen(
                         content = remember {
                             { modifier ->
                                 val viewModel = koinViewModel<CommunitySearchViewModel>()
-                                val communitySearchState = CommunitySearchStateHolder.bindViewModelState(viewModel)
+                                val communitySearchState =
+                                    CommunitySearchStateHolder.bindViewModelState(viewModel)
                                 CommunitySearchScreen(
                                     modifier = modifier,
                                     screenState = communitySearchState,
                                     onSearchQueryChanged = viewModel::updateSearchQuery,
-                                    onSearchFilterChanged = { selectedFilterIndex,radiusValue ->
+                                    onSearchFilterChanged = { selectedFilterIndex, radiusValue ->
                                         viewModel.setRadiusValue(radiusValue)
                                         viewModel.setSelectedFilterIndex(selectedFilterIndex)
                                     },
@@ -159,12 +159,8 @@ fun HomeScreen(
                 ) {
                     val viewModel = koinViewModel<MarketPlaceViewModel>()
 
-                    val screenState = MarketPlaceStateHolder.rememberMarketPlaceState(
-                        searchQuery = viewModel.currentSearchQuery.collectAsStateWithLifecycle(initialValue = null),
-                        newsCardsList = viewModel.marketPlaceNewsCardList,
-                        filterCategoryList  = viewModel.marketPlaceFilterCategoryList,
-                        selectedFilterIndex = viewModel.selectedFilterIndex.collectAsStateWithLifecycle(0),
-                        productsList = viewModel.marketPlaceProductGridListState.collectAsStateWithLifecycle(initialValue = MarketPlaceProductGridListState.Loading)
+                    val screenState = MarketPlaceStateHolder.bindViewModelState(
+                        viewModel = viewModel
                     )
                     NavigationBarScreenTemplate(
                         modifier = Modifier
@@ -186,10 +182,13 @@ fun HomeScreen(
                                     },
                                     onCategorySelectedIndexChanged = viewModel::setSelectedFilterIndex,
                                     onLikeClicked = { product, isLiked ->
-                                        viewModel.updateProductFavoriteStatus(product.product.id,isLiked)
+                                        viewModel.updateProductFavoriteStatus(
+                                            product.product.id,
+                                            isLiked
+                                        )
                                     },
                                     onAddToCardClicked = { product, isLiked ->
-                                        viewModel.updateCardStatus(product.product.id,isLiked)
+                                        viewModel.updateCardStatus(product.product.id, isLiked)
                                     },
                                     onSeeAllProductsClicked = {
                                         onHomeExit(NavigationRoutingData.VIEW_SCREEN_PRODUCT_LIST)
@@ -202,7 +201,7 @@ fun HomeScreen(
                 }
                 composable(NavigationRoutingData.Home.NOTIFICATIONS) {
                     val viewModel = koinViewModel<NotificationsViewModel>()
-                    val screenState =  NotificationScreenStateHolder
+                    val screenState = NotificationScreenStateHolder
                         .rememberNotificationScreenState(
                             notificationsListState = viewModel.latestNotificationsState.collectAsStateWithLifecycle(),
                             currentPage = rememberSaveable {
@@ -215,8 +214,8 @@ fun HomeScreen(
                     ) { modifier ->
                         NotificationsScreen(
                             modifier = modifier,
-                            screenState =  screenState,
-                            onProjectReferenceClicked = {projectRef->
+                            screenState = screenState,
+                            onProjectReferenceClicked = { projectRef ->
 
                             },
                             onRefreshNotifications = {
@@ -226,7 +225,7 @@ fun HomeScreen(
                     }
                 }
                 composable(NavigationRoutingData.Home.PROFILE) {
-                    val profileViewModel : MyProfileViewModel = koinViewModel()
+                    val profileViewModel: MyProfileViewModel = koinViewModel()
                     var isLogoutPopupVisible by remember {
                         mutableStateOf(false)
                     }
@@ -235,16 +234,20 @@ fun HomeScreen(
 
                     LogoutPopup(
                         isShown = isLogoutPopupVisible,
-                        onCancelled =  {
+                        onCancelled = {
                             isLogoutPopupVisible = false
                         },
                         onConfirmAppExit = {
                             profileScreenCoScope.launch {
-                                profileViewModel.logOutCurrentUser().collect { isLoggedOut->
+                                profileViewModel.logOutCurrentUser().collect { isLoggedOut ->
                                     if (isLoggedOut) {
-                                    onHomeExit(NavigationRoutingData.LOGIN)
+                                        onHomeExit(NavigationRoutingData.LOGIN)
                                     } else {
-                                        Toast.makeText(currentContext, "Could not logout user !", Toast.LENGTH_LONG).show()
+                                        Toast.makeText(
+                                            currentContext,
+                                            "Could not logout user !",
+                                            Toast.LENGTH_LONG
+                                        ).show()
                                     }
                                     isLogoutPopupVisible = false
                                 }
@@ -258,40 +261,41 @@ fun HomeScreen(
                             .padding(paddingValues),
                         onExitNavigation = { onHomeExit(NavigationRoutingData.EXIT_APP_ROUTE) },
                     ) { modifier ->
-                        val myProfileState : State<ProfileScreenState> = profileViewModel.profileState.collectAsStateWithLifecycle(
-                            initialValue = ProfileScreenState.Loading()
-                        )
-
-                            val scrollState = rememberScrollState()
-
-                            ProfileScreen(
-                                modifier = modifier
-                                    .verticalScroll(state = scrollState)
-                                    .fillMaxSize(),
-                                screenState = myProfileState.value,
-                                onRefreshProfile = {
-                                    profileViewModel.getMyProfile(withRefresh = true)
-                                },
-                                onLogOutClicked = {
-                                    isLogoutPopupVisible = true
-                                },
-                                onEditProfileClicked = {
-                                    onHomeExit(NavigationRoutingData.EDIT_PROFILE_SCREEN)
-                                },
-                                onKeywordClicked = {
-                                    homeNavController.navigate(NavigationRoutingData.Home.NETWORK)
-                                },
-                                onProductClicked = {
-                                    onHomeExit(NavigationRoutingData.VIEW_SCREEN_PRODUCT)
-                                },
-                                onSeeAllCoffeeBeanClicked = {
-                                   onHomeExit(NavigationRoutingData.VIEW_SCREEN_PRODUCT_LIST)
-                                },
-                                onSeeAllCoffeeGearClicked = {
-                                    onHomeExit(NavigationRoutingData.VIEW_SCREEN_PRODUCT_LIST)
-                                }
+                        val myProfileState: State<ProfileScreenState> =
+                            profileViewModel.profileState.collectAsStateWithLifecycle(
+                                initialValue = ProfileScreenState.Loading()
                             )
-                        }
+
+                        val scrollState = rememberScrollState()
+
+                        ProfileScreen(
+                            modifier = modifier
+                                .verticalScroll(state = scrollState)
+                                .fillMaxSize(),
+                            screenState = myProfileState.value,
+                            onRefreshProfile = {
+                                profileViewModel.getMyProfile(withRefresh = true)
+                            },
+                            onLogOutClicked = {
+                                isLogoutPopupVisible = true
+                            },
+                            onEditProfileClicked = {
+                                onHomeExit(NavigationRoutingData.EDIT_PROFILE_SCREEN)
+                            },
+                            onKeywordClicked = {
+                                homeNavController.navigate(NavigationRoutingData.Home.NETWORK)
+                            },
+                            onProductClicked = {
+                                onHomeExit(NavigationRoutingData.VIEW_SCREEN_PRODUCT)
+                            },
+                            onSeeAllCoffeeBeanClicked = {
+                                onHomeExit(NavigationRoutingData.VIEW_SCREEN_PRODUCT_LIST)
+                            },
+                            onSeeAllCoffeeGearClicked = {
+                                onHomeExit(NavigationRoutingData.VIEW_SCREEN_PRODUCT_LIST)
+                            }
+                        )
+                    }
                 }
             }
         }

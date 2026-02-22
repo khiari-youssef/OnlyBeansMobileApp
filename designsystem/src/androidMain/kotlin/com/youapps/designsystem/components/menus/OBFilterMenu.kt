@@ -33,7 +33,7 @@ fun OBFilterMenu(
             .fillMaxWidth(),
         horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.spacedBy(6.dp, Alignment.Top)
-    ){
+    ) {
 
         LazyRow(
             horizontalArrangement = Arrangement.spacedBy(8.dp),
@@ -41,13 +41,16 @@ fun OBFilterMenu(
                 .fillMaxWidth()
                 .padding(vertical = 8.dp)
         ) {
-            itemsIndexed(filters) { index,category ->
+            itemsIndexed(filters) { index, category ->
                 val isSelected = index == selectedFilterIndex
                 Surface(
                     onClick = { onFilterSelected(index) },
                     shape = CircleShape, // Makes it pill-shaped
                     color = if (isSelected) Color(0xFF92400e) else Color.White,
-                    border = BorderStroke(1.dp,if(isSelected) Color.Transparent else Color(0xFFe7e5e4)),
+                    border = BorderStroke(
+                        1.dp,
+                        if (isSelected) Color.Transparent else Color(0xFFe7e5e4)
+                    ),
                     modifier = Modifier.height(40.dp),
                     tonalElevation = 1.dp,
                     shadowElevation = 1.dp,

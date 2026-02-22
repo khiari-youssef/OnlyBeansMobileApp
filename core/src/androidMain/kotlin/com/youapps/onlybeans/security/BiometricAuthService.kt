@@ -63,13 +63,12 @@ class BiometricAuthService(
     }
 
 
-
     private class BiometricLauncher(
         private val context: Context
-    ) : BiometricLauncherService{
+    ) : BiometricLauncherService {
 
-        private val _authenticationResultState: MutableStateFlow<BiometricLauncherService.DeviceAuthenticationState>
-                = MutableStateFlow(BiometricLauncherService.DeviceAuthenticationState.Idle)
+        private val _authenticationResultState: MutableStateFlow<BiometricLauncherService.DeviceAuthenticationState> =
+            MutableStateFlow(BiometricLauncherService.DeviceAuthenticationState.Idle)
 
         private fun createBiometricPromptRequest(
             title: String,
@@ -90,28 +89,33 @@ class BiometricAuthService(
             activity: FragmentActivity,
             title: String,
             subtitle: String
-        ) : Flow<BiometricLauncherService.DeviceAuthenticationState> = callbackFlow {
+        ): Flow<BiometricLauncherService.DeviceAuthenticationState> = callbackFlow {
             val promptRequest = createBiometricPromptRequest(
                 title, subtitle
             )
-            val callback = object : BiometricPrompt.AuthenticationCallback(){
+            val callback = object : BiometricPrompt.AuthenticationCallback() {
                 override fun onAuthenticationFailed() {
                     super.onAuthenticationFailed()
                     trySend(BiometricLauncherService.DeviceAuthenticationState.Failed)
                 }
+
                 override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
                     super.onAuthenticationError(errorCode, errString)
-                    trySend(BiometricLauncherService.DeviceAuthenticationState.Error(
-                        errorCode
-                    ))
+                    trySend(
+                        BiometricLauncherService.DeviceAuthenticationState.Error(
+                            errorCode
+                        )
+                    )
                 }
 
                 override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                     super.onAuthenticationSucceeded(result)
-                    trySend( BiometricLauncherService.DeviceAuthenticationState.Success(
-                        result.authenticationType,
-                        result.cryptoObject?.cipher?.doFinal()
-                    ))
+                    trySend(
+                        BiometricLauncherService.DeviceAuthenticationState.Success(
+                            result.authenticationType,
+                            result.cryptoObject?.cipher?.doFinal()
+                        )
+                    )
                 }
             }
             val biometricPrompt = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
@@ -133,28 +137,37 @@ class BiometricAuthService(
         }
 
 
-        override fun launch(fragment: Fragment, title: String, subtitle: String): Flow<BiometricLauncherService.DeviceAuthenticationState> = callbackFlow  {
+        override fun launch(
+            fragment: Fragment,
+            title: String,
+            subtitle: String
+        ): Flow<BiometricLauncherService.DeviceAuthenticationState> = callbackFlow {
             val promptRequest = createBiometricPromptRequest(
                 title, subtitle
             )
-            val callback = object : BiometricPrompt.AuthenticationCallback(){
+            val callback = object : BiometricPrompt.AuthenticationCallback() {
                 override fun onAuthenticationFailed() {
                     super.onAuthenticationFailed()
                     trySend(BiometricLauncherService.DeviceAuthenticationState.Failed)
                 }
+
                 override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
                     super.onAuthenticationError(errorCode, errString)
-                    trySend(BiometricLauncherService.DeviceAuthenticationState.Error(
-                        errorCode
-                    ))
+                    trySend(
+                        BiometricLauncherService.DeviceAuthenticationState.Error(
+                            errorCode
+                        )
+                    )
                 }
 
                 override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                     super.onAuthenticationSucceeded(result)
-                    trySend( BiometricLauncherService.DeviceAuthenticationState.Success(
-                        result.authenticationType,
-                        result.cryptoObject?.cipher?.doFinal()
-                    ))
+                    trySend(
+                        BiometricLauncherService.DeviceAuthenticationState.Success(
+                            result.authenticationType,
+                            result.cryptoObject?.cipher?.doFinal()
+                        )
+                    )
                 }
             }
             val biometricPrompt = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
@@ -181,29 +194,34 @@ class BiometricAuthService(
             secretKey: SecretKey,
             title: String,
             subtitle: String
-        ) : Flow<BiometricLauncherService.DeviceAuthenticationState> = callbackFlow {
+        ): Flow<BiometricLauncherService.DeviceAuthenticationState> = callbackFlow {
 
             val promptRequest = createBiometricPromptRequest(
                 title, subtitle
             )
-            val callback = object : BiometricPrompt.AuthenticationCallback(){
+            val callback = object : BiometricPrompt.AuthenticationCallback() {
                 override fun onAuthenticationFailed() {
                     super.onAuthenticationFailed()
                     trySend(BiometricLauncherService.DeviceAuthenticationState.Failed)
                 }
+
                 override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
                     super.onAuthenticationError(errorCode, errString)
-                    trySend(BiometricLauncherService.DeviceAuthenticationState.Error(
-                        errorCode
-                    ))
+                    trySend(
+                        BiometricLauncherService.DeviceAuthenticationState.Error(
+                            errorCode
+                        )
+                    )
                 }
 
                 override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                     super.onAuthenticationSucceeded(result)
-                    trySend( BiometricLauncherService.DeviceAuthenticationState.Success(
-                        result.authenticationType,
-                        result.cryptoObject?.cipher?.doFinal()
-                    ))
+                    trySend(
+                        BiometricLauncherService.DeviceAuthenticationState.Success(
+                            result.authenticationType,
+                            result.cryptoObject?.cipher?.doFinal()
+                        )
+                    )
                 }
             }
             val biometricPrompt = BiometricPrompt(
@@ -211,18 +229,18 @@ class BiometricAuthService(
                 context.mainExecutor,
                 callback
             )
-                val cipher = Cipher.getInstance(
-                    KeyProperties.KEY_ALGORITHM_AES + "/"
-                            + KeyProperties.BLOCK_MODE_CBC + "/"
-                            + KeyProperties.ENCRYPTION_PADDING_PKCS7
+            val cipher = Cipher.getInstance(
+                KeyProperties.KEY_ALGORITHM_AES + "/"
+                        + KeyProperties.BLOCK_MODE_CBC + "/"
+                        + KeyProperties.ENCRYPTION_PADDING_PKCS7
+            )
+            cipher.init(Cipher.ENCRYPT_MODE, secretKey)
+            withContext(Dispatchers.Default) {
+                biometricPrompt.authenticate(
+                    promptRequest,
+                    BiometricPrompt.CryptoObject(cipher)
                 )
-                cipher.init(Cipher.ENCRYPT_MODE, secretKey)
-                withContext(Dispatchers.Default) {
-                    biometricPrompt.authenticate(
-                        promptRequest,
-                        BiometricPrompt.CryptoObject(cipher)
-                    )
-                }
+            }
             awaitClose()
         }
 

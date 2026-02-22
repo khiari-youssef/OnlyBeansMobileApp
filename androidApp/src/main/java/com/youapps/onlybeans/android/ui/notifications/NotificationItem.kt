@@ -32,9 +32,9 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.youapps.designsystem.OBFontFamilies
-import com.youapps.onlybeans.designsystem.R
 import com.youapps.designsystem.SuccessColor
 import com.youapps.designsystem.components.loading.shimmerEffect
+import com.youapps.onlybeans.designsystem.R
 import com.youapps.onlybeans.domain.entities.OBNotification
 
 
@@ -42,7 +42,7 @@ import com.youapps.onlybeans.domain.entities.OBNotification
 fun NotificationItem(
     modifier: Modifier = Modifier,
     oBNotification: OBNotification?,
-    onProjectReferenceClicked : (ref: String)->Unit,
+    onProjectReferenceClicked: (ref: String) -> Unit,
     builder: (@Composable () -> Unit)? = null
 ) {
     Column(
@@ -77,17 +77,19 @@ fun NotificationItem(
                 withLink(
                     link = LinkAnnotation.Clickable(
                         tag = "SignUpActionText",
-                        styles = TextLinkStyles( SpanStyle(
-                            fontFamily = OBFontFamilies.MainBoldFontFamily,
-                            fontWeight = FontWeight.W700,
-                            color = MaterialTheme.colorScheme.primary,
-                            textDecoration = TextDecoration.Underline
-                        )),
+                        styles = TextLinkStyles(
+                            SpanStyle(
+                                fontFamily = OBFontFamilies.MainBoldFontFamily,
+                                fontWeight = FontWeight.W700,
+                                color = MaterialTheme.colorScheme.primary,
+                                textDecoration = TextDecoration.Underline
+                            )
+                        ),
                         linkInteractionListener = {
                             onProjectReferenceClicked(oBNotification.projectRef)
                         },
                     )
-                ){
+                ) {
                     append(oBNotification.projectRef)
                 }
             } ?: append("")
@@ -126,7 +128,7 @@ fun NotificationItem(
 @Composable
 fun NotificationRequestItem(
     modifier: Modifier = Modifier,
-    onProjectReferenceClicked : (ref : String)->Unit,
+    onProjectReferenceClicked: (ref: String) -> Unit,
     oBNotification: OBNotification.OBRequestNotification?
 ) {
     NotificationItem(
@@ -185,7 +187,7 @@ fun NotificationRequestItem(
 @Composable
 fun NotificationResponseItem(
     modifier: Modifier = Modifier,
-    onProjectReferenceClicked : (ref : String)->Unit,
+    onProjectReferenceClicked: (ref: String) -> Unit,
     OBNotification: OBNotification.OBResponseNotification?
 ) {
     NotificationItem(

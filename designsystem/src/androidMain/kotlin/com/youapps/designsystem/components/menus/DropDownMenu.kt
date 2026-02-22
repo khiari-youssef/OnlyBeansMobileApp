@@ -27,17 +27,17 @@ import coil.request.CachePolicy
 import coil.request.ImageRequest
 import com.youapps.onlybeans.designsystem.R
 
-sealed interface ImageMediaType{
-    data class Resource(val resId : Int,val size : DpSize?=null) : ImageMediaType
-    data class Url(val url : String,val size : DpSize?=null) : ImageMediaType {
+sealed interface ImageMediaType {
+    data class Resource(val resId: Int, val size: DpSize? = null) : ImageMediaType
+    data class Url(val url: String, val size: DpSize? = null) : ImageMediaType {
         override fun toString(): String = url
     }
 }
 
 @Immutable
 data class DropDownMenuItemData(
-    val label : String,
-    val icon : ImageMediaType?=null,
+    val label: String,
+    val icon: ImageMediaType? = null,
 )
 
 
@@ -46,26 +46,26 @@ sealed interface DropDownMenuDataState {
     data object Error : DropDownMenuDataState
 
     @Immutable
-    data class Success(val items : List<DropDownMenuItemData>) : DropDownMenuDataState
+    data class Success(val items: List<DropDownMenuItemData>) : DropDownMenuDataState
 }
+
 @Immutable
 data class DropDownMenuData(
-    val items : List<DropDownMenuItemData>
+    val items: List<DropDownMenuItemData>
 )
-
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OBDropDownMenu(
     modifier: Modifier = Modifier,
-    data : DropDownMenuData,
-    isExpanded : Boolean,
+    data: DropDownMenuData,
+    isExpanded: Boolean,
     scrollState: ScrollState = rememberScrollState(),
-    onExpandedChange : (Boolean)-> Unit,
-    onClick : (DropDownMenuItemData) -> Unit
+    onExpandedChange: (Boolean) -> Unit,
+    onClick: (DropDownMenuItemData) -> Unit
 ) {
-    if( data.items.isNotEmpty()) {
+    if (data.items.isNotEmpty()) {
         ExposedDropdownMenuBox(
             modifier = modifier,
             expanded = isExpanded,
@@ -98,28 +98,41 @@ fun OBDropDownMenu(
                         onClick = {
                             onClick(item)
                         },
-                        leadingIcon =item.icon?.run {
+                        leadingIcon = item.icon?.run {
                             {
-                                when (item.icon){
-                                    is ImageMediaType.Resource ->Icon(
-                                        modifier = Modifier.size(item.icon.size ?: DpSize(
-                                            width = 25.dp,
-                                            height = 30.dp)),
+                                when (item.icon) {
+                                    is ImageMediaType.Resource -> Icon(
+                                        modifier = Modifier.size(
+                                            item.icon.size ?: DpSize(
+                                                width = 25.dp,
+                                                height = 30.dp
+                                            )
+                                        ),
                                         imageVector = ImageVector.vectorResource(item.icon.resId),
-                                        contentDescription = stringResource(R.string.content_description_drop_down_item,item.label),
+                                        contentDescription = stringResource(
+                                            R.string.content_description_drop_down_item,
+                                            item.label
+                                        ),
                                         tint = MaterialTheme.colorScheme.onSurface
                                     )
-                                    is ImageMediaType.Url ->  AsyncImage(
-                                        modifier = Modifier.size(item.icon.size ?: DpSize(
-                                            width = 25.dp,
-                                            height = 30.dp)),
+
+                                    is ImageMediaType.Url -> AsyncImage(
+                                        modifier = Modifier.size(
+                                            item.icon.size ?: DpSize(
+                                                width = 25.dp,
+                                                height = 30.dp
+                                            )
+                                        ),
                                         model = ImageRequest.Builder(LocalContext.current)
                                             .data(item.icon.url)
                                             .diskCachePolicy(CachePolicy.ENABLED)
                                             .memoryCachePolicy(CachePolicy.ENABLED)
-                                            .build() ,
-                                        contentDescription = stringResource(R.string.content_description_drop_down_item,item.label),
-                                        )
+                                            .build(),
+                                        contentDescription = stringResource(
+                                            R.string.content_description_drop_down_item,
+                                            item.label
+                                        ),
+                                    )
 
                                 }
 

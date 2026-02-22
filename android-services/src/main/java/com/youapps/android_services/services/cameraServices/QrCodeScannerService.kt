@@ -14,7 +14,7 @@ import com.google.mlkit.vision.common.InputImage
 
 internal class QRCodeImageAnalyzer(
     private val onResult: (data: String?) -> Unit,
-    private val onScanProgress : (rect : Rect?)->Unit,
+    private val onScanProgress: (rect: Rect?) -> Unit,
     private val barCodeValidator: (barcode: Barcode) -> Boolean,
     private val onBarCodeScanError: () -> Unit
 ) : ImageAnalysis.Analyzer {
@@ -22,10 +22,10 @@ internal class QRCodeImageAnalyzer(
     private val options = BarcodeScannerOptions.Builder()
         .setBarcodeFormats(Barcode.FORMAT_QR_CODE)
         .setZoomSuggestionOptions(
-             ZoomSuggestionOptions.Builder {
-                 true
-             }
-           .build())
+            ZoomSuggestionOptions.Builder {
+                true
+            }
+                .build())
         .build()
 
     private val scanner = BarcodeScanning.getClient(options)
@@ -52,7 +52,7 @@ internal class QRCodeImageAnalyzer(
                 .addOnCanceledListener {
                     imageProxy.close()
                 }
-                .addOnCompleteListener{
+                .addOnCompleteListener {
                     imageProxy.close()
                 }
 

@@ -26,43 +26,43 @@ import com.youapps.designsystem.OBFontFamilies
 fun CircularLoadingProgressShip(
     modifier: Modifier = Modifier
 ) {
-Card(
-    modifier = modifier
-        .wrapContentHeight(),
-    colors = CardDefaults
-        .cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant
-        ),
-    shape = MaterialTheme.shapes.large,
-    border = BorderStroke(color = MaterialTheme.colorScheme.secondary, width = 1.dp )
-) {
-  Row(
-      modifier = Modifier
-          .padding(8.dp)
-          .wrapContentSize(),
-      verticalAlignment = Alignment.CenterVertically,
-      horizontalArrangement = Arrangement
-          .spacedBy(12.dp,Alignment.CenterHorizontally)
-  ) {
-    CircularProgressIndicator(
-        modifier = Modifier
-            .size(16.dp),
-        strokeWidth = 2.dp,
-        color = MaterialTheme.colorScheme.secondary
-    )
-    Text(
-        modifier = Modifier
-            .animateContentSize(
-                animationSpec = tween(800)
+    Card(
+        modifier = modifier
+            .wrapContentHeight(),
+        colors = CardDefaults
+            .cardColors(
+                containerColor = MaterialTheme.colorScheme.surfaceVariant
+            ),
+        shape = MaterialTheme.shapes.large,
+        border = BorderStroke(color = MaterialTheme.colorScheme.secondary, width = 1.dp)
+    ) {
+        Row(
+            modifier = Modifier
+                .padding(8.dp)
+                .wrapContentSize(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement
+                .spacedBy(12.dp, Alignment.CenterHorizontally)
+        ) {
+            CircularProgressIndicator(
+                modifier = Modifier
+                    .size(16.dp),
+                strokeWidth = 2.dp,
+                color = MaterialTheme.colorScheme.secondary
             )
-            .wrapContentSize(),
-        text = "Loading ...",
-        style = TextStyle(
-            fontSize = 12.sp,
-            fontFamily = OBFontFamilies.MainMediumFontFamily,
-            color = MaterialTheme.colorScheme.secondary
-        )
-    )
-  }
-}
+            Text(
+                modifier = Modifier
+                    .animateContentSize(
+                        animationSpec = tween(800)
+                    )
+                    .wrapContentSize(),
+                text = "Loading ...",
+                style = TextStyle(
+                    fontSize = 12.sp,
+                    fontFamily = OBFontFamilies.MainMediumFontFamily,
+                    color = MaterialTheme.colorScheme.secondary
+                )
+            )
+        }
+    }
 }

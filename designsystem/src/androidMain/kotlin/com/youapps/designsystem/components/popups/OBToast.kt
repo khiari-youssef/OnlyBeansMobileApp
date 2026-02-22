@@ -32,49 +32,49 @@ import androidx.compose.ui.zIndex
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.youapps.designsystem.OBFontFamilies
-import com.youapps.onlybeans.designsystem.R
 import com.youapps.designsystem.SuccessColor
+import com.youapps.onlybeans.designsystem.R
 
 @Stable
 data class SesameToastDefaults(
-  val backgroundColor: Color,
-  val textStyle : TextStyle = TextStyle(
-      fontSize = 14.sp,
-      fontFamily = OBFontFamilies.MainMediumFontFamily,
-      fontWeight = FontWeight(500),
-      color = Color.Black,
-      textAlign = TextAlign.Center
-  ),
-  val iconsTint : Color
-){
-    companion object{
-
-        private val textStyle = TextStyle(
+    val backgroundColor: Color,
+    val textStyle: TextStyle = TextStyle(
         fontSize = 14.sp,
         fontFamily = OBFontFamilies.MainMediumFontFamily,
         fontWeight = FontWeight(500),
         color = Color.Black,
         textAlign = TextAlign.Center
+    ),
+    val iconsTint: Color
+) {
+    companion object {
+
+        private val textStyle = TextStyle(
+            fontSize = 14.sp,
+            fontFamily = OBFontFamilies.MainMediumFontFamily,
+            fontWeight = FontWeight(500),
+            color = Color.Black,
+            textAlign = TextAlign.Center
         )
 
         @Composable
-        fun getAlertToastStyle() : SesameToastDefaults = SesameToastDefaults(
+        fun getAlertToastStyle(): SesameToastDefaults = SesameToastDefaults(
             backgroundColor = Color(0xFFFF8500),
             textStyle = textStyle,
             iconsTint = Color.Black
         )
 
         @Composable
-        fun getInfoToastStyle() : SesameToastDefaults = SesameToastDefaults(
+        fun getInfoToastStyle(): SesameToastDefaults = SesameToastDefaults(
             backgroundColor = MaterialTheme.colorScheme.secondary,
             textStyle = textStyle.copy(
                 color = Color.White
             ),
-             iconsTint = Color.White
+            iconsTint = Color.White
         )
 
         @Composable
-        fun getSuccessToastStyle() : SesameToastDefaults = SesameToastDefaults(
+        fun getSuccessToastStyle(): SesameToastDefaults = SesameToastDefaults(
             backgroundColor = SuccessColor,
             textStyle = textStyle.copy(
                 color = Color.White
@@ -87,83 +87,85 @@ data class SesameToastDefaults(
 @Composable
 fun SesameToast(
     modifier: Modifier = Modifier,
-    message : String,
-    iconResID : Int,
-    sesameToastDefaults : SesameToastDefaults,
-    onDismissRequest : ()->Unit
+    message: String,
+    iconResID: Int,
+    sesameToastDefaults: SesameToastDefaults,
+    onDismissRequest: () -> Unit
 ) {
- Surface(
-     modifier = modifier,
-     color = sesameToastDefaults.backgroundColor,
-     shape = MaterialTheme.shapes.medium
- ) {
-     ConstraintLayout(
-         modifier = Modifier
-             .zIndex(4f)
-             .padding(
-                 8.dp
-             )
-             .fillMaxWidth()
-             .wrapContentHeight()
-     ) {
-         val (iconRef,textRef,closeIconRef) = createRefs()
-          Icon(
-              modifier = Modifier
-                  .semantics {
-                      contentDescription = "ToastVariantIcon"
-                  }
-                  .constrainAs(iconRef) {
-                      start.linkTo(parent.start)
-                      top.linkTo(parent.top)
-                      bottom.linkTo(parent.bottom)
-                  }
-                  .requiredSize(20.dp),
-              imageVector = ImageVector.vectorResource(
-                  iconResID
-              ),
-              contentDescription = null,
-              tint = sesameToastDefaults.iconsTint
-          )
-         Text(
-             modifier = Modifier.semantics {
-                 contentDescription = "ToastTextContent"
-             }.constrainAs(textRef){
-                 start.linkTo(iconRef.end,8.dp)
-                 end.linkTo(closeIconRef.start,8.dp)
-                 width  = Dimension.fillToConstraints
-                 top.linkTo(parent.top)
-                 bottom.linkTo(parent.bottom)
-             },
-             text = message,
-             style = sesameToastDefaults.textStyle
-         )
-         Icon(
-             modifier = Modifier
-                 .constrainAs(closeIconRef) {
-                     end.linkTo(parent.end)
-                     top.linkTo(parent.top)
-                     bottom.linkTo(parent.bottom)
-                 }
-                 .clickable(onClick = onDismissRequest)
-                 .requiredSize(20.dp),
-             imageVector = ImageVector.vectorResource(
-                 R.drawable.ic_clear
-             ),
-             contentDescription = null,
-             tint = sesameToastDefaults.iconsTint
-         )
-     }
- }
+    Surface(
+        modifier = modifier,
+        color = sesameToastDefaults.backgroundColor,
+        shape = MaterialTheme.shapes.medium
+    ) {
+        ConstraintLayout(
+            modifier = Modifier
+                .zIndex(4f)
+                .padding(
+                    8.dp
+                )
+                .fillMaxWidth()
+                .wrapContentHeight()
+        ) {
+            val (iconRef, textRef, closeIconRef) = createRefs()
+            Icon(
+                modifier = Modifier
+                    .semantics {
+                        contentDescription = "ToastVariantIcon"
+                    }
+                    .constrainAs(iconRef) {
+                        start.linkTo(parent.start)
+                        top.linkTo(parent.top)
+                        bottom.linkTo(parent.bottom)
+                    }
+                    .requiredSize(20.dp),
+                imageVector = ImageVector.vectorResource(
+                    iconResID
+                ),
+                contentDescription = null,
+                tint = sesameToastDefaults.iconsTint
+            )
+            Text(
+                modifier = Modifier
+                    .semantics {
+                        contentDescription = "ToastTextContent"
+                    }
+                    .constrainAs(textRef) {
+                        start.linkTo(iconRef.end, 8.dp)
+                        end.linkTo(closeIconRef.start, 8.dp)
+                        width = Dimension.fillToConstraints
+                        top.linkTo(parent.top)
+                        bottom.linkTo(parent.bottom)
+                    },
+                text = message,
+                style = sesameToastDefaults.textStyle
+            )
+            Icon(
+                modifier = Modifier
+                    .constrainAs(closeIconRef) {
+                        end.linkTo(parent.end)
+                        top.linkTo(parent.top)
+                        bottom.linkTo(parent.bottom)
+                    }
+                    .clickable(onClick = onDismissRequest)
+                    .requiredSize(20.dp),
+                imageVector = ImageVector.vectorResource(
+                    R.drawable.ic_clear
+                ),
+                contentDescription = null,
+                tint = sesameToastDefaults.iconsTint
+            )
+        }
+    }
 }
 
 @Composable
 fun SesameToastPopup(
     modifier: Modifier = Modifier,
-    isShown : Boolean,
-    message : String,
-    iconResID : Int = R.drawable.ic_alert,
-    sesameToastDefaults :SesameToastDefaults,
-    onDismissRequest : ()->Unit
+    isShown: Boolean,
+    message: String,
+    iconResID: Int = R.drawable.ic_alert,
+    sesameToastDefaults: SesameToastDefaults,
+    onDismissRequest: () -> Unit
 ) {
     AnimatedVisibility(
         modifier = modifier,
@@ -171,8 +173,8 @@ fun SesameToastPopup(
         enter = slideInVertically(tween(durationMillis = 300, easing = EaseOut)) {
             it
         },
-        exit = slideOutVertically(tween(durationMillis = 300, easing = EaseIn)){
-           it*2
+        exit = slideOutVertically(tween(durationMillis = 300, easing = EaseIn)) {
+            it * 2
         },
         label = "ToastVisibilityAnimation"
     ) {

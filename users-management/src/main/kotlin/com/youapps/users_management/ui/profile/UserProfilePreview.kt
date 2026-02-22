@@ -25,10 +25,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
-import com.youapps.onlybeans.designsystem.R
 import com.youapps.designsystem.components.images.OBCircleImageXL
 import com.youapps.designsystem.components.images.OBCoverPhoto
 import com.youapps.designsystem.components.loading.shimmerEffect
+import com.youapps.onlybeans.designsystem.R
 import com.youapps.onlybeans.domain.entities.users.OBUserProfilePreView
 
 
@@ -36,19 +36,20 @@ import com.youapps.onlybeans.domain.entities.users.OBUserProfilePreView
 fun UserProfilePreview(
     modifier: Modifier = Modifier,
     actionButtonText: String,
-    onProfileActionClicked : ()->Unit,
-    oBUserProfile : OBUserProfilePreView
+    onProfileActionClicked: () -> Unit,
+    oBUserProfile: OBUserProfilePreView
 ) {
     ConstraintLayout(
         modifier = modifier
     ) {
-        val (coverImageRef,profileAvatarPicture,detailSection)= createRefs()
+        val (coverImageRef, profileAvatarPicture, detailSection) = createRefs()
         OBCoverPhoto(
             modifier = Modifier
                 .height(
                     height = 128.dp
-                ).fillMaxWidth()
-                .constrainAs(coverImageRef){
+                )
+                .fillMaxWidth()
+                .constrainAs(coverImageRef) {
                     top.linkTo(parent.top)
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
@@ -57,10 +58,10 @@ fun UserProfilePreview(
             url = oBUserProfile.coverPicture
         )
         OBCircleImageXL(
-            modifier = Modifier.constrainAs(profileAvatarPicture){
-                start.linkTo(parent.start,16.dp)
-                top.linkTo(coverImageRef.bottom,(-36).dp)
-            } ,
+            modifier = Modifier.constrainAs(profileAvatarPicture) {
+                start.linkTo(parent.start, 16.dp)
+                top.linkTo(coverImageRef.bottom, (-36).dp)
+            },
             uri = oBUserProfile.profilePicture,
             placeholderRes = R.drawable.ic_profile_placeholder_male,
             errorRes = R.drawable.ic_profile_placeholder_male
@@ -68,11 +69,11 @@ fun UserProfilePreview(
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceAround,
-            modifier = Modifier.constrainAs(detailSection){
-                start.linkTo(parent.start,16.dp)
-                end.linkTo(parent.end,16.dp)
+            modifier = Modifier.constrainAs(detailSection) {
+                start.linkTo(parent.start, 16.dp)
+                end.linkTo(parent.end, 16.dp)
                 width = Dimension.fillToConstraints
-                top.linkTo(profileAvatarPicture.bottom,8.dp)
+                top.linkTo(profileAvatarPicture.bottom, 8.dp)
             }
         ) {
             Column(
@@ -116,13 +117,19 @@ fun UserProfilePreview(
                             tint = MaterialTheme.colorScheme.primary
                         )
                         Text(
-                            text = "$country${city?.run { 
-                                ",$this"
-                            } ?:""}${line?.run {
-                                ",$this"
-                            } ?:""}${postalCode?.run {
-                                ",$this"
-                            } ?:""}",
+                            text = "$country${
+                                city?.run {
+                                    ",$this"
+                                } ?: ""
+                            }${
+                                line?.run {
+                                    ",$this"
+                                } ?: ""
+                            }${
+                                postalCode?.run {
+                                    ",$this"
+                                } ?: ""
+                            }",
                             style = TextStyle(
                                 fontSize = 14.sp,
                                 fontWeight = FontWeight.Normal,
@@ -154,14 +161,15 @@ fun UserProfilePreviewLoader(
     ConstraintLayout(
         modifier = modifier
     ) {
-        val (coverImageRef,profileAvatarPicture,detailSection)= createRefs()
+        val (coverImageRef, profileAvatarPicture, detailSection) = createRefs()
         OBCoverPhoto(
             modifier = Modifier
                 .shimmerEffect(true)
                 .height(
                     height = 128.dp
-                ).fillMaxWidth()
-                .constrainAs(coverImageRef){
+                )
+                .fillMaxWidth()
+                .constrainAs(coverImageRef) {
                     top.linkTo(parent.top)
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
@@ -171,10 +179,10 @@ fun UserProfilePreviewLoader(
         )
         OBCircleImageXL(
             modifier = Modifier
-                .constrainAs(profileAvatarPicture){
-                start.linkTo(parent.start,16.dp)
-                top.linkTo(coverImageRef.bottom,(-36).dp)
-            } ,
+                .constrainAs(profileAvatarPicture) {
+                    start.linkTo(parent.start, 16.dp)
+                    top.linkTo(coverImageRef.bottom, (-36).dp)
+                },
             uri = "",
             placeholderRes = R.drawable.ic_profile_placeholder_male,
             errorRes = R.drawable.ic_profile_placeholder_male
@@ -182,11 +190,11 @@ fun UserProfilePreviewLoader(
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceAround,
-            modifier = Modifier.constrainAs(detailSection){
-                start.linkTo(parent.start,16.dp)
-                end.linkTo(parent.end,16.dp)
+            modifier = Modifier.constrainAs(detailSection) {
+                start.linkTo(parent.start, 16.dp)
+                end.linkTo(parent.end, 16.dp)
                 width = Dimension.fillToConstraints
-                top.linkTo(profileAvatarPicture.bottom,8.dp)
+                top.linkTo(profileAvatarPicture.bottom, 8.dp)
             }
         ) {
             Column(
@@ -206,22 +214,22 @@ fun UserProfilePreviewLoader(
                         .shimmerEffect(true)
                         .fillMaxWidth()
                 )
-                    Row(
-                        modifier = Modifier,
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(4.dp, Alignment.Start)
-                    ) {
-                        Spacer(
-                            modifier = Modifier
-                                .shimmerEffect(true)
-                                .size(height = 12.dp, width = 10.dp)
-                        )
-                        Spacer(
-                            modifier = Modifier
-                                .shimmerEffect(true)
-                                .fillMaxWidth()
-                        )
-                    }
+                Row(
+                    modifier = Modifier,
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(4.dp, Alignment.Start)
+                ) {
+                    Spacer(
+                        modifier = Modifier
+                            .shimmerEffect(true)
+                            .size(height = 12.dp, width = 10.dp)
+                    )
+                    Spacer(
+                        modifier = Modifier
+                            .shimmerEffect(true)
+                            .fillMaxWidth()
+                    )
+                }
 
 
             }

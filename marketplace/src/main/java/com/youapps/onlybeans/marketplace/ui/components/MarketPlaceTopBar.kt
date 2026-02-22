@@ -25,8 +25,8 @@ import com.youapps.onlybeans.marketplace.R
 @Composable
 fun MarketplaceTopBar(
     modifier: Modifier = Modifier,
-    searchQuery : String,
-    onSearchQueryChanged : (String)-> Unit
+    searchQuery: String,
+    onSearchQueryChanged: (String) -> Unit
 ) {
     Column(
         modifier = modifier,
@@ -74,10 +74,10 @@ fun MarketplaceTopBar(
                 .fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
-        ){
+        ) {
             OBSearchField(
                 modifier = Modifier.fillMaxWidth(),
-                query =searchQuery,
+                query = searchQuery,
                 onSearchQueryChanged = onSearchQueryChanged,
                 placeholderRes = R.string.marketplace_search_input_placeholder
             )

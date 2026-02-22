@@ -37,40 +37,40 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.youapps.designsystem.LinkColor
 import com.youapps.designsystem.OBFontFamilies
-import com.youapps.onlybeans.designsystem.R
 import com.youapps.designsystem.TonedDark
 import com.youapps.designsystem.components.text.PlaceholderText
 import com.youapps.designsystem.onBackgroundShadedDarkMode
 import com.youapps.designsystem.onBackgroundShadedLightMode
+import com.youapps.onlybeans.designsystem.R
 
 
 internal class LinkVisualTransformation(
-    private val onLinkClicked : (link : String)-> Unit
-): VisualTransformation{
+    private val onLinkClicked: (link: String) -> Unit
+) : VisualTransformation {
 
     override fun filter(text: AnnotatedString): TransformedText {
         return TransformedText(
             text = buildAnnotatedString {
-                    withLink(
-                        link = LinkAnnotation.Clickable(
-                            tag = "LinkVisualTransformation",
-                            linkInteractionListener = {
-                                onLinkClicked(text.toString())
-                            },
-                            styles = TextLinkStyles(
-                                style = SpanStyle(
-                                    background = LinkColor,
-                                    fontSize = 14.sp,
-                                    fontStyle = FontStyle.Normal,
-                                    fontFamily = OBFontFamilies.MainRegularFontFamily,
-                                    letterSpacing = 1.sp
-                                )
+                withLink(
+                    link = LinkAnnotation.Clickable(
+                        tag = "LinkVisualTransformation",
+                        linkInteractionListener = {
+                            onLinkClicked(text.toString())
+                        },
+                        styles = TextLinkStyles(
+                            style = SpanStyle(
+                                background = LinkColor,
+                                fontSize = 14.sp,
+                                fontStyle = FontStyle.Normal,
+                                fontFamily = OBFontFamilies.MainRegularFontFamily,
+                                letterSpacing = 1.sp
                             )
-                        ),
-                    ) {
-                        append(text = text)
-                    }
-            } ,
+                        )
+                    ),
+                ) {
+                    append(text = text)
+                }
+            },
             OffsetMapping.Identity
         )
     }
@@ -82,9 +82,9 @@ fun LinkInputField(
     link: String,
     isEnabled: Boolean = true,
     isRequired: Boolean = false,
-    errorMessage : String?=null,
+    errorMessage: String? = null,
     onLinkChanged: (link: String) -> Unit,
-    onValidLinkClicked : (link: String) -> Unit
+    onValidLinkClicked: (link: String) -> Unit
 ) {
     Column(
         modifier = modifier,
@@ -117,7 +117,7 @@ fun LinkInputField(
                 lineHeight = 24.sp
             ),
             value = link,
-            keyboardActions= KeyboardActions.Default,
+            keyboardActions = KeyboardActions.Default,
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Text
             ),
@@ -131,7 +131,10 @@ fun LinkInputField(
                 Icon(
                     modifier = Modifier.size(24.dp),
                     imageVector = ImageVector.vectorResource(R.drawable.ic_link),
-                    contentDescription = stringResource(R.string.content_description_link_button,link),
+                    contentDescription = stringResource(
+                        R.string.content_description_link_button,
+                        link
+                    ),
                     tint = MaterialTheme.colorScheme.onSurface
                 )
             },
@@ -151,16 +154,18 @@ fun LinkInputField(
                 focusedContainerColor = if (isSystemInDarkTheme()) TonedDark else Color.White,
                 unfocusedContainerColor = if (isSystemInDarkTheme()) TonedDark else Color.White,
                 errorContainerColor = if (isSystemInDarkTheme()) TonedDark else Color.White,
-                cursorColor =   MaterialTheme.colorScheme.primary,
-                focusedLabelColor =  MaterialTheme.colorScheme.primary,
+                cursorColor = MaterialTheme.colorScheme.primary,
+                focusedLabelColor = MaterialTheme.colorScheme.primary,
                 focusedTrailingIconColor = Color.Unspecified,
                 focusedBorderColor = MaterialTheme.colorScheme.primary,
                 unfocusedLabelColor = if (isSystemInDarkTheme()) onBackgroundShadedDarkMode else onBackgroundShadedLightMode,
-                disabledContainerColor = if (isSystemInDarkTheme()) Color(0xFF333333) else Color(0xFFD9D9D9),
+                disabledContainerColor = if (isSystemInDarkTheme()) Color(0xFF333333) else Color(
+                    0xFFD9D9D9
+                ),
                 disabledTextColor = Color(0xFFB3B3B3),
                 unfocusedBorderColor = Color(0xFFD9D9D9),
-                unfocusedTextColor =  MaterialTheme.colorScheme.onSurface,
-                focusedTextColor =  MaterialTheme.colorScheme.onSurface
+                unfocusedTextColor = MaterialTheme.colorScheme.onSurface,
+                focusedTextColor = MaterialTheme.colorScheme.onSurface
             ),
             onValueChange = onLinkChanged
         )

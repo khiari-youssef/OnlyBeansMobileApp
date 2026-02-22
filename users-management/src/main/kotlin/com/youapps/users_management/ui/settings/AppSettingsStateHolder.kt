@@ -6,13 +6,13 @@ import androidx.compose.runtime.remember
 
 
 data class AppSettingsStateHolder(
-  val isAutoLoginEnabled : State<Boolean>
-){
-    companion object{
+    val isAutoLoginEnabled: State<Boolean>
+) {
+    companion object {
         @Composable
         fun rememberAppSettingsState(
-            isAutoLoginEnabled : State<Boolean>
-        ) : AppSettingsStateHolder = remember(isAutoLoginEnabled) {
+            isAutoLoginEnabled: State<Boolean>
+        ): AppSettingsStateHolder = remember(isAutoLoginEnabled) {
             AppSettingsStateHolder(isAutoLoginEnabled)
         }
     }

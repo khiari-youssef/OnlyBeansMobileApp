@@ -1,14 +1,14 @@
 package com.youapps.onlybeans.domain.valueobjects
 
 
-sealed interface OBAuthInterface{
+sealed interface OBAuthInterface {
 
     data class OBTokenLogin(
-        val value : String
+        val value: String
     ) : OBAuthInterface
 
     data class OBCredentialsLogin(
-        val password : String,
-        val email : String
+        val password: String,
+        val email: String
     ) : OBAuthInterface
 }

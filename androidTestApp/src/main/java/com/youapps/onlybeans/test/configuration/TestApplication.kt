@@ -16,7 +16,7 @@ class TestApplication : Application() {
             androidContext(
                 InstrumentationRegistry.getInstrumentation().targetContext.applicationContext
             )
-            modules(listOf(testModule,androidSecurityModule, viewModelsModule))
+            modules(listOf(testModule, androidSecurityModule, viewModelsModule))
         }
     }
 }

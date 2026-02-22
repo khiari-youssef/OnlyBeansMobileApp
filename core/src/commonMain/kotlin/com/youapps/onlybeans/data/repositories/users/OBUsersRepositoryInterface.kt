@@ -8,15 +8,15 @@ import com.youapps.onlybeans.domain.valueobjects.OBAuthInterface
 interface OBUsersRepositoryInterface {
 
     suspend fun authenticateUser(
-       loginMethodInterface: OBAuthInterface
-    ) : OBUserProfile
+        loginMethodInterface: OBAuthInterface
+    ): OBUserProfile
 
 
-    suspend fun getActiveUserSessionToken() : String?
+    suspend fun getActiveUserSessionToken(): String?
 
-    suspend fun clearUsersFromLocalStorage() : Boolean
+    suspend fun clearUsersFromLocalStorage(): Boolean
 
-    suspend fun getCurrentUserData(withRefresh : Boolean = false) : OBUserProfile?
+    suspend fun getCurrentUserData(withRefresh: Boolean = false): OBUserProfile?
 
 
 }

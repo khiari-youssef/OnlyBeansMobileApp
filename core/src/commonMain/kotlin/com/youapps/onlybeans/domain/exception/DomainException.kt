@@ -1,8 +1,7 @@
 package com.youapps.onlybeans.domain.exception
 
 
-
-enum class DomainErrorType{
+enum class DomainErrorType {
     InvalidCredentials,
     AccountLocked,
     Undefined,
@@ -10,8 +9,9 @@ enum class DomainErrorType{
     Unauthorized,
     NotFound
 }
- class DomainException(
-    override val cause: Throwable?=null,
-    override val message: String?=null,
-     val errorType : DomainErrorType
+
+class DomainException(
+    override val cause: Throwable? = null,
+    override val message: String? = null,
+    val errorType: DomainErrorType
 ) : Exception()

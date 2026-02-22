@@ -19,7 +19,7 @@ import org.koin.test.inject
 
 
 @RunWith(JUnit4::class)
-class AppLaunchNavigationScreenStateTestCases : KoinTest{
+class AppLaunchNavigationScreenStateTestCases : KoinTest {
 
     private val instrumentationContext: Context by inject()
 
@@ -31,9 +31,9 @@ class AppLaunchNavigationScreenStateTestCases : KoinTest{
     fun testMainNavigationWhenLoginScreenShouldBeTheStartDestination() {
         composeMainActivityTestRule.activity.run {
             setContent {
-                    OBTheme {
+                OBTheme {
 
-                    }
+                }
             }
         }
         composeMainActivityTestRule
@@ -45,10 +45,10 @@ class AppLaunchNavigationScreenStateTestCases : KoinTest{
     @Test
     fun testMainNavigationWhenLoginScreenIsSkippedForAutologin() {
         composeMainActivityTestRule.activity.run {
-           setContent {
-               OBTheme {
+            setContent {
+                OBTheme {
 
-               }
+                }
             }
         }
         composeMainActivityTestRule
@@ -64,11 +64,11 @@ class AppLaunchNavigationScreenStateTestCases : KoinTest{
     @Test
     fun testMainActivityScreenWhenAnUndefinedBiometricAuthErrorOccurs() {
         composeMainActivityTestRule.activity.run {
-             setContent {
-                   OBTheme {
+            setContent {
+                OBTheme {
 
-               }
-           }
+                }
+            }
         }
         composeMainActivityTestRule.onNodeWithContentDescription(
             "InfoPopup"
@@ -114,12 +114,12 @@ class AppLaunchNavigationScreenStateTestCases : KoinTest{
     @Test
     fun testMainActivityScreenWhenHardwareUnavailableBiometricAuthErrorOccurs() {
         composeMainActivityTestRule.activity.run {
-            setContent{
-           OBTheme {
+            setContent {
+                OBTheme {
 
 
-               }
-           }
+                }
+            }
         }
         composeMainActivityTestRule.onNodeWithContentDescription(
             "InfoPopup"
@@ -137,7 +137,7 @@ class AppLaunchNavigationScreenStateTestCases : KoinTest{
 
                 }
             }
-           }
+        }
         composeMainActivityTestRule.onNodeWithContentDescription(
             "InfoPopup"
         ).run {

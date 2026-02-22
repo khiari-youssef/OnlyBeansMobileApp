@@ -16,12 +16,9 @@ import com.youapps.onlybeans.domain.entities.products.OBRoastLevel
 import com.youapps.onlybeans.domain.entities.users.OBLocation
 import com.youapps.onlybeans.marketplace.domain.entities.MarketPlaceNewsCard
 import com.youapps.onlybeans.marketplace.ui.components.lists.MarketPlaceProductGridListData
-import com.youapps.onlybeans.ui.product.obCoffeeBeansMockProduct
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.getAndUpdate
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -54,7 +51,7 @@ class MarketPlaceViewModel : ViewModel() {
             _marketPlaceProductGridListState.update {
                 MarketPlaceProductGridListState.Success(
                     data = MarketPlaceProductGridListData(
-                        items = List(10){
+                        items = List(10) {
                             OBMarketPlaceProduct(
                                 marketPlaceID = "marketplace-id-0aegd2sh15srh1",
                                 product = OBCoffeeBeansProductDetails(
@@ -62,7 +59,7 @@ class MarketPlaceViewModel : ViewModel() {
                                     categoryID = "coffee_beans",
                                     name = "Ethiopian Yirgacheffe",
                                     displayMetadata = "100% Arabica • Single Origin • Medium Roast",
-                                    productCovers =  listOf(
+                                    productCovers = listOf(
                                         "https://plus.unsplash.com/premium_photo-1724820188081-17b09ee3f2b7?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                                         "https://plus.unsplash.com/premium_photo-1724820188081-17b09ee3f2b7?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                                     ),
@@ -84,13 +81,13 @@ class MarketPlaceViewModel : ViewModel() {
                                         id = "coffee-roaster-0xatdhshzrhfsdj",
                                         name = "Bloom Coffee Co.",
                                         description = "Roasting small batches in Seattle, WA since 2015.",
-                                        locations = listOf(OBLocation(23.154757,65.2254789))
-                                    ) ,
+                                        locations = listOf(OBLocation(23.154757, 65.2254789))
+                                    ),
                                     roastDate = "04-02-2026",
                                     endConsumptionDate = "04-05-2026",
                                     flavorProfileData = OBFlavorProfileData(
                                         description = "Complex & Floral",
-                                        radarChartData =  mapOf(
+                                        radarChartData = mapOf(
                                             "Acidity" to 80f,
                                             "Aroma" to 90f,
                                             "Sweetness" to 80f,
@@ -116,15 +113,15 @@ class MarketPlaceViewModel : ViewModel() {
                                 ),
                                 pricing = OBProductPricing.OBProductMultipleWeightBasedPricing(
                                     pricePerWeight = mapOf(
-                                        250 to OBPrice(price = 18.5f,0.2f),
+                                        250 to OBPrice(price = 18.5f, 0.2f),
                                         500 to OBPrice(price = 35f),
                                         1000 to OBPrice(price = 65f)
                                     ),
                                     currency = "USD",
                                     weightUnit = "g"
-                                ) ,
+                                ),
                                 isAddedToFavoriteList = it % 2 == 0,
-                                isAddedToCard =  it % 2 != 0,
+                                isAddedToCard = it % 2 != 0,
                                 inStockItems = 5,
                                 rating = OBProductRating(
                                     reviewsNumber = 124,
@@ -174,24 +171,25 @@ class MarketPlaceViewModel : ViewModel() {
     }
 
 
-    fun updateProductFavoriteStatus(productID : String,isFavorite : Boolean) {
+    fun updateProductFavoriteStatus(productID: String, isFavorite: Boolean) {
         val currentState = _marketPlaceProductGridListState.value
         if (currentState is MarketPlaceProductGridListState.Success) {
             val currentItems = currentState.data.items
-           _marketPlaceProductGridListState.update {
-               MarketPlaceProductGridListState.Success(
-                   data = currentState.data.copy(
-                       items = currentItems.map {
-                           if (it.product.id == productID) {
-                               it.copy(isAddedToFavoriteList = isFavorite)
-                           } else it
-                       }
-                   )
-               )
-           }
+            _marketPlaceProductGridListState.update {
+                MarketPlaceProductGridListState.Success(
+                    data = currentState.data.copy(
+                        items = currentItems.map {
+                            if (it.product.id == productID) {
+                                it.copy(isAddedToFavoriteList = isFavorite)
+                            } else it
+                        }
+                    )
+                )
+            }
         }
     }
-    fun updateCardStatus(productID : String,isAddedToCard : Boolean){
+
+    fun updateCardStatus(productID: String, isAddedToCard: Boolean) {
         val currentState = _marketPlaceProductGridListState.value
         if (currentState is MarketPlaceProductGridListState.Success) {
             val currentItems = currentState.data.items

@@ -25,16 +25,16 @@ import com.youapps.designsystem.onBackgroundShadedLightMode
 
 @Composable
 fun DualButtonPopup(
-    title : String,
-    subtitle : String?=null,
-    isShown : Boolean,
-    positiveButtonText : String,
-    negativeButtonText : String,
-    onPositiveButtonClicked : ()->Unit,
-    onNegativeButtonClicked : ()->Unit,
-    onDismissRequest : ()->Unit
+    title: String,
+    subtitle: String? = null,
+    isShown: Boolean,
+    positiveButtonText: String,
+    negativeButtonText: String,
+    onPositiveButtonClicked: () -> Unit,
+    onNegativeButtonClicked: () -> Unit,
+    onDismissRequest: () -> Unit
 ) {
-    if (isShown){
+    if (isShown) {
         Dialog(
             onDismissRequest = onDismissRequest
         ) {

@@ -2,7 +2,10 @@ package com.youapps.onlybeans.marketplace.ui.components
 
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.TextAutoSize
 import androidx.compose.material3.Icon
@@ -17,8 +20,6 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.youapps.onlybeans.R
-
 
 
 @Composable
@@ -26,9 +27,9 @@ fun OBProductRatingTag(
     modifier: Modifier = Modifier,
     rating: Float,
     reviewCount: Int,
-    backgroundColor : Color = Color.Transparent,
-     starColor : Color= Color(0xFFFFA000), // Deep Orange/Amber
-     textColor : Color = Color(0xFF8B4513)
+    backgroundColor: Color = Color.Transparent,
+    starColor: Color = Color(0xFFFFA000), // Deep Orange/Amber
+    textColor: Color = Color(0xFF8B4513)
 ) {
 
 

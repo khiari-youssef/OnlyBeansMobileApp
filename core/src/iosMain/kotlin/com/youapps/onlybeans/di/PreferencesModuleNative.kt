@@ -10,7 +10,7 @@ import platform.Foundation.NSURL
 import platform.Foundation.NSUserDomainMask
 
 @OptIn(ExperimentalForeignApi::class)
-actual val datastoreModule : Module = module {
+actual val datastoreModule: Module = module {
     factory(dataStorePathTag) {
         val documentDirectory: NSURL? = NSFileManager.defaultManager.URLForDirectory(
             directory = NSDocumentDirectory,

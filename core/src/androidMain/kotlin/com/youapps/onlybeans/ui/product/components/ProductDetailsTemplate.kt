@@ -1,6 +1,7 @@
 package com.youapps.onlybeans.ui.product.components
 
 import OBButtonContainedSecondary
+import OBButtonSize
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -31,20 +32,18 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.constraintlayout.compose.Dimension
 import com.youapps.designsystem.OBTheme
 import com.youapps.designsystem.components.dialogs.ImageViewerDialog
-import com.youapps.onlybeans.ui.product.OBProductTopBar
 import com.youapps.onlybeans.R
 import com.youapps.onlybeans.domain.entities.products.OBProduct
+import com.youapps.onlybeans.ui.product.OBProductTopBar
 import com.youapps.onlybeans.ui.product.obCoffeeBeansMockProduct
 
 @Preview()
 @Composable
-fun ProductDetailsTemplatePreview(){
+fun ProductDetailsTemplatePreview() {
 
-    OBTheme{
+    OBTheme {
         ProductDetailsTemplate(
             obProduct = obCoffeeBeansMockProduct,
             onBackClick = {
@@ -67,27 +66,27 @@ fun ProductDetailsTemplate(
     obProduct: OBProduct,
     onBackClick: () -> Unit,
     onShareClick: () -> Unit,
-    content : @Composable ColumnScope.()-> Unit
+    content: @Composable ColumnScope.() -> Unit
 ) {
     val topAppBarScrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
 
     Scaffold(
         modifier = modifier.nestedScroll(topAppBarScrollBehavior.nestedScrollConnection),
-     topBar = {
-         OBProductTopBar(
-             modifier = Modifier
-                 .fillMaxWidth(),
-             scrollBehavior = topAppBarScrollBehavior,
-             topAppBarColors = TopAppBarDefaults.topAppBarColors(
-                 containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(
-                     0.9f
-                 ),
-                 scrolledContainerColor = Color.Transparent
-             ),
-             onBackClick = onBackClick,
-             onShareClick = onShareClick
-         )
-     },
+        topBar = {
+            OBProductTopBar(
+                modifier = Modifier
+                    .fillMaxWidth(),
+                scrollBehavior = topAppBarScrollBehavior,
+                topAppBarColors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(
+                        0.9f
+                    ),
+                    scrolledContainerColor = Color.Transparent
+                ),
+                onBackClick = onBackClick,
+                onShareClick = onShareClick
+            )
+        },
         bottomBar = {
             Surface(
                 modifier = modifier,
@@ -97,7 +96,8 @@ fun ProductDetailsTemplate(
                     modifier = Modifier
                         .padding(
                             vertical = 8.dp
-                        ).fillMaxWidth(),
+                        )
+                        .fillMaxWidth(),
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center
                 ) {
@@ -116,11 +116,11 @@ fun ProductDetailsTemplate(
         }
     ) { _ ->
         val scrollState = rememberScrollState()
-        val imageViewerContent : MutableState<String?> = remember {
+        val imageViewerContent: MutableState<String?> = remember {
             mutableStateOf(null)
         }
         ImageViewerDialog(
-            imageUrl = imageViewerContent.value ?: "" ,
+            imageUrl = imageViewerContent.value ?: "",
             isVisible = imageViewerContent.value != null,
             onDismissRequest = {
                 imageViewerContent.value = null

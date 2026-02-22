@@ -7,55 +7,60 @@ import com.youapps.onlybeans.security.SupportedDeviceAuthenticationMethods
 @Stable
 @JvmInline
 value class BiometricCapabilitiesUIState(
-    val state : SupportedDeviceAuthenticationMethods
+    val state: SupportedDeviceAuthenticationMethods
 )
 
 @Composable
 fun BiometricCapabilitiesCheckUIHandler(
-    biometricCapabilitiesState : BiometricCapabilitiesUIState,
-    onOpenSettings : ()->Unit,
-    onQuitApp : ()->Unit,
-    onSuccessContent : @Composable ()->Unit
+    biometricCapabilitiesState: BiometricCapabilitiesUIState,
+    onOpenSettings: () -> Unit,
+    onQuitApp: () -> Unit,
+    onSuccessContent: @Composable () -> Unit
 ) {
-  when (biometricCapabilitiesState.state){
-      is SupportedDeviceAuthenticationMethods.Available->{
-           onSuccessContent()
-      }
-      is SupportedDeviceAuthenticationMethods.Unavailable ->{
-          BiometricIdentityNotRegisteredDialog(
-              isShown = true,
-              onClosed = onQuitApp,
-              onOpenSettings = onOpenSettings
-          )
-      }
-      is SupportedDeviceAuthenticationMethods.Undefined ->{
-          InfoPopup(
-              title = stringResource(id = R.string.error_biometric_temporararely_unavailable_title),
-              subtitle = stringResource(id = R.string.error_biometric_temporararely_unavailable_message),
-              isShown = true ,
-              buttonText = stringResource(id = com.youapps.onlybeans.designsystem.R.string.retry) ,
-              onButtonClicked = onOpenSettings,
-              onDismissRequest = onQuitApp
-          )
-      }
-      is SupportedDeviceAuthenticationMethods.Waiting ->{
+    when (biometricCapabilitiesState.state) {
+        is SupportedDeviceAuthenticationMethods.Available -> {
+            onSuccessContent()
+        }
 
-      }
-      is SupportedDeviceAuthenticationMethods.HardwareUnavailable->{
-          InfoPopup(
-              title = stringResource(id = R.string.error_biometric_undefined_title),
-              subtitle = stringResource(id = R.string.error_biometric_undefined_message),
-              isShown = true ,
-              buttonText = stringResource(id = com.youapps.onlybeans.designsystem.R.string.retry) ,
-              onButtonClicked = onOpenSettings,
-              onDismissRequest = onQuitApp
-          )
-      }
-      is SupportedDeviceAuthenticationMethods.NoHardware ->{
-          BiometricCapabilitiesNotFoundDialog(
-              isShown = true,
-              onClosed = onQuitApp
-          )
-      }
-  }
+        is SupportedDeviceAuthenticationMethods.Unavailable -> {
+            BiometricIdentityNotRegisteredDialog(
+                isShown = true,
+                onClosed = onQuitApp,
+                onOpenSettings = onOpenSettings
+            )
+        }
+
+        is SupportedDeviceAuthenticationMethods.Undefined -> {
+            InfoPopup(
+                title = stringResource(id = R.string.error_biometric_temporararely_unavailable_title),
+                subtitle = stringResource(id = R.string.error_biometric_temporararely_unavailable_message),
+                isShown = true,
+                buttonText = stringResource(id = com.youapps.onlybeans.designsystem.R.string.retry),
+                onButtonClicked = onOpenSettings,
+                onDismissRequest = onQuitApp
+            )
+        }
+
+        is SupportedDeviceAuthenticationMethods.Waiting -> {
+
+        }
+
+        is SupportedDeviceAuthenticationMethods.HardwareUnavailable -> {
+            InfoPopup(
+                title = stringResource(id = R.string.error_biometric_undefined_title),
+                subtitle = stringResource(id = R.string.error_biometric_undefined_message),
+                isShown = true,
+                buttonText = stringResource(id = com.youapps.onlybeans.designsystem.R.string.retry),
+                onButtonClicked = onOpenSettings,
+                onDismissRequest = onQuitApp
+            )
+        }
+
+        is SupportedDeviceAuthenticationMethods.NoHardware -> {
+            BiometricCapabilitiesNotFoundDialog(
+                isShown = true,
+                onClosed = onQuitApp
+            )
+        }
+    }
 }

@@ -1,4 +1,5 @@
 package com.youapps.onlybeans.data.dto
+
 import com.youapps.onlybeans.domain.entities.products.OBCoffeeCompany
 import com.youapps.onlybeans.domain.entities.products.OBCoffeeFarm
 import com.youapps.onlybeans.domain.entities.products.OBCoffeeShop
@@ -19,9 +20,9 @@ import kotlinx.serialization.json.Json
 
 internal data class OBCoffeeSpaceDTO(
     val id: String,
-    val data : Any
+    val data: Any
 ) {
-    fun toDomainModel() : OBCoffeeSpace = when(data) {
+    fun toDomainModel(): OBCoffeeSpace = when (data) {
         is OBHomeCoffeeBarDTO -> data.toDomainModel()
         is OBCoffeeShopDTO -> data.toDomainModel()
         is OBCoffeeCompanyDTO -> data.toDomainModel()
@@ -30,47 +31,52 @@ internal data class OBCoffeeSpaceDTO(
     }
 }
 
-internal const val OBHomeCoffeeBarID : String = "ob_home_coffee_bar"
-internal const val OBCoffeeShopID : String = "ob_coffee_shop"
-internal const val OBCoffeeCompanyID : String = "ob_coffee_company"
-internal const val OBCoffeeFarmID : String = "ob_coffee_farm"
+internal const val OBHomeCoffeeBarID: String = "ob_home_coffee_bar"
+internal const val OBCoffeeShopID: String = "ob_coffee_shop"
+internal const val OBCoffeeCompanyID: String = "ob_coffee_company"
+internal const val OBCoffeeFarmID: String = "ob_coffee_farm"
 
-internal  class  CoffeeSpaceSerialize() : KSerializer<OBCoffeeSpaceDTO> {
+internal class CoffeeSpaceSerialize() : KSerializer<OBCoffeeSpaceDTO> {
 
-    override val descriptor: SerialDescriptor = PrimitiveSerialDescriptor("CoffeeSpace", PrimitiveKind.STRING)
+    override val descriptor: SerialDescriptor =
+        PrimitiveSerialDescriptor("CoffeeSpace", PrimitiveKind.STRING)
 
     override fun serialize(
         encoder: Encoder,
         value: OBCoffeeSpaceDTO
     ) {
-        when(value.id) {
+        when (value.id) {
             OBHomeCoffeeBarID -> {
                 if (value.data is OBHomeCoffeeBarDTO) {
                     encoder.encodeSerializableValue(OBHomeCoffeeBarDTO.serializer(), value.data)
                 } else throw SerializationException(message = "The schema associated with the ID $OBHomeCoffeeBarID is not valid")
             }
+
             OBCoffeeShopID -> {
                 if (value.data is OBCoffeeShopDTO) {
                     encoder.encodeSerializableValue(OBCoffeeShopDTO.serializer(), value.data)
                 } else throw SerializationException(message = "The schema associated with the ID $OBCoffeeShopID is not valid")
             }
+
             OBCoffeeCompanyID -> {
                 if (value.data is OBCoffeeCompanyDTO) {
                     encoder.encodeSerializableValue(OBCoffeeCompanyDTO.serializer(), value.data)
                 } else throw SerializationException(message = "The schema associated with the ID $OBCoffeeCompanyID is not valid")
             }
+
             OBCoffeeFarmID -> {
                 if (value.data is OBCoffeeFarmDTO) {
                     encoder.encodeSerializableValue(OBCoffeeFarmDTO.serializer(), value.data)
                 } else throw SerializationException(message = "The schema associated with the ID $OBCoffeeFarmID is not valid")
             }
-            else ->  throw SerializationException(message = "no such id !")
+
+            else -> throw SerializationException(message = "no such id !")
         }
     }
 
     override fun deserialize(decoder: Decoder): OBCoffeeSpaceDTO {
-       val decodedString = decoder.decodeString()
-        val coffeeSpace : OBCoffeeSpaceDTO= Json.decodeFromString<OBCoffeeSpaceDTO>(decodedString)
+        val decodedString = decoder.decodeString()
+        val coffeeSpace: OBCoffeeSpaceDTO = Json.decodeFromString<OBCoffeeSpaceDTO>(decodedString)
         return coffeeSpace
     }
 
@@ -79,12 +85,12 @@ internal  class  CoffeeSpaceSerialize() : KSerializer<OBCoffeeSpaceDTO> {
 
 @Serializable
 data class OBFileDTO(
-    val uri : String?=null,
-    val isLocal : Boolean?=null,
-    val format : String?=null
-){
+    val uri: String? = null,
+    val isLocal: Boolean? = null,
+    val format: String? = null
+) {
 
-    fun toDomainModel() : OBFile? = uri?.run {
+    fun toDomainModel(): OBFile? = uri?.run {
         format?.run {
             OBFile(
                 uri = uri,
@@ -97,14 +103,14 @@ data class OBFileDTO(
 
 @Serializable
 internal data class OBHomeCoffeeBarDTO(
-    @SerialName("spaceId")  val spaceId : String,
-    @SerialName("userEmail") val userEmail : String,
-    @SerialName("description") val description : String,
-    @SerialName("gallery") val gallery : List<OBFileDTO>,
-    @SerialName("coffeeGear")  val coffeeGear : List<OBProductListItemDTO>,
-    @SerialName("coffeeBeans")  val coffeeBeans : List<OBProductListItemDTO>
-){
-    fun toDomainModel() : OBHomeCoffeeBar {
+    @SerialName("spaceId") val spaceId: String,
+    @SerialName("userEmail") val userEmail: String,
+    @SerialName("description") val description: String,
+    @SerialName("gallery") val gallery: List<OBFileDTO>,
+    @SerialName("coffeeGear") val coffeeGear: List<OBProductListItemDTO>,
+    @SerialName("coffeeBeans") val coffeeBeans: List<OBProductListItemDTO>
+) {
+    fun toDomainModel(): OBHomeCoffeeBar {
         return OBHomeCoffeeBar(
             spaceId = this.spaceId,
             userEmail = this.userEmail,
@@ -128,14 +134,14 @@ internal data class OBHomeCoffeeBarDTO(
 
 @Serializable
 internal data class OBCoffeeShopDTO(
-    @SerialName("spaceId")  val spaceId : String,
-    @SerialName("userEmail") val userEmail : String,
-    @SerialName("description") val description : String,
-    @SerialName("gallery") val gallery : List<String>,
-    @SerialName("coffeeGear")  val coffeeGear : List<OBProductListItemDTO>,
-    @SerialName("coffeeBeans")  val coffeeBeans : List<OBProductListItemDTO>
+    @SerialName("spaceId") val spaceId: String,
+    @SerialName("userEmail") val userEmail: String,
+    @SerialName("description") val description: String,
+    @SerialName("gallery") val gallery: List<String>,
+    @SerialName("coffeeGear") val coffeeGear: List<OBProductListItemDTO>,
+    @SerialName("coffeeBeans") val coffeeBeans: List<OBProductListItemDTO>
 ) {
-    fun toDomainModel() : OBCoffeeShop = OBCoffeeShop(
+    fun toDomainModel(): OBCoffeeShop = OBCoffeeShop(
         spaceId = this.spaceId,
         userEmail = this.userEmail,
         description = this.description,
@@ -150,14 +156,14 @@ internal data class OBCoffeeShopDTO(
 
 @Serializable
 internal data class OBCoffeeCompanyDTO(
-    @SerialName("spaceId")  val spaceId : String,
-    @SerialName("userEmail") val userEmail : String,
-    @SerialName("description") val description : String,
-    @SerialName("gallery") val gallery : List<String>,
-    @SerialName("coffeeGear")  val coffeeGear : List<OBProductListItemDTO>,
-    @SerialName("coffeeBeans")  val coffeeBeans : List<OBProductListItemDTO>
+    @SerialName("spaceId") val spaceId: String,
+    @SerialName("userEmail") val userEmail: String,
+    @SerialName("description") val description: String,
+    @SerialName("gallery") val gallery: List<String>,
+    @SerialName("coffeeGear") val coffeeGear: List<OBProductListItemDTO>,
+    @SerialName("coffeeBeans") val coffeeBeans: List<OBProductListItemDTO>
 ) {
-    fun toDomainModel() : OBCoffeeCompany = OBCoffeeCompany(
+    fun toDomainModel(): OBCoffeeCompany = OBCoffeeCompany(
         spaceId = this.spaceId,
         userEmail = this.userEmail,
         description = this.description,
@@ -171,14 +177,14 @@ internal data class OBCoffeeCompanyDTO(
 
 @Serializable
 internal data class OBCoffeeFarmDTO(
-    @SerialName("spaceId")  val spaceId : String,
-    @SerialName("userEmail") val userEmail : String,
-    @SerialName("description") val description : String,
-    @SerialName("gallery") val gallery : List<String>,
-    @SerialName("coffeeGear")  val coffeeGear : List<OBProductListItemDTO>,
-    @SerialName("coffeeBeans")  val coffeeBeans : List<OBProductListItemDTO>
+    @SerialName("spaceId") val spaceId: String,
+    @SerialName("userEmail") val userEmail: String,
+    @SerialName("description") val description: String,
+    @SerialName("gallery") val gallery: List<String>,
+    @SerialName("coffeeGear") val coffeeGear: List<OBProductListItemDTO>,
+    @SerialName("coffeeBeans") val coffeeBeans: List<OBProductListItemDTO>
 ) {
-    fun toDomainModel() : OBCoffeeFarm = OBCoffeeFarm(
+    fun toDomainModel(): OBCoffeeFarm = OBCoffeeFarm(
         spaceId = this.spaceId,
         userEmail = this.userEmail,
         description = this.description,

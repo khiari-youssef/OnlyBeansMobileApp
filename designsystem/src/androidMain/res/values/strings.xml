@@ -54,8 +54,7 @@
     <string name="location_disabled">Location Disabled</string>
 
 
-
-     <!-- Content description-->
+    <!-- Content description-->
     <string name="content_description_drop_down_item">Drop down item : %s</string>
     <string name="content_description_back_button">Back button icon</string>
     <string name="content_description_delete_button">Delete button icon</string>
@@ -73,8 +72,7 @@
     <string name="content_description_product_item_add_to_card_button">Add to card button</string>
     <string name="content_description_rating_star_icon">Rating star icon</string>
 
-"
-
+    "
 
 
     <!-- <string name="carousel_placeholder">¡Aún no hay imágenes ni vídeos en tu galería!</string> -->

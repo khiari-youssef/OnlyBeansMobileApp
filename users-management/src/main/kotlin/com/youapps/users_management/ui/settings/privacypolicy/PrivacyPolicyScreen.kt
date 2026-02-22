@@ -12,7 +12,7 @@ import com.youapps.onlybeans.users_management.R
 
 @Composable
 fun PrivacyPolicyScreen(
-    onBackPressed : ()->Unit
+    onBackPressed: () -> Unit
 ) {
     DetailsScreenTemplate(
         modifier = Modifier,

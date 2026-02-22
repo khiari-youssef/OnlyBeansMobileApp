@@ -1,10 +1,12 @@
 <resources>
+
     <style name="AppTheme" parent="android:Theme.Material.NoActionBar">
         <item name="android:colorBackground">@color/screenBackgroundColor</item>
         <item name="android:statusBarColor">@color/primaryColor</item>
         <item name="android:navigationBarColor">@color/primaryColor</item>
         <item name="android:windowTranslucentStatus">false</item>
     </style>
+
     <style name="SesameSplashScreen" parent="Theme.SplashScreen">
         <item name="android:statusBarColor">@color/primaryColorDark</item>
         <item name="android:windowTranslucentStatus">true</item>

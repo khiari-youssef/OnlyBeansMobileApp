@@ -21,18 +21,18 @@ import com.youapps.onlybeans.designsystem.R
 @Composable
 fun OBCoverPhoto(
     modifier: Modifier = Modifier,
-    url : String?,
-    contentDescription : String?=null
+    url: String?,
+    contentDescription: String? = null
 ) {
     val isLoading = remember {
         mutableStateOf(true)
     }
-    val coverAutoSize : MutableState<IntSize?> = remember {
+    val coverAutoSize: MutableState<IntSize?> = remember {
         mutableStateOf(null)
     }
     AsyncImage(
         modifier = modifier
-            .onGloballyPositioned{
+            .onGloballyPositioned {
                 coverAutoSize.value = it.size
             }
             .shimmerEffect(isLoading.value),
@@ -42,7 +42,7 @@ fun OBCoverPhoto(
             .size {
                 coverAutoSize.value?.let {
                     Size(
-                        width = it.width ,
+                        width = it.width,
                         height = it.height
                     )
                 } ?: Size.ORIGINAL
@@ -52,7 +52,7 @@ fun OBCoverPhoto(
             .diskCachePolicy(CachePolicy.ENABLED)
             .crossfade(true)
             .build(),
-        onState = {state->
+        onState = { state ->
             isLoading.value = state is AsyncImagePainter.State.Loading
         },
         contentDescription = contentDescription

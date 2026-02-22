@@ -8,20 +8,21 @@ import org.gradle.kotlin.dsl.getByType
 
 internal val Project.libs
     get(): VersionCatalog = extensions.getByType<VersionCatalogsExtension>().named("libs")
+
 internal fun Project.configureKotlinAndroid(
-    commonExtension: CommonExtension<*, *, *, *, *,*>,
+    commonExtension: CommonExtension<*, *, *, *, *, *>,
 ) {
     commonExtension.apply {
-        compileSdk =  libs.findVersion("compileSdk").get().toString().toInt()
+        compileSdk = libs.findVersion("compileSdk").get().toString().toInt()
         defaultConfig {
             minSdk = libs.findVersion("minSdk").get().toString().toInt()
         }
-        buildFeatures{
+        buildFeatures {
             compose = true
             buildConfig = true
         }
-        composeOptions{
-            kotlinCompilerExtensionVersion =  libs.findVersion("compose-compiler").get().toString()
+        composeOptions {
+            kotlinCompilerExtensionVersion = libs.findVersion("compose-compiler").get().toString()
         }
         compileOptions {
             sourceCompatibility = JavaVersion.VERSION_21

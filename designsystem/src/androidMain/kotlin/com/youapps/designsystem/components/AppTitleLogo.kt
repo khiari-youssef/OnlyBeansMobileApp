@@ -21,29 +21,28 @@ import com.youapps.onlybeans.designsystem.R
 fun AppTitleLogo(
     modifier: Modifier = Modifier
 ) {
-       Row(
-           modifier = modifier,
-           verticalAlignment = Alignment.CenterVertically,
-           horizontalArrangement = Arrangement.Absolute.Center
-       ) {
-           Image(
-               modifier = Modifier
-                   .size(32.dp),
-               imageVector = ImageVector.vectorResource(id = R.drawable.ic_coffee_bean),
-               contentDescription = ""
-           )
-           Text(
-               modifier = modifier,
-               textAlign = TextAlign.Center,
-               style = TextStyle(
-                   color = MaterialTheme.colorScheme.primary,
-                   fontFamily = FontFamily(fonts = listOf(Font(R.font.app_title_font))),
-                   fontSize = 48.sp
-               ),
-               text = "nly Beans"
-           )
-       }
-
+    Row(
+        modifier = modifier,
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Absolute.Center
+    ) {
+        Image(
+            modifier = Modifier
+                .size(32.dp),
+            imageVector = ImageVector.vectorResource(id = R.drawable.ic_coffee_bean),
+            contentDescription = ""
+        )
+        Text(
+            modifier = modifier,
+            textAlign = TextAlign.Center,
+            style = TextStyle(
+                color = MaterialTheme.colorScheme.primary,
+                fontFamily = FontFamily(fonts = listOf(Font(R.font.app_title_font))),
+                fontSize = 48.sp
+            ),
+            text = "nly Beans"
+        )
+    }
 
 
 }

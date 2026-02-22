@@ -14,46 +14,46 @@ val LoginScreenConfigurationPortrait = ConstraintSet {
     val appTitleLogo = createRefFor("AppTitleLogo")
     val loginToastRef = createRefFor("toast")
 
-    constrain(signUpAction){
-        top.linkTo(loginFormRef.bottom,32.dp)
+    constrain(signUpAction) {
+        top.linkTo(loginFormRef.bottom, 32.dp)
         start.linkTo(parent.start)
         end.linkTo(parent.end)
         width = Dimension.fillToConstraints
     }
-    constrain(loginToastRef){
+    constrain(loginToastRef) {
         start.linkTo(parent.start)
         end.linkTo(parent.end)
-        bottom.linkTo(parent.bottom,24.dp)
+        bottom.linkTo(parent.bottom, 24.dp)
     }
-    constrain(loginScreenTop){
-        top.linkTo(parent.top,32.dp)
+    constrain(loginScreenTop) {
+        top.linkTo(parent.top, 32.dp)
         start.linkTo(parent.start)
         end.linkTo(parent.end)
     }
-    constrain(appTitleLogo){
-        top.linkTo(loginScreenTop.bottom,48.dp)
-        start.linkTo(parent.start)
-        end.linkTo(parent.end)
-        width = Dimension.fillToConstraints
-    }
-    constrain(loginFormRef){
-        top.linkTo(appTitleLogo.bottom,48.dp)
+    constrain(appTitleLogo) {
+        top.linkTo(loginScreenTop.bottom, 48.dp)
         start.linkTo(parent.start)
         end.linkTo(parent.end)
         width = Dimension.fillToConstraints
-        height = Dimension.wrapContent
     }
-    constrain(loginButtonRef){
-        top.linkTo(signUpAction.bottom,32.dp)
+    constrain(loginFormRef) {
+        top.linkTo(appTitleLogo.bottom, 48.dp)
         start.linkTo(parent.start)
         end.linkTo(parent.end)
         width = Dimension.fillToConstraints
         height = Dimension.wrapContent
     }
-    constrain(loginFooterRef){
+    constrain(loginButtonRef) {
+        top.linkTo(signUpAction.bottom, 32.dp)
         start.linkTo(parent.start)
         end.linkTo(parent.end)
-        bottom.linkTo(parent.bottom,8.dp)
+        width = Dimension.fillToConstraints
+        height = Dimension.wrapContent
+    }
+    constrain(loginFooterRef) {
+        start.linkTo(parent.start)
+        end.linkTo(parent.end)
+        bottom.linkTo(parent.bottom, 8.dp)
     }
 }
 
@@ -67,47 +67,47 @@ val LoginScreenConfigurationLandscape = ConstraintSet {
     val loginToastRef = createRefFor("toast")
     val horizentalGuideline = createGuidelineFromBottom(0.3f)
 
-    constrain(signUpAction){
+    constrain(signUpAction) {
         top.linkTo(loginFormRef.bottom)
         start.linkTo(parent.start)
         end.linkTo(parent.end)
         width = Dimension.fillToConstraints
     }
-    constrain(loginToastRef){
-        start.linkTo(parent.start,16.dp)
-        end.linkTo(parent.end,16.dp)
-        bottom.linkTo(parent.bottom,24.dp)
+    constrain(loginToastRef) {
+        start.linkTo(parent.start, 16.dp)
+        end.linkTo(parent.end, 16.dp)
+        bottom.linkTo(parent.bottom, 24.dp)
     }
-    constrain(loginScreenTop){
-        top.linkTo(parent.top,16.dp)
+    constrain(loginScreenTop) {
+        top.linkTo(parent.top, 16.dp)
         start.linkTo(parent.start)
     }
-    constrain(appTitleLogo){
-        top.linkTo(loginScreenTop.bottom,16.dp)
+    constrain(appTitleLogo) {
+        top.linkTo(loginScreenTop.bottom, 16.dp)
         start.linkTo(parent.start)
         end.linkTo(loginScreenTop.end)
         bottom.linkTo(horizentalGuideline)
         height = Dimension.fillToConstraints
     }
-    constrain(loginFormRef){
-        top.linkTo(parent.top,24.dp)
-        start.linkTo(loginScreenTop.end,12.dp)
-        end.linkTo(parent.end,12.dp)
-        bottom.linkTo(horizentalGuideline,8.dp)
+    constrain(loginFormRef) {
+        top.linkTo(parent.top, 24.dp)
+        start.linkTo(loginScreenTop.end, 12.dp)
+        end.linkTo(parent.end, 12.dp)
+        bottom.linkTo(horizentalGuideline, 8.dp)
         width = Dimension.fillToConstraints
         height = Dimension.wrapContent
     }
-    constrain(loginButtonRef){
-        top.linkTo(horizentalGuideline,8.dp)
+    constrain(loginButtonRef) {
+        top.linkTo(horizentalGuideline, 8.dp)
         start.linkTo(parent.start)
         end.linkTo(parent.end)
-        bottom.linkTo(loginFooterRef.top,8.dp)
+        bottom.linkTo(loginFooterRef.top, 8.dp)
         width = Dimension.fillToConstraints
         height = Dimension.wrapContent
     }
-    constrain(loginFooterRef){
+    constrain(loginFooterRef) {
         start.linkTo(parent.start)
         end.linkTo(parent.end)
-        bottom.linkTo(parent.bottom,8.dp)
+        bottom.linkTo(parent.bottom, 8.dp)
     }
 }

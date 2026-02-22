@@ -8,10 +8,10 @@ import com.youapps.onlybeans.domain.exception.DomainErrorType
 sealed interface ProfileScreenState {
 
     @Immutable
-    data class Loading(val withPullToRefresh : Boolean = false) : ProfileScreenState
+    data class Loading(val withPullToRefresh: Boolean = false) : ProfileScreenState
 
     @Immutable
-    data class Error(val error : DomainErrorType) : ProfileScreenState
+    data class Error(val error: DomainErrorType) : ProfileScreenState
 
     @Immutable
     data class Loaded(val profile: OBUserProfile) : ProfileScreenState

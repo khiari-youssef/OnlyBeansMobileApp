@@ -2,10 +2,7 @@ package com.youapps.onlybeans.ui.product
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Badge
-import androidx.compose.material3.BadgedBox
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
@@ -31,9 +28,9 @@ import com.youapps.onlybeans.designsystem.R
 @Composable
 fun OBProductTopBar(
     modifier: Modifier = Modifier,
-    title: String?=null,
-    scrollBehavior: TopAppBarScrollBehavior?=null,
-    topAppBarColors : TopAppBarColors = TopAppBarDefaults.topAppBarColors(
+    title: String? = null,
+    scrollBehavior: TopAppBarScrollBehavior? = null,
+    topAppBarColors: TopAppBarColors = TopAppBarDefaults.topAppBarColors(
         containerColor = Color.Transparent,
         scrolledContainerColor = MaterialTheme.colorScheme.primary
     ),
@@ -42,7 +39,7 @@ fun OBProductTopBar(
 ) {
     CenterAlignedTopAppBar(
         modifier = modifier,
-        scrollBehavior =scrollBehavior ,
+        scrollBehavior = scrollBehavior,
         title = {
             title?.run {
                 Text(
@@ -65,7 +62,10 @@ fun OBProductTopBar(
                 contentColor = MaterialTheme.colorScheme.onSurface,
                 elevation = FloatingActionButtonDefaults.elevation(4.dp)
             ) {
-                Icon(ImageVector.vectorResource(R.drawable.ic_back), contentDescription = stringResource(R.string.content_description_back_button))
+                Icon(
+                    ImageVector.vectorResource(R.drawable.ic_back),
+                    contentDescription = stringResource(R.string.content_description_back_button)
+                )
             }
         },
         actions = {

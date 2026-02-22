@@ -6,15 +6,15 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 internal class OBUserAccountDTO(
-    @SerialName("id") val id : String,
-    @SerialName("email")val email : String,
-    @SerialName("phone")val phone : String,
-    @SerialName("userProfile") val userProfile : OBUserProfileDTO
+    @SerialName("id") val id: String,
+    @SerialName("email") val email: String,
+    @SerialName("phone") val phone: String,
+    @SerialName("userProfile") val userProfile: OBUserProfileDTO
 ) {
 
 
-    fun toDomainModel() : OBUserAccount = OBUserAccount(
-        id= id,
+    fun toDomainModel(): OBUserAccount = OBUserAccount(
+        id = id,
         email = email,
         phone = phone,
         userProfile = userProfile.toDomainModel()

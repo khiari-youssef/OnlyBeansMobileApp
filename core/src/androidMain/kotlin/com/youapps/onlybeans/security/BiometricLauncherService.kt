@@ -9,22 +9,28 @@ import javax.crypto.SecretKey
 interface BiometricLauncherService {
 
 
-    val authenticationResultState : StateFlow<DeviceAuthenticationState>
-    fun launch(activity: FragmentActivity,title : String,
-               subtitle : String) : Flow<DeviceAuthenticationState>
+    val authenticationResultState: StateFlow<DeviceAuthenticationState>
+    fun launch(
+        activity: FragmentActivity, title: String,
+        subtitle: String
+    ): Flow<DeviceAuthenticationState>
 
-    fun launch(fragment: Fragment,title : String,
-               subtitle : String) : Flow<DeviceAuthenticationState>
+    fun launch(
+        fragment: Fragment, title: String,
+        subtitle: String
+    ): Flow<DeviceAuthenticationState>
 
-    fun launchAndEncrypt(activity: FragmentActivity,secretKey: SecretKey,title : String,
-                         subtitle : String) : Flow<DeviceAuthenticationState>
+    fun launchAndEncrypt(
+        activity: FragmentActivity, secretKey: SecretKey, title: String,
+        subtitle: String
+    ): Flow<DeviceAuthenticationState>
 
 
-    sealed interface DeviceAuthenticationState{
+    sealed interface DeviceAuthenticationState {
 
         data object Idle : DeviceAuthenticationState
         data object Failed : DeviceAuthenticationState
-        data class Error(val code : Int) : DeviceAuthenticationState{
+        data class Error(val code: Int) : DeviceAuthenticationState {
             override fun equals(other: Any?): Boolean {
                 return other is Error && other.code == this.code
             }
@@ -33,10 +39,11 @@ interface BiometricLauncherService {
                 return code
             }
         }
+
         data class Success(
-            val method : Int,
-            val data : ByteArray?=null
-            ) : DeviceAuthenticationState {
+            val method: Int,
+            val data: ByteArray? = null
+        ) : DeviceAuthenticationState {
             override fun equals(other: Any?): Boolean {
                 if (this === other) return true
                 if (javaClass != other?.javaClass) return false
@@ -61,7 +68,7 @@ interface BiometricLauncherService {
     }
 }
 
-sealed interface SupportedDeviceAuthenticationMethods{
+sealed interface SupportedDeviceAuthenticationMethods {
     data object Waiting : SupportedDeviceAuthenticationMethods
     data object Undefined : SupportedDeviceAuthenticationMethods
     data object NoHardware : SupportedDeviceAuthenticationMethods
@@ -69,5 +76,6 @@ sealed interface SupportedDeviceAuthenticationMethods{
     data object Unavailable : SupportedDeviceAuthenticationMethods
 
 
-    data class Available( val biometricLauncherService: BiometricLauncherService) : SupportedDeviceAuthenticationMethods
+    data class Available(val biometricLauncherService: BiometricLauncherService) :
+        SupportedDeviceAuthenticationMethods
 }

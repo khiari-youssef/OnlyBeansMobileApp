@@ -6,16 +6,17 @@ import kotlinx.coroutines.flow.Flow
 
 interface AppMetaDataAPI {
     suspend fun initAppData()
-     fun getCountriesList(limit: Int,offset: Int): Flow<List<OBCountry>>
-     suspend fun getCountryByCode(countryCode : String) : OBCountry?
+    fun getCountriesList(limit: Int, offset: Int): Flow<List<OBCountry>>
+    suspend fun getCountryByCode(countryCode: String): OBCountry?
 
-    suspend fun getDeviceLocalCountry() : OBCountry?
+    suspend fun getDeviceLocalCountry(): OBCountry?
 }
+
 internal expect class AppMetaDataAPIImpl : AppMetaDataAPI {
 
- override suspend fun initAppData()
- override  fun getCountriesList(limit: Int,offset: Int) : Flow<List<OBCountry>>
- override suspend fun getCountryByCode(countryCode: String): OBCountry?
-override suspend fun getDeviceLocalCountry(): OBCountry?
+    override suspend fun initAppData()
+    override fun getCountriesList(limit: Int, offset: Int): Flow<List<OBCountry>>
+    override suspend fun getCountryByCode(countryCode: String): OBCountry?
+    override suspend fun getDeviceLocalCountry(): OBCountry?
 
 }

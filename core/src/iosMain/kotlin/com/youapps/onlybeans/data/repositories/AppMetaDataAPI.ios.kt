@@ -10,7 +10,7 @@ actual class AppMetaDataAPIImpl : AppMetaDataAPI {
         TODO("iOs Implementation")
     }
 
-    actual override  fun getCountriesList(limit: Int,offset: Int) : Flow<List<OBCountry>> {
+    actual override fun getCountriesList(limit: Int, offset: Int): Flow<List<OBCountry>> {
         TODO("iOs Implementation")
     }
 

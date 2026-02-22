@@ -20,7 +20,8 @@ import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 
-internal val SearchCommunityRemoteDataSourceImplTag = named("SearchCommunityRemoteDataSourceImplTag")
+internal val SearchCommunityRemoteDataSourceImplTag =
+    named("SearchCommunityRemoteDataSourceImplTag")
 internal val SearchCommunityLocalDataSourceImplTag = named("SearchCommunityLocalDataSourceImplTag")
 internal val SearchCommunityRepositoryImplTag = named("SearchCommunityRepositoryImplTag")
 internal val SearchCommunityUseCaseImplTag = named("SearchCommunityUseCaseImplTag")
@@ -30,7 +31,7 @@ val searchModule = module {
     includes(sharedRepositories)
     includes(platformServicesModule)
     factory<SearchCommunityRemoteDataSource>(SearchCommunityRemoteDataSourceImplTag) {
-       SearchCommunityRemoteDataSourceImpl()
+        SearchCommunityRemoteDataSourceImpl()
     }
     factory<SearchCommunityLocalDataSource>(SearchCommunityLocalDataSourceImplTag) {
         SearchCommunityLocalDataSourceImpl()
@@ -41,7 +42,9 @@ val searchModule = module {
             get(SearchCommunityLocalDataSourceImplTag)
         )
     }
-    factory<UseCaseContract<OBMapSearchQuery,List<MapSearchDataPoint>>>(SearchCommunityUseCaseImplTag){
+    factory<UseCaseContract<OBMapSearchQuery, List<MapSearchDataPoint>>>(
+        SearchCommunityUseCaseImplTag
+    ) {
         SearchCommunityUseCase(
             get(SearchCommunityRepositoryImplTag)
         )
@@ -50,7 +53,7 @@ val searchModule = module {
         CommunitySearchViewModel(
             get(OBLocationServicePlayServicesImplTag),
             get(AppMetaDataAPITag),
-            get( SearchCommunityUseCaseImplTag)
+            get(SearchCommunityUseCaseImplTag)
         )
     }
 }

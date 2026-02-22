@@ -7,7 +7,7 @@ import com.google.android.gms.maps.LocationSource
 @Immutable
 class ManualLocationSource : LocationSource {
     private var mapListener: LocationSource.OnLocationChangedListener? = null
-    private var currentLocation : Location?=null
+    private var currentLocation: Location? = null
 
 
     override fun activate(listener: LocationSource.OnLocationChangedListener) {
@@ -19,11 +19,11 @@ class ManualLocationSource : LocationSource {
         this.mapListener = null
     }
 
-    fun getCurrentLocation() : Location?= currentLocation
+    fun getCurrentLocation(): Location? = currentLocation
 
     // You call this manually to push a new location to the blue dot
     fun pushLocation(location: Location) {
-        currentLocation= location
+        currentLocation = location
         mapListener?.onLocationChanged(location)
     }
 }

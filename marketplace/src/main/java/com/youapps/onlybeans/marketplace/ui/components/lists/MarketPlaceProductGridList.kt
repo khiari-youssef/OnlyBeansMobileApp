@@ -1,13 +1,10 @@
 package com.youapps.onlybeans.marketplace.ui.components.lists
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
@@ -32,21 +29,21 @@ fun MarketPlaceProductGridListPreview() {
         modifier = Modifier
             .fillMaxWidth(),
         data = MarketPlaceProductGridListData(
-            items = List(10){
+            items = List(10) {
                 OBMarketPlaceProduct(
                     marketPlaceID = "marketplace-id-0aegd2sh15srh1",
                     product = obCoffeeBeansMockProduct,
                     pricing = OBProductPricing.OBProductMultipleWeightBasedPricing(
                         pricePerWeight = mapOf(
-                            250 to OBPrice(price = 18.5f,0.2f),
+                            250 to OBPrice(price = 18.5f, 0.2f),
                             500 to OBPrice(price = 35f),
                             1000 to OBPrice(price = 65f)
                         ),
                         currency = "USD",
                         weightUnit = "g"
-                    ) ,
+                    ),
                     isAddedToFavoriteList = it % 2 == 0,
-                    isAddedToCard =  it % 2 != 0,
+                    isAddedToCard = it % 2 != 0,
                     inStockItems = 5,
                     rating = OBProductRating(
                         reviewsNumber = 124,
@@ -66,7 +63,7 @@ fun MarketPlaceProductGridListPreview() {
 
 @Immutable
 data class MarketPlaceProductGridListData(
-    val items : List<OBMarketPlaceProduct>
+    val items: List<OBMarketPlaceProduct>
 )
 
 
@@ -74,8 +71,8 @@ data class MarketPlaceProductGridListData(
 fun MarketPlaceProductGridList(
     modifier: Modifier = Modifier,
     data: MarketPlaceProductGridListData,
-    onAddToCardClicked : (product : OBMarketPlaceProduct,isAdded : Boolean)-> Unit,
-    onLikeClicked : (product : OBMarketPlaceProduct,isLiked : Boolean)-> Unit
+    onAddToCardClicked: (product: OBMarketPlaceProduct, isAdded: Boolean) -> Unit,
+    onLikeClicked: (product: OBMarketPlaceProduct, isLiked: Boolean) -> Unit
 ) {
     val gridState = rememberLazyGridState()
     LazyVerticalGrid(
@@ -84,20 +81,20 @@ fun MarketPlaceProductGridList(
         columns = GridCells.Fixed(2),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
-        content ={
+        content = {
             items(data.items.size, key = {
                 data.items[it].product.id
-            }){ index->
+            }) { index ->
                 MarketPlaceProductListItem(
                     modifier = Modifier
                         .fillMaxWidth()
                         .wrapContentHeight(),
-                    obProduct = data.items[index] ,
+                    obProduct = data.items[index],
                     onLikeClicked = {
-                        onLikeClicked(data.items[index],it)
+                        onLikeClicked(data.items[index], it)
                     },
                     onAddToCardClicked = {
-                        onAddToCardClicked(data.items[index],it)
+                        onAddToCardClicked(data.items[index], it)
                     }
                 )
             }
@@ -117,8 +114,8 @@ fun MarketPlaceProductGridListLoader(
         columns = GridCells.Fixed(2),
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
-        content ={
-            items(8){ index->
+        content = {
+            items(8) { index ->
                 Spacer(
                     modifier = Modifier
                         .clip(RoundedCornerShape(16.dp))

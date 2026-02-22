@@ -17,12 +17,12 @@ class BaseApplication : Application() {
         startKoin {
             androidContext(this@BaseApplication)
             loadKoinModules(
-               listOf(
-                   searchModule,
-                   viewModelsModule,
-                   androidSecurityModule,
-                   platformServicesModule,
-               )
+                listOf(
+                    searchModule,
+                    viewModelsModule,
+                    androidSecurityModule,
+                    platformServicesModule,
+                )
             )
         }
 

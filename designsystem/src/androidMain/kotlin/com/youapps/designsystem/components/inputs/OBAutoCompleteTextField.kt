@@ -14,16 +14,16 @@ import com.youapps.designsystem.components.menus.OBDropDownMenu
 @Composable
 fun OBAutoCompleteTextField(
     modifier: Modifier = Modifier,
-    label : String,
-    placeholder : String?=null,
-    text : String,
+    label: String,
+    placeholder: String? = null,
+    text: String,
     errorMessage: String? = null,
     isRequired: Boolean = false,
-    data : DropDownMenuData?=null,
-    onValueChanged : (String)-> Unit,
-    customFilter: ((item : DropDownMenuItemData)-> Boolean)?=null
+    data: DropDownMenuData? = null,
+    onValueChanged: (String) -> Unit,
+    customFilter: ((item: DropDownMenuItemData) -> Boolean)? = null
 ) {
-    val isExpanded = remember{
+    val isExpanded = remember {
         mutableStateOf(false)
     }
 
@@ -38,7 +38,7 @@ fun OBAutoCompleteTextField(
         text = text,
         label = label,
         placeholder = placeholder ?: "",
-        onTextChanged = { text->
+        onTextChanged = { text ->
             data?.items?.takeIf { it.isNotEmpty() }?.run {
                 filteredData.value = filteredData.value?.copy(
                     items = this.filter(customFilter ?: {
@@ -49,7 +49,7 @@ fun OBAutoCompleteTextField(
             }
             onValueChanged(text)
         },
-        errorMessage =errorMessage
+        errorMessage = errorMessage
     )
     filteredData.value?.run {
         OBDropDownMenu(

@@ -27,13 +27,13 @@ fun OBProductPriceSection(
     onOBPrice: OBPrice,
     currency: String
 ) {
-    onOBPrice.discount?.let { discount->
+    onOBPrice.discount?.let { discount ->
         if (discount > 0) {
             Column(
                 modifier = modifier,
                 horizontalAlignment = Alignment.Start,
                 verticalArrangement = Arrangement.Center
-            ){
+            ) {
                 Row(
                     Modifier
                         .wrapContentSize(),
@@ -47,7 +47,9 @@ fun OBProductPriceSection(
                         text = "${onOBPrice.price} $currency",
                         textAlign = TextAlign.Center,
                         style = MaterialTheme.typography.labelSmall.copy(
-                            color = if (isSystemInDarkTheme()) Color(0xFF94a3b8) else Color(0xFF94a3b8),
+                            color = if (isSystemInDarkTheme()) Color(0xFF94a3b8) else Color(
+                                0xFF94a3b8
+                            ),
                             textDecoration = TextDecoration.LineThrough
                         ),
                         textDecoration = TextDecoration.LineThrough

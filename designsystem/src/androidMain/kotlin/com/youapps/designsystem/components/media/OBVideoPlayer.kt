@@ -1,9 +1,7 @@
 package com.youapps.designsystem.components.media
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -16,8 +14,6 @@ import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.ui.PlayerView
 
 
-
-
 @Composable
 fun OBVideoPlayer(
     modifier: Modifier = Modifier,
@@ -25,7 +21,7 @@ fun OBVideoPlayer(
 ) {
     val mediaItem = MediaItem.fromUri(videoUri)
     val currentLifeCycle = LocalLifecycleOwner.current
-     val lifecycleState = currentLifeCycle.lifecycle.currentStateAsState()
+    val lifecycleState = currentLifeCycle.lifecycle.currentStateAsState()
 
     val context = LocalContext.current
     val player = remember(context) {
@@ -35,9 +31,9 @@ fun OBVideoPlayer(
 
     AndroidView(
         modifier = modifier,
-        factory = { context->
+        factory = { context ->
             PlayerView(context).apply {
-              this.player = player
+                this.player = player
             }.also {
                 player.setMediaItem(mediaItem);
                 player.prepare();
@@ -46,7 +42,7 @@ fun OBVideoPlayer(
         }
     )
     LaunchedEffect(lifecycleState.value) {
-        if (lifecycleState.value == Lifecycle.State.DESTROYED){
+        if (lifecycleState.value == Lifecycle.State.DESTROYED) {
             if (player.isReleased.not()) {
                 player.release()
             }

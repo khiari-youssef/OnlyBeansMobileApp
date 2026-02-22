@@ -31,12 +31,9 @@ import com.youapps.designsystem.onBackgroundShadedDarkMode
 import com.youapps.designsystem.onBackgroundShadedLightMode
 
 
-
-
-
 @Composable
 fun OBTextField(
-    modifier: Modifier =Modifier,
+    modifier: Modifier = Modifier,
     text: String,
     label: String,
     placeholder: String,
@@ -44,16 +41,16 @@ fun OBTextField(
     isEnabled: Boolean = true,
     errorMessage: String? = null,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
-    visualTransformation : VisualTransformation = VisualTransformation.None,
-    leftIconRes : Int?=null,
-    rightIconRes : Int?=null,
-    onLeftIconResClicked : (()->Unit)?=null,
-    onRightIconResClicked : (()->Unit)?=null,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
+    leftIconRes: Int? = null,
+    rightIconRes: Int? = null,
+    onLeftIconResClicked: (() -> Unit)? = null,
+    onRightIconResClicked: (() -> Unit)? = null,
     onTextChanged: (text: String) -> Unit
 ) {
 
     Column(
-     modifier = modifier,
+        modifier = modifier,
         horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.spacedBy(4.dp, Alignment.CenterVertically)
     ) {
@@ -61,15 +58,15 @@ fun OBTextField(
             text = buildAnnotatedString {
                 append("$label:")
                 if (isRequired) {
-                 withStyle(
-                     style = SpanStyle(color = MaterialTheme.colorScheme.error)
-                 ){
-                     append("*")
-                 }
+                    withStyle(
+                        style = SpanStyle(color = MaterialTheme.colorScheme.error)
+                    ) {
+                        append("*")
+                    }
                 }
             },
             style = MaterialTheme.typography.bodyMedium.copy(
-               color = if (isEnabled) MaterialTheme.colorScheme.onSurface else Color(0xFFB3B3B3)
+                color = if (isEnabled) MaterialTheme.colorScheme.onSurface else Color(0xFFB3B3B3)
             )
         )
         OutlinedTextField(
@@ -83,7 +80,7 @@ fun OBTextField(
                 lineHeight = 24.sp
             ),
             value = text,
-            keyboardActions= keyboardActions,
+            keyboardActions = keyboardActions,
             placeholder = {
                 PlaceholderText(
                     text = placeholder,
@@ -95,44 +92,44 @@ fun OBTextField(
             singleLine = true,
             supportingText = errorMessage?.run {
                 {
-                   Text(
-                       text = errorMessage,
-                       style = MaterialTheme.typography.labelMedium,
-                       textAlign = TextAlign.Start,
-                   )
+                    Text(
+                        text = errorMessage,
+                        style = MaterialTheme.typography.labelMedium,
+                        textAlign = TextAlign.Start,
+                    )
                 }
             },
-            leadingIcon = leftIconRes?.run{
+            leadingIcon = leftIconRes?.run {
                 {
                     Icon(
                         modifier = Modifier.clickable(
                             interactionSource = MutableInteractionSource(),
                             indication = null,
                             onClick = {
-                                onLeftIconResClicked?.let { callback->
+                                onLeftIconResClicked?.let { callback ->
                                     callback()
                                 }
-                            }) ,
+                            }),
                         imageVector = ImageVector.vectorResource(this),
                         contentDescription = "",
-                        tint =  MaterialTheme.colorScheme.secondary
+                        tint = MaterialTheme.colorScheme.secondary
                     )
                 }
             },
-            trailingIcon = rightIconRes?.run{
+            trailingIcon = rightIconRes?.run {
                 {
                     Icon(
                         modifier = Modifier.clickable(
                             interactionSource = MutableInteractionSource(),
                             indication = null
                         ) {
-                            onRightIconResClicked?.let { callback->
+                            onRightIconResClicked?.let { callback ->
                                 callback()
                             }
                         },
                         imageVector = ImageVector.vectorResource(this),
                         contentDescription = "",
-                        tint =  MaterialTheme.colorScheme.primary
+                        tint = MaterialTheme.colorScheme.primary
                     )
                 }
             },
@@ -141,16 +138,18 @@ fun OBTextField(
                 focusedContainerColor = if (isSystemInDarkTheme()) TonedDark else Color.White,
                 unfocusedContainerColor = if (isSystemInDarkTheme()) TonedDark else Color.White,
                 errorContainerColor = if (isSystemInDarkTheme()) TonedDark else Color.White,
-                cursorColor =   MaterialTheme.colorScheme.primary,
-                focusedLabelColor =  MaterialTheme.colorScheme.primary,
+                cursorColor = MaterialTheme.colorScheme.primary,
+                focusedLabelColor = MaterialTheme.colorScheme.primary,
                 focusedTrailingIconColor = Color.Unspecified,
                 focusedBorderColor = MaterialTheme.colorScheme.primary,
                 unfocusedLabelColor = if (isSystemInDarkTheme()) onBackgroundShadedDarkMode else onBackgroundShadedLightMode,
-                disabledContainerColor = if (isSystemInDarkTheme()) Color(0xFF333333) else Color(0xFFD9D9D9),
+                disabledContainerColor = if (isSystemInDarkTheme()) Color(0xFF333333) else Color(
+                    0xFFD9D9D9
+                ),
                 disabledTextColor = Color(0xFFB3B3B3),
                 unfocusedBorderColor = Color(0xFFD9D9D9),
-                unfocusedTextColor =  MaterialTheme.colorScheme.onSurface,
-                focusedTextColor =  MaterialTheme.colorScheme.onSurface
+                unfocusedTextColor = MaterialTheme.colorScheme.onSurface,
+                focusedTextColor = MaterialTheme.colorScheme.onSurface
             ),
             onValueChange = onTextChanged
         )

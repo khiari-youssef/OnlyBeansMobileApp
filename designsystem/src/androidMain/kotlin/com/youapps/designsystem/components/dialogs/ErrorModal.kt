@@ -22,92 +22,91 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.youapps.designsystem.OBFontFamilies
-import com.youapps.onlybeans.designsystem.R
 import com.youapps.designsystem.onBackgroundShadedDarkMode
 import com.youapps.designsystem.onBackgroundShadedLightMode
-
+import com.youapps.onlybeans.designsystem.R
 
 
 @Composable
 fun ErrorModal(
     modifier: Modifier = Modifier,
-    title : String,
-    details : String?=null,
-    imgRes : Int?=null,
-    onRetryAction : ()->Unit
+    title: String,
+    details: String? = null,
+    imgRes: Int? = null,
+    onRetryAction: () -> Unit
 ) {
-   Card(
-       modifier = modifier
-           .fillMaxWidth()
-           .wrapContentHeight(),
-       colors = CardDefaults.cardColors(
-           containerColor = MaterialTheme.colorScheme.background
-       ),
-       shape = MaterialTheme.shapes.large
-   ) {
-       Column(
-           modifier = Modifier
-               .padding(24.dp)
-               .fillMaxWidth()
-               .wrapContentHeight(),
-           horizontalAlignment = Alignment.CenterHorizontally,
-           verticalArrangement = Arrangement.spacedBy(
-               24.dp,Alignment.CenterVertically
-           )
-       ) {
-          Column(
-              modifier = Modifier
-                  .fillMaxWidth()
-                  .wrapContentHeight(),
-              horizontalAlignment = Alignment.CenterHorizontally,
-              verticalArrangement = Arrangement.spacedBy(
-                  16.dp,Alignment.CenterVertically
-              )
-          ) {
-              Text(
-                  modifier = Modifier
-                      .fillMaxWidth()
-                      .wrapContentHeight(),
-                  text = title,
-                  style = TextStyle(
-                      fontSize = 20.sp,
-                      fontFamily = OBFontFamilies.MainBoldFontFamily,
-                      fontWeight = FontWeight(700),
-                      color = MaterialTheme.colorScheme.onBackground,
-                      textAlign = TextAlign.Center
-                  )
-              )
-              if (details?.isNotBlank() == true){
-                  Text(
-                      modifier = Modifier
-                          .fillMaxWidth()
-                          .wrapContentHeight(),
-                      text = details,
-                      style = TextStyle(
-                          fontSize = 16.sp,
-                          fontFamily = OBFontFamilies.MainMediumFontFamily,
-                          fontWeight = FontWeight(500),
-                          color = if (isSystemInDarkTheme()) onBackgroundShadedDarkMode else onBackgroundShadedLightMode,
-                          textAlign = TextAlign.Center
-                      ),
-                      maxLines = 3,
-                      overflow = TextOverflow.Ellipsis
-                  )
-              }
-          }
-           imgRes?.run {
-               Image(
-                   imageVector = ImageVector.vectorResource(imgRes) ,
-                   contentDescription = "",
-               )
-           }
-           OBButtonContainedSecondary(
-               text = stringResource(id = R.string.retry),
-               isEnabled = true,
-               isLoading = false,
-               onClick = onRetryAction
-           )
-       }
-   }
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .wrapContentHeight(),
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.background
+        ),
+        shape = MaterialTheme.shapes.large
+    ) {
+        Column(
+            modifier = Modifier
+                .padding(24.dp)
+                .fillMaxWidth()
+                .wrapContentHeight(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.spacedBy(
+                24.dp, Alignment.CenterVertically
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(
+                    16.dp, Alignment.CenterVertically
+                )
+            ) {
+                Text(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .wrapContentHeight(),
+                    text = title,
+                    style = TextStyle(
+                        fontSize = 20.sp,
+                        fontFamily = OBFontFamilies.MainBoldFontFamily,
+                        fontWeight = FontWeight(700),
+                        color = MaterialTheme.colorScheme.onBackground,
+                        textAlign = TextAlign.Center
+                    )
+                )
+                if (details?.isNotBlank() == true) {
+                    Text(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .wrapContentHeight(),
+                        text = details,
+                        style = TextStyle(
+                            fontSize = 16.sp,
+                            fontFamily = OBFontFamilies.MainMediumFontFamily,
+                            fontWeight = FontWeight(500),
+                            color = if (isSystemInDarkTheme()) onBackgroundShadedDarkMode else onBackgroundShadedLightMode,
+                            textAlign = TextAlign.Center
+                        ),
+                        maxLines = 3,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
+            }
+            imgRes?.run {
+                Image(
+                    imageVector = ImageVector.vectorResource(imgRes),
+                    contentDescription = "",
+                )
+            }
+            OBButtonContainedSecondary(
+                text = stringResource(id = R.string.retry),
+                isEnabled = true,
+                isLoading = false,
+                onClick = onRetryAction
+            )
+        }
+    }
 }
 

@@ -11,34 +11,34 @@ import com.youapps.onlybeans.designsystem.R
 
 @Composable
 fun SesamePasswordTextField(
-    modifier : Modifier = Modifier,
-    password : String,
-    label : String,
-    placeholder : String,
-    isEnabled : Boolean,
-    errorMessage : String?=null,
+    modifier: Modifier = Modifier,
+    password: String,
+    label: String,
+    placeholder: String,
+    isEnabled: Boolean,
+    errorMessage: String? = null,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
-    onPasswordChanged : (text : String)->Unit
+    onPasswordChanged: (text: String) -> Unit
 ) {
     val isPasswordRevealed = remember {
         mutableStateOf(false)
     }
     val visualTransformation = remember {
         derivedStateOf {
-            if (isPasswordRevealed.value){
+            if (isPasswordRevealed.value) {
                 VisualTransformation.None
             } else PasswordVisualTransformation()
         }
     }
     OBTextField(
-        modifier =modifier,
+        modifier = modifier,
         text = password,
-        label = label ,
+        label = label,
         placeholder = placeholder,
         isEnabled = isEnabled,
         errorMessage = errorMessage,
         keyboardActions = keyboardActions,
-        visualTransformation = visualTransformation.value ,
+        visualTransformation = visualTransformation.value,
         rightIconRes = if (isPasswordRevealed.value) R.drawable.ic_password_revealed else R.drawable.ic_password_hidden,
         onRightIconResClicked = remember {
             {

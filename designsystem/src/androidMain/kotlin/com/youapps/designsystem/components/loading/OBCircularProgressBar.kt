@@ -11,8 +11,8 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun OBCircularProgressBar(
     modifier: Modifier = Modifier,
-    color : Color,
-    strokeWidth : Dp = 1.dp
+    color: Color,
+    strokeWidth: Dp = 1.dp
 ) {
     CircularProgressIndicator(
         modifier = modifier,

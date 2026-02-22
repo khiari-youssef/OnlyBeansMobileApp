@@ -26,16 +26,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.youapps.designsystem.OBFontFamilies
-import com.youapps.onlybeans.designsystem.R
 import com.youapps.designsystem.onBackgroundShadedDarkMode
 import com.youapps.designsystem.onBackgroundShadedLightMode
+import com.youapps.onlybeans.designsystem.R
 
 @Preview
 @Composable
 fun NavigationNotFoundModal(
     modifier: Modifier = Modifier,
-    title : String = stringResource(id = R.string.error_destination_not_found_title),
-    details : String = stringResource(id = R.string.error_destination_not_found_detail)
+    title: String = stringResource(id = R.string.error_destination_not_found_title),
+    details: String = stringResource(id = R.string.error_destination_not_found_detail)
 ) {
     Card(
         modifier = modifier
@@ -98,7 +98,7 @@ fun NavigationNotFoundModal(
                 )
             }
             Image(
-                painter = painterResource(id = R.drawable.ic_navigation_not_found) ,
+                painter = painterResource(id = R.drawable.ic_navigation_not_found),
                 contentDescription = "",
             )
         }

@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun OBMapCluster(
-    size : Int
+    size: Int
 ) {
     Box(
         modifier = Modifier
@@ -25,7 +25,7 @@ fun OBMapCluster(
             .background(color = MaterialTheme.colorScheme.secondary)
             .size(40.dp),
         contentAlignment = Alignment.Center
-    ){
+    ) {
         Text(
             modifier = Modifier.wrapContentSize(),
             text = "$size",

@@ -1,5 +1,3 @@
-
-
 import com.android.build.api.dsl.ApplicationExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -13,11 +11,11 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
         runCatching {
             val keystorePropertiesFile = target.file("keystore.properties")
             keystoreProperties.load(FileInputStream(keystorePropertiesFile))
-        }.onFailure { th->
+        }.onFailure { th ->
             th.printStackTrace()
         }
         with(target) {
-            with(pluginManager){
+            with(pluginManager) {
                 apply("com.android.application")
                 apply("org.jetbrains.kotlin.android")
             }
@@ -34,7 +32,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                         isDebuggable = true
                         isMinifyEnabled = false
                         signingConfigs {
-                            val isCICD : Boolean = System.getenv("CI") != null;
+                            val isCICD: Boolean = System.getenv("CI") != null;
                             create("signingConfig") {
                                 if (isCICD) {
                                     keyAlias = System.getenv("keyAlias")
