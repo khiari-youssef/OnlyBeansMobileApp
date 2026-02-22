@@ -32,7 +32,8 @@ fun CommunitySearchScreen(
     screenState : CommunitySearchStateHolder,
     onSearchQueryChanged : (String)-> Unit,
     onSearchFilterChanged : (selectedFilterIndex : Int,radiusValue : Float)-> Unit,
-    searchVisibleArea : (SearchByRegionBounds)-> Unit
+    searchVisibleArea : (SearchByRegionBounds)-> Unit,
+    onCheckLocationSettings: ()-> Unit
 ) {
     var searchViewType by remember {
        mutableStateOf(SearchViewType.Map)
@@ -41,6 +42,7 @@ fun CommunitySearchScreen(
     var isFilterDialogVisible by remember {
         mutableStateOf(false)
     }
+
 
     OBSearchFilterDialog(
         modifier = Modifier,
@@ -57,11 +59,13 @@ fun CommunitySearchScreen(
     Box(
         modifier = modifier
     ){
+
         when(searchViewType){
             SearchViewType.Map -> CommunityMapView(
                 modifier = Modifier.fillMaxSize(),
                 screenState = screenState,
-                searchVisibleArea = searchVisibleArea
+                searchVisibleArea = searchVisibleArea,
+                onCheckLocationSettings = onCheckLocationSettings
             )
             SearchViewType.List -> CommunityListView(
                 modifier = Modifier.fillMaxSize(),

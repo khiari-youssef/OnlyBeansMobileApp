@@ -48,6 +48,8 @@
     <string name="enable_search_by_radius">Permettre la recherche par rayon</string>
     <string name="filters_not_available">Filtres non disponibles</string>
     <string name="categories_label">Catégories</string>
+    <string name="location_enabled">Localisation Activée</string>
+    <string name="location_disabled">Localisation Désactivée</string>
 
     <!-- Content description-->
     <string name="content_description_drop_down_item">Élément de la liste déroulante : %s</string>

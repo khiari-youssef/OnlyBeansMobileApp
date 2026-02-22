@@ -1,14 +1,23 @@
 package com.youapps.search_module.search_list_map.ui.community_search_state
 
+import android.location.Location
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.android.gms.maps.LocationSource
+import com.youapps.onlybeans.data.repositories.AppMetaDataAPI
+import com.youapps.onlybeans.platform.LocationSettingsType
+import com.youapps.onlybeans.platform.OBLocationService
+import com.youapps.search_module.search_list_map.ui.community_search_screen.map_view.ManualLocationSource
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class CommunitySearchViewModel : ViewModel() {
+class CommunitySearchViewModel(
+    private val locationService : OBLocationService,
+    val appMetaDataAPI : AppMetaDataAPI
+) : ViewModel() {
 
 
     init {
@@ -30,7 +39,34 @@ class CommunitySearchViewModel : ViewModel() {
  private val _currentSearchByAreaState: MutableStateFlow<SearchByAreaState> = MutableStateFlow(SearchByAreaState.Idle)
  val currentSearchByAreaState: StateFlow<SearchByAreaState> = _currentSearchByAreaState
 
+  val currentLocationSource : ManualLocationSource = ManualLocationSource()
 
+
+
+    /*
+    fun startListeningToCurrentLocationUpdates() {
+        viewModelScope.launch {
+            val country =   appMetaDataAPI.getDeviceLocalCountry()
+             locationService.getSingleFreshLocation()?.let { firstLocationFix->
+                 currentLocationSource.pushLocation(Location("manual").apply {
+                     latitude = firstLocationFix.latitude
+                     longitude = firstLocationFix.longitude
+                 })
+             }
+
+            locationService.subscribe(strategy = LocationSettingsType.POWER_EFFICIENCY)
+                .collect { location ->
+                    location?.run {
+                        currentLocationSource.pushLocation(Location("manual").apply {
+                            latitude = location.latitude
+                            longitude = location.longitude
+                        })
+                    }
+                }
+
+        }
+    }
+     */
 
 
   fun updateSearchQuery(searchQuery: String) {
@@ -69,6 +105,7 @@ class CommunitySearchViewModel : ViewModel() {
         }
         viewModelScope.launch {
             delay(1000)
+
             _currentSearchByAreaState.update {
                 SearchByAreaState.Success
             }

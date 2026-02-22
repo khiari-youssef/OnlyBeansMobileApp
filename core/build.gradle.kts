@@ -54,6 +54,7 @@ kotlin {
             implementation(libs.jetpack.viewmodel.core)
             implementation(libs.bundles.composelibs)
             implementation(projects.designsystem)
+            implementation(libs.play.services.location)
         }
         iosMain.dependencies {
             implementation(libs.stately.common)

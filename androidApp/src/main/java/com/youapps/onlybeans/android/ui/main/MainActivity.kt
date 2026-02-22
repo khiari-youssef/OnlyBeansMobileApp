@@ -6,7 +6,9 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Lifecycle
@@ -18,11 +20,15 @@ import com.youapps.designsystem.OBTheme
 import com.youapps.designsystem.components.bars.OBBottomNavigationBarDefaults
 import com.youapps.onlybeans.data.repositories.AppMetaDataAPI
 import com.youapps.onlybeans.di.AppMetaDataAPITag
+import com.youapps.onlybeans.di.OBLocationServicePlayServicesImplTag
+import com.youapps.onlybeans.platform.OBLocationService
+import com.youapps.onlybeans.platform.OBLocationServiceStateLocale
 import com.youapps.users_management.ui.login.LoginState
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.getViewModel
+import org.koin.compose.koinInject
 
 class MainActivity : ComponentActivity() {
 
@@ -61,12 +67,17 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background,
                 ) {
-                    MainNavigation(
-                        modifier = Modifier.fillMaxSize(),
-                        rootNavController = uiState.rootNavController,
-                        homeDestinations = uiState.homeDestinations,
-                        autoLoginState = autoLoginState.value
-                    )
+                    OBLocationServiceStateLocale(
+                        obLocationService = koinInject<OBLocationService>(OBLocationServicePlayServicesImplTag)
+                    ){
+                        MainNavigation(
+                            modifier = Modifier.fillMaxSize(),
+                            rootNavController = uiState.rootNavController,
+                            homeDestinations = uiState.homeDestinations,
+                            autoLoginState = autoLoginState.value
+                        )
+                    }
+
                 }
             }
         }

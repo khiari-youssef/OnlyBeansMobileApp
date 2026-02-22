@@ -50,6 +50,8 @@
     <string name="enable_search_by_radius">Enable search by radius</string>
     <string name="filters_not_available">Filters not available</string>
     <string name="categories_label">Categories</string>
+    <string name="location_enabled">Location Enabled</string>
+    <string name="location_disabled">Location Disabled</string>
 
 
 

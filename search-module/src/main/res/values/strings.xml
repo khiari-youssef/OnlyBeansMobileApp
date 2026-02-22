@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
      <string name="search_bar_placeholder">Search people, communities and events</string>
+    <string name="search_this_area">Search this area</string>
 
 
     <!-- Content description-->
     <string name="content_description_map_view">Map View to search and visualize community items on the map</string>
+    <string name="content_description_map_recenter_icon">Icon to recenter user on the map</string>
+    <string name="content_description_map_enable_location_icon">Icon to enable location services</string>
+
+
 </resources>

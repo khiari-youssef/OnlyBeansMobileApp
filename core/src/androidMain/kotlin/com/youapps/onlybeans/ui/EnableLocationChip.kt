@@ -1,9 +1,11 @@
 package com.youapps.onlybeans.ui
 
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
-import android.app.Activity.RESULT_CANCELED
+import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.provider.Settings
 import android.widget.Toast
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.ActivityResultLauncher
@@ -13,13 +15,15 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.material.Chip
-import androidx.compose.material.ChipDefaults
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.Icon
-import androidx.compose.material.Text
+import androidx.compose.material3.AssistChip
+import androidx.compose.material3.AssistChipDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -27,53 +31,69 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.youapps.onlybeans.R
+import com.youapps.onlybeans.di.OBLocationServicePlayServicesImplTag
 import com.youapps.onlybeans.platform.OBLocationService
+import com.youapps.onlybeans.platform.OBLocationServicePlayServicesImpl
+import kotlinx.coroutines.launch
+import org.koin.compose.KoinApplication
 import org.koin.compose.koinInject
+import org.koin.dsl.module
 import com.youapps.onlybeans.designsystem.R as ds
+
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun EnableLocationChip(
     modifier: Modifier = Modifier,
-    onLocationEnabled : ()-> Unit
+    onLocationEnabled: () -> Unit
 ) {
-    val locationService : OBLocationService = koinInject<OBLocationService>()
+    val locationService: OBLocationService = koinInject<OBLocationService>(OBLocationServicePlayServicesImplTag)
     val localContext = LocalContext.current
-    val locationPermissions =  arrayOf(
+    val locationPermissions = arrayOf(
         ACCESS_COARSE_LOCATION,
-        ACCESS_COARSE_LOCATION
     )
-    val locationSettingsLauncher : ActivityResultLauncher<Intent> = rememberLauncherForActivityResult(
+    val localCoroutineScope = rememberCoroutineScope()
+    val locationSettingsLauncher: ActivityResultLauncher<Intent> = rememberLauncherForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) { (resultCode, _) ->
-        if (resultCode == RESULT_CANCELED && locationService.isLocationEnabled()){
+        localCoroutineScope.launch {
+            if (resultCode == Activity.RESULT_CANCELED && locationService.isLocationEnabled()) {
                 onLocationEnabled()
-        } else {
-            Toast.makeText(localContext, localContext.getString(R.string.random_error), Toast.LENGTH_SHORT)
+            } else {
+                Toast.makeText(
+                    localContext,
+                    localContext.getString(R.string.random_error),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 
-    val enabledPermissions : List<Boolean> = locationPermissions.map { permission->
+    val enabledPermissions: List<Boolean> = locationPermissions.map { permission ->
         localContext.checkSelfPermission(permission) == PackageManager.PERMISSION_GRANTED
     }
-    val permissionLauncher = rememberLauncherForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { result->
-         if (result.values.any { it }){
-             locationSettingsLauncher.launch(locationService.getRedirectionToLocationSettingsIntent(localContext))
-         } else {
-             Toast.makeText(localContext, localContext.getString(R.string.permission_required), Toast.LENGTH_SHORT).show()
-         }
-    }
+    val permissionLauncher =
+        rememberLauncherForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { result ->
+            if (result.values.any { it }) {
+                locationSettingsLauncher.launch(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                })
+            } else {
+                Toast.makeText(
+                    localContext,
+                    localContext.getString(R.string.permission_required),
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
 
-
-
-
-
-    Chip(
-        colors = ChipDefaults.chipColors(
-            backgroundColor = MaterialTheme.colorScheme.primary,
-            disabledBackgroundColor = MaterialTheme.colorScheme.primary.copy(
+    AssistChip(
+        colors = AssistChipDefaults.elevatedAssistChipColors(
+            containerColor = MaterialTheme.colorScheme.primary,
+            disabledContainerColor = MaterialTheme.colorScheme.primary.copy(
                 alpha = 0.5f
             )
         ),
@@ -83,14 +103,18 @@ fun EnableLocationChip(
                 vertical = 8.dp
             )
             .wrapContentSize(),
+        shape = RoundedCornerShape(8.dp),
+        border = null,
         onClick = {
-           if (enabledPermissions.none()){
-               permissionLauncher.launch(locationPermissions)
-           } else {
-               locationSettingsLauncher.launch(locationService.getRedirectionToLocationSettingsIntent(localContext))
-           }
+            if (enabledPermissions.none { it }) {
+                permissionLauncher.launch(locationPermissions)
+            } else {
+                locationSettingsLauncher.launch(Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                })
+            }
         },
-        content = {
+        label = {
             Text(
                 text = stringResource(R.string.enable_location_service),
                 style = MaterialTheme.typography.labelLarge.copy(
@@ -109,15 +133,10 @@ fun EnableLocationChip(
                         height = 14.dp,
                         width = 10.dp
                     ),
-                imageVector = ImageVector.vectorResource(ds.drawable.ic_location_pin) ,
+                imageVector = ImageVector.vectorResource(ds.drawable.ic_location_pin),
                 contentDescription = stringResource(R.string.enable_location_service),
                 tint = Color.White
             )
         }
     )
-
-
-
-
-
 }

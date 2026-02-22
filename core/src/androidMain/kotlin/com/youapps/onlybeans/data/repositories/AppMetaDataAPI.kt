@@ -48,4 +48,10 @@ internal actual class AppMetaDataAPIImpl(
     }
 
      actual override suspend fun getCountryByCode(countryCode: String): OBCountry? =dataSource.getCountryByCode(countryCode = countryCode)
+
+    actual override suspend fun getDeviceLocalCountry(): OBCountry? = runCatching{
+       val deviceLocale = applicationContext.resources.configuration.locales.get(0)
+        val countryCode = deviceLocale.country
+        return@runCatching  dataSource.getCountryByCode(countryCode = countryCode)
+    }.getOrNull()
  }

@@ -60,6 +60,8 @@
     <string name="enable_search_by_radius">Permitir búsqueda por radio</string>
     <string name="filters_not_available">Filtros no disponibles</string>
     <string name="categories_label">Categorías</string>
+    <string name="location_enabled">Ubicación Activada</string>
+    <string name="location_disabled">Ubcación Desactivada</string>
 
 
     <string name="content_description_drop_down_item">Elemento de lista desplegable: %s</string>

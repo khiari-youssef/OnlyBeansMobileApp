@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="search_bar_placeholder">Rechercher des personnes, communautés et évenements</string>
+    <string name="search_this_area">Rechercher cette zone</string>
 
     <!-- Content description-->
     <string name="content_description_map_view">Vue de la carte pour rechercher et visualiser les éléments de la communauté sur la carte</string>
+    <string name="content_description_map_recenter_icon">Icone pour recenter l\'utilisateur sur la carte</string>
+    <string name="content_description_map_enable_location_icon">Icone pour activer les services de localisation</string>
+
 </resources>

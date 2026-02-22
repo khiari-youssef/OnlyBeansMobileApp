@@ -17,4 +17,8 @@ actual class AppMetaDataAPIImpl : AppMetaDataAPI {
     actual override suspend fun getCountryByCode(countryCode: String): OBCountry? {
         TODO("Not yet implemented")
     }
+
+    actual override suspend fun getDeviceLocalCountry(): OBCountry? {
+        TODO("Not yet implemented")
+    }
 }

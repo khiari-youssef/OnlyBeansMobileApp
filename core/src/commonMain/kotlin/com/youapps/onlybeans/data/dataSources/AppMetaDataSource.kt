@@ -48,13 +48,15 @@ suspend fun getCountriesList(limit: Int,offset: Int) : List<OBCountry> = withCon
 suspend fun getCountryByCode(countryCode: String) : OBCountry? = withContext(Dispatchers.IO) {
     onlyBeansDatabase.onlyBeansDatabaseQueries.getCountriesByCode(
         countryCode = countryCode
-    ).executeAsOneOrNull()?.let { (countryCode, phonePrefix, countryName, countryFlag) ->
+    ).executeAsOneOrNull()?.let { (countryCode, phonePrefix, countryName, countryFlag,latLngBounds) ->
         OBCountry(
             countryCode = countryCode,
             phonePrefix = phonePrefix,
             countryName = countryName,
             countryFlag = countryFlag,
-            latLngBounds = listOf()
+            latLngBounds =latLngBounds?.split(",")?.mapNotNull {
+                OBLocation.fromString(it)
+            }
         )
     }
 }

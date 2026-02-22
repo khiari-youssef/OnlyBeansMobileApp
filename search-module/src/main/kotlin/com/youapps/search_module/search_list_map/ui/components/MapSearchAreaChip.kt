@@ -1,5 +1,6 @@
 package com.youapps.search_module.search_list_map.ui.components
 
+import androidx.appcompat.R
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.ElevatedAssistChip
@@ -10,6 +11,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
@@ -23,7 +25,7 @@ fun MapSearchAreaChip(
         modifier = modifier,
         shape = RoundedCornerShape(8.dp),
         label = {
-            Text("Search this Area")
+            Text(stringResource(com.youapps.onlybeans.search_module.R.string.search_this_area))
         },
         onClick = onClick,
         colors = AssistChipDefaults.elevatedAssistChipColors(

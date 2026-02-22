@@ -2,12 +2,16 @@ package com.youapps.search_module.search_list_map.ui.community_search_state
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.ProduceStateScope
 import androidx.compose.runtime.State
+import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.google.android.gms.maps.LocationSource
 import com.youapps.onlybeans.domain.entities.users.OBLocation
 import com.youapps.onlybeans.domain.exception.DomainErrorType
 import com.youapps.search_module.search_list_map.ui.community_search_screen.SearchViewType
+import com.youapps.search_module.search_list_map.ui.community_search_screen.map_view.ManualLocationSource
 import kotlin.Float
 
 @Immutable
@@ -24,6 +28,7 @@ data class SearchByRegionBounds(
 sealed interface SearchByAreaState{
     data object Idle : SearchByAreaState
     data object Loading : SearchByAreaState
+
     data class Error(val domainErrorType: DomainErrorType) : SearchByAreaState
     data object Success : SearchByAreaState
 }
@@ -33,6 +38,7 @@ data class CommunitySearchStateHolder(
     val searchFilters : State<SearchFilterList?>,
     val selectedFilterIndex : State<Int>,
     val currentRadiusValue : State<Float>,
+    val locationSource : ManualLocationSource,
     val searchOperationState : State<SearchByAreaState>
 ) {
 
@@ -44,14 +50,16 @@ data class CommunitySearchStateHolder(
             searchFilters : State<SearchFilterList?>,
             selectedFilterIndex : State<Int>,
             currentRadiusValue : State<Float>,
-            searchOperationState : State<SearchByAreaState>
+            searchOperationState : State<SearchByAreaState>,
+            locationSource : ManualLocationSource,
         ) : CommunitySearchStateHolder = remember(searchQuery,currentRadiusValue,selectedFilterIndex,searchOperationState) {
             CommunitySearchStateHolder(
                 searchQuery = searchQuery,
                 searchFilters = searchFilters,
                 selectedFilterIndex = selectedFilterIndex,
                 currentRadiusValue = currentRadiusValue,
-                searchOperationState = searchOperationState
+                searchOperationState = searchOperationState,
+                locationSource = locationSource
             )
         }
 
@@ -63,7 +71,8 @@ data class CommunitySearchStateHolder(
             searchFilters = viewModel.searchFilterList.collectAsStateWithLifecycle(initialValue = null),
             selectedFilterIndex = viewModel.selectedFilterIndex.collectAsStateWithLifecycle(initialValue = -1),
             currentRadiusValue =  viewModel.currentRadiusValue.collectAsStateWithLifecycle(initialValue = 1f),
-            searchOperationState = viewModel.currentSearchByAreaState.collectAsStateWithLifecycle(initialValue = SearchByAreaState.Idle)
+            searchOperationState = viewModel.currentSearchByAreaState.collectAsStateWithLifecycle(initialValue = SearchByAreaState.Idle),
+            locationSource = viewModel.currentLocationSource
         )
 
 
