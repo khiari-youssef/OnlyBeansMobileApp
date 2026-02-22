@@ -17,7 +17,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.youapps.designsystem.components.buttons.OBFilterButton
 import com.youapps.designsystem.components.inputs.OBSearchField
-import com.youapps.designsystem.components.menus.OBFilterMenu
 import com.youapps.onlybeans.search_module.R
 import com.youapps.search_module.search_list_map.ui.community_search_screen.list_view.CommunityListView
 import com.youapps.search_module.search_list_map.ui.community_search_screen.map_view.CommunityMapView
@@ -32,8 +31,7 @@ fun CommunitySearchScreen(
     screenState : CommunitySearchStateHolder,
     onSearchQueryChanged : (String)-> Unit,
     onSearchFilterChanged : (selectedFilterIndex : Int,radiusValue : Float)-> Unit,
-    searchVisibleArea : (SearchByRegionBounds)-> Unit,
-    onCheckLocationSettings: ()-> Unit
+    searchVisibleArea : (SearchByRegionBounds)-> Unit
 ) {
     var searchViewType by remember {
        mutableStateOf(SearchViewType.Map)
@@ -64,8 +62,7 @@ fun CommunitySearchScreen(
             SearchViewType.Map -> CommunityMapView(
                 modifier = Modifier.fillMaxSize(),
                 screenState = screenState,
-                searchVisibleArea = searchVisibleArea,
-                onCheckLocationSettings = onCheckLocationSettings
+                onSearchVisibleArea = searchVisibleArea
             )
             SearchViewType.List -> CommunityListView(
                 modifier = Modifier.fillMaxSize(),

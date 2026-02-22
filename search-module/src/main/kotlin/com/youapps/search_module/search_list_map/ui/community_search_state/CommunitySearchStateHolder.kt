@@ -10,7 +10,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.google.android.gms.maps.LocationSource
 import com.youapps.onlybeans.domain.entities.users.OBLocation
 import com.youapps.onlybeans.domain.exception.DomainErrorType
+import com.youapps.search_module.search_list_map.domain.entities.MapSearchDataPoint
 import com.youapps.search_module.search_list_map.ui.community_search_screen.SearchViewType
+import com.youapps.search_module.search_list_map.ui.community_search_screen.map_view.DataClusterItem
 import com.youapps.search_module.search_list_map.ui.community_search_screen.map_view.ManualLocationSource
 import kotlin.Float
 
@@ -19,6 +21,10 @@ data class SearchFilterList(
     val data : List<String>
 )
 
+@Immutable
+data class SearchByAreaResult(
+ val data : List<DataClusterItem>
+ )
 
 data class SearchByRegionBounds(
     val northEast : OBLocation,
@@ -29,8 +35,8 @@ sealed interface SearchByAreaState{
     data object Idle : SearchByAreaState
     data object Loading : SearchByAreaState
 
-    data class Error(val domainErrorType: DomainErrorType) : SearchByAreaState
-    data object Success : SearchByAreaState
+    data class Error(val domainErrorType: DomainErrorType = DomainErrorType.Undefined) : SearchByAreaState
+    data class Success(val data : SearchByAreaResult) : SearchByAreaState
 }
 
 data class CommunitySearchStateHolder(
@@ -69,7 +75,7 @@ data class CommunitySearchStateHolder(
         ) : CommunitySearchStateHolder = rememberCommunitySearchState(
             searchQuery = viewModel.currentSearchQuery.collectAsStateWithLifecycle(initialValue = null),
             searchFilters = viewModel.searchFilterList.collectAsStateWithLifecycle(initialValue = null),
-            selectedFilterIndex = viewModel.selectedFilterIndex.collectAsStateWithLifecycle(initialValue = -1),
+            selectedFilterIndex = viewModel.selectedFilterIndex.collectAsStateWithLifecycle(initialValue = 0),
             currentRadiusValue =  viewModel.currentRadiusValue.collectAsStateWithLifecycle(initialValue = 1f),
             searchOperationState = viewModel.currentSearchByAreaState.collectAsStateWithLifecycle(initialValue = SearchByAreaState.Idle),
             locationSource = viewModel.currentLocationSource

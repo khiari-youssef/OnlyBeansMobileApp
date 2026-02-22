@@ -4,9 +4,17 @@ import android.location.Location
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.gms.maps.LocationSource
+import com.google.android.gms.maps.model.LatLng
+import com.youapps.onlybeans.contracts.UseCaseContract
 import com.youapps.onlybeans.data.repositories.AppMetaDataAPI
+import com.youapps.onlybeans.domain.entities.users.OBLocation
+import com.youapps.onlybeans.domain.exception.DomainErrorType
 import com.youapps.onlybeans.platform.LocationSettingsType
 import com.youapps.onlybeans.platform.OBLocationService
+import com.youapps.search_module.search_list_map.data.SearchCommunityRepository
+import com.youapps.search_module.search_list_map.domain.entities.MapSearchDataPoint
+import com.youapps.search_module.search_list_map.domain.entities.OBMapSearchQuery
+import com.youapps.search_module.search_list_map.ui.community_search_screen.map_view.DataClusterItem
 import com.youapps.search_module.search_list_map.ui.community_search_screen.map_view.ManualLocationSource
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +24,8 @@ import kotlinx.coroutines.launch
 
 class CommunitySearchViewModel(
     private val locationService : OBLocationService,
-    val appMetaDataAPI : AppMetaDataAPI
+    private val appMetaDataAPI : AppMetaDataAPI,
+    private val useCase: UseCaseContract<OBMapSearchQuery,List<MapSearchDataPoint>>
 ) : ViewModel() {
 
 
@@ -30,7 +39,7 @@ class CommunitySearchViewModel(
  private val _searchFilterList: MutableStateFlow<SearchFilterList?> = MutableStateFlow(null)
  val searchFilterList: StateFlow<SearchFilterList?> = _searchFilterList
 
- private val _selectedFilterIndex: MutableStateFlow<Int> = MutableStateFlow(-1)
+ private val _selectedFilterIndex: MutableStateFlow<Int> = MutableStateFlow(0)
  val selectedFilterIndex: StateFlow<Int> = _selectedFilterIndex
 
  private val _currentRadiusValue: MutableStateFlow<Float> = MutableStateFlow(1f)
@@ -103,12 +112,34 @@ class CommunitySearchViewModel(
         _currentSearchByAreaState.update {
             SearchByAreaState.Loading
         }
+        val query : OBMapSearchQuery = OBMapSearchQuery(
+            searchQuery = currentSearchQuery.value ?: "",
+            mapBounds = bounds,
+            radius = currentRadiusValue.value,
+            categoryID = searchFilterList.value?.data[selectedFilterIndex.value]
+        )
         viewModelScope.launch {
             delay(1000)
-
-            _currentSearchByAreaState.update {
-                SearchByAreaState.Success
-            }
+           try {
+               val result = useCase.execute(query)
+               _currentSearchByAreaState.update {
+                   SearchByAreaState.Success(
+                       data = SearchByAreaResult(
+                           data = result.map {
+                               DataClusterItem(
+                                   data = it,
+                                   itemSnippet = it.title
+                               )
+                           }
+                       )
+                   )
+               }
+           } catch (th : Throwable){
+               th.printStackTrace()
+               _currentSearchByAreaState.update {
+                   SearchByAreaState.Error()
+               }
+           }
         }
 
     }

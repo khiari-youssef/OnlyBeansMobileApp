@@ -1,73 +1,62 @@
 package com.youapps.search_module.search_list_map.ui.community_search_screen.map_view
 
-import android.location.Location
 import android.widget.Toast
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.FloatingActionButton
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Immutable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.LocationSource
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.maps.android.compose.GoogleMap
 import com.google.maps.android.compose.MapProperties
 import com.google.maps.android.compose.MapType
 import com.google.maps.android.compose.MapUiSettings
-import com.google.maps.android.compose.Marker
-import com.google.maps.android.compose.MarkerState
+import com.google.maps.android.compose.MapsComposeExperimentalApi
+import com.google.maps.android.compose.clustering.Clustering
 import com.google.maps.android.compose.rememberCameraPositionState
-import com.google.maps.android.compose.rememberMarkerState
 import com.google.maps.android.compose.rememberUpdatedMarkerState
 import com.youapps.onlybeans.domain.entities.users.OBLocation
 import com.youapps.onlybeans.platform.LocalLocationStateEnabled
 import com.youapps.onlybeans.search_module.R
-import com.youapps.onlybeans.ui.EnableLocationChip
 import com.youapps.search_module.search_list_map.ui.community_search_state.CommunitySearchStateHolder
 import com.youapps.search_module.search_list_map.ui.community_search_state.SearchByAreaState
 import com.youapps.search_module.search_list_map.ui.community_search_state.SearchByRegionBounds
 import com.youapps.search_module.search_list_map.ui.components.MapSearchAreaChip
-import com.youapps.search_module.search_list_map.ui.components.OBMapLocationToggleButton
+import com.youapps.search_module.search_list_map.ui.components.OBMapCluster
 import com.youapps.search_module.search_list_map.ui.components.OBMapRecenterButton
 import kotlinx.coroutines.launch
 
 
 
 
+@OptIn(MapsComposeExperimentalApi::class)
 @Composable
 fun CommunityMapView(
     modifier: Modifier = Modifier,
     screenState : CommunitySearchStateHolder,
-    searchVisibleArea : (SearchByRegionBounds)-> Unit,
-    onCheckLocationSettings : ()-> Unit
+    onSearchVisibleArea : (SearchByRegionBounds)-> Unit
 ) {
+    val context = LocalContext.current
     val tunisia = screenState.locationSource.getCurrentLocation()?.run {
         LatLng(
             latitude,
@@ -111,16 +100,36 @@ fun CommunityMapView(
 
             },
             content = {
-                val markerState = rememberUpdatedMarkerState()
+                val stateSnapShot = screenState.searchOperationState.value
+                if(stateSnapShot is SearchByAreaState.Success){
+                    Clustering(
+                        items = stateSnapShot.data.data,
+                        onClusterClick = { cluster ->
+                            false
+                        },
+                        clusterContent = { data->
+                            OBMapCluster(
+                                size = data.size
+                            )
+                        },
+                        onClusterItemClick = { item ->
+                            // Handle clicking an individual marker
+                            false
+                        }
+                    )
+                }
 
             }
         )
-        if ( screenState.searchOperationState.value is SearchByAreaState.Loading){
+        if(screenState.searchOperationState.value is SearchByAreaState.Loading){
             CircularProgressIndicator(
                 modifier = Modifier
                     .align(Alignment.Center),
                 color = MaterialTheme.colorScheme.secondary
             )
+        }
+        if(screenState.searchOperationState.value is SearchByAreaState.Error){
+            Toast.makeText(context, stringResource(com.youapps.onlybeans.designsystem.R.string.error_toast_unknown), Toast.LENGTH_SHORT).show()
         }
         ConstraintLayout(
             modifier = Modifier
@@ -163,7 +172,7 @@ fun CommunityMapView(
                         .wrapContentSize(),
                     onClick = {
                         cameraPositionState.projection?.visibleRegion?.latLngBounds?.run {
-                            searchVisibleArea(
+                            onSearchVisibleArea(
                                 SearchByRegionBounds(
                                     northEast = OBLocation(
                                         latitude = this.northeast.latitude,

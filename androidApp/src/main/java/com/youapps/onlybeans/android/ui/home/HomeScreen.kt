@@ -148,9 +148,6 @@ fun HomeScreen(
                                     },
                                     searchVisibleArea = { bounds ->
                                         viewModel.searchVisibleArea(bounds)
-                                    },
-                                    onCheckLocationSettings = {
-
                                     }
                                 )
                             }

@@ -12,7 +12,6 @@ import com.youapps.onlybeans.di.domainModule
 import com.youapps.onlybeans.di.repositoriesModule
 import com.youapps.onlybeans.marketplace.ui.state.MarketPlaceViewModel
 import com.youapps.onlybeans.ui.product.ProductsViewModel
-import com.youapps.search_module.search_list_map.ui.community_search_state.CommunitySearchViewModel
 import com.youapps.users_management.ui.login.LoginViewModel
 import com.youapps.users_management.ui.profile.MyProfileViewModel
 import com.youapps.users_management.ui.registration.OBRegistrationViewModel
@@ -53,8 +52,5 @@ val viewModelsModule = module {
     }
     viewModel {
         MarketPlaceViewModel()
-    }
-    viewModel {
-        CommunitySearchViewModel(get(OBLocationServicePlayServicesImplTag),get(AppMetaDataAPITag))
     }
 }
