@@ -148,6 +148,9 @@ fun HomeScreen(
                                     },
                                     searchVisibleArea = { bounds ->
                                         viewModel.searchVisibleArea(bounds)
+                                    },
+                                    onMapLoaded = {
+                                        viewModel.listenToLocationUpdates()
                                     }
                                 )
                             }

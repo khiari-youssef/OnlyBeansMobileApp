@@ -44,6 +44,7 @@ import kotlinx.coroutines.launch
 fun CommunityMapView(
     modifier: Modifier = Modifier,
     screenState: CommunitySearchStateHolder,
+    onMapLoaded : ()-> Unit,
     onSearchVisibleArea: (SearchByRegionBounds) -> Unit
 ) {
     val context = LocalContext.current
@@ -65,18 +66,18 @@ fun CommunityMapView(
         modifier = modifier
     ) {
         val mapCoroutineScope = rememberCoroutineScope()
-        val mapUiState = remember(isLocationEnabled) {
+        val mapUiState =
             MapUiSettings(
                 compassEnabled = true,
                 zoomControlsEnabled = false,
-                myLocationButtonEnabled = isLocationEnabled,
+                myLocationButtonEnabled = true,
                 mapToolbarEnabled = false
             )
-        }
-        val mapProperties = remember(isLocationEnabled) {
+
+        val mapProperties = remember {
             MapProperties(
                 mapType = MapType.NORMAL,
-                isMyLocationEnabled = isLocationEnabled
+                isMyLocationEnabled = false
             )
         }
         GoogleMap(
@@ -86,9 +87,7 @@ fun CommunityMapView(
             uiSettings = mapUiState,
             locationSource = screenState.locationSource,
             properties = mapProperties,
-            onMapLoaded = {
-
-            },
+            onMapLoaded = onMapLoaded,
             content = {
                 val stateSnapShot = screenState.searchOperationState.value
                 if (stateSnapShot is SearchByAreaState.Success) {

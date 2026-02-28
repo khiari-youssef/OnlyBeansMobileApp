@@ -22,6 +22,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -31,6 +32,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.youapps.onlybeans.R
 import com.youapps.onlybeans.di.OBLocationServicePlayServicesImplTag
 import com.youapps.onlybeans.platform.OBLocationService
@@ -57,7 +59,7 @@ fun EnableLocationChip(
             ActivityResultContracts.StartActivityForResult()
         ) { (resultCode, _) ->
             localCoroutineScope.launch {
-                if (resultCode == Activity.RESULT_CANCELED && locationService.isLocationEnabled()) {
+                if (resultCode == Activity.RESULT_CANCELED && locationService.isLocationServiceEnabled()) {
                     onLocationEnabled()
                 } else {
                     Toast.makeText(

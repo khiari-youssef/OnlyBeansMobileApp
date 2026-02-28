@@ -29,6 +29,7 @@ import com.youapps.search_module.search_list_map.ui.components.OBSearchFilterDia
 fun CommunitySearchScreen(
     modifier: Modifier = Modifier,
     screenState: CommunitySearchStateHolder,
+    onMapLoaded : ()-> Unit,
     onSearchQueryChanged: (String) -> Unit,
     onSearchFilterChanged: (selectedFilterIndex: Int, radiusValue: Float) -> Unit,
     searchVisibleArea: (SearchByRegionBounds) -> Unit
@@ -62,6 +63,7 @@ fun CommunitySearchScreen(
             SearchViewType.Map -> CommunityMapView(
                 modifier = Modifier.fillMaxSize(),
                 screenState = screenState,
+                onMapLoaded = onMapLoaded,
                 onSearchVisibleArea = searchVisibleArea
             )
 

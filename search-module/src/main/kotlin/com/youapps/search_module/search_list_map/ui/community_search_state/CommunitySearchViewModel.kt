@@ -1,9 +1,13 @@
 package com.youapps.search_module.search_list_map.ui.community_search_state
 
+import android.content.Context
+import android.location.Location
+import android.widget.Toast
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.youapps.onlybeans.contracts.UseCaseContract
 import com.youapps.onlybeans.data.repositories.AppMetaDataAPI
+import com.youapps.onlybeans.platform.LocationSettingsType
 import com.youapps.onlybeans.platform.OBLocationService
 import com.youapps.search_module.search_list_map.domain.entities.MapSearchDataPoint
 import com.youapps.search_module.search_list_map.domain.entities.OBMapSearchQuery
@@ -14,11 +18,13 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.koin.core.Koin
 
 class CommunitySearchViewModel(
     private val locationService: OBLocationService,
     private val appMetaDataAPI: AppMetaDataAPI,
-    private val useCase: UseCaseContract<OBMapSearchQuery, List<MapSearchDataPoint>>
+    private val useCase: UseCaseContract<OBMapSearchQuery, List<MapSearchDataPoint>>,
+    private val appContext : Context
 ) : ViewModel() {
 
 
@@ -43,6 +49,25 @@ class CommunitySearchViewModel(
     val currentSearchByAreaState: StateFlow<SearchByAreaState> = _currentSearchByAreaState
 
     val currentLocationSource: ManualLocationSource = ManualLocationSource()
+
+
+
+    fun listenToLocationUpdates() {
+        viewModelScope.launch {
+            locationService.subscribe(strategy = LocationSettingsType.HIGH_ACCURACY)
+                .collect { location ->
+                    location?.run {
+                        currentLocationSource.pushLocation(Location("manual").apply {
+                            latitude = location.latitude
+                            longitude = location.longitude
+                        })
+                    }
+                    Toast.makeText(appContext,location.run {
+                        "${this?.latitude},${this?.longitude}"
+                    }, Toast.LENGTH_SHORT).show()
+                }
+        }
+    }
 
 
     /*
@@ -136,6 +161,7 @@ class CommunitySearchViewModel(
         }
 
     }
+
 
 
 }

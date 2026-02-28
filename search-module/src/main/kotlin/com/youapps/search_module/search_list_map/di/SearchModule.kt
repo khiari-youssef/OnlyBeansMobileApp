@@ -53,7 +53,8 @@ val searchModule = module {
         CommunitySearchViewModel(
             get(OBLocationServicePlayServicesImplTag),
             get(AppMetaDataAPITag),
-            get(SearchCommunityUseCaseImplTag)
+            get(SearchCommunityUseCaseImplTag),
+            get()
         )
     }
 }
