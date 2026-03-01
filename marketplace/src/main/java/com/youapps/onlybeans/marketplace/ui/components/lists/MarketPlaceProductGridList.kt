@@ -10,19 +10,12 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.youapps.designsystem.components.loading.shimmerEffect
 import com.youapps.onlybeans.domain.entities.products.OBMarketPlaceProduct
-import com.youapps.onlybeans.domain.entities.products.OBPrice
-import com.youapps.onlybeans.domain.entities.products.OBProductPricing
-import com.youapps.onlybeans.domain.entities.products.OBProductRating
-import com.youapps.onlybeans.ui.product.obCoffeeBeansMockProduct
 import kotlinx.collections.immutable.ImmutableList
-
 
 
 @Composable

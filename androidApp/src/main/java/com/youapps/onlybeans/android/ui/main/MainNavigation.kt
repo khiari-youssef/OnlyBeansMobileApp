@@ -33,7 +33,6 @@ import androidx.navigation.navArgument
 import com.youapps.designsystem.components.bars.OBBottomNavigationBarDefaults
 import com.youapps.designsystem.components.dialogs.ImageViewerDialog
 import com.youapps.designsystem.components.dialogs.NavigationNotFoundModal
-import com.youapps.designsystem.components.lists.CarouselState
 import com.youapps.designsystem.components.popups.AppExitPopup
 import com.youapps.designsystem.navigateBack
 import com.youapps.onlybeans.R
@@ -46,7 +45,6 @@ import com.youapps.users_management.ui.login.LoginScreen
 import com.youapps.users_management.ui.login.LoginState
 import com.youapps.users_management.ui.login.LoginUIStateHolder
 import com.youapps.users_management.ui.login.LoginViewModel
-import com.youapps.users_management.ui.registration.InputRuleCheckState
 import com.youapps.users_management.ui.registration.OBRegistrationScreen
 import com.youapps.users_management.ui.registration.OBRegistrationStateHolder
 import com.youapps.users_management.ui.registration.OBRegistrationViewModel
