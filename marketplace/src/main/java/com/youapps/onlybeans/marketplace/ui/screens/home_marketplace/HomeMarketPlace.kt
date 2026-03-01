@@ -62,7 +62,7 @@ fun HomeMarketPlace(
 ) {
     val bodyScrollState = rememberScrollState()
     val topAppBarScrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
-    val usPullRefreshing = remember {
+    val isPullRefreshing = remember {
         derivedStateOf {
             state.marketPlaceDataState.value.let { state->
                 state is MarketPlaceDataState.Loading && state.withPullToRefresh
@@ -72,7 +72,7 @@ fun HomeMarketPlace(
     val refreshState = rememberPullToRefreshState()
 
     PullToRefreshBox(
-        isRefreshing = usPullRefreshing.value,
+        isRefreshing = isPullRefreshing.value,
         onRefresh = onRefreshMarketPlaceDataClicked,
         state = refreshState,
         contentAlignment = Alignment.TopCenter,
@@ -83,7 +83,7 @@ fun HomeMarketPlace(
                     .zIndex(4f),
                 containerColor = MaterialTheme.colorScheme.background,
                 state = refreshState,
-                isRefreshing = usPullRefreshing.value,
+                isRefreshing = isPullRefreshing.value,
             )
         }
     ) {

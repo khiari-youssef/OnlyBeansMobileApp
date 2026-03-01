@@ -17,6 +17,9 @@ import androidx.compose.material.pullrefresh.rememberPullRefreshState
 import androidx.compose.material3.DividerDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
+import androidx.compose.material3.pulltorefresh.PullToRefreshDefaults
+import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
@@ -43,115 +46,122 @@ fun NotificationsScreen(
         }
     }
     val listState = rememberLazyListState()
-    val refreshState = rememberPullRefreshState(
-        refreshing = isPullRefreshing.value,
-        onRefresh = onRefreshNotifications
-    )
-    Box(
-        modifier = Modifier
-            .pullRefresh(refreshState)
-            .fillMaxWidth()
-            .wrapContentHeight(),
-        contentAlignment = Alignment.TopCenter
-    ) {
-        PullRefreshIndicator(
-            refreshing = isPullRefreshing.value,
-            state = refreshState,
+    val refreshState = rememberPullToRefreshState()
+    PullToRefreshBox(
+        isRefreshing = isPullRefreshing.value,
+        onRefresh = onRefreshNotifications,
+        state = refreshState,
+        contentAlignment = Alignment.TopCenter,
+        indicator = {
+            PullToRefreshDefaults.Indicator(
+                modifier = Modifier
+                    .height(40.dp)
+                    .zIndex(4f),
+                containerColor = MaterialTheme.colorScheme.background,
+                state = refreshState,
+                isRefreshing = isPullRefreshing.value,
+            )
+        }
+    ){
+        Box(
             modifier = Modifier
-                .zIndex(4f),
-            backgroundColor = Color.White,
-        )
-        LazyColumn(
-            modifier = modifier
-                .padding(
-                    top = 8.dp,
-                )
-                .padding(
-                    horizontal = 12.dp
-                )
-                .background(
-                    color = MaterialTheme.colorScheme.surfaceVariant
-                ),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(
-                8.dp, Alignment.CenterVertically
-            ),
-            state = listState
+                .fillMaxWidth()
+                .wrapContentHeight(),
+            contentAlignment = Alignment.TopCenter
         ) {
-            when (notificationsListState) {
-                is NotificationsListState.NotificationsLoading -> {
-                    items(15) {
-                        NotificationItem(
-                            modifier = Modifier
-                                .height(60.dp)
-                                .fillMaxWidth(),
-                            oBNotification = null,
-                            onProjectReferenceClicked = {}
-                        )
-                        HorizontalDivider(
-                            modifier = Modifier
-                                .padding(
-                                    horizontal = 12.dp
-                                )
-                                .fillMaxWidth(),
-                            thickness = 0.5f.dp,
-                            color = DividerDefaults.color
-                        )
+            LazyColumn(
+                modifier = modifier
+                    .padding(
+                        top = 8.dp,
+                    )
+                    .padding(
+                        horizontal = 12.dp
+                    )
+                    .background(
+                        color = MaterialTheme.colorScheme.surfaceVariant
+                    ),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(
+                    8.dp, Alignment.CenterVertically
+                ),
+                state = listState
+            ) {
+                when (notificationsListState) {
+                    is NotificationsListState.NotificationsLoading -> {
+                        items(15) {
+                            NotificationItem(
+                                modifier = Modifier
+                                    .height(60.dp)
+                                    .fillMaxWidth(),
+                                oBNotification = null,
+                                onProjectReferenceClicked = {}
+                            )
+                            HorizontalDivider(
+                                modifier = Modifier
+                                    .padding(
+                                        horizontal = 12.dp
+                                    )
+                                    .fillMaxWidth(),
+                                thickness = 0.5f.dp,
+                                color = DividerDefaults.color
+                            )
+                        }
                     }
-                }
 
-                is NotificationsListState.Error -> {
+                    is NotificationsListState.Error -> {
 
-                }
+                    }
 
-                is NotificationsListState.Success -> {
-                    items(
-                        items = notificationsListState.notificationsList,
-                        key = {
-                            it.id
+                    is NotificationsListState.Success -> {
+                        items(
+                            items = notificationsListState.notificationsList,
+                            key = {
+                                it.id
+                            }
+                        ) { notification ->
+                            val itemModifier = Modifier
+                                .shimmerEffect(notificationsListState.isRefreshingMore)
+                                .fillMaxWidth()
+                            when (notification) {
+                                is OBNotification.OBRequestNotification -> {
+                                    NotificationRequestItem(
+                                        modifier = itemModifier,
+                                        oBNotification = notification,
+                                        onProjectReferenceClicked = onProjectReferenceClicked
+                                    )
+                                }
+
+                                is OBNotification.OBInfoNotification -> {
+                                    NotificationItem(
+                                        modifier = itemModifier,
+                                        oBNotification = notification,
+                                        onProjectReferenceClicked = onProjectReferenceClicked
+                                    )
+                                }
+
+                                is OBNotification.OBResponseNotification -> {
+                                    NotificationResponseItem(
+                                        modifier = itemModifier,
+                                        OBNotification = notification,
+                                        onProjectReferenceClicked = onProjectReferenceClicked
+                                    )
+                                }
+                            }
+                            HorizontalDivider(
+                                modifier = Modifier
+                                    .padding(
+                                        horizontal = 12.dp
+                                    )
+                                    .fillMaxWidth(),
+                                thickness = 0.5f.dp,
+                                color = DividerDefaults.color
+                            )
                         }
-                    ) { notification ->
-                        val itemModifier = Modifier
-                            .shimmerEffect(notificationsListState.isRefreshingMore)
-                            .fillMaxWidth()
-                        when (notification) {
-                            is OBNotification.OBRequestNotification -> {
-                                NotificationRequestItem(
-                                    modifier = itemModifier,
-                                    oBNotification = notification,
-                                    onProjectReferenceClicked = onProjectReferenceClicked
-                                )
-                            }
-
-                            is OBNotification.OBInfoNotification -> {
-                                NotificationItem(
-                                    modifier = itemModifier,
-                                    oBNotification = notification,
-                                    onProjectReferenceClicked = onProjectReferenceClicked
-                                )
-                            }
-
-                            is OBNotification.OBResponseNotification -> {
-                                NotificationResponseItem(
-                                    modifier = itemModifier,
-                                    OBNotification = notification,
-                                    onProjectReferenceClicked = onProjectReferenceClicked
-                                )
-                            }
-                        }
-                        HorizontalDivider(
-                            modifier = Modifier
-                                .padding(
-                                    horizontal = 12.dp
-                                )
-                                .fillMaxWidth(),
-                            thickness = 0.5f.dp,
-                            color = DividerDefaults.color
-                        )
                     }
                 }
             }
         }
     }
+
 
 }
