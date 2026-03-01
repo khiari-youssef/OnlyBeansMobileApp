@@ -19,6 +19,7 @@ constraintlayout = "1.1.1"
 compose-coil = "2.7.0"
 compose-navigation = "2.9.5"
 compose-lottie = "6.6.10"
+kotlinxCollectionsImmutable = "0.4.0"
 kotlinxDatetime = "0.7.1"
 androidx-activityCompose = "1.11.0"
 mapsCompose = "8.1.0"
@@ -100,6 +101,7 @@ compose-lottie = { module = "com.airbnb.android:lottie-compose", version.ref = "
 compose-test-junit = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "compose" }
 compose-test-rule = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "compose" }
 kotlin-coroutines = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core", version.ref = "kcoroutines" }
+kotlinx-collections-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "kotlinxCollectionsImmutable" }
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "kotlinxDatetime" }
 kotlin-ktor-core = { module = "io.ktor:ktor-client-core", version.ref = "ktorVersion" }
 kotlin-ktor-content = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktorVersion" }
@@ -143,7 +145,7 @@ androidx-foundation-layout = { group = "androidx.compose.foundation", name = "fo
 play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "playServicesLocation" }
 
 [bundles]
-composelibs = ['compose-ui', 'compose-ui-tooling-preview', 'compose-foundation', 'compose-material', 'compose-material3', 'androidx-activity-compose', 'compose-animation-core', 'compose-animation-graphics', 'compose-coil', 'compose-lottie', 'compose-navigation', 'compose-constraintlayout', 'jetpack-viewmodel-compose', 'jetpack-viewmodel-composeutils', 'koin-compose']
+composelibs = ['compose-ui', 'compose-ui-tooling-preview', 'compose-foundation', 'compose-material', 'compose-material3', 'androidx-activity-compose', 'compose-animation-core', 'compose-animation-graphics', 'compose-coil', 'compose-lottie', 'compose-navigation', 'compose-constraintlayout', 'jetpack-viewmodel-compose', 'jetpack-viewmodel-composeutils', 'koin-compose','kotlinx-collections-immutable']
 testingLibs = ['espresso-core', 'junit', 'kotlin-test', 'koin-test', 'androidx-test-ext-junit', 'androidx-test-rules', 'androidx-test-runner', 'compose-test-junit', 'koin-test-android', 'kotlin-test-mockito']
 
 

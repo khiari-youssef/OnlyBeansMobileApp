@@ -44,7 +44,6 @@ import com.youapps.onlybeans.android.ui.notifications.NotificationScreenStateHol
 import com.youapps.onlybeans.android.ui.notifications.NotificationsScreen
 import com.youapps.onlybeans.android.ui.notifications.NotificationsViewModel
 import com.youapps.onlybeans.marketplace.ui.screens.home_marketplace.HomeMarketPlace
-import com.youapps.onlybeans.marketplace.ui.state.MarketPlaceProductGridListState
 import com.youapps.onlybeans.marketplace.ui.state.MarketPlaceStateHolder
 import com.youapps.onlybeans.marketplace.ui.state.MarketPlaceViewModel
 import com.youapps.search_module.search_list_map.ui.community_search_screen.CommunitySearchScreen
@@ -195,6 +194,9 @@ fun HomeScreen(
                                     },
                                     onSeeAllProductsClicked = {
                                         onHomeExit(NavigationRoutingData.VIEW_SCREEN_PRODUCT_LIST)
+                                    },
+                                    onRefreshMarketPlaceDataClicked = {
+                                        viewModel.fetchMarketPlaceData(true)
                                     }
                                 )
                             }

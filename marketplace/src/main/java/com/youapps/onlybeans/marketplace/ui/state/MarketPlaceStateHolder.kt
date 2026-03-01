@@ -6,7 +6,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.remember
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.youapps.onlybeans.marketplace.domain.entities.MarketPlaceNewsCard
-import com.youapps.onlybeans.marketplace.ui.components.lists.MarketPlaceProductGridListData
+import com.youapps.onlybeans.marketplace.ui.models.MarketPlacePageData
 
 
 @Immutable
@@ -14,45 +14,33 @@ data class MarketPlaceNewsCardList(
     val data: List<MarketPlaceNewsCard>
 )
 
-@Immutable
-data class MarketPlaceFilterCategoryList(
-    val data: List<String>
-)
 
-sealed interface MarketPlaceProductGridListState {
-    data object Loading : MarketPlaceProductGridListState
-    data class Success(val data: MarketPlaceProductGridListData) : MarketPlaceProductGridListState
-    data class Error(val message: String) : MarketPlaceProductGridListState
+sealed interface MarketPlaceDataState {
+    data class Loading(val withPullToRefresh : Boolean = false) : MarketPlaceDataState
+    data class Success(val data: MarketPlacePageData,val showOnlySearchResult : Boolean = false) : MarketPlaceDataState
+    data class Error(val message: String) : MarketPlaceDataState
 }
 
 
 data class MarketPlaceStateHolder(
     val searchQuery: State<String?>,
-    val newsCardsList: MarketPlaceNewsCardList,
-    val filterCategoryList: MarketPlaceFilterCategoryList,
     val selectedFilterIndex: State<Int>,
-    val productsListState: State<MarketPlaceProductGridListState>
+    val marketPlaceDataState: State<MarketPlaceDataState>
 ) {
 
     companion object {
         @Composable
         fun rememberMarketPlaceState(
             searchQuery: State<String?>,
-            newsCardsList: MarketPlaceNewsCardList,
-            filterCategoryList: MarketPlaceFilterCategoryList,
             selectedFilterIndex: State<Int>,
-            productsList: State<MarketPlaceProductGridListState>
+            productsList: State<MarketPlaceDataState>
         ): MarketPlaceStateHolder = remember(
             searchQuery,
-            newsCardsList,
-            filterCategoryList,
             selectedFilterIndex,
             productsList
         ) {
             MarketPlaceStateHolder(
                 searchQuery,
-                newsCardsList,
-                filterCategoryList,
                 selectedFilterIndex,
                 productsList
             )
@@ -65,13 +53,11 @@ data class MarketPlaceStateHolder(
             searchQuery = viewModel.currentSearchQuery.collectAsStateWithLifecycle(
                 initialValue = null
             ),
-            newsCardsList = viewModel.marketPlaceNewsCardList,
-            filterCategoryList = viewModel.marketPlaceFilterCategoryList,
             selectedFilterIndex = viewModel.selectedFilterIndex.collectAsStateWithLifecycle(
                 0
             ),
-            productsList = viewModel.marketPlaceProductGridListState.collectAsStateWithLifecycle(
-                initialValue = MarketPlaceProductGridListState.Loading
+            productsList = viewModel.marketPlaceDataState.collectAsStateWithLifecycle(
+                initialValue = MarketPlaceDataState.Loading()
             )
         )
     }

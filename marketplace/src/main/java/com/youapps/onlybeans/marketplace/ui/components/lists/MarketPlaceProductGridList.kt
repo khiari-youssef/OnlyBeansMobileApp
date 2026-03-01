@@ -21,56 +21,14 @@ import com.youapps.onlybeans.domain.entities.products.OBPrice
 import com.youapps.onlybeans.domain.entities.products.OBProductPricing
 import com.youapps.onlybeans.domain.entities.products.OBProductRating
 import com.youapps.onlybeans.ui.product.obCoffeeBeansMockProduct
+import kotlinx.collections.immutable.ImmutableList
 
-@Preview
-@Composable
-fun MarketPlaceProductGridListPreview() {
-    MarketPlaceProductGridList(
-        modifier = Modifier
-            .fillMaxWidth(),
-        data = MarketPlaceProductGridListData(
-            items = List(10) {
-                OBMarketPlaceProduct(
-                    marketPlaceID = "marketplace-id-0aegd2sh15srh1",
-                    product = obCoffeeBeansMockProduct,
-                    pricing = OBProductPricing.OBProductMultipleWeightBasedPricing(
-                        pricePerWeight = mapOf(
-                            250 to OBPrice(price = 18.5f, 0.2f),
-                            500 to OBPrice(price = 35f),
-                            1000 to OBPrice(price = 65f)
-                        ),
-                        currency = "USD",
-                        weightUnit = "g"
-                    ),
-                    isAddedToFavoriteList = it % 2 == 0,
-                    isAddedToCard = it % 2 != 0,
-                    inStockItems = 5,
-                    rating = OBProductRating(
-                        reviewsNumber = 124,
-                        averageRating = 4.8f
-                    )
-                )
-            }
-        ),
-        onLikeClicked = { product, isLiked ->
-
-        },
-        onAddToCardClicked = { product, isLiked ->
-
-        }
-    )
-}
-
-@Immutable
-data class MarketPlaceProductGridListData(
-    val items: List<OBMarketPlaceProduct>
-)
 
 
 @Composable
 fun MarketPlaceProductGridList(
     modifier: Modifier = Modifier,
-    data: MarketPlaceProductGridListData,
+    data: ImmutableList<OBMarketPlaceProduct>,
     onAddToCardClicked: (product: OBMarketPlaceProduct, isAdded: Boolean) -> Unit,
     onLikeClicked: (product: OBMarketPlaceProduct, isLiked: Boolean) -> Unit
 ) {
@@ -82,19 +40,19 @@ fun MarketPlaceProductGridList(
         horizontalArrangement = Arrangement.spacedBy(16.dp),
         verticalArrangement = Arrangement.spacedBy(16.dp),
         content = {
-            items(data.items.size, key = {
-                data.items[it].product.id
+            items(data.size, key = {
+                data[it].product.id
             }) { index ->
                 MarketPlaceProductListItem(
                     modifier = Modifier
                         .fillMaxWidth()
                         .wrapContentHeight(),
-                    obProduct = data.items[index],
+                    obProduct = data[index],
                     onLikeClicked = {
-                        onLikeClicked(data.items[index], it)
+                        onLikeClicked(data[index], it)
                     },
                     onAddToCardClicked = {
-                        onAddToCardClicked(data.items[index], it)
+                        onAddToCardClicked(data[index], it)
                     }
                 )
             }
@@ -119,7 +77,7 @@ fun MarketPlaceProductGridListLoader(
                 Spacer(
                     modifier = Modifier
                         .clip(RoundedCornerShape(16.dp))
-                        .shimmerEffect(true)
+                        .shimmerEffect(true, shape = RoundedCornerShape(16.dp))
                         .fillMaxWidth()
                         .height(200.dp)
                 )

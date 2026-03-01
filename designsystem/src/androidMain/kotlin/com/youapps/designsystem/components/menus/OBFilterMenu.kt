@@ -4,6 +4,7 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -19,6 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.youapps.designsystem.components.loading.shimmerEffect
 
 
 @Composable
@@ -34,7 +36,6 @@ fun OBFilterMenu(
         horizontalAlignment = Alignment.Start,
         verticalArrangement = Arrangement.spacedBy(6.dp, Alignment.Top)
     ) {
-
         LazyRow(
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             modifier = Modifier
@@ -67,6 +68,32 @@ fun OBFilterMenu(
                         )
                     }
                 }
+            }
+        }
+    }
+}
+
+@Composable
+fun OBFilterMenuLoader(modifier: Modifier = Modifier) {
+    Column(
+        modifier = modifier
+            .fillMaxWidth(),
+        horizontalAlignment = Alignment.Start,
+        verticalArrangement = Arrangement.spacedBy(6.dp, Alignment.Top)
+    ) {
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(vertical = 8.dp)
+        ) {
+            repeat(4) { index ->
+                  Box(
+                      modifier = Modifier
+                          .shimmerEffect(true, shape = CircleShape)
+                          .height(40.dp)
+                          .weight(0.2f)
+                  )
             }
         }
     }
