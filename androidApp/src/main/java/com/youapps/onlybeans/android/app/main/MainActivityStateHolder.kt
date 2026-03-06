@@ -1,4 +1,4 @@
-package com.youapps.onlybeans.android.ui.main
+package com.youapps.onlybeans.android.app.main
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State

@@ -1,7 +1,6 @@
 package com.youapps.onlybeans.android.di
 
-import com.youapps.onlybeans.android.ui.main.MainActivityViewModel
-import com.youapps.onlybeans.android.ui.notifications.NotificationsViewModel
+import com.youapps.onlybeans.android.app.main.MainActivityViewModel
 import com.youapps.onlybeans.di.AppMetaDataAPITag
 import com.youapps.onlybeans.di.OBUserLoginUseCaseTag
 import com.youapps.onlybeans.di.OBUserLogoutUseCaseTag
@@ -22,9 +21,6 @@ val viewModelsModule = module {
     includes(domainModule)
     includes(androidSecurityModule)
     includes(repositoriesModule)
-    viewModel {
-        NotificationsViewModel()
-    }
     viewModel {
         MyProfileViewModel(
             get(UsersRepositoryTag), get(

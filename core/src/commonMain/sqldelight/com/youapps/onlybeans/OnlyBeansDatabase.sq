@@ -1,3 +1,4 @@
+import kotlin.Boolean;
 import kotlin.ULong;
 
 
@@ -41,6 +42,14 @@ countryFlag TEXT NOT NULL,
 latLngBounds TEXT
 );
 
+CREATE TABLE OBNotificationDB(
+id TEXT PRIMARY KEY,
+title TEXT NOT NULL,
+description TEXT NOT NULL,
+timeAgo INTEGER NOT NULL,
+isRead INTEGER AS Boolean NOT NULL DEFAULT 0,
+type TEXT NOT NULL
+);
 
 
 insertCountries:
@@ -80,4 +89,21 @@ INSERT OR REPLACE INTO OBHomeCoffeeBarDB VALUES(?,?,?,?,?,?);
 selectHomeCoffeeBar:
 SELECT * FROM OBHomeCoffeeBarDB LIMIT 1;
 
+insertNotification:
+INSERT OR REPLACE INTO OBNotificationDB VALUES(?,?,?,?,?,?);
+
+updateNotificationReadStatusByID:
+UPDATE OBNotificationDB SET isRead = :isRead WHERE OBNotificationDB.id = :id;
+
+updateAllNotificationsReadStatus:
+UPDATE OBNotificationDB SET isRead = 1;
+
+selectAllMostRecentNotifications:
+SELECT * FROM OBNotificationDB ORDER BY timeAgo ASC LIMIT :limitparam;
+
+deleteNotificationById:
+DELETE FROM OBNotificationDB WHERE id = :id;
+
+selectUnReadNotificationsCount:
+SELECT COUNT(*) FROM OBNotificationDB WHERE isRead= 0;
 

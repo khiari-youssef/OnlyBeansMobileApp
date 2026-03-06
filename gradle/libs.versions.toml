@@ -35,7 +35,7 @@ securityIdentityCredential = "1.0.0-alpha03"
 splashscreen = "1.1.0-rc01"
 koin = "4.1.1"
 mockito = "6.1.0"
-sqldelight = "2.1.0"
+sqldelight = "2.2.1"
 kcoroutines = "1.10.2"
 ktorVersion = "3.3.1"
 jpLifeCycle = "2.9.4"
@@ -125,6 +125,7 @@ sqldelight-runtime = { module = "app.cash.sqldelight:runtime", version.ref = "sq
 sqldelight-driver-android = { module = "app.cash.sqldelight:android-driver", version.ref = "sqldelight" }
 sqldelight-driver-native = { module = "app.cash.sqldelight:native-driver", version.ref = "sqldelight" }
 sqldelight-adapter = { module = "app.cash.sqldelight:primitive-adapters", version.ref = "sqldelight" }
+sqldelight-extension-coroutine= {module="app.cash.sqldelight:coroutines-extensions",version.ref="sqldelight"}
 jetpack-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "jpLifeCycle" }
 jetpack-viewmodel-core = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "jpLifeCycle" }
 jetpack-viewmodel-composeutils = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "jpLifeCycle" }
@@ -143,6 +144,7 @@ stately-common = { module = "co.touchlab:stately-common", version.ref = "stately
 ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
 androidx-foundation-layout = { group = "androidx.compose.foundation", name = "foundation-layout", version.ref = "foundationLayout" }
 play-services-location = { group = "com.google.android.gms", name = "play-services-location", version.ref = "playServicesLocation" }
+
 
 [bundles]
 composelibs = ['compose-ui', 'compose-ui-tooling-preview', 'compose-foundation', 'compose-material', 'compose-material3', 'androidx-activity-compose', 'compose-animation-core', 'compose-animation-graphics', 'compose-coil', 'compose-lottie', 'compose-navigation', 'compose-constraintlayout', 'jetpack-viewmodel-compose', 'jetpack-viewmodel-composeutils', 'koin-compose','kotlinx-collections-immutable']

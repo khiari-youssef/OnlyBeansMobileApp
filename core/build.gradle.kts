@@ -35,6 +35,7 @@ kotlin {
             implementation(libs.koin.core)
             implementation(libs.sqldelight.runtime)
             implementation(libs.sqldelight.adapter)
+            implementation(libs.sqldelight.extension.coroutine)
             implementation(libs.androidx.annotation)
             implementation(libs.androidx.collection)
             implementation(libs.androidx.datastore.preferences.core)

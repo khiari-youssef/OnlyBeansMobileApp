@@ -27,8 +27,10 @@ dependencies {
     implementation(libs.androidx.splashscreen)
     debugImplementation(libs.compose.ui.tooling)
     implementation(libs.koin.core)
+    implementation(libs.sqldelight.extension.coroutine)
     implementation(libs.koin.android)
     implementation(libs.jetpack.viewmodel.core)
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
+    debugImplementation(libs.compose.ui.tooling)
 }

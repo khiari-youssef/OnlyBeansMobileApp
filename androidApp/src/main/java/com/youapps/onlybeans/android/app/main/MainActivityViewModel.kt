@@ -1,4 +1,4 @@
-package com.youapps.onlybeans.android.ui.main
+package com.youapps.onlybeans.android.app.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

@@ -1,6 +1,7 @@
 package com.youapps.onlybeans.android.base
 
 import android.app.Application
+import com.youapps.onlybeans.android.di.notificationsModule
 import com.youapps.onlybeans.android.di.viewModelsModule
 import com.youapps.onlybeans.di.androidSecurityModule
 import com.youapps.onlybeans.di.platformServicesModule
@@ -19,6 +20,7 @@ class BaseApplication : Application() {
             loadKoinModules(
                 listOf(
                     searchModule,
+                    notificationsModule,
                     viewModelsModule,
                     androidSecurityModule,
                     platformServicesModule,

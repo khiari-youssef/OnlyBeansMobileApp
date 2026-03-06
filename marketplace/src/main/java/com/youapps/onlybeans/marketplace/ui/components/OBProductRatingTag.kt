@@ -42,7 +42,7 @@ fun OBProductRatingTag(
     ) {
         // The Star Icon
         Icon(
-            imageVector = ImageVector.vectorResource(com.youapps.onlybeans.designsystem.R.drawable.ic_rating_star),
+            imageVector = ImageVector.vectorResource(com.youapps.onlybeans.designsystem.R.drawable.ic_rating_star_filled),
             contentDescription = stringResource(com.youapps.onlybeans.designsystem.R.string.content_description_rating_star_icon),
             tint = starColor,
             modifier = Modifier.size(16.dp),

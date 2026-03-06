@@ -1,4 +1,4 @@
-package com.youapps.onlybeans.android.ui.main
+package com.youapps.onlybeans.android.app.main
 
 import SettingsScreen
 import android.content.Intent
@@ -37,7 +37,7 @@ import com.youapps.designsystem.components.popups.AppExitPopup
 import com.youapps.designsystem.navigateBack
 import com.youapps.onlybeans.R
 import com.youapps.onlybeans.android.base.NavigationRoutingData
-import com.youapps.onlybeans.android.ui.home.HomeScreen
+import com.youapps.onlybeans.android.app.home.HomeScreen
 import com.youapps.onlybeans.domain.valueobjects.UserSex
 import com.youapps.onlybeans.ui.product.ProductsListScreen
 import com.youapps.onlybeans.ui.product.ProductsListScreenState

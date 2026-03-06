@@ -1,4 +1,4 @@
-package com.youapps.onlybeans.android.ui.home
+package com.youapps.onlybeans.android.app.home
 
 
 import ProfileScreen
@@ -40,9 +40,9 @@ import com.youapps.designsystem.components.bars.OBBottomNavigationBar
 import com.youapps.designsystem.components.bars.OBBottomNavigationBarDefaults
 import com.youapps.designsystem.components.popups.LogoutPopup
 import com.youapps.onlybeans.android.base.NavigationRoutingData
-import com.youapps.onlybeans.android.ui.notifications.NotificationScreenStateHolder
-import com.youapps.onlybeans.android.ui.notifications.NotificationsScreen
-import com.youapps.onlybeans.android.ui.notifications.NotificationsViewModel
+import com.youapps.onlybeans.android.notifications.ui.screen.NotificationScreenStateHolder
+import com.youapps.onlybeans.android.notifications.ui.screen.NotificationsScreen
+import com.youapps.onlybeans.android.notifications.ui.screen.NotificationsViewModel
 import com.youapps.onlybeans.marketplace.ui.screens.home_marketplace.HomeMarketPlace
 import com.youapps.onlybeans.marketplace.ui.state.MarketPlaceStateHolder
 import com.youapps.onlybeans.marketplace.ui.state.MarketPlaceViewModel
@@ -207,12 +207,7 @@ fun HomeScreen(
                 composable(NavigationRoutingData.Home.NOTIFICATIONS) {
                     val viewModel = koinViewModel<NotificationsViewModel>()
                     val screenState = NotificationScreenStateHolder
-                        .rememberNotificationScreenState(
-                            notificationsListState = viewModel.latestNotificationsState.collectAsStateWithLifecycle(),
-                            currentPage = rememberSaveable {
-                                mutableIntStateOf(0)
-                            }
-                        )
+                        .bindViewModelState(viewModel)
                     NavigationBarScreenTemplate(
                         modifier = Modifier,
                         onExitNavigation = { onHomeExit(NavigationRoutingData.EXIT_APP_ROUTE) },
@@ -220,12 +215,17 @@ fun HomeScreen(
                         NotificationsScreen(
                             modifier = modifier,
                             screenState = screenState,
-                            onProjectReferenceClicked = { projectRef ->
-
+                            onNotificationClicked = { id->
+                               viewModel.markNotificationRead(id)
+                            },
+                            onRemoveNotification = viewModel::removeNotification,
+                            onLoadNextPage = {
+                                viewModel.loadMoreNotifications(pageSize = 8)
                             },
                             onRefreshNotifications = {
-                                viewModel.getLastNotifications(isRefresh = true)
-                            }
+                                viewModel.getLastNotifications(isPullToRefresh = true)
+                            },
+                            onMarkAllRead = viewModel::markAllNotificationsRead
                         )
                     }
                 }

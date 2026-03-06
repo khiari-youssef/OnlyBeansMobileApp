@@ -8,7 +8,7 @@ import org.koin.dsl.module
 
 val UsersRepositoryTag = named("OBUsersRepository")
 val repositoriesModule = module {
-    includes(dataSourcesModule)
+    includes(dataConfigModule)
     factory<OBUsersRepositoryInterface>(UsersRepositoryTag) {
         OBUsersRepository(get(), get(), get())
     }

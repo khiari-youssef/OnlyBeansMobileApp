@@ -9,7 +9,7 @@ import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import com.youapps.designsystem.OBTheme
 import com.youapps.onlybeans.android.R
-import com.youapps.onlybeans.android.ui.main.MainActivity
+import com.youapps.onlybeans.android.app.main.MainActivity
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith

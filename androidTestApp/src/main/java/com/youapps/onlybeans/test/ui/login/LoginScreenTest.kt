@@ -11,7 +11,7 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.youapps.designsystem.R
-import com.youapps.onlybeans.android.ui.main.MainActivity
+import com.youapps.onlybeans.android.app.main.MainActivity
 import com.youapps.onlybeans.domain.exception.DomainErrorType
 import com.youapps.users_management.ui.login.LoginScreen
 import com.youapps.users_management.ui.login.LoginState

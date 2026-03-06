@@ -16,4 +16,9 @@
     <string name="biometric_auth_failed_message">La operación falló</string>
     <string name="biometric_auth_cancelled_title">Error de autenticación</string>
     <string name="biometric_auth_cancelled_message">Operación cancelada</string>
+
+    <!-- Notifications App Bar -->
+    <string name="notifications_app_bar_icon_description">Icono de la barra de aplicaciones de notificaciones</string>
+    <string name="notifications_app_bar_title">Notificaciones</string>
+    <string name="notifications_app_bar_mark_all_read">Marcar todo como leído</string>
 </resources>
