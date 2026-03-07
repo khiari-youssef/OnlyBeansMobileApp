@@ -51,6 +51,7 @@ import com.youapps.onlybeans.android.R
 import com.youapps.onlybeans.android.notifications.domain.entities.OBNotificationItemData
 import com.youapps.onlybeans.android.notifications.ui.components.NotificationsAppBar
 import com.youapps.onlybeans.android.notifications.ui.components.OBNotificationCard
+import com.youapps.onlybeans.android.notifications.ui.components.OBNotificationCardLoader
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -108,7 +109,7 @@ fun NotificationsScreen(
                 when (notificationsListState) {
                     is  NotificationsListState.NotificationsLoading-> {
                         Column(
-                            modifier = Modifier
+                            modifier = modifier
                                 .padding(
                                     top = 8.dp,
                                 )
@@ -120,15 +121,11 @@ fun NotificationsScreen(
                                 8.dp, Alignment.CenterVertically
                             ),
                         ){
-                            repeat(10){
-                                Box(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .height(80.dp)
-                                        .shimmerEffect(true, shape = RoundedCornerShape(12.dp))
-                                )
-                            }
+                           repeat(12){
+                               OBNotificationCardLoader()
+                           }
                         }
+
                     }
                     is NotificationsListState.Error -> {
                             ErrorStateComponent(
