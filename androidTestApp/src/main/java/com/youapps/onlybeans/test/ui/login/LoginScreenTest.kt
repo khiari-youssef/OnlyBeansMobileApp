@@ -64,6 +64,9 @@ class LoginScreenTest : KoinTest {
                 },
                 onSetIdleState = {
                     viewModelLoginMockState.value = LoginState.Idle
+                },
+                onSignUpClicked = {
+
                 }
             )
         }
@@ -109,6 +112,9 @@ class LoginScreenTest : KoinTest {
                 },
                 onSetIdleState = {
                     viewModelLoginMockState.value = LoginState.Idle
+                },
+                onSignUpClicked = {
+
                 }
             )
         }
@@ -155,6 +161,9 @@ class LoginScreenTest : KoinTest {
                     viewModelLoginMockState.value = LoginState.Error(
                         errorType = DomainErrorType.AccountLocked
                     )
+                },
+                onSignUpClicked = {
+
                 }
             )
         }

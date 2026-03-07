@@ -21,4 +21,8 @@
     <string name="notifications_app_bar_icon_description">Notifications App bar icon</string>
     <string name="notifications_app_bar_title">Notifications</string>
     <string name="notifications_app_bar_mark_all_read">Mark all read</string>
+    <string name="notifications_empty_state_title">No notifications yet</string>
+    <string name="notifications_empty_state_subtitle">"You're all caught up! We'll notify you when there's something new."</string>
+    <string name="notifications_error_state_title">Something went wrong</string>
+    <string name="notifications_error_state_subtitle">"We couldn't load your notifications. Please try again."</string>
 </resources>

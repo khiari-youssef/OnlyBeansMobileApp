@@ -21,4 +21,8 @@
     <string name="notifications_app_bar_icon_description">Icône de la barre d\'applications de notifications</string>
     <string name="notifications_app_bar_title">Notifications</string>
     <string name="notifications_app_bar_mark_all_read">Tout marquer comme lu</string>
+    <string name="notifications_empty_state_title">Pas encore de notifications</string>
+    <string name="notifications_empty_state_subtitle">"Vous êtes à jour ! Nous vous préviendrons dès qu'il y aura du nouveau."</string>
+    <string name="notifications_error_state_title">Une erreur est survenue</string>
+    <string name="notifications_error_state_subtitle">"Nous n'avons pas pu charger vos notifications. Veuillez réessayer."</string>
 </resources>
