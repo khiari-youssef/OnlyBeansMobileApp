@@ -28,6 +28,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -43,6 +44,7 @@ import com.youapps.onlybeans.marketplace.ui.components.MarketPlaceCarouselLoader
 import com.youapps.onlybeans.marketplace.ui.components.MarketplaceTopBar
 import com.youapps.onlybeans.marketplace.ui.components.lists.MarketPlaceProductGridList
 import com.youapps.onlybeans.marketplace.ui.components.lists.MarketPlaceProductGridListLoader
+import com.youapps.onlybeans.marketplace.ui.components.lists.MarketPlaceProductGridListOverView
 import com.youapps.onlybeans.marketplace.ui.state.MarketPlaceDataState
 import com.youapps.onlybeans.marketplace.ui.state.MarketPlaceStateHolder
 
@@ -228,9 +230,8 @@ fun HomeMarketPlace(
                                             )
                                         }
                                     ) {
-                                        MarketPlaceProductGridList(
+                                        MarketPlaceProductGridListOverView(
                                             modifier = Modifier
-                                                .height(400.dp)
                                                 .fillMaxWidth(),
                                             data = marketPlaceDataState.data.products,
                                             onAddToCardClicked = onAddToCardClicked,

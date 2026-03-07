@@ -177,8 +177,8 @@ fun OBNotificationCardLoader(
                     .background(color = Color.White,RoundedCornerShape(8.dp))
                     .border(width = 1.dp, color = if (isSystemInDarkTheme()) Color(0xFFA5A5A5) else Color(0xFFC2C2C2), RoundedCornerShape(8.dp))
                     .padding(
-                        vertical = 8.dp,
-                        horizontal = 12.dp
+                        vertical = 12.dp,
+                        horizontal = 16.dp
                     )
                     .fillMaxWidth()
                     .wrapContentHeight(),
@@ -198,19 +198,19 @@ fun OBNotificationCardLoader(
                         modifier = Modifier
                             .fillMaxWidth(0.8f)
                             .shimmerEffect(true)
-                            .height(10.dp)
+                            .height(15.dp)
                     )
                     Box(
                         modifier = Modifier
                             .fillMaxWidth(0.95f)
                             .shimmerEffect(true)
-                            .height(10.dp)
+                            .height(15.dp)
                     )
                     Box(
                         modifier = Modifier
                             .fillMaxWidth(0.5f)
                             .shimmerEffect(true)
-                            .height(10.dp)
+                            .height(15.dp)
                     )
                 }
             }

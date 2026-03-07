@@ -1,10 +1,12 @@
 package com.youapps.onlybeans.marketplace.ui.components.lists
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
@@ -17,6 +19,39 @@ import com.youapps.designsystem.components.loading.shimmerEffect
 import com.youapps.onlybeans.domain.entities.products.OBMarketPlaceProduct
 import kotlinx.collections.immutable.ImmutableList
 
+
+@Composable
+fun MarketPlaceProductGridListOverView(
+    modifier: Modifier = Modifier,
+    data: ImmutableList<OBMarketPlaceProduct>,
+    onAddToCardClicked: (product: OBMarketPlaceProduct, isAdded: Boolean) -> Unit,
+    onLikeClicked: (product: OBMarketPlaceProduct, isLiked: Boolean) -> Unit
+) {
+    FlowRow(
+         modifier = modifier,
+         maxItemsInEachRow = 2,
+         maxLines = 5,
+         horizontalArrangement = Arrangement.spacedBy(16.dp),
+         verticalArrangement = Arrangement.spacedBy(16.dp),
+         content = {
+            repeat(data.size){ index ->
+                MarketPlaceProductListItem(
+                    modifier = Modifier
+                        .weight(0.5f)
+                        .fillMaxWidth()
+                        .wrapContentHeight(),
+                    obProduct = data[index],
+                    onLikeClicked = {
+                        onLikeClicked(data[index], it)
+                    },
+                    onAddToCardClicked = {
+                        onAddToCardClicked(data[index], it)
+                    }
+                )
+            }
+         }
+     )
+}
 
 @Composable
 fun MarketPlaceProductGridList(
