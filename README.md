@@ -32,7 +32,7 @@ This section highlights the technologies used in the codebase.
 
 * **Language:** Kotlin 
 * **UI:** Jetpack compose
-* **Architecture:** MVVM / State Management with compose / Multi-module architecture
+* **Architecture:** MVVM / State Management with compose / Multi-module architecture / Configuration management with Convetion plugins and version catalog.
 * **Dependency Injection:** Koin
 * **Networking:** Ktor
 * **Local Persistence:** SqlDelight/Preferences
@@ -42,4 +42,5 @@ This section highlights the technologies used in the codebase.
 * I started with KMP template and libraries but then i decided to switch to android-first development.
 * This project was originally a different app idea with different features which i personally built for university project but fortunately it served as template for this new app.
 * I'm still refactoring this project: Design system, DI, navigation essentially.
+* I did not rely completely on AI but it did help me alot : Translating strings, localizing hardcoded texts, generating small editable composable functions, generating mock data to test, i also used Figma AI to generate mobile app UI/UX prototypes.
 * **License:** GNU General Public License v3.0
