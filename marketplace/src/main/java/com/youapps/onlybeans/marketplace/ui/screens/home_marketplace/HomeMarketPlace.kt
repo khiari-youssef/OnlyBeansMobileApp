@@ -28,7 +28,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -57,10 +56,11 @@ fun HomeMarketPlace(
     onSearchQueryChanged: (String) -> Unit,
     onCategorySelectedIndexChanged: (Int) -> Unit,
     onNewsCardClicked: (MarketPlaceNewsCard) -> Unit,
-    onAddToCardClicked: (product: OBMarketPlaceProduct, isAdded: Boolean) -> Unit,
+    onAddToCardStateClicked: (product: OBMarketPlaceProduct, isAdded: Boolean) -> Unit,
     onLikeClicked: (product: OBMarketPlaceProduct, isLiked: Boolean) -> Unit,
     onSeeAllProductsClicked: () -> Unit,
-    onRefreshMarketPlaceDataClicked : ()-> Unit
+    onRefreshMarketPlaceDataClicked : ()-> Unit,
+    onShowCardBottomSheetDialog : ()-> Unit
 ) {
     val bodyScrollState = rememberScrollState()
     val topAppBarScrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
@@ -72,6 +72,7 @@ fun HomeMarketPlace(
         }
     }
     val refreshState = rememberPullToRefreshState()
+
 
     PullToRefreshBox(
         isRefreshing = isPullRefreshing.value,
@@ -108,7 +109,9 @@ fun HomeMarketPlace(
                         .wrapContentHeight()
                         .fillMaxWidth(),
                     searchQuery = state.searchQuery.value ?: "",
-                    onSearchQueryChanged = onSearchQueryChanged
+                    onSearchQueryChanged = onSearchQueryChanged,
+                    onShowCardBottomSheetDialog = onShowCardBottomSheetDialog,
+                    itemsAddedToCard = state.currentCardItemsListState.value.size
                 )
             }
         ) { paddingValues ->
@@ -182,7 +185,7 @@ fun HomeMarketPlace(
                                         modifier = Modifier
                                             .fillMaxWidth(),
                                         data = marketPlaceDataState.data.products,
-                                        onAddToCardClicked = onAddToCardClicked,
+                                        onAddToCardClicked = onAddToCardStateClicked,
                                         onLikeClicked = onLikeClicked
                                     )
                                 }
@@ -234,7 +237,7 @@ fun HomeMarketPlace(
                                             modifier = Modifier
                                                 .fillMaxWidth(),
                                             data = marketPlaceDataState.data.products,
-                                            onAddToCardClicked = onAddToCardClicked,
+                                            onAddToCardClicked = onAddToCardStateClicked,
                                             onLikeClicked = onLikeClicked
                                         )
                                     }

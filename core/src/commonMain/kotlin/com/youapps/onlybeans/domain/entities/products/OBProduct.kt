@@ -54,3 +54,27 @@ data class OBMarketPlaceProduct(
 )
 
 
+data class OBMarketPlaceCardProduct(
+    val productID: String,
+    val productName: String,
+    val productImagePreview : String?,
+    val productCardDescription : String,
+    val productQuantity : Int,
+    val selectedPrice: OBPrice
+) {
+    override fun equals(other: Any?): Boolean =
+        other is OBMarketPlaceCardProduct &&
+        other.productID == this.productID
+
+    override fun hashCode(): Int {
+        var result = productQuantity
+        result = 31 * result + productID.hashCode()
+        result = 31 * result + productName.hashCode()
+        result = 31 * result + (productImagePreview?.hashCode() ?: 0)
+        result = 31 * result + productCardDescription.hashCode()
+        result = 31 * result + selectedPrice.hashCode()
+        return result
+    }
+}
+
+

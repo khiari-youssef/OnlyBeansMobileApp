@@ -1,11 +1,18 @@
 package com.youapps.onlybeans.marketplace.ui.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.FloatingActionButton
+import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -25,8 +32,10 @@ import com.youapps.onlybeans.marketplace.R
 @Composable
 fun MarketplaceTopBar(
     modifier: Modifier = Modifier,
+    itemsAddedToCard : Int = 0,
     searchQuery: String,
-    onSearchQueryChanged: (String) -> Unit
+    onSearchQueryChanged: (String) -> Unit,
+    onShowCardBottomSheetDialog : ()-> Unit
 ) {
     Column(
         modifier = modifier,
@@ -64,9 +73,17 @@ fun MarketplaceTopBar(
                     )
                 )
             }
-            ShoppingCardIcon(
-                itemsAddedToCard = 1
-            )
+            Box(
+                modifier = Modifier
+                    .padding(8.dp)
+                    .clickable(onClick = onShowCardBottomSheetDialog)
+            ){
+                ShoppingCardIcon(
+                    modifier = Modifier,
+                    itemsAddedToCard = itemsAddedToCard
+                )
+            }
+
         }
         Row(
             modifier = Modifier

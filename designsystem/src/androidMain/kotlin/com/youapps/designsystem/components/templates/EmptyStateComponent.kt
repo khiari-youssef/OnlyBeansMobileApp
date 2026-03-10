@@ -22,7 +22,6 @@ fun EmptyStateComponent(
 ) {
     Column(
         modifier = modifier
-            .fillMaxSize()
             .padding(24.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally

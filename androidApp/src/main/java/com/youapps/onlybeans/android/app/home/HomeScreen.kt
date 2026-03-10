@@ -43,6 +43,8 @@ import com.youapps.onlybeans.android.base.NavigationRoutingData
 import com.youapps.onlybeans.android.notifications.ui.screen.NotificationScreenStateHolder
 import com.youapps.onlybeans.android.notifications.ui.screen.NotificationsScreen
 import com.youapps.onlybeans.android.notifications.ui.screen.NotificationsViewModel
+import com.youapps.onlybeans.domain.entities.products.OBProductPricing
+import com.youapps.onlybeans.marketplace.ui.components.templates.MarketPlaceCardBottomSheetDialog
 import com.youapps.onlybeans.marketplace.ui.screens.home_marketplace.HomeMarketPlace
 import com.youapps.onlybeans.marketplace.ui.state.MarketPlaceStateHolder
 import com.youapps.onlybeans.marketplace.ui.state.MarketPlaceViewModel
@@ -107,10 +109,13 @@ fun HomeScreen(
                     selectedItemIndex = selectedHomeDestinationIndex.intValue,
                     properties = homeDestinations,
                     onItemSelected = { index ->
-                        homeNavController.navigate(
-                            route = NavigationRoutingData.Home.mapIndexToRoute(index),
-                            navOptions = navOpts
-                        )
+                        val newDestination = NavigationRoutingData.Home.mapIndexToRoute(index)
+                       if ( homeNavController.currentDestination?.route != newDestination) {
+                           homeNavController.navigate(
+                               route = NavigationRoutingData.Home.mapIndexToRoute(index),
+                               navOptions = navOpts
+                           )
+                       }
                     }
                 )
             }
@@ -174,6 +179,20 @@ fun HomeScreen(
                         },
                         content = remember {
                             { modifier ->
+                                var isCardBottomSheetDialog : Boolean by remember {
+                                    mutableStateOf(false)
+                                }
+
+                                MarketPlaceCardBottomSheetDialog(
+                                    isShown = isCardBottomSheetDialog,
+                                    onDismiss = {
+                                        isCardBottomSheetDialog = false
+                                        viewModel.saveCurrentCardState()
+                                    },
+                                    addedProducts = screenState.currentCardItemsListState.value,
+                                    onQuantityChanged = viewModel::updateCardItemQuantity,
+                                    onProductRemoved = viewModel::removeProductFromCard
+                                )
                                 HomeMarketPlace(
                                     modifier = Modifier
                                         .fillMaxSize(),
@@ -189,14 +208,29 @@ fun HomeScreen(
                                             isLiked
                                         )
                                     },
-                                    onAddToCardClicked = { product, isLiked ->
-                                        viewModel.updateCardStatus(product.product.id, isLiked)
+                                    onAddToCardStateClicked = { marketPlaceProduct, isAdded ->
+                                        if (isAdded){
+                                            viewModel.addProductToCard(
+                                                product = marketPlaceProduct.product,
+                                                selectedPrice = when (val pricing = marketPlaceProduct.pricing) {
+                                                    is OBProductPricing.OBProductMultipleWeightBasedPricing -> pricing.pricePerWeight.values.first()
+                                                    is OBProductPricing.OBProductMultipleBundleBasedPricing -> pricing.pricePerBundle.values.first()
+                                                    is OBProductPricing.OBProductSinglePricing -> pricing.price
+                                                },
+                                                quantity = 1
+                                            )
+                                        } else {
+                                            viewModel.removeProductFromCard(marketPlaceProduct.product.id)
+                                        }
                                     },
                                     onSeeAllProductsClicked = {
                                         onHomeExit(NavigationRoutingData.VIEW_SCREEN_PRODUCT_LIST)
                                     },
                                     onRefreshMarketPlaceDataClicked = {
                                         viewModel.fetchMarketPlaceData(true)
+                                    },
+                                    onShowCardBottomSheetDialog = {
+                                        isCardBottomSheetDialog = true
                                     }
                                 )
                             }

@@ -5,8 +5,10 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.State
 import androidx.compose.runtime.remember
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.youapps.onlybeans.domain.entities.products.OBMarketPlaceCardProduct
 import com.youapps.onlybeans.marketplace.domain.entities.MarketPlaceNewsCard
 import com.youapps.onlybeans.marketplace.ui.models.MarketPlacePageData
+import kotlinx.collections.immutable.ImmutableList
 
 
 @Immutable
@@ -25,7 +27,8 @@ sealed interface MarketPlaceDataState {
 data class MarketPlaceStateHolder(
     val searchQuery: State<String?>,
     val selectedFilterIndex: State<Int>,
-    val marketPlaceDataState: State<MarketPlaceDataState>
+    val marketPlaceDataState: State<MarketPlaceDataState>,
+    val currentCardItemsListState : State<ImmutableList<OBMarketPlaceCardProduct>>
 ) {
 
     companion object {
@@ -33,7 +36,8 @@ data class MarketPlaceStateHolder(
         fun rememberMarketPlaceState(
             searchQuery: State<String?>,
             selectedFilterIndex: State<Int>,
-            productsList: State<MarketPlaceDataState>
+            productsList: State<MarketPlaceDataState>,
+             currentCardItemsListState : State<ImmutableList<OBMarketPlaceCardProduct>>
         ): MarketPlaceStateHolder = remember(
             searchQuery,
             selectedFilterIndex,
@@ -42,7 +46,8 @@ data class MarketPlaceStateHolder(
             MarketPlaceStateHolder(
                 searchQuery,
                 selectedFilterIndex,
-                productsList
+                productsList,
+                currentCardItemsListState
             )
         }
 
@@ -58,7 +63,8 @@ data class MarketPlaceStateHolder(
             ),
             productsList = viewModel.marketPlaceDataState.collectAsStateWithLifecycle(
                 initialValue = MarketPlaceDataState.Loading()
-            )
+            ),
+            currentCardItemsListState = viewModel.currentCardItemsListState.collectAsStateWithLifecycle()
         )
     }
 }

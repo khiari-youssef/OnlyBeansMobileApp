@@ -8,14 +8,18 @@ import com.youapps.onlybeans.domain.entities.products.OBCoffeeRegion
 import com.youapps.onlybeans.domain.entities.products.OBCoffeeRoaster
 import com.youapps.onlybeans.domain.entities.products.OBFlavorNotes
 import com.youapps.onlybeans.domain.entities.products.OBFlavorProfileData
+import com.youapps.onlybeans.domain.entities.products.OBMarketPlaceCardProduct
 import com.youapps.onlybeans.domain.entities.products.OBMarketPlaceProduct
 import com.youapps.onlybeans.domain.entities.products.OBPrice
+import com.youapps.onlybeans.domain.entities.products.OBProduct
 import com.youapps.onlybeans.domain.entities.products.OBProductPricing
 import com.youapps.onlybeans.domain.entities.products.OBProductRating
 import com.youapps.onlybeans.domain.entities.products.OBRoastLevel
 import com.youapps.onlybeans.domain.entities.users.OBLocation
 import com.youapps.onlybeans.marketplace.domain.entities.MarketPlaceNewsCard
 import com.youapps.onlybeans.marketplace.ui.models.MarketPlacePageData
+import com.youapps.onlybeans.ui.product.coffeeInstances
+import kotlinx.collections.immutable.ImmutableList
 import kotlinx.collections.immutable.toImmutableList
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -40,10 +44,85 @@ class MarketPlaceViewModel : ViewModel() {
     val marketPlaceDataState: StateFlow<MarketPlaceDataState> =
         _marketPlaceDataState
 
+    private val _currentCardItemsListState: MutableStateFlow<ImmutableList<OBMarketPlaceCardProduct>> =
+        MutableStateFlow(coffeeInstances)
+    val currentCardItemsListState: StateFlow<ImmutableList<OBMarketPlaceCardProduct>> =
+        _currentCardItemsListState
+
     init {
         fetchMarketPlaceData()
     }
 
+
+    fun addProductToCard(
+        product: OBProduct,
+        quantity: Int,
+        selectedPrice : OBPrice,
+        selectedOptions: String?=null
+    ){
+        val currentState = _currentCardItemsListState.value
+        val newCardProduct = OBMarketPlaceCardProduct(
+            productID = product.id,
+            productQuantity = quantity,
+            productName = product.name,
+            productImagePreview = product.productCovers.firstOrNull(),
+            productCardDescription = selectedOptions ?: "",
+            selectedPrice = selectedPrice
+        )
+
+        val productInTheCard = currentState.find {
+            it == newCardProduct
+        }
+        productInTheCard?.run {
+            _currentCardItemsListState.update { currentList->
+                currentList.map { item->
+                   if (item.productID == productInTheCard.productID) {
+                       newCardProduct
+                   } else item
+                }.toImmutableList()
+            }
+        } ?: run {
+            _currentCardItemsListState.update { currentList->
+                buildList {
+                    addAll(currentList)
+                    add(OBMarketPlaceCardProduct(
+                        productID = product.id,
+                        productQuantity = quantity,
+                        productName = product.name,
+                        productImagePreview = product.productCovers.firstOrNull(),
+                        productCardDescription = selectedOptions ?: "",
+                        selectedPrice = selectedPrice
+                    ))
+                }.toImmutableList()
+            }
+        }
+
+    }
+
+    fun saveCurrentCardState() {
+
+    }
+
+
+    fun removeProductFromCard(productID: String) {
+        _currentCardItemsListState.update {  currentState->
+            currentState.filter {
+                it.productID != productID
+            }.toImmutableList()
+        }
+    }
+
+    fun updateCardItemQuantity(productID: String,quantity : Int){
+        _currentCardItemsListState.update {  currentState->
+            currentState.map {
+                if (it.productID == productID) {
+                    it.copy(
+                        productQuantity = quantity
+                    )
+                } else it
+            }.toImmutableList()
+        }
+    }
 
     fun fetchMarketPlaceData(withPullToRefresh : Boolean = false) {
         viewModelScope.launch {
@@ -295,25 +374,7 @@ class MarketPlaceViewModel : ViewModel() {
          */
     }
 
-    fun updateCardStatus(productID: String, isAddedToCard: Boolean) {
-        val currentState = _marketPlaceDataState.value
-        /*
-        if (currentState is MarketPlaceProductDataState.Success) {
-            val currentItems = currentState.data.items
-            _marketPlaceDataState.update {
-                MarketPlaceProductDataState.Success(
-                    data = currentState.data.copy(
-                        items = currentItems.map {
-                            if (it.product.id == productID) {
-                                it.copy(isAddedToCard = isAddedToCard)
-                            } else it
-                        }
-                    )
-                )
-            }
-        }
-         */
-    }
+
 
 
 }

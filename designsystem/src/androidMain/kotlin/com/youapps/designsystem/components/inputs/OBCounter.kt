@@ -32,12 +32,17 @@ import androidx.compose.ui.unit.dp
 import com.youapps.onlybeans.designsystem.R
 
 
+enum class CounterDisplaySize{
+    Screen,Card
+}
+
 @Composable
 fun OBCounter(
     modifier: Modifier = Modifier,
     initialCount: Int = 0,
     maxCount: Int = Int.MAX_VALUE,
     minCount: Int = 0,
+    counterDisplaySize: CounterDisplaySize = CounterDisplaySize.Screen,
     onCountChanged: (Int) -> Unit
 ) {
     var currentCount by remember {
@@ -51,8 +56,8 @@ fun OBCounter(
         Row(
             modifier = Modifier
                 .padding(
-                    horizontal = 8.dp,
-                    vertical = 8.dp
+                    vertical = if (counterDisplaySize == CounterDisplaySize.Screen) 8.dp else 2.dp,
+                    horizontal = if (counterDisplaySize == CounterDisplaySize.Screen) 8.dp else 4.dp
                 )
                 .wrapContentSize(),
             verticalAlignment = Alignment.CenterVertically,
@@ -66,7 +71,7 @@ fun OBCounter(
                 ),
                 modifier = Modifier
                     .padding(
-                        8.dp
+                        if (counterDisplaySize == CounterDisplaySize.Screen)   8.dp else 4.dp
                     )
                     .clickable {
                         if (currentCount > minCount) {
@@ -74,7 +79,7 @@ fun OBCounter(
                             onCountChanged(currentCount)
                         }
                     }
-                    .size(16.dp)
+                    .size(if (counterDisplaySize == CounterDisplaySize.Screen) 16.dp else 12.dp)
             )
             currentCount.toString().forEach { char ->
                 AnimatedContent(
@@ -100,7 +105,7 @@ fun OBCounter(
                         text = targetChar.toString(),
                         softWrap = false,
                         textAlign = TextAlign.Center,
-                        style = MaterialTheme.typography.bodyMedium,
+                        style = if (counterDisplaySize == CounterDisplaySize.Screen)  MaterialTheme.typography.bodyMedium else MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurface
                     )
                 }
@@ -113,7 +118,7 @@ fun OBCounter(
                 ),
                 modifier = Modifier
                     .padding(
-                        8.dp
+                        if (counterDisplaySize == CounterDisplaySize.Screen)   8.dp else 4.dp
                     )
                     .clickable {
                         if (currentCount < maxCount) {
@@ -121,7 +126,7 @@ fun OBCounter(
                             onCountChanged(currentCount)
                         }
                     }
-                    .size(16.dp)
+                    .size(if (counterDisplaySize == CounterDisplaySize.Screen) 16.dp else 12.dp)
             )
 
         }

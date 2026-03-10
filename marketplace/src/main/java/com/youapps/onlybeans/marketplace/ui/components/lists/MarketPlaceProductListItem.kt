@@ -48,6 +48,8 @@ import com.youapps.onlybeans.domain.entities.products.OBProductPricing
 import com.youapps.onlybeans.domain.entities.products.OBProductRating
 import com.youapps.onlybeans.marketplace.ui.components.OBProductRatingTag
 import com.youapps.onlybeans.ui.product.obCoffeeBeansMockProduct
+import com.youapps.onlybeans.utilities.NumericUtils
+import java.util.Locale
 
 
 @Preview(widthDp = 300)
@@ -190,7 +192,7 @@ fun MarketPlaceProductListItem(
                             is OBProductPricing.OBProductMultipleWeightBasedPricing -> pricing.pricePerWeight.values.first()
                             is OBProductPricing.OBProductMultipleBundleBasedPricing -> pricing.pricePerBundle.values.first()
                             is OBProductPricing.OBProductSinglePricing -> pricing.price
-                        }.let { (price, _) -> "$price ${obProduct.pricing.currency}" },
+                        }.let { (price, _) -> NumericUtils.formatPrice(price, Locale.getDefault()) },
                         textAlign = TextAlign.Start,
                         maxLines = 1,
                         style = TextStyle(

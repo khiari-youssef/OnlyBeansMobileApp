@@ -61,14 +61,9 @@ fun OBBottomNavigationBar(
                 colors = NavigationBarItemDefaults.colors(
                     indicatorColor = if (selectedItemIndex == index)
                         selectedNavigationBarItemColor
-                    else unSelectedBottomNavigationColor
+                    else unSelectedBottomNavigationColor,
                 ),
-                modifier = Modifier
-                    .background(
-                        if (selectedItemIndex == index)
-                            selectedNavigationBarItemColor
-                        else unSelectedBottomNavigationColor
-                    ),
+                modifier = Modifier,
                 icon = {
                     if (item.badgeContent > 0) {
                         BadgedBox(

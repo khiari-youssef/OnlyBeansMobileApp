@@ -1,49 +1,41 @@
-# Sesaworks
+# OnlyBeans
 
-A mobile app for Sesame university students to manage their academic projets.
+*A mobile application that acts as a social platform for the coffee lovers community.
 
-# Note :
+![App Screenshot/Banner](assets/map_search_view_screen.jpeg)
+![App Screenshot/Banner](assets/profile_view_screen.jpeg)
+![App Screenshot/Banner](assets/marketplace_screen.jpeg)
+![App Screenshot/Banner](assets/notifications_screen.jpeg)
 
-More features will be added that are not only confined to managing academic projects but also
-solving problems students and staff encouter on daily basis.
-See the next features UI
-protoypes [here](https://www.figma.com/file/NLNjgyfvxpEMhJuhmJX12K/SesameStudentLife?type=design&node-id=435%3A3577&mode=design&t=isR2KAcPRgT9X7Ta-1)
+## Overview
+Users can build their profile as Baristas,Roasters, etc and find other people with the same interest in coffee so that they can share content or even look for coffee shops, purchase coffee products or equipment from a global marketplace.
+
 
 ## Purpose
+Why was this project created?
+* **Motivation:** I'm a specialty coffee lover and this idea is motivating me to build a side project regardless of how useful it might be.
+* **Goals:** The main goal is to build a side project to showcase my knowledge of modern android development.
 
-This app is built as part of my academic projects but also serves as a sample for a jetpack-compose
-android app.
-As you inspect the code, you will notice that it is a Kotlin multiplatform app but i decided to go
-android-first because i had issues with compose multiplatform and sqldelight.
+## Main Features
+* **Feature 1:** Login with email and password.
+* **Feature 2:** Build your profile which includes your personal information and your coffee space. could be your coffee shop or even your home coffee corner.
+* **Feature 3:** Search for users,coffee shops, farms, etc by arean on the map and based on filters that you set.
+* **Feature 4:** Visit the marketplace to search and purchase products from different popular brands.
+* **Feature 5:** Receive notifications about the latest trends, promotions and even your orders.
 
-* What does this app showcase ?
+## Technical Description
+This section highlights the technologies used in the codebase.
 
-- Jetpack compose powered UI supporting dark mode and landscape mode.
-- Creating modular and reusable UI components jetpack compose (Implementing a design system built on
-  top of M3)
-- State management with jetpack compose.
-- MVVM architectural design pattern.
-- The power of Kotlin's asynchronous and reactive programming using Coroutines and flows.
-- Clean architecture
-- Testing with Junit and compose UI testing API
-- Storing and fetching data from local database using SQlDelight.
-- Making API calls using Ktor Http client.
-- Implementation of a biometric authentication with jetpack compose.
+* **Language:** Kotlin 
+* **UI:** Jetpack compose
+* **Architecture:** MVVM / State Management with compose / Multi-module architecture
+* **Dependency Injection:** Koin
+* **Networking:** Ktor
+* **Local Persistence:** SqlDelight/Preferences
+* **Asynchronous:** Flows,Coroutines
 
-## Figma UI prototype
-
-![SplashScreen](./assets/SplashScreen.png)
-![Login](./assets/UserSigning.png)
-![Home](./assets/Home.png)
-![Profile](./assets/Profile.png)
-![MyProjects](./assets/SearchProjects.png)
-
-## Application layers and data flow
-
-![MVVM](./assets/mvvm.PNG)
-
-## Links & Attributions
-
-User placeholder images:
-Link: https://www.freepik.com/free-vector/anonymous-avatars-grey-circles_44471922.htm#query=placeholder%20avatar&position=0&from_view=keyword&track=ais&uuid=d9cf7813-dc74-4bcc-b5eb-a9e5c6f94109 \
-Author : https://www.freepik.com/author/juicy-fish
+## Extra Notes
+* I started with KMP template and libraries but then i decided to switch to android-first development.
+* This project was originally a different app idea with different features which i personally built for university project but fortunately it served as template for this new app.
+* I'm still refactoring this project: Design system, DI, navigation essentially.
+* **License:** GNU General Public License v3.0
