@@ -1,15 +1,19 @@
 # OnlyBeans
 
-*A mobile application that acts as a social platform for the coffee lovers community.
-
-![App Screenshot/Banner](assets/map_search_view_screen.jpeg)
-![App Screenshot/Banner](assets/profile_view_screen.jpeg)
-![App Screenshot/Banner](assets/marketplace_screen.jpeg)
-![App Screenshot/Banner](assets/notifications_screen.jpeg)
+- A mobile application that acts as a social platform for the coffee lovers community.
 
 ## Overview
 Users can build their profile as Baristas,Roasters, etc and find other people with the same interest in coffee so that they can share content or even look for coffee shops, purchase coffee products or equipment from a global marketplace.
 
+<div align="center">
+  <img src="assets/map_search_view_screen.jpeg" width="200" alt="MapSearchView screenshot">
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="assets/profile_view_screen.jpeg" width="200" alt="Profile screenshot">
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <img src="assets/marketplace_screen.jpeg" width="200" alt="MarketPlace screenshot">
+  &nbsp;&nbsp;&nbsp;&nbsp;
+    <img src="assets/notifications_screen.jpeg" width="200" alt="Notifications screenshot">
+</div>
 
 ## Purpose
 Why was this project created?
