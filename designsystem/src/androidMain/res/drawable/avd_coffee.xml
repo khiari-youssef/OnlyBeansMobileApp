@@ -1,0 +1,6 @@
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:drawable="@drawable/splashscreen_logo">
+    <target
+        android:name="pulse_group"
+        android:animation="@animator/pulse_anim" />
+</animated-vector>

@@ -38,6 +38,7 @@ value class OBBottomNavigationBarDefaults(
 
 @Composable
 fun OBBottomNavigationBar(
+
     selectedItemIndex: Int,
     modifier: Modifier = Modifier,
     properties: OBBottomNavigationBarDefaults,
