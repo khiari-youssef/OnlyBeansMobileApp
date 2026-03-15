@@ -35,10 +35,17 @@
     <string name="profile_sex_male">Homme</string>
     <string name="profile_sex_female">Femme</string>
 
+    <!-- Login Strings -->
+    <string name="login_welcome_back">Bon retour</string>
+    <string name="login_subtitle">Connectez-vous à votre compte café</string>
+    <string name="login_forgot_password">Oublié ?</string>
+    <string name="login_social_divider"> ou continuer avec </string>
+    <string name="login_google">Google</string>
+    <string name="login_pinterest">Pinterest</string>
 
     <!--  Accessibility   -->
-
     <string name="content_description_product_image_preview">Image du produit : %s</string>
     <string name="content_description_product_action">Action sur le produit : %s</string>
+    <string name="content_description_app_logo">Logo de l\'application</string>
 
 </resources>

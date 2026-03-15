@@ -10,7 +10,7 @@ import com.youapps.onlybeans.designsystem.R
 
 
 @Composable
-fun SesamePasswordTextField(
+fun OBPasswordTextField(
     modifier: Modifier = Modifier,
     password: String,
     label: String,

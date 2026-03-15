@@ -4,36 +4,50 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.youapps.designsystem.BrickRed
 import com.youapps.designsystem.OBFontFamilies
-import com.youapps.designsystem.RoseEbony
-import com.youapps.designsystem.components.loading.OBCircularProgressBar
 
 
 enum class OBButtonSize {
     Small, Medium, Large
+}
+
+private val smallButtonHeightRange = 32..36
+private val mediumButtonHeightRange = 40..44
+private val largeButtonHeightRange = 48..56
+
+fun getHeightForSizeCategory(obButtonSize: OBButtonSize) = when(obButtonSize){
+    OBButtonSize.Small -> smallButtonHeightRange
+    OBButtonSize.Medium -> mediumButtonHeightRange
+    OBButtonSize.Large -> largeButtonHeightRange
 }
 
 @Preview
@@ -62,6 +76,7 @@ fun BtnsPreview(modifier: Modifier = Modifier) {
 }
 
 
+
 @Composable
 fun OBButtonContainedPrimary(
     modifier: Modifier = Modifier,
@@ -72,12 +87,16 @@ fun OBButtonContainedPrimary(
     icon: Int? = null,
     onClick: () -> Unit
 ) {
+    val heightRange = getHeightForSizeCategory(size)
     OBButton(
-        modifier = modifier,
+        modifier = modifier.heightIn(
+            min = heightRange.first.dp,
+            max = heightRange.last.dp
+        ),
         text = text,
         isLoading = isLoading,
         isEnabled = isEnabled,
-        backgroundColor = RoseEbony,
+        backgroundColor = MaterialTheme.colorScheme.primary,
         onClick = onClick,
         icon = icon,
         fontSize = when (size) {
@@ -100,13 +119,7 @@ fun OBButtonContainedPrimary(
                 horizontal = 12.dp,
                 vertical = 4.dp
             )
-        },
-        heightRangeDP = when (size) {
-            OBButtonSize.Large -> 32..56
-            OBButtonSize.Medium -> 24..48
-            OBButtonSize.Small -> 20..40
         }
-
     )
 }
 
@@ -120,8 +133,12 @@ fun OBButtonContainedNeutral(
     icon: Int? = null,
     onClick: () -> Unit
 ) {
+    val heightRange = getHeightForSizeCategory(size)
     OBButton(
-        modifier = modifier,
+        modifier = modifier.heightIn(
+            min = heightRange.first.dp,
+            max = heightRange.last.dp
+        ),
         text = text,
         isLoading = isLoading,
         isEnabled = isEnabled,
@@ -150,11 +167,6 @@ fun OBButtonContainedNeutral(
                 vertical = 4.dp
             )
         },
-        heightRangeDP = when (size) {
-            OBButtonSize.Large -> 32..56
-            OBButtonSize.Medium -> 24..48
-            OBButtonSize.Small -> 20..40
-        }
     )
 }
 
@@ -168,8 +180,12 @@ fun OBButtonContainedSecondary(
     icon: Int? = null,
     onClick: () -> Unit
 ) {
+    val heightRange = getHeightForSizeCategory(size)
     OBButton(
-        modifier = modifier,
+        modifier = modifier.heightIn(
+            min = heightRange.first.dp,
+            max = heightRange.last.dp
+        ),
         text = text,
         isLoading = isLoading,
         isEnabled = isEnabled,
@@ -197,14 +213,29 @@ fun OBButtonContainedSecondary(
                 vertical = 4.dp
             )
         },
-        heightRangeDP = when (size) {
-            OBButtonSize.Large -> 32..56
-            OBButtonSize.Medium -> 24..48
-            OBButtonSize.Small -> 20..40
-        }
     )
 }
 
+
+@Composable
+fun OBTextButton(
+    modifier: Modifier = Modifier,
+    text: String,
+    style: TextStyle = MaterialTheme.typography.labelMedium,
+    onClick: () -> Unit
+) {
+    TextButton(
+        onClick = onClick,
+        modifier = modifier,
+        contentPadding = PaddingValues(4.dp)
+    ) {
+        Text(
+            text,
+            style = style,
+            color = MaterialTheme.colorScheme.primary
+        )
+    }
+}
 
 @Composable
 fun OBButton(
@@ -222,12 +253,10 @@ fun OBButton(
     ),
     fontSize: TextUnit = 16.sp,
     fontColor: Color = Color.White,
-    heightRangeDP: IntRange = 25..44,
     onClick: () -> Unit
 ) {
     Button(
-        modifier = modifier
-            .heightIn(heightRangeDP.first.dp, heightRangeDP.last.dp),
+        modifier = modifier,
         enabled = isEnabled or isLoading,
         shape = MaterialTheme.shapes.medium,
         colors = ButtonDefaults.buttonColors(
@@ -245,7 +274,7 @@ fun OBButton(
             animationSpec = spring()
         ) {
             if (it) {
-                OBCircularProgressBar(
+                CircularProgressIndicator(
                     modifier = Modifier
                         .semantics {
                             contentDescription = "OBButtonLoadingCircularProgressBar"

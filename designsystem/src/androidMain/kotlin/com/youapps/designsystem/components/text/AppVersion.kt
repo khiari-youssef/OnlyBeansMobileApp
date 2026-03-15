@@ -13,6 +13,7 @@ import com.youapps.onlybeans.designsystem.R
 
 @Composable
 fun AppVersion(
+    modifier: Modifier = Modifier,
     version: String
 ) {
     Text(
@@ -23,7 +24,7 @@ fun AppVersion(
             fontStyle = FontStyle.Normal,
             letterSpacing = 1.sp
         ),
-        modifier = Modifier
+        modifier = modifier
             .wrapContentSize(),
         maxLines = 1,
         text = stringResource(id = R.string.version_placeholder, version),
