@@ -14,7 +14,7 @@ import com.youapps.search_module.search_list_map.data.SearchCommunityRepositoryC
 import com.youapps.search_module.search_list_map.domain.entities.MapSearchDataPoint
 import com.youapps.search_module.search_list_map.domain.entities.OBMapSearchQuery
 import com.youapps.search_module.search_list_map.domain.usecases.SearchCommunityUseCase
-import com.youapps.search_module.search_list_map.ui.community_search_state.CommunitySearchViewModel
+import com.youapps.search_module.search_list_map.ui.community_search_screen.state.CommunitySearchViewModel
 import org.koin.core.module.dsl.viewModel
 import org.koin.core.qualifier.named
 import org.koin.dsl.module

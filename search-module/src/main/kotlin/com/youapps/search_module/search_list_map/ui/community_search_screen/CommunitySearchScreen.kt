@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -20,8 +21,8 @@ import com.youapps.designsystem.components.inputs.OBSearchField
 import com.youapps.onlybeans.search_module.R
 import com.youapps.search_module.search_list_map.ui.community_search_screen.list_view.CommunityListView
 import com.youapps.search_module.search_list_map.ui.community_search_screen.map_view.CommunityMapView
-import com.youapps.search_module.search_list_map.ui.community_search_state.CommunitySearchStateHolder
-import com.youapps.search_module.search_list_map.ui.community_search_state.SearchByRegionBounds
+import com.youapps.search_module.search_list_map.ui.community_search_screen.state.CommunitySearchStateHolder
+import com.youapps.search_module.search_list_map.ui.community_search_screen.state.SearchByRegionBounds
 import com.youapps.search_module.search_list_map.ui.components.OBSearchFilterDialog
 
 
@@ -87,7 +88,8 @@ fun CommunitySearchScreen(
                 modifier = Modifier,
                 placeholderRes = R.string.search_bar_placeholder,
                 query = screenState.searchQuery.value ?: "",
-                onSearchQueryChanged = onSearchQueryChanged
+                onSearchQueryChanged = onSearchQueryChanged,
+                containerColor = MaterialTheme.colorScheme.surfaceContainerHigh
             )
             Row(
                 modifier = Modifier
@@ -97,6 +99,7 @@ fun CommunitySearchScreen(
             ) {
                 OBFilterButton(
                     modifier = Modifier,
+                    containerColor =  MaterialTheme.colorScheme.surfaceContainerHigh,
                     onClick = {
                         isFilterDialogVisible = true
                     }

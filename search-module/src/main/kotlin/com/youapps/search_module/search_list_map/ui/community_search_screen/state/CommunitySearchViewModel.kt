@@ -1,4 +1,4 @@
-package com.youapps.search_module.search_list_map.ui.community_search_state
+package com.youapps.search_module.search_list_map.ui.community_search_screen.state
 
 import android.content.Context
 import android.location.Location

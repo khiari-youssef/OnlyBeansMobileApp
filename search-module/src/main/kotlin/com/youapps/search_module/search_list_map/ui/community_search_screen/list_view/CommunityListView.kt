@@ -2,7 +2,7 @@ package com.youapps.search_module.search_list_map.ui.community_search_screen.lis
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.youapps.search_module.search_list_map.ui.community_search_state.CommunitySearchStateHolder
+import com.youapps.search_module.search_list_map.ui.community_search_screen.state.CommunitySearchStateHolder
 
 
 @Composable

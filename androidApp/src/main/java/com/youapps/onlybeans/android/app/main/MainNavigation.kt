@@ -55,7 +55,7 @@ import com.youapps.onlybeans.domain.exception.DomainErrorType
 import com.youapps.onlybeans.domain.valueobjects.UserSex
 import com.youapps.onlybeans.ui.product.ProductsListScreen
 import com.youapps.onlybeans.ui.product.ProductsListScreenState
-import com.youapps.users_management.ui.login.LoginScreenV2
+import com.youapps.users_management.ui.login.LoginScreen
 import com.youapps.users_management.ui.login.LoginState
 import com.youapps.users_management.ui.login.LoginUIStateHolder
 import com.youapps.users_management.ui.login.LoginViewModel
@@ -163,7 +163,7 @@ fun MainActivity.MainNavigation(
                         }
                     },
                     content = {
-                        LoginScreenV2(
+                        LoginScreen(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .wrapContentHeight()

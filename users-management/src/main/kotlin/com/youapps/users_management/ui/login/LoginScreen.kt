@@ -1,23 +1,17 @@
 package com.youapps.users_management.ui.login
 
-import AppVersion
-import OBButton
 import OBButtonContainedPrimary
 import OBEmailTextField
 import OBPasswordTextField
 import OBTextButton
-import android.os.Build
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.focusGroup
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -31,9 +25,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
-import com.youapps.designsystem.components.themev2.CoffeeAmber700
 import com.youapps.onlybeans.designsystem.R
-import com.youapps.onlybeans.users_management.BuildConfig
 import com.youapps.onlybeans.designsystem.R as DesignR
 import com.youapps.onlybeans.users_management.R as UserR
 
@@ -44,7 +36,7 @@ val TextSecondary = Color(0xFF8D8B8B)
 
 
 @Composable
-fun LoginScreenV2(
+fun LoginScreen(
     modifier: Modifier,
     screenState : LoginUIStateHolder,
     onEmailChanged : (String)-> Unit,

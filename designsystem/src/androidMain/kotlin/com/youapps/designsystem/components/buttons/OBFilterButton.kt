@@ -22,12 +22,13 @@ import com.youapps.onlybeans.designsystem.R
 @Composable
 fun OBFilterButton(
     modifier: Modifier = Modifier,
+    containerColor: Color = Color.White,
     onClick: () -> Unit = {}
 ) {
     Surface(
         modifier = modifier
             .wrapContentSize(),
-        color = Color.White,
+        color = containerColor,
         border = BorderStroke(1.dp, Color(0xFFe7e5e4)),
         shape = RoundedCornerShape(8.dp)
     ) {

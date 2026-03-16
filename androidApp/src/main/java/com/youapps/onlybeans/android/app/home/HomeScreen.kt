@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
@@ -49,8 +50,8 @@ import com.youapps.onlybeans.marketplace.ui.screens.home_marketplace.HomeMarketP
 import com.youapps.onlybeans.marketplace.ui.state.MarketPlaceStateHolder
 import com.youapps.onlybeans.marketplace.ui.state.MarketPlaceViewModel
 import com.youapps.search_module.search_list_map.ui.community_search_screen.CommunitySearchScreen
-import com.youapps.search_module.search_list_map.ui.community_search_state.CommunitySearchStateHolder
-import com.youapps.search_module.search_list_map.ui.community_search_state.CommunitySearchViewModel
+import com.youapps.search_module.search_list_map.ui.community_search_screen.state.CommunitySearchStateHolder
+import com.youapps.search_module.search_list_map.ui.community_search_screen.state.CommunitySearchViewModel
 import com.youapps.users_management.ui.profile.MyProfileViewModel
 import com.youapps.users_management.ui.profile.ProfileScreenState
 import kotlinx.coroutines.launch
@@ -96,6 +97,7 @@ fun HomeScreen(
                 contentDescription = "HomeScreen"
             }
             .fillMaxSize(),
+        containerColor =MaterialTheme.colorScheme.background,
         bottomBar = {
             AnimatedVisibility(
                 visible = isBottomAppBarVisible.value,
