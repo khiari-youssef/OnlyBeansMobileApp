@@ -35,8 +35,6 @@ private val LightColorScheme = lightColorScheme(
     onSurface = md_theme_light_onSurface,
     surfaceVariant = md_theme_light_surfaceVariant,
     onSurfaceVariant = md_theme_light_onSurfaceVariant,
-    surfaceContainer =
-    outline = md_theme_light_outline,
     outlineVariant = md_theme_light_outlineVariant,
 
     inverseSurface = md_theme_light_inverseSurface,
