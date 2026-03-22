@@ -15,8 +15,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.youapps.designsystem.DisabledOnSurfaceColorDarkMode
-import com.youapps.designsystem.DisabledOnSurfaceColorLightMode
+import com.youapps.designsystem.components.themev2.DisabledOnSurfaceColorDarkMode
+import com.youapps.designsystem.components.themev2.DisabledOnSurfaceColorLightMode
 
 @Stable
 data class OBRadioGroupData(

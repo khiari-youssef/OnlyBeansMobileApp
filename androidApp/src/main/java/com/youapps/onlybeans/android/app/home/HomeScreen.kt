@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
@@ -21,6 +22,7 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
@@ -40,6 +42,7 @@ import com.youapps.designsystem.components.bars.OBBottomNavigationBar
 import com.youapps.designsystem.components.bars.OBBottomNavigationBarDefaults
 import com.youapps.designsystem.components.popups.LogoutPopup
 import com.youapps.onlybeans.android.base.NavigationRoutingData
+import com.youapps.onlybeans.android.base.NavigationRoutingData.Home
 import com.youapps.onlybeans.android.notifications.ui.screen.NotificationScreenStateHolder
 import com.youapps.onlybeans.android.notifications.ui.screen.NotificationsScreen
 import com.youapps.onlybeans.android.notifications.ui.screen.NotificationsViewModel
@@ -49,8 +52,8 @@ import com.youapps.onlybeans.marketplace.ui.screens.home_marketplace.HomeMarketP
 import com.youapps.onlybeans.marketplace.ui.state.MarketPlaceStateHolder
 import com.youapps.onlybeans.marketplace.ui.state.MarketPlaceViewModel
 import com.youapps.search_module.search_list_map.ui.community_search_screen.CommunitySearchScreen
-import com.youapps.search_module.search_list_map.ui.community_search_state.CommunitySearchStateHolder
-import com.youapps.search_module.search_list_map.ui.community_search_state.CommunitySearchViewModel
+import com.youapps.search_module.search_list_map.ui.community_search_screen.state.CommunitySearchStateHolder
+import com.youapps.search_module.search_list_map.ui.community_search_screen.state.CommunitySearchViewModel
 import com.youapps.users_management.ui.profile.MyProfileViewModel
 import com.youapps.users_management.ui.profile.ProfileScreenState
 import kotlinx.coroutines.launch
@@ -64,61 +67,49 @@ fun HomeScreen(
 ) {
     val homeNavController = rememberNavController()
 
-
-    val selectedHomeDestinationIndex = rememberSaveable {
-        mutableIntStateOf(0)
-    }
-
-    homeNavController.addOnDestinationChangedListener { controller, destination, arguments ->
-        destination.route?.run {
-            selectedHomeDestinationIndex.intValue = NavigationRoutingData.Home.mapRouteToIndex(this)
-        }
-    }
-
-
-    val initialRoute = remember {
-        derivedStateOf {
-            NavigationRoutingData.Home.mapIndexToRoute(selectedHomeDestinationIndex.intValue)
-        }
-    }
+     val initialDestination = Home.NETWORK
 
     val navOpts = remember {
         NavOptions.Builder()
+            .setRestoreState(true)
             .setLaunchSingleTop(true)
             .build()
     }
-    val isBottomAppBarVisible = rememberSaveable {
-        mutableStateOf(true)
-    }
+
     Scaffold(
         modifier = Modifier
             .semantics {
                 contentDescription = "HomeScreen"
             }
             .fillMaxSize(),
+        containerColor =MaterialTheme.colorScheme.background,
         bottomBar = {
-            AnimatedVisibility(
-                visible = isBottomAppBarVisible.value,
-                enter = fadeIn(spring()),
-                exit = fadeOut(spring())
-            ) {
+            val navigationSelectedDestinationState = produceState<String>(initialValue = initialDestination) {
+                homeNavController.addOnDestinationChangedListener { _, destination, _ ->
+                    destination.route?.run {
+                        value = this
+                    }
+                }
+            }
                 OBBottomNavigationBar(
                     modifier = Modifier
                         .heightIn(min = 24.dp, max = 56.dp)
                         .fillMaxWidth(),
-                    selectedItemIndex = selectedHomeDestinationIndex.intValue,
+                    selectedItemIndex = Home.mapRouteToIndex(navigationSelectedDestinationState.value)  ,
                     properties = homeDestinations,
-                    onItemSelected = { index ->
-                        val newDestination = NavigationRoutingData.Home.mapIndexToRoute(index)
-                       if ( homeNavController.currentDestination?.route != newDestination) {
-                           homeNavController.navigate(
-                               route = NavigationRoutingData.Home.mapIndexToRoute(index),
-                               navOptions = navOpts
-                           )
-                       }
+                    onItemSelected = remember {
+                        { index ->
+                            val newDestination = Home.mapIndexToRoute(index)
+                            if ( homeNavController.currentDestination?.route != newDestination) {
+                                homeNavController.navigate(
+                                    route = Home.mapIndexToRoute(index),
+                                    navOptions = navOpts
+                                )
+                            }
+                        }
                     }
                 )
-            }
+
         },
         content = { paddingValues ->
             NavHost(
@@ -126,10 +117,10 @@ fun HomeScreen(
                     .padding(paddingValues)
                     .fillMaxSize(),
                 navController = homeNavController,
-                route = NavigationRoutingData.Home.ROOT,
-                startDestination = initialRoute.value
+                route = Home.ROOT,
+                startDestination = initialDestination
             ) {
-                composable(NavigationRoutingData.Home.NETWORK) {
+                composable(Home.NETWORK) {
                     NavigationBarScreenTemplate(
                         modifier = Modifier,
                         onExitNavigation = remember {
@@ -137,7 +128,7 @@ fun HomeScreen(
                                 onHomeExit(NavigationRoutingData.EXIT_APP_ROUTE)
                             }
                         },
-                        content = remember {
+                        content =
                             { modifier ->
                                 val viewModel = koinViewModel<CommunitySearchViewModel>()
                                 val communitySearchState =
@@ -158,11 +149,11 @@ fun HomeScreen(
                                     }
                                 )
                             }
-                        }
+
                     )
                 }
                 composable(
-                    route = NavigationRoutingData.Home.MARKETPLACE
+                    route = Home.MARKETPLACE
                 ) {
                     val viewModel = koinViewModel<MarketPlaceViewModel>()
 
@@ -177,8 +168,7 @@ fun HomeScreen(
                                 onHomeExit(NavigationRoutingData.EXIT_APP_ROUTE)
                             }
                         },
-                        content = remember {
-                            { modifier ->
+                        content = { modifier ->
                                 var isCardBottomSheetDialog : Boolean by remember {
                                     mutableStateOf(false)
                                 }
@@ -234,11 +224,11 @@ fun HomeScreen(
                                     }
                                 )
                             }
-                        }
+
                     )
 
                 }
-                composable(NavigationRoutingData.Home.NOTIFICATIONS) {
+                composable(Home.NOTIFICATIONS) {
                     val viewModel = koinViewModel<NotificationsViewModel>()
                     val screenState = NotificationScreenStateHolder
                         .bindViewModelState(viewModel)
@@ -263,7 +253,7 @@ fun HomeScreen(
                         )
                     }
                 }
-                composable(NavigationRoutingData.Home.PROFILE) {
+                composable(Home.PROFILE) {
                     val profileViewModel: MyProfileViewModel = koinViewModel()
                     var isLogoutPopupVisible by remember {
                         mutableStateOf(false)

@@ -91,14 +91,10 @@ fun HomeMarketPlace(
         }
     ) {
         Scaffold(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant,
             modifier = modifier.nestedScroll(topAppBarScrollBehavior.nestedScrollConnection),
             topBar = {
                 MarketplaceTopBar(
                     modifier = Modifier
-                        .background(
-                            color = MaterialTheme.colorScheme.surfaceVariant
-                        )
                         .shadow(
                             elevation = 1.dp
                         )

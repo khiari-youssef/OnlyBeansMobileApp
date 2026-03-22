@@ -30,7 +30,7 @@ import com.youapps.designsystem.components.inputs.OBRadiusSlider
 import com.youapps.designsystem.components.menus.OBFilterMenu
 import com.youapps.designsystem.components.text.PlaceholderText
 import com.youapps.onlybeans.search_module.R
-import com.youapps.search_module.search_list_map.ui.community_search_state.SearchFilterList
+import com.youapps.search_module.search_list_map.ui.community_search_screen.state.SearchFilterList
 import com.youapps.onlybeans.designsystem.R as ds
 
 
@@ -50,7 +50,7 @@ fun OBSearchFilterDialog(
             content = {
                 Surface(
                     modifier = modifier,
-                    color = MaterialTheme.colorScheme.surfaceVariant,
+                    color = MaterialTheme.colorScheme.surfaceContainerHigh,
                     shape = RoundedCornerShape(16.dp)
                 ) {
                     var selectedFilterIndex by remember(selectedFilterIndex) {

@@ -6,6 +6,8 @@
 Users can build their profile as Baristas,Roasters, etc and find other people with the same interest in coffee so that they can share content or even look for coffee shops, purchase coffee products or equipment from a global marketplace.
 
 <div align="center">
+ <img src="assets/login_screen.jpeg" width="200" alt="Login screenshot">
+ &nbsp;&nbsp;&nbsp;&nbsp;
   <img src="assets/map_search_view_screen.jpeg" width="200" alt="MapSearchView screenshot">
   &nbsp;&nbsp;&nbsp;&nbsp;
   <img src="assets/profile_view_screen.jpeg" width="200" alt="Profile screenshot">

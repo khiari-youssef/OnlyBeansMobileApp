@@ -7,20 +7,27 @@ import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.semantics.contentDescription
-import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.unit.dp
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.net.toUri
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -33,11 +40,17 @@ import androidx.navigation.navArgument
 import com.youapps.designsystem.components.bars.OBBottomNavigationBarDefaults
 import com.youapps.designsystem.components.dialogs.ImageViewerDialog
 import com.youapps.designsystem.components.dialogs.NavigationNotFoundModal
+import com.youapps.designsystem.components.loading.OBLoadingDialog
 import com.youapps.designsystem.components.popups.AppExitPopup
+import com.youapps.designsystem.components.popups.OBToastData
+import com.youapps.designsystem.components.popups.OBToastType
+import com.youapps.designsystem.components.templates.OBToastableContainer
+import com.youapps.designsystem.components.templates.ToastVisibilityState
 import com.youapps.designsystem.navigateBack
 import com.youapps.onlybeans.R
-import com.youapps.onlybeans.android.base.NavigationRoutingData
 import com.youapps.onlybeans.android.app.home.HomeScreen
+import com.youapps.onlybeans.android.base.NavigationRoutingData
+import com.youapps.onlybeans.domain.exception.DomainErrorType
 import com.youapps.onlybeans.domain.valueobjects.UserSex
 import com.youapps.onlybeans.ui.product.ProductsListScreen
 import com.youapps.onlybeans.ui.product.ProductsListScreenState
@@ -51,8 +64,10 @@ import com.youapps.users_management.ui.registration.OBRegistrationViewModel
 import com.youapps.users_management.ui.settings.AppSettingsStateHolder
 import com.youapps.users_management.ui.settings.SettingsViewModel
 import com.youapps.users_management.ui.settings.privacypolicy.PrivacyPolicyScreen
+import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import com.youapps.onlybeans.designsystem.R as ds
 
 
 @Composable
@@ -96,40 +111,89 @@ fun MainActivity.MainNavigation(
                     },
                     loginRequestResult = viewModel.loginResultState.collectAsStateWithLifecycle()
                 )
+                val toastState = ToastVisibilityState.rememberToastVisibilityState()
+
+
                 LaunchedEffect(key1 = loginUIState.loginRequestResult.value, block = {
-                    if (loginUIState.loginRequestResult.value is LoginState.Success) {
+                    val snapShot = loginUIState.loginRequestResult.value
+                    if (snapShot is LoginState.Success) {
                         rootNavController.navigate("MainNavigation")
+                    }
+                    if (snapShot is LoginState.Error) {
+                        toastState
+                            .show(
+                                data = OBToastData(
+                                    message = when (snapShot.errorType) {
+                                        DomainErrorType.AccountLocked -> {
+                                            getString(ds.string.error_toast_locked)
+                                        }
+
+                                        DomainErrorType.Unauthorized -> {
+                                            getString(ds.string.error_toast_unauthorized)
+                                        }
+
+                                        DomainErrorType.InvalidCredentials -> {
+                                            getString(ds.string.error_toast_invalid_credentials)
+                                        }
+
+                                        else ->getString(ds.string.error_toast_unknown)
+                                    },
+                                    resID = ds.drawable.ic_alert,
+                                    type = OBToastType.Error
+                                )
+                            )
                     }
                 })
 
                 BackHandler {
                     isAppExistPopupShown.value = true
                 }
-                LoginScreen(
-                    modifier = Modifier
-                        .semantics {
-                            contentDescription = "LoginScreen"
-                        }
-                        .fillMaxSize(),
-                    loginUIStateHolder = loginUIState,
-                    onEmailChanged = { email ->
-                        loginUIState.loginEmail.value = email
-                    },
-                    onPasswordChanged = { password ->
-                        loginUIState.loginPassword.value = password
-                    },
-                    onSetIdleState = {
-                        viewModel.setLoginIdleState()
-                    },
-                    onLoginClicked = {
-                        viewModel.loginWithEmailAndPassword(
-                            loginUIState.loginEmail.value,
-                            loginUIState.loginPassword.value
-                        )
+                OBLoadingDialog(
+                    isShown = loginUIState.loginRequestResult.value is LoginState.Loading
+                )
+                val currentCoroutineScope = rememberCoroutineScope()
 
+
+                OBToastableContainer(
+                    modifier = Modifier.fillMaxSize(),
+                    state = toastState,
+                    onDismissRequest = {
+                        currentCoroutineScope.launch {
+                            toastState.hide()
+                        }
                     },
-                    onSignUpClicked = {
-                        rootNavController.navigate(NavigationRoutingData.REGISTRATION_SCREEN)
+                    content = {
+                        LoginScreen(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .wrapContentHeight()
+                                .background(MaterialTheme.colorScheme.background)
+                                .padding(
+                                    horizontal = 20.dp
+                                )
+                                .verticalScroll(rememberScrollState()),
+                            screenState = loginUIState,
+                            onEmailChanged = { email ->
+                                loginUIState.loginEmail.value = email
+                            },
+                            onPasswordChanged = { password ->
+                                loginUIState.loginPassword.value = password
+                            },
+                            onSignUpClicked = {
+                                rootNavController.navigate(NavigationRoutingData.REGISTRATION_SCREEN)
+                            },
+                            onGoogleSignInClicked = {},
+                            onPInterestSignInClicked = {},
+                            onSignInClicked = {
+                                viewModel.loginWithEmailAndPassword(
+                                    loginUIState.loginEmail.value,
+                                    loginUIState.loginPassword.value
+                                )
+                            },
+                            onForgotPasswordClicked = {
+
+                            }
+                        )
                     }
                 )
 

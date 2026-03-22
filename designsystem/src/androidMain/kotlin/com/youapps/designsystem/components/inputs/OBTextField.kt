@@ -25,10 +25,10 @@ import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.youapps.designsystem.OBFontFamilies
-import com.youapps.designsystem.TonedDark
 import com.youapps.designsystem.components.text.PlaceholderText
-import com.youapps.designsystem.onBackgroundShadedDarkMode
-import com.youapps.designsystem.onBackgroundShadedLightMode
+import com.youapps.designsystem.components.themev2.TonedDark
+import com.youapps.designsystem.components.themev2.onBackgroundShadedDarkMode
+import com.youapps.designsystem.components.themev2.onBackgroundShadedLightMode
 
 
 @Composable
@@ -71,7 +71,7 @@ fun OBTextField(
         )
         OutlinedTextField(
             modifier = modifier,
-            shape = MaterialTheme.shapes.small,
+            shape = MaterialTheme.shapes.medium,
             textStyle = TextStyle(
                 fontSize = 14.sp,
                 fontStyle = FontStyle.Normal,
@@ -135,8 +135,6 @@ fun OBTextField(
             },
             visualTransformation = visualTransformation,
             colors = OutlinedTextFieldDefaults.colors(
-                focusedContainerColor = if (isSystemInDarkTheme()) TonedDark else Color.White,
-                unfocusedContainerColor = if (isSystemInDarkTheme()) TonedDark else Color.White,
                 errorContainerColor = if (isSystemInDarkTheme()) TonedDark else Color.White,
                 cursorColor = MaterialTheme.colorScheme.primary,
                 focusedLabelColor = MaterialTheme.colorScheme.primary,

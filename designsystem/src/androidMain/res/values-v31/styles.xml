@@ -11,9 +11,8 @@
         <item name="android:statusBarColor">@color/primaryColorDark</item>
         <item name="android:windowTranslucentStatus">true</item>
         <item name="windowSplashScreenBackground">@color/screenBackgroundColor</item>
-        <item name="windowSplashScreenAnimatedIcon">@drawable/splashscreen_logo</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/avd_coffee</item>
         <item name="windowSplashScreenAnimationDuration">800</item>
         <item name="postSplashScreenTheme">@style/AppTheme</item>
-        <item name="android:windowSplashScreenBrandingImage">@drawable/app_title_logo</item>
     </style>
 </resources>

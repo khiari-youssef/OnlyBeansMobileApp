@@ -1,0 +1,113 @@
+package com.youapps.designsystem.components.themev2
+
+import androidx.compose.ui.graphics.Color
+
+val md_theme_light_primary = Color(0xFFB45309)
+val md_theme_light_onPrimary = Color(0xFFFFFFFF)
+val md_theme_light_primaryContainer = Color(0xFFFFDDB3)
+val md_theme_light_onPrimaryContainer = Color(0xFF2E1500)
+
+val md_theme_light_secondary = Color(0xFF6F5B40)
+val md_theme_light_onSecondary = Color(0xFFFFFFFF)
+val md_theme_light_secondaryContainer = Color(0xFFFAE0BC)
+val md_theme_light_onSecondaryContainer = Color(0xFF271905)
+
+val md_theme_light_tertiary = Color(0xFF51643F)
+val md_theme_light_onTertiary = Color(0xFFFFFFFF)
+val md_theme_light_tertiaryContainer = Color(0xFFD4EABB)
+val md_theme_light_onTertiaryContainer = Color(0xFF102004)
+
+val md_theme_light_error = Color(0xFFBA1A1A)
+
+val md_theme_light_success = Color(0xFF0F9300)
+val md_theme_light_errorContainer = Color(0xFFFFDAD6)
+val md_theme_light_onError = Color(0xFFFFFFFF)
+val md_theme_light_onErrorContainer = Color(0xFF410002)
+
+val md_theme_light_background =Color(0xFFF0ECEC)
+val md_theme_light_onBackground = Color(0xFF1F1B16)
+
+val md_theme_light_surface = Color(0xFFFFFBFF)
+val md_theme_light_onSurface = Color(0xFF1F1B16)
+val md_theme_light_surfaceVariant = Color(0xFFF0E0CF)
+val md_theme_light_onSurfaceVariant = Color(0xFF4F4539)
+
+val md_theme_light_outline = Color(0xFF817567)
+val md_theme_light_outlineVariant = Color(0xFFD3C4B4)
+
+val md_theme_light_inverseSurface = Color(0xFF34302A)
+val md_theme_light_inverseOnSurface = Color(0xFFF9EFE7)
+val md_theme_light_inversePrimary = Color(0xFFFFB951)
+
+val md_theme_light_surfaceTint = Color(0xFF92400E)
+val md_theme_light_scrim = Color(0xFF000000)
+
+// Dark Theme Colors
+val md_theme_dark_primary = Color(0xFF78350F)
+val md_theme_dark_onPrimary = Color(0xFF4D2600)
+val md_theme_dark_primaryContainer = Color(0xFF6E3900)
+val md_theme_dark_onPrimaryContainer = Color(0xFFFFDDB3)
+
+val md_theme_dark_secondary = Color(0xFFDDC4A1)
+val md_theme_dark_onSecondary = Color(0xFF3E2E16)
+val md_theme_dark_secondaryContainer = Color(0xFF56442A)
+val md_theme_dark_onSecondaryContainer = Color(0xFFFAE0BC)
+
+val md_theme_dark_tertiary = Color(0xFFB8CEA1)
+val md_theme_dark_onTertiary = Color(0xFF243516)
+val md_theme_dark_tertiaryContainer = Color(0xFF3A4C2A)
+val md_theme_dark_onTertiaryContainer = Color(0xFFD4EABB)
+
+val md_theme_dark_error = Color(0xFFFFB4AB)
+
+val md_theme_dark_success = Color(0xFF118C03)
+val md_theme_dark_errorContainer = Color(0xFF93000A)
+val md_theme_dark_onError = Color(0xFF690005)
+val md_theme_dark_onErrorContainer = Color(0xFFFFDAD6)
+
+val md_theme_dark_background = Color(0xFF1F1B16)
+val md_theme_dark_onBackground = Color(0xFFEAE1D9)
+
+val md_theme_dark_surface = Color(0xFF1F1B16)
+val md_theme_dark_onSurface = Color(0xFFEAE1D9)
+val md_theme_dark_surfaceVariant = Color(0xFF4F4539)
+val md_theme_dark_onSurfaceVariant = Color(0xFFD3C4B4)
+
+val md_theme_dark_outline = Color(0xFF9C8F80)
+val md_theme_dark_outlineVariant = Color(0xFF4F4539)
+
+val md_theme_dark_inverseSurface = Color(0xFFEAE1D9)
+val md_theme_dark_inverseOnSurface = Color(0xFF34302A)
+val md_theme_dark_inversePrimary = Color(0xFF92400E)
+
+val md_theme_dark_surfaceTint = Color(0xFFFFB951)
+val md_theme_dark_scrim = Color(0xFF000000)
+
+// Additional Coffee-themed colors for custom use
+val CoffeeAmber600 = Color(0xFFD97706)
+val CoffeeAmber700 = Color(0xFFB45309)
+val CoffeeAmber800 = Color(0xFF92400E)
+val CoffeeAmber900 = Color(0xFF78350F)
+val CoffeeAmber950 = Color(0xFF451A03)
+val CoffeeStone900 = Color(0xFF1C1917)
+
+
+internal val RoseEbony = Color(0xFF674141)
+internal val Licorice = Color(0xFF1f1313)
+internal val BrickRed = Color(0xFFAA4A44)
+internal val PumpkinOrangeShaded = Color(0xFFFF7518)
+internal val Alabaster = Color(0xFFFBFBFB)
+
+internal val Isabelline = Color(0xFFF0ECEC)
+val ErrorColor = Color(0xFFA21E1E)
+val onBackgroundShadedLightMode = Color(0xFF8D8B8B)
+val onBackgroundShadedDarkMode = Color(0xFFB8B8B8)
+internal val Dark = Color(0xFF272727)
+internal val TonedDark = Color(0xFF444444)
+internal val ShadedWhite = Color(0xFFF5F5F5)
+
+internal val DisabledOnSurfaceColorLightMode = Color(0xFF707070)
+
+internal val DisabledOnSurfaceColorDarkMode = Color(0xFFAD9D9D)
+
+internal val LinkColor = Color(0xFF124183)

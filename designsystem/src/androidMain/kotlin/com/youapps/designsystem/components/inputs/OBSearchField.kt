@@ -30,6 +30,7 @@ fun OBSearchField(
     modifier: Modifier = Modifier,
     placeholderRes: Int,
     query: String = "",
+    containerColor : Color?=null,
     onSearchQueryChanged: (query: String) -> Unit
 ) {
     val searchBarState = rememberSearchBarState()
@@ -79,8 +80,8 @@ fun OBSearchField(
                 colors = TextFieldDefaults.colors(
                     focusedLeadingIconColor = Color(0xFFB45309),
                     unfocusedLeadingIconColor = Color(0xFF78716c),
-                    focusedContainerColor = Color(0xFFf5f5f4),
-                    unfocusedContainerColor = Color(0xFFf5f5f4),
+                    focusedContainerColor = containerColor ?: Color(0xFFf5f5f4),
+                    unfocusedContainerColor =containerColor ?: Color(0xFFf5f5f4),
                     focusedIndicatorColor = Color.Transparent, // Removes the bottom line
                     unfocusedIndicatorColor = Color.Transparent,
                 )

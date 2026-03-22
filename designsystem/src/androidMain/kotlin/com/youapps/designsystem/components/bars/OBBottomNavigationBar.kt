@@ -1,7 +1,6 @@
 package com.youapps.designsystem.components.bars
 
 import androidx.compose.animation.core.animateIntAsState
-import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material3.Badge
@@ -14,6 +13,7 @@ import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -38,13 +38,14 @@ value class OBBottomNavigationBarDefaults(
 
 @Composable
 fun OBBottomNavigationBar(
+
     selectedItemIndex: Int,
     modifier: Modifier = Modifier,
     properties: OBBottomNavigationBarDefaults,
     onItemSelected: (index: Int) -> Unit
 ) {
     val allowedItems = properties.items.take(5)
-    val unSelectedBottomNavigationColor = MaterialTheme.colorScheme.surfaceVariant
+    val unSelectedBottomNavigationColor = MaterialTheme.colorScheme.surfaceContainerHigh
 
     val selectedNavigationBarItemColor =
         if (isSystemInDarkTheme()) Color(0xFF150d0d) else Color(0xFFCFC1C1)
@@ -105,7 +106,9 @@ fun OBBottomNavigationBar(
 
                 },
                 selected = selectedItemIndex == index,
-                onClick = { onItemSelected(index) }
+                onClick = remember {
+                    { onItemSelected(index) }
+                }
             )
 
         }

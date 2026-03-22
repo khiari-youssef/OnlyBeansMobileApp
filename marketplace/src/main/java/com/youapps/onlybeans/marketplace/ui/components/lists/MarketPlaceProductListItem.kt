@@ -38,9 +38,9 @@ import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.compose.AsyncImagePainter
 import com.youapps.designsystem.OBFontFamilies
-import com.youapps.designsystem.OBTheme
 import com.youapps.designsystem.components.buttons.OBLikeCardButton
 import com.youapps.designsystem.components.loading.shimmerEffect
+import com.youapps.designsystem.components.themev2.OBThemeV2
 import com.youapps.onlybeans.designsystem.R
 import com.youapps.onlybeans.domain.entities.products.OBMarketPlaceProduct
 import com.youapps.onlybeans.domain.entities.products.OBPrice
@@ -55,7 +55,7 @@ import java.util.Locale
 @Preview(widthDp = 300)
 @Composable
 fun MarketPlaceProductListItemPreview() {
-    OBTheme {
+    OBThemeV2 {
         val isLiked = remember {
             mutableStateOf(false)
         }

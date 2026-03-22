@@ -23,8 +23,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.window.Dialog
 import com.youapps.designsystem.OBFontFamilies
-import com.youapps.designsystem.onBackgroundShadedDarkMode
-import com.youapps.designsystem.onBackgroundShadedLightMode
+import com.youapps.designsystem.components.themev2.onBackgroundShadedDarkMode
+import com.youapps.designsystem.components.themev2.onBackgroundShadedLightMode
 
 @Composable
 fun InfoPopup(

@@ -32,8 +32,8 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.youapps.designsystem.OBTheme
 import com.youapps.designsystem.components.dialogs.ImageViewerDialog
+import com.youapps.designsystem.components.themev2.OBThemeV2
 import com.youapps.onlybeans.R
 import com.youapps.onlybeans.domain.entities.products.OBProduct
 import com.youapps.onlybeans.ui.product.OBProductTopBar
@@ -43,7 +43,7 @@ import com.youapps.onlybeans.ui.product.obCoffeeBeansMockProduct
 @Composable
 fun ProductDetailsTemplatePreview() {
 
-    OBTheme {
+    OBThemeV2 {
         ProductDetailsTemplate(
             obProduct = obCoffeeBeansMockProduct,
             onBackClick = {

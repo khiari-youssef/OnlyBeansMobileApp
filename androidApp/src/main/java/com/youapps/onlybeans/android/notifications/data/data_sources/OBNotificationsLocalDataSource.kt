@@ -1,14 +1,12 @@
 package com.youapps.onlybeans.android.notifications.data.data_sources
 
 import app.cash.sqldelight.coroutines.asFlow
-import app.cash.sqldelight.coroutines.mapToList
 import app.cash.sqldelight.coroutines.mapToOne
 import com.youapps.onlybeans.OnlyBeansDatabase
 import com.youapps.onlybeans.android.notifications.domain.entities.NotificationItemType
 import com.youapps.onlybeans.android.notifications.domain.entities.OBNotificationItemData
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
 

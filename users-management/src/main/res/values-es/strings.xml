@@ -41,9 +41,17 @@
     <string name="profile_sex_male">Masculino</string>
     <string name="profile_sex_female">Femenino</string>
 
-    <!--  Accessibility   -->
+    <!-- Login Strings -->
+    <string name="login_welcome_back">Bienvenido de nuevo</string>
+    <string name="login_subtitle">Inicia sesión en tu cuenta de café</string>
+    <string name="login_forgot_password">¿Olvidaste?</string>
+    <string name="login_social_divider"> o continúa con </string>
+    <string name="login_google">Google</string>
+    <string name="login_pinterest">Pinterest</string>
 
+    <!--  Accessibility   -->
     <string name="content_description_product_image_preview">Imagen del producto: %s</string>
     <string name="content_description_product_action">Acción al hacer clic en el producto: %s</string>
+    <string name="content_description_app_logo">Logotipo de la aplicación</string>
 
 </resources>

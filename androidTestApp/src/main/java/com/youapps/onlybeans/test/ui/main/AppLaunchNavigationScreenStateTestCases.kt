@@ -7,7 +7,7 @@ import androidx.compose.ui.test.hasAnyChild
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
-import com.youapps.designsystem.OBTheme
+import com.youapps.designsystem.components.themev2.OBThemeV2
 import com.youapps.onlybeans.android.R
 import com.youapps.onlybeans.android.app.main.MainActivity
 import org.junit.Rule
@@ -31,7 +31,7 @@ class AppLaunchNavigationScreenStateTestCases : KoinTest {
     fun testMainNavigationWhenLoginScreenShouldBeTheStartDestination() {
         composeMainActivityTestRule.activity.run {
             setContent {
-                OBTheme {
+                OBThemeV2 {
 
                 }
             }
@@ -46,7 +46,7 @@ class AppLaunchNavigationScreenStateTestCases : KoinTest {
     fun testMainNavigationWhenLoginScreenIsSkippedForAutologin() {
         composeMainActivityTestRule.activity.run {
             setContent {
-                OBTheme {
+                OBThemeV2 {
 
                 }
             }
@@ -65,7 +65,7 @@ class AppLaunchNavigationScreenStateTestCases : KoinTest {
     fun testMainActivityScreenWhenAnUndefinedBiometricAuthErrorOccurs() {
         composeMainActivityTestRule.activity.run {
             setContent {
-                OBTheme {
+                OBThemeV2 {
 
                 }
             }
@@ -89,7 +89,7 @@ class AppLaunchNavigationScreenStateTestCases : KoinTest {
     fun testMainActivityScreenWhenANoHardwareBiometricAuthErrorOccurs() {
         composeMainActivityTestRule.activity.run {
             setContent {
-                OBTheme {
+                OBThemeV2 {
 
 
                 }
@@ -115,7 +115,7 @@ class AppLaunchNavigationScreenStateTestCases : KoinTest {
     fun testMainActivityScreenWhenHardwareUnavailableBiometricAuthErrorOccurs() {
         composeMainActivityTestRule.activity.run {
             setContent {
-                OBTheme {
+                OBThemeV2 {
 
 
                 }
@@ -133,7 +133,7 @@ class AppLaunchNavigationScreenStateTestCases : KoinTest {
     fun testMainActivityScreenWhenUnavailableBiometricAuthErrorOccurs() {
         composeMainActivityTestRule.activity.run {
             setContent {
-                OBTheme {
+                OBThemeV2 {
 
                 }
             }

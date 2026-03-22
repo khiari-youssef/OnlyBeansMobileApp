@@ -30,9 +30,9 @@ import com.google.maps.android.compose.rememberCameraPositionState
 import com.youapps.onlybeans.domain.entities.users.OBLocation
 import com.youapps.onlybeans.platform.LocalLocationStateEnabled
 import com.youapps.onlybeans.search_module.R
-import com.youapps.search_module.search_list_map.ui.community_search_state.CommunitySearchStateHolder
-import com.youapps.search_module.search_list_map.ui.community_search_state.SearchByAreaState
-import com.youapps.search_module.search_list_map.ui.community_search_state.SearchByRegionBounds
+import com.youapps.search_module.search_list_map.ui.community_search_screen.state.CommunitySearchStateHolder
+import com.youapps.search_module.search_list_map.ui.community_search_screen.state.SearchByAreaState
+import com.youapps.search_module.search_list_map.ui.community_search_screen.state.SearchByRegionBounds
 import com.youapps.search_module.search_list_map.ui.components.MapSearchAreaChip
 import com.youapps.search_module.search_list_map.ui.components.OBMapCluster
 import com.youapps.search_module.search_list_map.ui.components.OBMapRecenterButton

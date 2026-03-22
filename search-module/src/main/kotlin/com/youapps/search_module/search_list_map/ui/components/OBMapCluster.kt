@@ -22,7 +22,7 @@ fun OBMapCluster(
     Box(
         modifier = Modifier
             .clip(CircleShape)
-            .background(color = MaterialTheme.colorScheme.secondary)
+            .background(color = MaterialTheme.colorScheme.primary)
             .size(40.dp),
         contentAlignment = Alignment.Center
     ) {

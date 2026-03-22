@@ -9,8 +9,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import com.youapps.designsystem.OBFontFamilies
-import com.youapps.designsystem.onBackgroundShadedDarkMode
-import com.youapps.designsystem.onBackgroundShadedLightMode
+import com.youapps.designsystem.components.themev2.onBackgroundShadedDarkMode
+import com.youapps.designsystem.components.themev2.onBackgroundShadedLightMode
 
 @Composable
 fun PlaceholderText(

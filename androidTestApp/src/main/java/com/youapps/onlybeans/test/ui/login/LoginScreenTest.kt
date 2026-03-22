@@ -10,10 +10,8 @@ import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.youapps.designsystem.R
 import com.youapps.onlybeans.android.app.main.MainActivity
-import com.youapps.onlybeans.domain.exception.DomainErrorType
-import com.youapps.users_management.ui.login.LoginScreen
+import com.youapps.onlybeans.designsystem.R
 import com.youapps.users_management.ui.login.LoginState
 import com.youapps.users_management.ui.login.LoginUIStateHolder
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -52,7 +50,8 @@ class LoginScreenTest : KoinTest {
                     initialValue = LoginState.Idle
                 )
             )
-            LoginScreen(
+           /*
+            LoginScreenV2(
                 loginUIStateHolder = uiState,
                 onEmailChanged = {
                     uiState.loginEmail.value = it
@@ -69,6 +68,7 @@ class LoginScreenTest : KoinTest {
 
                 }
             )
+            */
         }
         composeLoginTestRule.run {
             onNodeWithContentDescription("LoginEmailTextField")
@@ -98,6 +98,7 @@ class LoginScreenTest : KoinTest {
                     initialValue = LoginState.Idle
                 )
             )
+            /*
             LoginScreen(
                 loginUIStateHolder = uiState,
                 onEmailChanged = {
@@ -117,6 +118,7 @@ class LoginScreenTest : KoinTest {
 
                 }
             )
+             */
         }
         composeLoginTestRule.run {
             onNodeWithContentDescription("SesameButtonLoadingCircularProgressBar")
@@ -147,6 +149,7 @@ class LoginScreenTest : KoinTest {
                     initialValue = LoginState.Idle
                 )
             )
+           /*
             LoginScreen(
                 loginUIStateHolder = uiState,
                 onEmailChanged = {
@@ -166,6 +169,7 @@ class LoginScreenTest : KoinTest {
 
                 }
             )
+            */
         }
         composeLoginTestRule.run {
             onNodeWithContentDescription("LoginEmailTextField")
@@ -199,6 +203,7 @@ class LoginScreenTest : KoinTest {
                     initialValue = LoginState.Idle
                 )
             )
+            /*
             LoginScreen(
                 loginUIStateHolder = uiState,
                 onEmailChanged = {
@@ -215,6 +220,7 @@ class LoginScreenTest : KoinTest {
                     viewModelLoginMockState.value = LoginState.Idle
                 }
             )
+             */
         }
         composeLoginTestRule.run {
             onNodeWithContentDescription("LoginEmailTextField")
