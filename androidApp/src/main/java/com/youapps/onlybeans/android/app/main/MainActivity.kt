@@ -1,13 +1,16 @@
 package com.youapps.onlybeans.android.app.main
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -16,11 +19,15 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.compose.rememberNavController
 import com.youapps.designsystem.components.bars.OBBottomNavigationBarDefaults
 import com.youapps.designsystem.components.themev2.OBThemeV2
+import com.youapps.onlybeans.android.R
 import com.youapps.onlybeans.data.repositories.AppMetaDataAPI
 import com.youapps.onlybeans.di.AppMetaDataAPITag
 import com.youapps.onlybeans.di.OBLocationServicePlayServicesImplTag
-import com.youapps.onlybeans.platform.OBLocationService
-import com.youapps.onlybeans.platform.OBLocationServiceStateLocale
+import com.youapps.onlybeans.di.OBNetworkMonitorImplTag
+import com.youapps.onlybeans.platform.location.LocalNetworkState
+import com.youapps.onlybeans.platform.location.OBLocationService
+import com.youapps.onlybeans.platform.location.OBCustomGlobalStatesLocale
+import com.youapps.onlybeans.platform.network.OBNetworkMonitor
 import com.youapps.users_management.ui.login.LoginState
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
@@ -65,11 +72,22 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background,
                 ) {
-                    OBLocationServiceStateLocale(
+                    OBCustomGlobalStatesLocale(
                         obLocationService = koinInject<OBLocationService>(
                             OBLocationServicePlayServicesImplTag
-                        )
+                        ),
+                        oBNetworkMonitor = koinInject<OBNetworkMonitor>(OBNetworkMonitorImplTag).also {
+                            it.startMonitoring()
+                        }
                     ) {
+                        val netWorkState = LocalNetworkState.current
+                        LaunchedEffect(netWorkState) {
+                            if (netWorkState.hasInternetAccess()){
+                                Toast.makeText(this@MainActivity, getString(R.string.network_state_enabled), Toast.LENGTH_SHORT).show()
+                            } else {
+                                Toast.makeText(this@MainActivity,getString(R.string.network_state_disabled), Toast.LENGTH_SHORT).show()
+                            }
+                        }
                         MainNavigation(
                             modifier = Modifier.fillMaxSize(),
                             rootNavController = uiState.rootNavController,
@@ -88,6 +106,7 @@ class MainActivity : ComponentActivity() {
     fun updateBadgeCount(itemIndex: Int, count: Int) {
         _viewModel.updateBadgeCount(itemIndex, count)
     }
+
 }
 
 

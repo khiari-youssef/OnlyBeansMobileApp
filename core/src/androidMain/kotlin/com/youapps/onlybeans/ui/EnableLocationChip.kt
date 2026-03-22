@@ -33,7 +33,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.youapps.onlybeans.R
 import com.youapps.onlybeans.di.OBLocationServicePlayServicesImplTag
-import com.youapps.onlybeans.platform.OBLocationService
+import com.youapps.onlybeans.platform.location.OBLocationService
 import kotlinx.coroutines.launch
 import org.koin.compose.koinInject
 import com.youapps.onlybeans.designsystem.R as ds

@@ -1,4 +1,4 @@
-package com.youapps.onlybeans.platform
+package com.youapps.onlybeans.platform.location
 
 import android.content.BroadcastReceiver
 import android.content.Context
@@ -14,10 +14,15 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.youapps.onlybeans.platform.network.OBNetworkMonitor
 
 
 val LocalLocationStateEnabled = compositionLocalOf {
     false
+}
+val LocalNetworkState = compositionLocalOf<OBNetworkMonitor.OBNetworkState> {
+    OBNetworkMonitor.OBNetworkState.Unavailable
 }
 
 class LocationProviderChangedReceiver(
@@ -39,14 +44,16 @@ class LocationProviderChangedReceiver(
 
 
 @Composable
-fun OBLocationServiceStateLocale(
+fun OBCustomGlobalStatesLocale(
     obLocationService: OBLocationService,
+    oBNetworkMonitor : OBNetworkMonitor,
     content: @Composable () -> Unit
 ) {
     val context = LocalContext.current
     var isLocationEnabled: Boolean by remember {
         mutableStateOf(obLocationService.isLocationServiceEnabled())
     }
+    val netWorkState = oBNetworkMonitor.watchNetWorkState().collectAsStateWithLifecycle(initialValue = OBNetworkMonitor.OBNetworkState.Unavailable)
 
 
     DisposableEffect(context) {
@@ -61,7 +68,7 @@ fun OBLocationServiceStateLocale(
             context.unregisterReceiver(receiver)
         }
     }
-    CompositionLocalProvider(LocalLocationStateEnabled provides isLocationEnabled) {
+    CompositionLocalProvider(LocalLocationStateEnabled provides isLocationEnabled,LocalNetworkState provides netWorkState.value) {
         content()
     }
 }
