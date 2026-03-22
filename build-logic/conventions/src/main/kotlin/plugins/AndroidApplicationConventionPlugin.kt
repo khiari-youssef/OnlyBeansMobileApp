@@ -33,7 +33,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                         isDebuggable = true
                         isMinifyEnabled = false
                         signingConfigs {
-                            val isCICD: Boolean = System.getenv("CI") != null;
+                            val isCICD: Boolean = System.getenv("CI") != null
                             getByName("debug") {
                                 if (isCICD) {
                                     keyAlias = System.getenv("KEY_ALIAS")
