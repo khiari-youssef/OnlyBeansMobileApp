@@ -1,6 +1,5 @@
 package com.youapps.designsystem.components.popups
 
-import androidx.compose.animation.core.MutableTransitionState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -12,8 +11,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.withFrameNanos
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -29,8 +26,6 @@ import com.youapps.designsystem.components.themev2.md_theme_dark_success
 import com.youapps.designsystem.components.themev2.md_theme_light_error
 import com.youapps.designsystem.components.themev2.md_theme_light_success
 import com.youapps.onlybeans.designsystem.R
-
-
 
 
 enum class OBToastType {

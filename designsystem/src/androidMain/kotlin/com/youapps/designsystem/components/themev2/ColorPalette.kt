@@ -1,11 +1,7 @@
 package com.youapps.designsystem.components.themev2
 
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.lightColorScheme
-
 import androidx.compose.ui.graphics.Color
 
-// Light Theme Colors
 val md_theme_light_primary = Color(0xFFB45309)
 val md_theme_light_onPrimary = Color(0xFFFFFFFF)
 val md_theme_light_primaryContainer = Color(0xFFFFDDB3)
@@ -95,3 +91,23 @@ val CoffeeAmber900 = Color(0xFF78350F)
 val CoffeeAmber950 = Color(0xFF451A03)
 val CoffeeStone900 = Color(0xFF1C1917)
 
+
+internal val RoseEbony = Color(0xFF674141)
+internal val Licorice = Color(0xFF1f1313)
+internal val BrickRed = Color(0xFFAA4A44)
+internal val PumpkinOrangeShaded = Color(0xFFFF7518)
+internal val Alabaster = Color(0xFFFBFBFB)
+
+internal val Isabelline = Color(0xFFF0ECEC)
+val ErrorColor = Color(0xFFA21E1E)
+val onBackgroundShadedLightMode = Color(0xFF8D8B8B)
+val onBackgroundShadedDarkMode = Color(0xFFB8B8B8)
+internal val Dark = Color(0xFF272727)
+internal val TonedDark = Color(0xFF444444)
+internal val ShadedWhite = Color(0xFFF5F5F5)
+
+internal val DisabledOnSurfaceColorLightMode = Color(0xFF707070)
+
+internal val DisabledOnSurfaceColorDarkMode = Color(0xFFAD9D9D)
+
+internal val LinkColor = Color(0xFF124183)

@@ -26,8 +26,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.youapps.designsystem.OBFontFamilies
-import com.youapps.designsystem.onBackgroundShadedDarkMode
-import com.youapps.designsystem.onBackgroundShadedLightMode
+import com.youapps.designsystem.components.themev2.onBackgroundShadedDarkMode
+import com.youapps.designsystem.components.themev2.onBackgroundShadedLightMode
 import com.youapps.onlybeans.designsystem.R
 
 @Preview

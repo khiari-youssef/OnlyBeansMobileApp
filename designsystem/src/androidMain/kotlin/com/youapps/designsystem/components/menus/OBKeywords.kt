@@ -43,9 +43,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
-import com.youapps.designsystem.DisabledOnSurfaceColorLightMode
 import com.youapps.designsystem.OBFontFamilies
 import com.youapps.designsystem.components.text.PlaceholderText
+import com.youapps.designsystem.components.themev2.DisabledOnSurfaceColorLightMode
 import com.youapps.onlybeans.designsystem.R
 
 

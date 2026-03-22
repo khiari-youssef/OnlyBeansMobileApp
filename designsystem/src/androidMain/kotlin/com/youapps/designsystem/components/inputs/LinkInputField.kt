@@ -35,12 +35,12 @@ import androidx.compose.ui.text.withLink
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.youapps.designsystem.LinkColor
 import com.youapps.designsystem.OBFontFamilies
-import com.youapps.designsystem.TonedDark
 import com.youapps.designsystem.components.text.PlaceholderText
-import com.youapps.designsystem.onBackgroundShadedDarkMode
-import com.youapps.designsystem.onBackgroundShadedLightMode
+import com.youapps.designsystem.components.themev2.LinkColor
+import com.youapps.designsystem.components.themev2.TonedDark
+import com.youapps.designsystem.components.themev2.onBackgroundShadedDarkMode
+import com.youapps.designsystem.components.themev2.onBackgroundShadedLightMode
 import com.youapps.onlybeans.designsystem.R
 
 

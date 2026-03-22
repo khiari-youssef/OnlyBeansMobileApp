@@ -32,8 +32,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
-import com.youapps.designsystem.OBTheme
 import com.youapps.designsystem.components.dialogs.ImageViewerDialog
+import com.youapps.designsystem.components.themev2.OBThemeV2
 import com.youapps.onlybeans.domain.entities.products.OBCoffeeBeansProductDetails
 import com.youapps.onlybeans.domain.entities.products.OBCoffeeRegion
 import com.youapps.onlybeans.domain.entities.products.OBCoffeeRoaster
@@ -111,7 +111,7 @@ fun MarketPlaceProductDetailsTemplatePreview() {
         roastLevel = OBRoastLevel.MEDIUM,
         displayMetadata = "100% Arabica • Single Origin • Medium Roast"
     )
-    OBTheme {
+    OBThemeV2 {
         MarketPlaceProductDetailsTemplate(
             oBMarketPlaceProduct = OBMarketPlaceProduct(
                 marketPlaceID = "marketplace-id-0aegd2sh15srh1",

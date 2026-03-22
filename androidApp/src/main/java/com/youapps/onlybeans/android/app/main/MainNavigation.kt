@@ -48,9 +48,8 @@ import com.youapps.designsystem.components.templates.OBToastableContainer
 import com.youapps.designsystem.components.templates.ToastVisibilityState
 import com.youapps.designsystem.navigateBack
 import com.youapps.onlybeans.R
-import com.youapps.onlybeans.android.base.NavigationRoutingData
 import com.youapps.onlybeans.android.app.home.HomeScreen
-import com.youapps.onlybeans.designsystem.R as ds
+import com.youapps.onlybeans.android.base.NavigationRoutingData
 import com.youapps.onlybeans.domain.exception.DomainErrorType
 import com.youapps.onlybeans.domain.valueobjects.UserSex
 import com.youapps.onlybeans.ui.product.ProductsListScreen
@@ -68,6 +67,7 @@ import com.youapps.users_management.ui.settings.privacypolicy.PrivacyPolicyScree
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import com.youapps.onlybeans.designsystem.R as ds
 
 
 @Composable
