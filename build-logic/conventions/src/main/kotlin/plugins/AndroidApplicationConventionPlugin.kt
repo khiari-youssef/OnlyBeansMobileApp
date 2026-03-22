@@ -34,12 +34,12 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                         isMinifyEnabled = false
                         signingConfigs {
                             val isCICD: Boolean = System.getenv("CI") != null;
-                            create("signingConfig") {
+                            create("debug") {
                                 if (isCICD) {
-                                    keyAlias = System.getenv("keyAlias")
-                                    keyPassword = System.getenv("keyPassword")
-                                    storeFile = file(System.getenv("storeFile"))
-                                    storePassword = System.getenv("storePassword")
+                                    keyAlias = System.getenv("KEY_ALIAS")
+                                    keyPassword = System.getenv("KEY_PASSWORD")
+                                    storeFile = file(System.getenv("STORE_FILE"))
+                                    storePassword = System.getenv("STORE_PASSWORD")
                                 } else {
                                     keyAlias = keystoreProperties["keyAlias"].toString()
                                     keyPassword = keystoreProperties["keyPassword"].toString()
