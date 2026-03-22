@@ -38,7 +38,7 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                                 if (isCICD) {
                                     keyAlias = System.getenv("KEY_ALIAS")
                                     keyPassword = System.getenv("KEY_PASSWORD")
-                                    storeFile = rootProject.file("keystores/keystore-debug.jks")
+                                    storeFile = rootProject.file("keystore-debug.jks")
                                     storePassword = System.getenv("STORE_PASSWORD")
                                 } else {
                                     keyAlias = keystoreProperties["keyAlias"].toString()
