@@ -33,13 +33,13 @@ class AndroidApplicationConventionPlugin : Plugin<Project> {
                         isDebuggable = true
                         isMinifyEnabled = false
                         signingConfigs {
-                            val isCICD: Boolean = System.getenv("CI") != null;
-                            create("signingConfig") {
+                            val isCICD: Boolean = System.getenv("CI") != null
+                            getByName("debug") {
                                 if (isCICD) {
-                                    keyAlias = System.getenv("keyAlias")
-                                    keyPassword = System.getenv("keyPassword")
-                                    storeFile = file(System.getenv("storeFile"))
-                                    storePassword = System.getenv("storePassword")
+                                    keyAlias = System.getenv("KEY_ALIAS")
+                                    keyPassword = System.getenv("KEY_PASSWORD")
+                                    storeFile = rootProject.file("keystore-debug.jks")
+                                    storePassword = System.getenv("STORE_PASSWORD")
                                 } else {
                                     keyAlias = keystoreProperties["keyAlias"].toString()
                                     keyPassword = keystoreProperties["keyPassword"].toString()
