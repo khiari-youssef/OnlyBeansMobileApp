@@ -1,4 +1,4 @@
-package com.youapps.onlybeans.platform
+package com.youapps.onlybeans.platform.location
 
 import android.Manifest.permission
 import android.content.Context

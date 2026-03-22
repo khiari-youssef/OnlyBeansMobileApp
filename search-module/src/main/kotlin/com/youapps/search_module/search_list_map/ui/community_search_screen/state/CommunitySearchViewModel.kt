@@ -7,8 +7,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.youapps.onlybeans.contracts.UseCaseContract
 import com.youapps.onlybeans.data.repositories.AppMetaDataAPI
-import com.youapps.onlybeans.platform.LocationSettingsType
-import com.youapps.onlybeans.platform.OBLocationService
+import com.youapps.onlybeans.platform.location.LocationSettingsType
+import com.youapps.onlybeans.platform.location.OBLocationService
 import com.youapps.search_module.search_list_map.domain.entities.MapSearchDataPoint
 import com.youapps.search_module.search_list_map.domain.entities.OBMapSearchQuery
 import com.youapps.search_module.search_list_map.ui.community_search_screen.map_view.DataClusterItem

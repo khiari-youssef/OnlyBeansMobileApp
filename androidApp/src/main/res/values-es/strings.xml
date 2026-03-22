@@ -16,6 +16,8 @@
     <string name="biometric_auth_failed_message">La operación falló</string>
     <string name="biometric_auth_cancelled_title">Error de autenticación</string>
     <string name="biometric_auth_cancelled_message">Operación cancelada</string>
+    <string name="network_state_enabled">La red está activada.</string>
+    <string name="network_state_disabled">La red está desactivada.</string>
 
     <!-- Notifications App Bar -->
     <string name="notifications_app_bar_icon_description">Icono de la barra de aplicaciones de notificaciones</string>

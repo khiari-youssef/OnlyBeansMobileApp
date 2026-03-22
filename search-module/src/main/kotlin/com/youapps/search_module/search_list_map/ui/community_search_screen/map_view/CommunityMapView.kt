@@ -28,7 +28,7 @@ import com.google.maps.android.compose.MapsComposeExperimentalApi
 import com.google.maps.android.compose.clustering.Clustering
 import com.google.maps.android.compose.rememberCameraPositionState
 import com.youapps.onlybeans.domain.entities.users.OBLocation
-import com.youapps.onlybeans.platform.LocalLocationStateEnabled
+import com.youapps.onlybeans.platform.location.LocalLocationStateEnabled
 import com.youapps.onlybeans.search_module.R
 import com.youapps.search_module.search_list_map.ui.community_search_screen.state.CommunitySearchStateHolder
 import com.youapps.search_module.search_list_map.ui.community_search_screen.state.SearchByAreaState
