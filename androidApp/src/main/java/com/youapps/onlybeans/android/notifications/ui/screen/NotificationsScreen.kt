@@ -17,7 +17,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -31,7 +31,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
@@ -143,9 +142,6 @@ fun NotificationsScreen(
                                     )
                                     .padding(
                                         horizontal = 12.dp
-                                    )
-                                    .background(
-                                        color = MaterialTheme.colorScheme.surfaceVariant
                                     ),
                                 horizontalAlignment = Alignment.CenterHorizontally,
                                 verticalArrangement = Arrangement.spacedBy(
@@ -191,8 +187,7 @@ fun NotificationsScreen(
                 exit = slideOutVertically(tween())
             ) {
                 CircularProgressIndicator(
-                    color = MaterialTheme.colorScheme.primary,
-                    backgroundColor = Color.White
+                    color = MaterialTheme.colorScheme.primary
                 )
             }
 
